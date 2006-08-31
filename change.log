@@ -8,7 +8,7 @@
 Irrlicht .NET CP 0.4.1
 =============================================================================
 -Organizing the wrapper as a SDK and SVN repository.
--Minor bugfixes
+-Minor bugfixes (for instance in Line3D)
 
 =============================================================================
 Irrlicht .NET CP 0.4
