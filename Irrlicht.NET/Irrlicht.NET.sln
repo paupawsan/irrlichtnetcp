@@ -1,0 +1,37 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C# Express 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Irrlicht.NET", "Irrlicht.NET\Irrlicht.NET.csproj", "{B5F2DCEE-C46A-41F2-B638-F86AA11DA260}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{1EDAE2E1-ACF3-48C2-AA78-2906A8AEA27F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GUIExample", "GUIExample\GUIExample.csproj", "{2F6A8B25-2FD2-4D6A-9FAD-320FA228122E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShadersAndParticles", "ShadersAndParticles\ShadersAndParticles.csproj", "{1D4B8625-15DB-4089-AE9F-0BCEC0F63CC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B5F2DCEE-C46A-41F2-B638-F86AA11DA260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5F2DCEE-C46A-41F2-B638-F86AA11DA260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5F2DCEE-C46A-41F2-B638-F86AA11DA260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5F2DCEE-C46A-41F2-B638-F86AA11DA260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EDAE2E1-ACF3-48C2-AA78-2906A8AEA27F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EDAE2E1-ACF3-48C2-AA78-2906A8AEA27F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EDAE2E1-ACF3-48C2-AA78-2906A8AEA27F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EDAE2E1-ACF3-48C2-AA78-2906A8AEA27F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F6A8B25-2FD2-4D6A-9FAD-320FA228122E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F6A8B25-2FD2-4D6A-9FAD-320FA228122E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F6A8B25-2FD2-4D6A-9FAD-320FA228122E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F6A8B25-2FD2-4D6A-9FAD-320FA228122E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D4B8625-15DB-4089-AE9F-0BCEC0F63CC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D4B8625-15DB-4089-AE9F-0BCEC0F63CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D4B8625-15DB-4089-AE9F-0BCEC0F63CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D4B8625-15DB-4089-AE9F-0BCEC0F63CC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
