@@ -50,7 +50,7 @@ class ShaderConstantSetCallBack : public IShaderConstantSetCallBack
 
 int GPU_AddHighLevelShaderMaterial(IntPtr gpu, M_STRING program, M_STRING ventrypoint, E_VERTEX_SHADER_TYPE vsCompileTarget, M_STRING pixelShaderProgram, M_STRING psEntryPoint, E_PIXEL_SHADER_TYPE psCompileTarget, SHADERCALLBACK callback, E_MATERIAL_TYPE baseMat, int userData)
 {
-	return ((IGPUProgrammingServices*)gpu)->addHighLevelShaderMaterial(program == "" ? 0 : program, ventrypoint, vsCompileTarget, *pixelShaderProgram ? pixelShaderProgram : 0, psEntryPoint, psCompileTarget, new ShaderConstantSetCallBack(callback), baseMat, userData);
+	return ((IGPUProgrammingServices*)gpu)->addHighLevelShaderMaterial(*program ? 0 : program, ventrypoint, vsCompileTarget, *pixelShaderProgram ? pixelShaderProgram : 0, psEntryPoint, psCompileTarget, new ShaderConstantSetCallBack(callback), baseMat, userData);
 }
 
 int GPU_AddHighLevelShaderMaterialFromFiles(IntPtr gpu, M_STRING vsfile, M_STRING ventrypoint, E_VERTEX_SHADER_TYPE vsCompileTarget, M_STRING psfile, M_STRING psEntryPoint, E_PIXEL_SHADER_TYPE psCompileTarget, SHADERCALLBACK callback, E_MATERIAL_TYPE baseMat, int userData)
