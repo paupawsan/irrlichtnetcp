@@ -36,6 +36,26 @@ namespace IrrlichtNETCP
             MaterialRendererServices_SetVertexShaderConstantA(_raw, name, floats, count);
         }
 
+        public void SetPixelShaderConstant(float[] data, int startRegister)
+        {
+            MaterialRendererServices_SetPixelShaderConstant(_raw, data, startRegister, data.Length);
+        }
+
+        public void SetPixelShaderConstant(string name, float[] floats)
+        {
+            MaterialRendererServices_SetPixelShaderConstantA(_raw, name, floats, floats.Length);
+        }
+
+        public void SetVertexShaderConstant(float[] data, int startRegister)
+        {
+            MaterialRendererServices_SetVertexShaderConstant(_raw, data, startRegister, data.Length);
+        }
+
+        public void SetVertexShaderConstant(string name, float[] floats)
+        {
+            MaterialRendererServices_SetVertexShaderConstantA(_raw, name, floats, floats.Length);
+        }
+
         public VideoDriver VideoDriver
         {
             get
