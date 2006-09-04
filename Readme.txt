@@ -10,6 +10,11 @@ Table of Contents :
 	3. SDK Directories and Files
 	4. How to use the SDK
 	
+Notice for SVN Users : 
+If you downloaded this via the SVN, I cannot guarantee that the binaries
+are up to date. So please contact me on the forum if you need the new binaries.
+Because the SVN is used only to retrieve the sources.
+	
 =============================================================================
 I Introduction
 =============================================================================
