@@ -596,10 +596,10 @@ namespace IrrlichtNETCP
 		}
 		
 		/// <summary>
-		/// Method GetMesh
+		/// Retrieves the mesh from a file
 		/// </summary>
-		/// <returns>An AnimatedMesh</returns>
-		/// <param name="name">A  string</param>
+		/// <returns>The mesh.</returns>
+		/// <param name="name">Path to the mesh file.</param>
 		public AnimatedMesh GetMesh(string name)
 		{
 			return (AnimatedMesh)
@@ -608,10 +608,10 @@ namespace IrrlichtNETCP
 		}
 		
 		/// <summary>
-		/// Method GetSceneNodeFromID
+		/// Retrieves a Scene node by id.
 		/// </summary>
-		/// <returns>A SceneNode</returns>
-		/// <param name="id">An int</param>
+		/// <returns>The Scene Node.</returns>
+		/// <param name="id">The ID of the node.</param>
 		public SceneNode GetSceneNodeFromID(int id)
 		{
 			return (SceneNode)
@@ -620,10 +620,10 @@ namespace IrrlichtNETCP
 		}
 		
 		/// <summary>
-		/// Method GetSceneNodeFromName
+		/// Retrieves a scene node from its name.
 		/// </summary>
-		/// <returns>A SceneNode</returns>
-		/// <param name="name">A  string</param>
+		/// <returns>The node</returns>
+		/// <param name="name">The name of the node</param>
 		public SceneNode GetSceneNodeFromName(string name)
 		{
 			return (SceneNode)
@@ -733,6 +733,10 @@ namespace IrrlichtNETCP
 			}
 		}
 		
+        /// <summary>
+        /// Gets the root scene node. And empty node with position = rotation = (0, 0, 0) and scale = (1, 1, 1)
+        /// Moreover, all node that do not have any parent is a child from the the root scene node.
+        /// </summary>
 		public SceneNode RootSceneNode
 		{
 			get
