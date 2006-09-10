@@ -199,6 +199,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\customscenenodes.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\device.cpp"
 				>
 			</File>
@@ -274,6 +278,10 @@
 			</File>
 			<File
 				RelativePath=".\conversion.h"
+				>
+			</File>
+			<File
+				RelativePath=".\customscenenodes.h"
 				>
 			</File>
 			<File

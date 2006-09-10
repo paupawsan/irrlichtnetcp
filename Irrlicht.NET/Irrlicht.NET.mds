@@ -1,28 +1,32 @@
 <Combine name="Irrlicht.NET" fileversion="2.0" outputpath="./build/bin/">
-  <Configurations active="Debug">
+  <Configurations active="Release">
     <Configuration name="Debug" ctype="CombineConfiguration">
       <Entry build="True" name="Irrlicht.NET" configuration="Debug" />
       <Entry build="True" name="Example" configuration="Debug" />
       <Entry build="True" name="GUIExample" configuration="Debug" />
       <Entry build="True" name="ShadersAndParticles" configuration="Debug" />
+      <Entry build="True" name="CustomSceneNode" configuration="Release" />
     </Configuration>
     <Configuration name="Release" ctype="CombineConfiguration">
       <Entry build="True" name="Irrlicht.NET" configuration="Release" />
       <Entry build="True" name="Example" configuration="Release" />
       <Entry build="True" name="GUIExample" configuration="Release" />
       <Entry build="True" name="ShadersAndParticles" configuration="Release" />
+      <Entry build="True" name="CustomSceneNode" configuration="Release" />
     </Configuration>
   </Configurations>
-  <StartMode startupentry="Example" single="True">
+  <StartMode startupentry="CustomSceneNode" single="True">
     <Execute type="None" entry="Irrlicht.NET" />
     <Execute type="None" entry="Example" />
     <Execute type="None" entry="GUIExample" />
     <Execute type="None" entry="ShadersAndParticles" />
+    <Execute type="None" entry="CustomSceneNode" />
   </StartMode>
   <Entries>
     <Entry filename="./Irrlicht.NET/Irrlicht.NET.mdp" />
     <Entry filename="./Example/Example.mdp" />
     <Entry filename="./GUIExample/GUIExample.mdp" />
     <Entry filename="./ShadersAndParticles/ShadersAndParticles.mdp" />
+    <Entry filename="./CustomSceneNode/CustomSceneNode.mdp" />
   </Entries>
 </Combine>

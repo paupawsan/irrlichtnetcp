@@ -390,6 +390,25 @@ namespace IrrlichtNETCP
 				NativeElement.GetObject(SceneManager_AddTextSceneNode(_raw, font.Raw, text, color.ToUnmanaged(), par),
 										typeof(TextSceneNode));
 		}
+
+        /// <summary>
+        /// Registers a node for rendering it at a specific time. 
+        /// </summary>
+        /// <param name="node">Node to register for drawing. Usually scene nodes would set 'this' as parameter here because they want to be drawn. </param>
+        /// <param name="pass">Specifies when the mode wants to be drawn in relation to the other nodes. For example, if the node is a shadow, it usually wants to be drawn after all other nodes and will use Shadow for this.</param>
+        public void RegisterNodeForRendering(SceneNode node, SceneNodeRenderPass pass)
+        {
+            SceneManager_RegisterNodeForRendering(_raw, node.Raw, pass);
+        }
+
+        /// <summary>
+        /// Registers a node for rendering it at a specific time. 
+        /// </summary>
+        /// <param name="node">Node to register for drawing. Usually scene nodes would set 'this' as parameter here because they want to be drawn. </param>
+        public void RegisterNodeForRendering(SceneNode node)
+        {
+            RegisterNodeForRendering(node, SceneNodeRenderPass.Automatic);
+        }
 		
 		/// <summary>
 		/// Adds a node to the deletion queue (it will be deleted immediately when it is secure)
@@ -815,7 +834,10 @@ namespace IrrlichtNETCP
 	    
 	    [DllImport(Native.Dll)]
 	    static extern void SceneManager_AddToDeletionQueue(IntPtr scenemanager, IntPtr node);
-		
+
+        [DllImport(Native.Dll)]
+	    static extern void SceneManager_RegisterNodeForRendering(IntPtr scenemanager, IntPtr node, SceneNodeRenderPass pass);
+
 	    [DllImport(Native.Dll)]
 		static extern IntPtr SceneManager_AddWaterSurfaceSceneNode(IntPtr scenemanager, IntPtr mesh, float waveHeight, float waveSpeed, float waveLength, IntPtr parent, int ID);
 	    

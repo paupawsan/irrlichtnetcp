@@ -587,6 +587,19 @@
             <param name="color">Color</param>
             <param name="parent">Its parent</param>
         </member>
+        <member name="M:IrrlichtNETCP.SceneManager.RegisterNodeForRendering(IrrlichtNETCP.SceneNode,IrrlichtNETCP.SceneNodeRenderPass)">
+            <summary>
+            Registers a node for rendering it at a specific time. 
+            </summary>
+            <param name="node">Node to register for drawing. Usually scene nodes would set 'this' as parameter here because they want to be drawn. </param>
+            <param name="pass">Specifies when the mode wants to be drawn in relation to the other nodes. For example, if the node is a shadow, it usually wants to be drawn after all other nodes and will use Shadow for this.</param>
+        </member>
+        <member name="M:IrrlichtNETCP.SceneManager.RegisterNodeForRendering(IrrlichtNETCP.SceneNode)">
+            <summary>
+            Registers a node for rendering it at a specific time. 
+            </summary>
+            <param name="node">Node to register for drawing. Usually scene nodes would set 'this' as parameter here because they want to be drawn. </param>
+        </member>
         <member name="M:IrrlichtNETCP.SceneManager.AddToDeletionQueue(IrrlichtNETCP.SceneNode)">
             <summary>
             Adds a node to the deletion queue (it will be deleted immediately when it is secure)

@@ -285,6 +285,11 @@ namespace IrrlichtNETCP
             return Matrix4.FromUnmanaged(mat);
         }
 
+        public void SetTransform(TransformationState state, Matrix4 mat)
+        {
+            VideoDriver_SetTransform(_raw, state, mat.ToUnmanaged());
+        }
+
         public bool QueryFeature(VideoDriverFeature feat)
         {
             return VideoDriver_QueryFeature(_raw, feat);
@@ -545,6 +550,9 @@ namespace IrrlichtNETCP
 
         [DllImport(Native.Dll)]
         static extern void VideoDriver_GetTransform(IntPtr videodriver, TransformationState state, [MarshalAs(UnmanagedType.LPArray)] float[] mat);
+
+        [DllImport(Native.Dll)]
+        static extern void VideoDriver_SetTransform(IntPtr videodriver, TransformationState state, float[] mat);
 
         [DllImport(Native.Dll)]
         static extern bool VideoDriver_QueryFeature(IntPtr videodriver, VideoDriverFeature feat);

@@ -45,6 +45,7 @@ extern "C"
     EXPORT IntPtr SceneManager_GetSceneNodeFromID(IntPtr scenemanager, int id);
     EXPORT IntPtr SceneManager_GetSceneNodeFromName(IntPtr scenemanager, M_STRING name);
 	EXPORT IntPtr SceneManager_GetMeshManipulator(IntPtr scenemanager);
+	EXPORT void SceneManager_RegisterNodeForRendering(IntPtr scenemanager, IntPtr node, E_SCENE_NODE_RENDER_PASS pass);
     EXPORT E_SCENE_NODE_RENDER_PASS SceneManager_GetSceneNodeRenderPass(IntPtr scenemanager);
     EXPORT void SceneManager_GetShadowColor(IntPtr scenemanager, M_SCOLOR color);
     EXPORT IntPtr SceneManager_GetVideoDriver(IntPtr scenemanager);

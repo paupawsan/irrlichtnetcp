@@ -199,6 +199,10 @@ void VideoDriver_GetTransform(IntPtr videodriver, E_TRANSFORMATION_STATE state, 
 {
 	UM_MAT4(GetVideoFromIntPtr(videodriver)->getTransform(state), mat);
 }
+void VideoDriver_SetTransform(IntPtr videodriver, E_TRANSFORMATION_STATE state, M_MAT4 mat)
+{
+	GetVideoFromIntPtr(videodriver)->setTransform(state, MU_MAT4(mat));
+}
 void VideoDriver_SetAmbientLight(IntPtr videodriver, M_SCOLOR ambient)
 {
 	GetVideoFromIntPtr(videodriver)->setAmbientLight(MU_SCOLOR(ambient));

@@ -82,6 +82,7 @@
     <Compile Include="Scene\Meshes\Mesh.cs" />
     <Compile Include="Scene\Meshes\MeshBuffer.cs" />
     <Compile Include="Scene\Meshes\MeshManipulator.cs" />
+    <Compile Include="Scene\Scene Nodes\CustomSceneNode.cs" />
     <Compile Include="Scene\SceneManager.cs" />
     <Compile Include="Scene\Scene Nodes\AnimatedMeshSceneNode.cs" />
     <Compile Include="Scene\Scene Nodes\BillboardSceneNode.cs" />

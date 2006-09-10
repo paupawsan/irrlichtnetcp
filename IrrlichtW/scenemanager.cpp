@@ -136,6 +136,11 @@ IntPtr SceneManager_CreateDeleteAnimator(IntPtr scenemanager, unsigned int timeM
     return GetSceneFromIntPtr(scenemanager)->createDeleteAnimator(timeMS);
 }
 
+void SceneManager_RegisterNodeForRendering(IntPtr scenemanager, IntPtr node, E_SCENE_NODE_RENDER_PASS pass)
+{
+	GetSceneFromIntPtr(scenemanager)->registerNodeForRendering((ISceneNode*)node, pass);
+}
+
 IntPtr SceneManager_CreateFlyCircleAnimator(IntPtr scenemanager, M_VECT3DF center, float radius, float speed)
 {
     return GetSceneFromIntPtr(scenemanager)->createFlyCircleAnimator(MU_VECT3DF(center), radius, speed);

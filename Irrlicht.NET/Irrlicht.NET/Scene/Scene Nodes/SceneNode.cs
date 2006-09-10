@@ -10,7 +10,11 @@ namespace IrrlichtNETCP
         {
         }
 
-        public Vector3D AbsolutePosition
+        public SceneNode() : base()
+        {
+        }
+
+        public virtual Vector3D AbsolutePosition
         {
             get
             {
@@ -20,7 +24,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public Matrix4 AbsoluteTransformation
+        public virtual Matrix4 AbsoluteTransformation
         {
             get
             {
@@ -66,7 +70,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public int ID
+        public virtual int ID
         {
             get
             {
@@ -78,7 +82,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public int MaterialCount
+        public virtual int MaterialCount
         {
             get
             {
@@ -86,7 +90,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public SceneNode Parent
+        public virtual SceneNode Parent
         {
             get
             {
@@ -115,7 +119,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public Vector3D Position
+        public virtual Vector3D Position
         {
             get
             {
@@ -129,7 +133,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public Vector3D Rotation
+        public virtual Vector3D Rotation
         {
             get
             {
@@ -143,7 +147,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public Vector3D Scale
+        public virtual Vector3D Scale
         {
             get
             {
@@ -157,7 +161,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public Matrix4 RelativeTransformation
+        public virtual Matrix4 RelativeTransformation
         {
             get
             {
@@ -167,7 +171,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public Box3D TransformedBoundingBox
+        public virtual Box3D TransformedBoundingBox
         {
             get
             {
@@ -177,7 +181,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public TriangleSelector TriangleSelector
+        public virtual TriangleSelector TriangleSelector
         {
             get
             {
@@ -223,7 +227,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public bool Visible
+        public virtual bool Visible
         {
             get
             {
@@ -235,17 +239,17 @@ namespace IrrlichtNETCP
             }
         }
 
-        public void AddAnimator(Animator animator)
+        public virtual void AddAnimator(Animator animator)
         {
             SceneNode_AddAnimator(_raw, animator.Raw);
         }
 
-        public void AddChild(SceneNode child)
+        public virtual void AddChild(SceneNode child)
         {
             SceneNode_AddChild(_raw, child.Raw);
         }
 
-        public Material GetMaterial(int i)
+        public virtual Material GetMaterial(int i)
         {
             return (Material)
                 NativeElement.GetObject(SceneNode_GetMaterial(_raw, i),
@@ -259,42 +263,42 @@ namespace IrrlichtNETCP
             base.Dispose();
         }
 
-        public void OnPostRender(uint timeMS)
+        public virtual void OnPostRender(uint timeMS)
         {
             SceneNode_OnPostRender(_raw, timeMS);
         }
 
-        public void OnPreRender()
+        public virtual void OnPreRender()
         {
             SceneNode_OnPreRender(_raw);
         }
 
-        public void Remove()
+        public virtual void Remove()
         {
             SceneNode_Remove(_raw);
         }
 
-        public void RemoveAll()
+        public virtual void RemoveAll()
         {
             SceneNode_RemoveAll(_raw);
         }
 
-        public void RemoveAnimator(Animator anim)
+        public virtual void RemoveAnimator(Animator anim)
         {
             SceneNode_RemoveAnimator(_raw, anim.Raw);
         }
 
-        public void RemoveAnimators()
+        public virtual void RemoveAnimators()
         {
             SceneNode_RemoveAnimators(_raw);
         }
 
-        public void RemoveChild(SceneNode child)
+        public virtual void RemoveChild(SceneNode child)
         {
             SceneNode_RemoveChild(_raw, child.Raw);
         }
 
-        public void Render()
+        public virtual void Render()
         {
             SceneNode_Render(_raw);
         }
@@ -319,7 +323,7 @@ namespace IrrlichtNETCP
             SetMaterialType((MaterialType)type);
         }
 
-        public void UpdateAbsolutePosition()
+        public virtual void UpdateAbsolutePosition()
         {
             SceneNode_UpdateAbsolutePosition(_raw);
         }
