@@ -70,4 +70,7 @@ extern "C"
 
     EXPORT void LightSceneNode_GetLight(IntPtr light, M_SCOLORF ambient, M_SCOLORF diffuse, M_SCOLORF specular, M_VECT3DF pos, float *radius, bool *castshadows, E_LIGHT_TYPE* type);
     EXPORT void LightSceneNode_SetLight(IntPtr light, M_SCOLORF ambient, M_SCOLORF diffuse, M_SCOLORF specular, M_VECT3DF pos, float radius, bool castshadows, E_LIGHT_TYPE type);
+
+    typedef void (STDCALL ANIMATOR_AFFECT)(IntPtr animator, IntPtr node, unsigned int timeMS);
+    EXPORT IntPtr IAnimator_Create(ANIMATOR_AFFECT callback);
 }

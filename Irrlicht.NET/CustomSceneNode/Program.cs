@@ -7,6 +7,23 @@ using IrrlichtNETCP.Inheritable;
 
 namespace CustomSceneNode
 {
+	public class CustomAnimator : IAnimator
+	{
+		public CustomAnimator(Vector3D rotation)
+		{
+			Rotation = rotation;
+		}
+		Vector3D Rotation;
+		uint StartTime = 0;
+		public override void AnimateNode(SceneNode node, uint timeMs)
+		{				
+			Vector3D NewRotation = node.Rotation; 
+			NewRotation += Rotation* ((timeMs-StartTime)/10.0f); 
+			node.Rotation = (NewRotation); 
+			StartTime = timeMs; 
+		}
+	}
+	
     public class CustomSceneNode : ISceneNode
     {
         Box3D Box;
@@ -90,8 +107,7 @@ namespace CustomSceneNode
             _scene.ActiveCamera.Position = new Vector3D(0, -40, 0);
             _scene.ActiveCamera.Target = new Vector3D();
 
-            Animator anim = _scene.CreateRotationAnimator(new Vector3D(0.8f, 0, 0.8f));
-            myNode.AddAnimator(anim);
+            myNode.AddAnimator(new CustomAnimator(new Vector3D(0.8f, 0, 0.8f)));
 
             while (device.Run())
             {

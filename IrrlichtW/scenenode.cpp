@@ -347,3 +347,24 @@ void LightSceneNode_SetLight(IntPtr light, M_SCOLORF ambient, M_SCOLORF diffuse,
 	((ILightSceneNode*)light)->getLightData() = slight;
 }
 
+class ManagedAnimator : ISceneNodeAnimator
+{
+    protected:
+    ANIMATOR_AFFECT _call;
+    public:
+    ManagedAnimator(ANIMATOR_AFFECT call)
+    {
+        _call = call;
+    }
+
+    virtual void animateNode(ISceneNode *node, unsigned int timeMS)
+    {
+        _call(this, node, timeMS);
+    }
+};
+
+IntPtr IAnimator_Create(ANIMATOR_AFFECT callback)
+{
+    return new ManagedAnimator(callback);
+}
+

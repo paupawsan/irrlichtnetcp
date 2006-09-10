@@ -10,6 +10,12 @@
 #include <iostream>
 #include "../Irrlicht SDK/include/irrlicht.h"
 
+#ifdef WIN32
+#define STDCALL __stdcall*
+#else
+#define STDCALL *
+#endif
+
 //This type's name is taken from dotNET's match
 //Of course in C++ it is just a basic pointer but it is quite more in C#
 typedef void* IntPtr;

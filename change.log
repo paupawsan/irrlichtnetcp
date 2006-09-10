@@ -8,6 +8,8 @@ Irrlicht .NET CP 0.5
 =============================================================================
 -Correcting a lot of minor bugs/speed issues.
 -Added Custom Scene Nodes feature and a tutorial.
+-Added inheritable IAnimator which behaves as a normal Animator you can
+ add to any node... Example added in the Custom Scene Nodes example.
 
 =============================================================================
 Irrlicht .NET CP 0.4.1
