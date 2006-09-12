@@ -481,6 +481,15 @@ namespace IrrlichtNETCP
 			return true;
 		}
 		
+		public Vector3D RotateVect( Vector3D vect )
+	    {
+	    	Vector3D tmp = new Vector3D(vect.X, vect.Y, vect.Z);
+	        vect.X = tmp.X*M[0] + tmp.Y*M[4] + tmp.Z*M[8];
+	        vect.Y = tmp.X*M[1] + tmp.Y*M[5] + tmp.Z*M[9];
+	        vect.Z = tmp.X*M[2] + tmp.Y*M[6] + tmp.Z*M[10];
+	        return vect;
+	    }
+		
 		public float[] ToUnmanaged() { return M; }
 		public static Matrix4 FromUnmanaged(float[] m) { return From(m); }
         public float[] ToShader() { return M; }
