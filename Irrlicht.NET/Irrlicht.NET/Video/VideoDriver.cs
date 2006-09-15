@@ -631,7 +631,7 @@ namespace IrrlichtNETCP
         ARB_VertexProgram_1,
         ARB_FragmentProgram_1,
         ARB_GLSL,
-        ARB_HLSL,
+        HLSL,
         Count
     }
 
