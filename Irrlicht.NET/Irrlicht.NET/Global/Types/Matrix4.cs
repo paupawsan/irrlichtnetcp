@@ -489,6 +489,20 @@ namespace IrrlichtNETCP
 	        vect.Z = tmp.X*M[2] + tmp.Y*M[6] + tmp.Z*M[10];
 	        return vect;
 	    }
+	    
+	    public Vector3D TransformVect(Vector3D vect)
+        {
+            float[] vector = { 0, 0, 0 };
+
+            vector[0] = vect.X * M[0] + vect.Y * M[4] + vect.Z * M[8] + M[12];
+            vector[1] = vect.X * M[1] + vect.Y * M[5] + vect.Z * M[9] + M[13];
+            vector[2] = vect.X * M[2] + vect.Y * M[6] + vect.Z * M[10] + M[14];
+
+            vect.X = vector[0];
+            vect.Y = vector[1];
+            vect.Z = vector[2];
+            return vect;
+        } 
 		
 		public float[] ToUnmanaged() { return M; }
 		public static Matrix4 FromUnmanaged(float[] m) { return From(m); }

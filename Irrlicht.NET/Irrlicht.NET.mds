@@ -15,6 +15,7 @@
       <Entry build="True" name="CustomSceneNode" configuration="Release" />
     </Configuration>
   </Configurations>
+  <DeployTargets />
   <StartMode startupentry="CustomSceneNode" single="True">
     <Execute type="None" entry="Irrlicht.NET" />
     <Execute type="None" entry="Example" />
