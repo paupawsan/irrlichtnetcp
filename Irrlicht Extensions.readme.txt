@@ -1,0 +1,16 @@
+=============================================================================
+=================== Irrlicht .NET CP Extensions =============================
+==================== Emmanuel 'DeusXL' Bossiere =============================
+=============================================================================
+
+Irrlicht .NET CP's extensions are free-to-use and to modify extensions
+to the Irrlicht .NET CP engine.
+They are all licensed under the Irrlicht .NET CP license (refer to 
+license.txt).
+
+To use them, just add the library "Irrlicht.Extensions.dll" to your .NET
+project and the using "IrrlichtNETCP.Extensions".
+
+List of scene nodes :
+-BeamNode by zitzu
+ http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=19
