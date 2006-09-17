@@ -82,7 +82,8 @@
  	
  	public enum SceneNodeType
  	{
- 		Test,
+ 		Cube,
+		Sphere,
  		Text,
  		WaterSurface,
  		Terrain,

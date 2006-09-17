@@ -7,7 +7,8 @@
 Irrlicht .NET CP 0.6
 =============================================================================
 -Added Matrix4.RotateVect, Matrix4.TransformVect
--Added Irrlicht .NET CP extensions.
+-Added Irrlicht .NET CP extensions
+-Corrected SceneNodeType enumeration to fit Irrlicht 1.1
 
 =============================================================================
 Irrlicht .NET CP 0.5
