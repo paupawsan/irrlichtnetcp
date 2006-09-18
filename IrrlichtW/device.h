@@ -21,6 +21,7 @@ extern "C"
     EXPORT IntPtr Device_GetFileSystem(IntPtr device);
     EXPORT IntPtr Device_GetTimer(IntPtr device);
     EXPORT IntPtr Device_GetVideoModeList(IntPtr device);
+    EXPORT IntPtr Device_GetLogger(IntPtr device);
     EXPORT M_STRING Device_GetVersion(IntPtr device);
     EXPORT bool Device_IsWindowActive(IntPtr device);
     EXPORT void Device_SetResizeable(IntPtr device, bool resizeable);
@@ -59,4 +60,9 @@ extern "C"
     EXPORT M_STRING FileList_GetFileName(IntPtr list, int index);
     EXPORT M_STRING FileList_GetFullFileName(IntPtr list, int index);
     EXPORT bool FileList_IsDirectory(IntPtr list, int index);
+
+    EXPORT ELOG_LEVEL Logger_GetLogLevel(IntPtr logger);
+    EXPORT void Logger_Log(IntPtr logger, M_STRING text, ELOG_LEVEL lev);
+    EXPORT void Logger_LogA(IntPtr logger, M_STRING text, M_STRING hint, ELOG_LEVEL lev);
+    EXPORT void Logger_SetLogLevel(IntPtr logger, ELOG_LEVEL level);
 }

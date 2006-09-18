@@ -32,4 +32,5 @@ extern "C"
 	EXPORT void GuiEnv_RemoveFocus(IntPtr guienv, IntPtr element);
 	EXPORT void GuiEnv_SetFocus(IntPtr guienv, IntPtr element);
 	EXPORT void GuiEnv_SetSkin(IntPtr guienv, IntPtr skin);
+	EXPORT IntPtr GuiEnv_GetBuiltInFont(IntPtr guienv);
 }

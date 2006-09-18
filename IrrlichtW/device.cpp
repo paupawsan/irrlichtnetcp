@@ -290,4 +290,29 @@ bool FileList_IsDirectory(IntPtr list, int index)
     _FIX_BOOL_MARSHAL_BUG(((IFileList*)list)->isDirectory(index));
 }
 
+IntPtr Device_GetLogger(IntPtr device)
+{
+    return ((IrrlichtDevice*)device)->getLogger();
+}
+
+ELOG_LEVEL Logger_GetLogLevel(IntPtr logger)
+{
+    return ((ILogger*)logger)->getLogLevel();
+}
+
+void Logger_Log(IntPtr logger, M_STRING text, ELOG_LEVEL lev)
+{
+    ((ILogger*)logger)->log(text, lev);
+}
+
+void Logger_LogA(IntPtr logger, M_STRING text, M_STRING hint, ELOG_LEVEL lev)
+{
+    ((ILogger*)logger)->log(text, hint, lev);
+}
+
+void Logger_SetLogLevel(IntPtr logger, ELOG_LEVEL level)
+{
+    ((ILogger*)logger)->setLogLevel(level);
+}
+
 

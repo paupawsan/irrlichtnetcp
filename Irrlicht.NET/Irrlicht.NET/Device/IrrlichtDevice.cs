@@ -130,6 +130,14 @@ namespace IrrlichtNETCP
                 return (CursorControl)NativeElement.GetObject(Device_GetCursorControl(_raw), typeof(CursorControl));
             }
         }
+
+        public Logger Logger
+        {
+            get
+            {
+                return (Logger)NativeElement.GetObject(Device_GetLogger(_raw), typeof(Logger));
+            }
+        }
 		
 		public VideoMode DesktopVideoMode
 		{
@@ -238,6 +246,9 @@ namespace IrrlichtNETCP
 
         [DllImport(Native.Dll)]
         static extern IntPtr Device_GetCursorControl(IntPtr raw);
+        
+        [DllImport(Native.Dll)]
+        static extern IntPtr Device_GetLogger(IntPtr device);
 		
 		[DllImport(Native.Dll)]
 		static extern void Device_SetWindowCaption(IntPtr raw, string caption);
@@ -291,6 +302,56 @@ namespace IrrlichtNETCP
 		{
 			return Resolution.Width + "x" + Resolution.Height + "x" + Depth;
 		}
+	}
+	
+	public class Logger : NativeElement
+	{
+		public Logger(IntPtr raw) : base(raw) { }
+		
+		public void Log(string text, LogLevel lev)
+		{
+			Logger_Log(_raw, text, lev);
+		}
+		public void Log(string text)
+		{
+			Log(text, LogLevel.Information);
+		}
+		public void Log(string text, string hint, LogLevel lev)
+		{
+			Logger_LogA(_raw, text, hint, lev);
+		}
+		public void Log(string text, string hint)
+		{
+			Log(text, hint, LogLevel.Information);
+		}
+		
+		public LogLevel LogLevel
+		{
+			get { return Logger_GetLogLevel(_raw); }
+			set { Logger_SetLogLevel(_raw, value); }
+		}
+		
+		#region Native Invokes
+		[DllImport(Native.Dll)]
+	    static extern LogLevel Logger_GetLogLevel(IntPtr logger);
+	    
+		[DllImport(Native.Dll)]
+        static extern void Logger_Log(IntPtr logger, string text, LogLevel lev);
+	    
+		[DllImport(Native.Dll)]
+        static extern void Logger_LogA(IntPtr logger, string text, string hint, LogLevel lev);
+	    
+		[DllImport(Native.Dll)]
+        static extern void Logger_SetLogLevel(IntPtr logger, LogLevel level);
+		#endregion
+	}
+	
+	public enum LogLevel
+	{
+		Information,
+		Warning,
+		Error,
+		None
 	}
 }
 

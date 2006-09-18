@@ -165,6 +165,14 @@ namespace IrrlichtNETCP
         {
             return (GUIFont)NativeElement.GetObject(GuiEnv_GetFont(_raw, filename), typeof(GUIFont));
         }
+        
+        public GUIFont BuiltInFont
+        {
+            get 
+            {
+            	return (GUIFont)NativeElement.GetObject(GuiEnv_GetBuiltInFont(_raw), typeof(GUIFont));
+            }
+        }
 
         public GUIElement RootElement
         {
@@ -280,6 +288,9 @@ namespace IrrlichtNETCP
 
         [DllImport(Native.Dll)]
         static extern IntPtr GuiEnv_GetFont(IntPtr guienv, string filename);
+        
+        [DllImport(Native.Dll)]
+        static extern IntPtr GuiEnv_GetBuiltInFont(IntPtr guienv);
 
         [DllImport(Native.Dll)]
         static extern IntPtr GuiEnv_GetRootGUIElement(IntPtr guienv);

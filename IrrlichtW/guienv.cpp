@@ -39,6 +39,11 @@ IntPtr GuiEnv_AddImage(IntPtr guienv, M_RECT rectangle, IntPtr parent, int id, M
 	return GetGui(guienv)->addImage(MU_RECT(rectangle), (IGUIElement*)parent, id, MU_WCHAR(text));
 }
 
+IntPtr GuiEnv_GetBuiltInFont(IntPtr guienv)
+{
+ return GetGui(guienv)->getBuiltInFont();
+}
+
 IntPtr GuiEnv_AddImageA(IntPtr guienv, IntPtr image, M_POS2DS pos, bool useAlphaChannel, IntPtr parent, int id, M_STRING text)
 {
 	return GetGui(guienv)->addImage((ITexture*)image, MU_POS2DS(pos), useAlphaChannel, (IGUIElement*)parent, id, MU_WCHAR(text));
