@@ -11,6 +11,7 @@ Irrlicht .NET CP 0.6
 -Corrected SceneNodeType enumeration to fit Irrlicht 1.1
 -Added Logger class
 -Added GuiEnvironment.BuiltInFont
+-Corrected Matrix4 to a class so that it can be instancied via new Matrix4()
 
 =============================================================================
 Irrlicht .NET CP 0.5

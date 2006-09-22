@@ -2,13 +2,18 @@ using System;
 
 namespace IrrlichtNETCP
 {
-	public struct Matrix4
+	public class Matrix4
 	{
 		public float[] M;
+		
+		public Matrix4()
+		{
+			this.M = Identity.M;
+		}
 	
 		public static Matrix4 From(float[] m)
 		{
-			Matrix4 mat;
+			Matrix4 mat = new Matrix4();
 			mat.M = m;
 			return mat;
 		}
@@ -444,7 +449,7 @@ namespace IrrlichtNETCP
 		{
 			Matrix4 temp;
 			if(GetInverse(out temp))
-				this = temp;
+				this.M = temp.M;
 		}
 		
 		public bool GetInverse(out Matrix4 outM)
