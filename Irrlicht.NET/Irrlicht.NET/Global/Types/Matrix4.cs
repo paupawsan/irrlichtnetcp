@@ -8,7 +8,7 @@ namespace IrrlichtNETCP
 		
 		public Matrix4()
 		{
-			this.M = Identity.M;
+			MakeIdentity();
 		}
 	
 		public static Matrix4 From(float[] m)
