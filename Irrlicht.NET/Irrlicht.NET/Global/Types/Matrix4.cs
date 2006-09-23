@@ -533,6 +533,6 @@ namespace IrrlichtNETCP
 			return ToString().GetHashCode();
 		}
 
-        public static Matrix4 Identity { get { Matrix4 mat = new Matrix4(); mat.MakeIdentity(); return mat; } }
+        public static Matrix4 Identity { get { Matrix4 mat = new Matrix4(); return mat; } }
 	}
 }
