@@ -179,6 +179,7 @@ namespace ShadersAndParticles
 
             //Here is another feature, RenderTarget
             Texture renderTarget = Driver.CreateRenderTargetTexture(new Dimension2D(320, 240));
+			int lastfps = -1, fps = 0;
             while (device.Run() && !Exit)
             {
                 Driver.BeginScene(true, true, Color.Gray);
@@ -199,7 +200,12 @@ namespace ShadersAndParticles
                                    logo.OriginalSize), Color.White, true);
                 Driver.EndScene();
 
-                device.WindowCaption = caption + " FPS : " + Driver.FPS;
+                fps = Driver.FPS;
+                if(fps != lastfps)
+                {
+                	device.WindowCaption = caption + " - FPS : " + fps;
+                	lastfps = fps;
+                }
             }
             device.Dispose();
         }

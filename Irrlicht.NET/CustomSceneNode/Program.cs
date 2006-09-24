@@ -108,14 +108,19 @@ namespace CustomSceneNode
             _scene.ActiveCamera.Target = new Vector3D();
 
             myNode.AddAnimator(new CustomAnimator(new Vector3D(0.8f, 0, 0.8f)));
-
+			int lastfps = -1, fps = 0;
             while (device.Run())
             {
                 _driver.BeginScene(true, true, Color.Gray);
                 _scene.DrawAll();
                 _driver.EndScene();
                 
-                device.WindowCaption = basecaption + " - FPS : " + _driver.FPS;
+                fps = _driver.FPS;
+                if(fps != lastfps)
+                {
+                	device.WindowCaption = basecaption + " - FPS : " + fps;
+                	lastfps = fps;
+                }
             }
             device.Dispose();
         }

@@ -216,6 +216,7 @@ namespace IrrlichtNetExample
             double random = 0;
             Random chance = new Random();
 
+			int lastfps = -1;
             while (device.Run() && !Exit)
             {
                 //We get the FPS to synchronize all movements
@@ -224,6 +225,14 @@ namespace IrrlichtNetExample
                 //Use the time between each loop instead
                 //(We use it here because it is not very important but be very careful)
                 int FPS = driver.FPS;
+                
+                if(FPS != lastfps)
+	            {
+	                //And here we are, we set the caption of the main window
+	                device.WindowCaption = caption + "FPS : " + FPS;
+	                lastfps = FPS;
+	            }
+	            
                 if (FPS < 10)
                     FPS = 70;
                 random += ((2000f / FPS) + chance.Next(-10, 10)) / 1000f;
@@ -268,9 +277,7 @@ namespace IrrlichtNetExample
                 //Finally we draw everything in the GUI Environment... CF the GUI example
                 guienv.DrawAll();
                 //End of the scene, the back buffer is displayed
-                driver.EndScene();
-                //And here we are, we set the caption of the main window
-                device.WindowCaption = caption + "FPS : " + driver.FPS;
+                driver.EndScene();                
             }
             //ALWAYS DISPOSE THE DEVICE AT THE END
             //It is REQUIRED on Linux because if you don't, XWindow will stay at the old video mode
