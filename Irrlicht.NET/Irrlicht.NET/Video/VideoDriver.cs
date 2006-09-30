@@ -191,8 +191,8 @@ namespace IrrlichtNETCP
 
         public void DrawIndexedTriangleList(Vertex3D[] vertices, int vertexCount, ushort[] indexList, int triangleCount)
         {
-            IntPtr[] rawlist = new IntPtr[vertices.Length];
-            for (int i = 0; i < vertices.Length; i++)
+            IntPtr[] rawlist = new IntPtr[vertexCount];
+            for (int i = 0; i < vertexCount; i++)
                 rawlist[i] = vertices[i].Raw;
             VideoDriver_DrawIndexedTriangleList(_raw, rawlist, vertexCount, indexList, triangleCount);
         }
@@ -212,8 +212,8 @@ namespace IrrlichtNETCP
 
         public void DrawIndexedTriangleFan(Vertex3D[] vertices, int vertexCount, ushort[] indexFan, int triangleCount)
         {
-            IntPtr[] rawFan = new IntPtr[vertices.Length];
-            for (int i = 0; i < vertices.Length; i++)
+            IntPtr[] rawFan = new IntPtr[vertexCount];
+            for (int i = 0; i < vertexCount; i++)
                 rawFan[i] = vertices[i].Raw;
             VideoDriver_DrawIndexedTriangleFan(_raw, rawFan, vertexCount, indexFan, triangleCount);
         }
