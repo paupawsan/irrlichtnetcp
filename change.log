@@ -12,6 +12,8 @@ Irrlicht .NET CP 0.6
 -Added Logger class
 -Added GuiEnvironment.BuiltInFont
 -Corrected Matrix4 to a class so that it can be instancied via new Matrix4()
+-Corrected bug with DrawIndexedTriangleList / Fan
+-Added CameraSceneNode.ViewFrustrum, which is almost complete
 
 =============================================================================
 Irrlicht .NET CP 0.5

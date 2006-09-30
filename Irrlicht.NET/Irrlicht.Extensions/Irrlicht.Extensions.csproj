@@ -35,6 +35,8 @@
   <ItemGroup>
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BeamNode.cs" />
+    <Compile Include="GrassPatchSceneNode.cs" />
+    <Compile Include="WindGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Irrlicht.NET\Irrlicht.NET.csproj">

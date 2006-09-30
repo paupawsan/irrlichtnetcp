@@ -33,6 +33,16 @@ namespace IrrlichtNETCP
 			}
 		}
 		
+		public ViewFrustrum ViewFrustrum
+		{
+			get
+			{
+				return (ViewFrustrum)
+					NativeElement.GetObject(Camera_GetViewFrustrum(_raw),
+											typeof(ViewFrustrum));
+			}
+		}
+		
 		public float FOV
 		{
 			get
@@ -163,6 +173,9 @@ namespace IrrlichtNETCP
 		[DllImport(Native.Dll)]
         static extern void Camera_GetViewMatrix(IntPtr camera, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 		
+		[DllImport(Native.Dll)]
+    	static extern IntPtr Camera_GetViewFrustrum(IntPtr camera);
+    
 		[DllImport(Native.Dll)]
 		static extern bool Camera_IsInputReceiverEnabled(IntPtr camera);
 		

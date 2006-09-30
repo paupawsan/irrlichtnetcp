@@ -14,3 +14,6 @@ project and the using "IrrlichtNETCP.Extensions".
 List of scene nodes :
 -BeamNode by zitzu
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=19
+-WindGenerator by DeusXL
+-GrassPatchSceneNode by DeusXL
+ http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?p=105

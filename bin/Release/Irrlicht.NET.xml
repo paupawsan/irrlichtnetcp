@@ -1,22 +1,27 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/media/hda2/Programmation/Irrlicht .NET CP SDK/bin/Release/Irrlicht.NET</name>
+        <name>Irrlicht.NET</name>
     </assembly>
     <members>
-        <member name="M:IrrlichtNETCP.FileSystem.AddZipFileArchive(System.String,System.Boolean,System.Boolean)">
-            <summary>
-            Adds to the current File System a zip/zlib-compatible archive
-            </summary>
-            <param name="name">Path to the archive</param>
-            <param name="ignoreCase">Will future archive-based name loading ignore case ?</param>
-            <param name="ignorePaths">Will future archive-based name loading ignore paths ?</param>
-        </member>
         <member name="F:IrrlichtNETCP.IrrlichtDevice.MainNativeEvent">
             <summary>
             Notice that the callback MUST BE KEPT ALIVE not to be collected by the GC
             That's why we create this object
             </summary>
+        </member>
+        <member name="M:IrrlichtNETCP.IrrlichtDevice.OnNativeEvent(System.IntPtr)">
+            <summary>
+            Fired on each Irrlicht event.
+            </summary>
+            <param name="evRaw">The adress of a pointer linking to the event</param>
+            <returns>Either the value of the user's own event receiver or false.</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.IrrlichtDevice.Run">
+            <summary>
+            Runs the device. Need to be fired on each frame to invalidate the window.
+            </summary>
+            <returns>True if done.</returns>
         </member>
         <member name="E:IrrlichtNETCP.IrrlichtDevice.OnEvent">
             <summary>
@@ -43,130 +48,71 @@
             Retrieves a tool to manipulate Irrlicht's files.
             </summary>
         </member>
-        <member name="M:IrrlichtNETCP.IrrlichtDevice.OnNativeEvent(System.IntPtr)">
+        <member name="F:IrrlichtNETCP.AnimatedMeshSceneNode.MainEventDelegate">
             <summary>
-            Fired on each Irrlicht event.
-            </summary>
-            <param name="evRaw">The adress of a pointer linking to the event</param>
-            <returns>Either the value of the user's own event receiver or false.</returns>
-        </member>
-        <member name="M:IrrlichtNETCP.IrrlichtDevice.Run">
-            <summary>
-            Runs the device. Need to be fired on each frame to invalidate the window.
-            </summary>
-            <returns>True if done.</returns>
-        </member>
-        <member name="P:IrrlichtNETCP.Box3D.Center">
-            <summary>
-            returns center of the bounding box
+            This delegate must never been collected by GC and that's why we
+            need to create this object.
             </summary>
         </member>
-        <member name="M:IrrlichtNETCP.Box3D.AddInternalPoint(System.Single,System.Single,System.Single)">
+        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.AddShadowVolumeSceneNode(System.Int32,System.Boolean,System.Single)">
             <summary>
-            Adds a point to the bounding box, causing it to grow bigger,
-            if point is outside of the box.
+            Adds a shadow to the node
             </summary>
-            <param name="x"> X Coordinate of the point to add to this box.</param>
-            <param name="y"> Y Coordinate of the point to add to this box.</param>
-            <param name="z"> Z Coordinate of the point to add to this box.</param>
+            <param name="ID">ID of the shadow, I advice -1 for automatic assignation</param>
+            <param name="zfail">Shall we use zfail ? (in fact it is not really implemented but I advice "true")</param>
+            <param name="infinity">Infinity, I advice 10000f</param>
+            <returns></returns>
         </member>
-        <member name="M:IrrlichtNETCP.Box3D.AddInternalPoint(IrrlichtNETCP.Vector3D)">
+        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.GetMS3DJointNode(System.String)">
             <summary>
-            Adds a point to the bounding box, causing it to grow bigger,
-            if point is outside of the box
+            Retrieves the MS3D Joint node whose name is [jointName]
             </summary>
-            <param name="p"> Point to add into the box.</param>
+            <returns>A SceneNode</returns>
+            <param name="jointName">Name of the node</param>
         </member>
-        <member name="M:IrrlichtNETCP.Box3D.AddInternalBox(IrrlichtNETCP.Box3D)">
+        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.GetXJointNode(System.String)">
             <summary>
-            Adds an other bounding box to the bounding box, causing it to grow bigger,
-            if the box is outside of the box
+            Retrieves the X Joint node whose name is [jointName]
             </summary>
-            <param name="b"> Other bounding box to add into this box.</param>
+            <returns>A SceneNode</returns>
+            <param name="jointName">Name of the node</param>
         </member>
-        <member name="M:IrrlichtNETCP.Box3D.IsPointInside(IrrlichtNETCP.Vector3D)">
+        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.SetFrameLoop(System.Int32,System.Int32)">
             <summary>
-            Determinates if a point is within this box.
+            Sets the animation loop between these two frames
             </summary>
-            <param name="p">: Point to check.</param>
-            <returns> Returns true if the point is withing the box, and false if it is not.</returns>
+            <param name="start">Starting frame</param>
+            <param name="end">Ending frame</param>
         </member>
-        <member name="M:IrrlichtNETCP.Box3D.IsPointTotalInside(IrrlichtNETCP.Vector3D)">
+        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.SetMD2Animation(System.String)">
             <summary>
-            Determinates if a point is within this box and its borders.
+            Sets the current MD2 animation
             </summary>
-            <param name="p"> Point to check.</param>
-            <returns> Returns true if the point is withing the box, and false if it is not.</returns>
+            <param name="animationname">Animation name (please refer to Irrlicht's documentation)</param>
         </member>
-        <member name="M:IrrlichtNETCP.Box3D.IntersectsWithBox(IrrlichtNETCP.Box3D)">
+        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.SetMD2Animation(IrrlichtNETCP.MD2Animation)">
             <summary>
-            Determinates if the box intersects with an other box.
+            Sets the current MD2 animation
             </summary>
-            <param name="other">Other box to check a intersection with.</param>
-            <returns> Returns true if there is a intersection with the other box,
-            otherwise false.</returns>
+            <param name="anim">Animation</param>
         </member>
-        <member name="M:IrrlichtNETCP.Box3D.GetEdges(IrrlichtNETCP.Vector3D[]@)">
+        <member name="M:IrrlichtNETCP.Vector2D.GetDistanceFromSQ(IrrlichtNETCP.Vector2D)">
             <summary>
-            Stores all 8 edges of the box into a array
+            Returns squared distance from an other point.
+            Here, the vector is interpreted as point in 3 dimensional space.
             </summary>
-            <param name="edges">Aray of 8 edges</param>
         </member>
-        <member name="M:IrrlichtNETCP.Color.ToBCL">
-            <summary>
-            Gets an standard .NET color from the current Irrlicht color.
+        <member name="M:IrrlichtNETCP.Vector2D.IsBetweenPoints(IrrlichtNETCP.Vector2D,IrrlichtNETCP.Vector2D)">
+             <summary>
+             Returns if the point represented by this vector is between to points
             </summary>
-            <returns>The .NET color</returns>
+            <param name="begin">Start point of line</param>
+            <param name="end">End point of line</param>
+            <returns> True if between points, false if not. </returns>
         </member>
-        <member name="M:IrrlichtNETCP.Color.FromBCL(System.Drawing.Color)">
-            <summary>
-            Makes an Irrlicht color from a standard .NET color.
-            </summary>
-            <param name="bcl">The standard .NET color</param>
-            <returns>The Irrlicht color</returns>
-        </member>
-        <member name="M:IrrlichtNETCP.Colorf.ToBCL">
-            <summary>
-            Gets an standard .NET color from the current Irrlicht color.
-            </summary>
-            <returns>The .NET color</returns>
-        </member>
-        <member name="M:IrrlichtNETCP.Colorf.FromBCL(System.Drawing.Color)">
-            <summary>
-            Makes an Irrlicht color from a standard .NET color.
-            </summary>
-            <param name="bcl">The standard .NET color</param>
-            <returns>The Irrlicht color</returns>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.MakeIdentity">
-            <summary> Set matrix to identity. </summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.GetM(System.Int32,System.Int32)">
-            <summary> Direct accessing every row and colum of the matrix values </summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.IsIdentity">
-            <summary> Returns true if the matrix is the identity matrix. </summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixPerspectiveFovLH(System.Single,System.Single,System.Single,System.Single)">
-            <summary> Builds a left-handed perspective projection matrix based on a field of view</summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixPerspectiveRH(System.Single,System.Single,System.Single,System.Single)">
-            <summary> Builds a right-handed perspective projection matrix.</summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixPerspectiveLH(System.Single,System.Single,System.Single,System.Single)">
-            <summary> Builds a left-handed perspective projection matrix.</summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixOrthoLH(System.Single,System.Single,System.Single,System.Single)">
-            <summary> Builds a left-handed orthogonal projection matrix.</summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixOrthoRH(System.Single,System.Single,System.Single,System.Single)">
-            <summary> Builds a right-handed orthogonal projection matrix.</summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.BuildCameraLookAtMatrixLH(IrrlichtNETCP.Vector3D,IrrlichtNETCP.Vector3D,IrrlichtNETCP.Vector3D)">
-            <summary> Builds a left-handed look-at matrix.</summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Matrix4.BuildCameraLookAtMatrixRH(IrrlichtNETCP.Vector3D,IrrlichtNETCP.Vector3D,IrrlichtNETCP.Vector3D)">
-            <summary> Builds a right-handed look-at matrix.</summary>
+        <member name="M:IrrlichtNETCP.Vector2D.GetInterpolated(IrrlichtNETCP.Vector2D,System.Single)">
+            \param other: other vector to interpolate between
+                    \param d: value between 0.0f and 1.0f. 
         </member>
         <member name="M:IrrlichtNETCP.Rect.IsPointInside(IrrlichtNETCP.Position2D)">
             <summary>
@@ -212,8 +158,8 @@
         </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.CreateMeshWithTangents(IrrlichtNETCP.Mesh)">
             <summary>
-            Creates a copy of the mesh, which will only consist of S3DVertexTangents vertices.
-            This is useful if you want to draw tangent space normal mapped geometry because it calculates the tangent and binormal data which is needed there.
+            Creates a copy of the mesh, which will only consist of S3DVertexTangents vertices. 
+            This is useful if you want to draw tangent space normal mapped geometry because it calculates the tangent and binormal data which is needed there. 
             </summary>
             <param name="baseMesh">Input mesh</param>
             <returns>Mesh consiting only of S3DVertexTangents vertices.</returns>
@@ -227,21 +173,21 @@
         </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.GetPolyCount(IrrlichtNETCP.Mesh)">
             <summary>
-            Returns amount of polygons in mesh.
+            Returns amount of polygons in mesh. 
             </summary>
             <param name="mesh">Mesh</param>
             <returns>Amount of polygons</returns>
         </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.GetPolyCount(IrrlichtNETCP.AnimatedMesh)">
             <summary>
-            Returns amount of polygons in mesh.
+            Returns amount of polygons in mesh. 
             </summary>
             <param name="mesh">Mesh</param>
             <returns>Amount of polygons</returns>
         </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.MakePlanarTextureMapping(IrrlichtNETCP.Mesh,System.Single)">
             <summary>
-            Creates a planar texture mapping on the mesh.
+            Creates a planar texture mapping on the mesh.  
             </summary>
             <param name="baseMesh">Mesh on which the operation is performed. </param>
             <param name="resolution">Resolution of the planar mapping. This is the value specifying which is the relation between world space and texture coordinate space. </param>
@@ -255,81 +201,161 @@
         </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.RecalculateNormals(IrrlichtNETCP.Mesh,System.Boolean)">
             <summary>
-            Recalculates all normals of the mesh.
+            Recalculates all normals of the mesh. 
             </summary>
             <param name="mesh">Mesh on which the operation is performed.</param>
-            <param name="smooth">
-            </param>
+            <param name="smooth"></param>
         </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.ScaleMesh(IrrlichtNETCP.Mesh,IrrlichtNETCP.Vector3D)">
             <summary>
-            Scales the whole mesh.
+            Scales the whole mesh. 
             </summary>
             <param name="mesh">Mesh on which the operation is performed. </param>
             <param name="scale">Scale factor. </param>
         </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.SetVertexColorAlpha(IrrlichtNETCP.Mesh,System.Int32)">
             <summary>
-            Sets the alpha vertex color value of the whole mesh to a new value.
+            Sets the alpha vertex color value of the whole mesh to a new value.  
             </summary>
             <param name="mesh">Mesh on which the operation is performed. </param>
             <param name="alpha">New alpha value. Must be a value between 0 and 255. </param>
         </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.SetVertexColors(IrrlichtNETCP.Mesh,IrrlichtNETCP.Color)">
             <summary>
-            Sets the colors of all vertices to one color.
+            Sets the colors of all vertices to one color. 
             </summary>
             <param name="mesh">Mesh on which the operation is performed. </param>
             <param name="color">New color.</param>
         </member>
-        <member name="F:IrrlichtNETCP.AnimatedMeshSceneNode.MainEventDelegate">
+        <member name="M:IrrlichtNETCP.VideoDriver.BeginScene(System.Boolean,System.Boolean,IrrlichtNETCP.Color)">
             <summary>
-            This delegate must never been collected by GC and that's why we
-            need to create this object.
+            Begin the scene
+            </summary>
+            <param name="back">Should the back buffer be cleared ?</param>
+            <param name="z">Should the Z buffer be cleared ? (useless on 2D-only applications)</param>
+            <param name="col">Color of the backbuffer</param>
+            <returns>False if failed</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.VideoDriver.EndScene">
+            <summary>
+            Ends the scene
             </summary>
         </member>
-        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.AddShadowVolumeSceneNode(System.Int32,System.Boolean,System.Single)">
+        <member name="M:IrrlichtNETCP.VideoDriver.AddTexture(IrrlichtNETCP.Dimension2D,System.String,IrrlichtNETCP.ColorFormat)">
             <summary>
-            Adds a shadow to the node
+            Creates an empty texture
             </summary>
-            <param name="ID">ID of the shadow, I advice -1 for automatic assignation</param>
-            <param name="zfail">Shall we use zfail ? (in fact it is not really implemented but I advice "true")</param>
-            <param name="infinity">Infinity, I advice 10000f</param>
-            <returns>
-            </returns>
+            <param name="size">Size of the teture</param>
+            <param name="name">Name of the texture on the texture pool</param>
+            <param name="fmt">Pixel format</param>
+            <returns>The created texture</returns>
         </member>
-        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.GetMS3DJointNode(System.String)">
+        <member name="M:IrrlichtNETCP.VideoDriver.GetTexture(System.String)">
             <summary>
-            Retrieves the MS3D Joint node whose name is [jointName]
+            Retrieves the texture
             </summary>
-            <returns>A SceneNode</returns>
-            <param name="jointName">Name of the node</param>
+            <param name="name">Path to the texture</param>
+            <returns>The texture</returns>
         </member>
-        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.GetXJointNode(System.String)">
+        <member name="M:IrrlichtNETCP.VideoDriver.MakeColorKeyTexture(IrrlichtNETCP.Texture,IrrlichtNETCP.Position2D)">
             <summary>
-            Retrieves the X Joint node whose name is [jointName]
+            Creates an 1bit alpha channel of the texture based on a pixel position color
             </summary>
-            <returns>A SceneNode</returns>
-            <param name="jointName">Name of the node</param>
+            <param name="texture">Input texture that will be modified</param>
+            <param name="colorKeyPixelPos">Position of the pixel with the color key</param>
         </member>
-        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.SetFrameLoop(System.Int32,System.Int32)">
+        <member name="M:IrrlichtNETCP.VideoDriver.MakeColorKeyTexture(IrrlichtNETCP.Texture,IrrlichtNETCP.Color)">
             <summary>
-            Sets the animation loop between these two frames
+            Creates an 1bit alpha channel of the texture based on a color
             </summary>
-            <param name="start">Starting frame</param>
-            <param name="end">Ending frame</param>
+            <param name="texture">Input texture that will be modified</param>
+            <param name="color">Color</param>
         </member>
-        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.SetMD2Animation(System.String)">
+        <member name="M:IrrlichtNETCP.VideoDriver.MakeNormalMapTexture(IrrlichtNETCP.Texture,System.Single)">
             <summary>
-            Sets the current MD2 animation
+            Creates a normal map from heightmap texture
             </summary>
-            <param name="animationname">Animation name (please refer to Irrlicht's documentation)</param>
+            <param name="texture">Input texture that will be modified</param>
+            <param name="amplitude">Constant value which by the height information is multiplied</param>
         </member>
-        <member name="M:IrrlichtNETCP.AnimatedMeshSceneNode.SetMD2Animation(IrrlichtNETCP.MD2Animation)">
+        <member name="P:IrrlichtNETCP.VideoDriver.FPS">
             <summary>
-            Sets the current MD2 animation
+            Retrieves the FPS (Frame Per Second) Number
+            Be careful because on the application's start it is set to 0.
             </summary>
-            <param name="anim">Animation</param>
+        </member>
+        <member name="M:IrrlichtNETCP.Texture.Lock">
+            <summary>
+            Call this before any modification/read of the texture via GetPixel/SetPixel
+            If you try to modify/acces the texture without it, it will still work but really slower 
+            Because it will lock and unlock the texture each time you access a pixel.
+            </summary>
+            <returns>Pointer to the lock result. You can use it in an unsafe context or use GetPixel/SetPixel</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Texture.Unlock">
+            <summary>
+            You must always call this after each lock.
+            </summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Texture.SetPixel(System.Int32,System.Int32,IrrlichtNETCP.Color)">
+            <summary>
+            Sets the current color of a pixel
+            </summary>
+            <param name="x">Width of the pixel</param>
+            <param name="y">Height of the pixel</param>
+            <param name="color">Color of the pixel</param>
+        </member>
+        <member name="M:IrrlichtNETCP.Texture.GetPixel(System.Int32,System.Int32)">
+            <summary>
+            Gets the current color of the pixel.
+            </summary>
+            <param name="x">Width of the pixel</param>
+            <param name="y">Height of the pixel</param>
+            <returns>The color</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Texture.Save(System.String)">
+            <summary>
+            Saves the texture to a file
+            </summary>
+            <param name="name">Path to the file in Irrlicht's working directory</param>
+        </member>
+        <member name="M:IrrlichtNETCP.Texture.Modify(IrrlichtNETCP.ModifyPixel)">
+            <summary>
+            Modifies the texture using a simple callback called on each pixel's modification.
+            </summary>
+            <param name="callback">Callback called for each pixel</param>
+        </member>
+        <member name="M:IrrlichtNETCP.Texture.Retrieve">
+            <summary>
+            Safe and fast way to retrieve all pixels of the texture.
+            </summary>
+            <returns>A two-dimension array with all pixels [x,y]</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Color.ToBCL">
+            <summary>
+            Gets an standard .NET color from the current Irrlicht color.
+            </summary>
+            <returns>The .NET color</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Color.FromBCL(System.Drawing.Color)">
+            <summary>
+            Makes an Irrlicht color from a standard .NET color.
+            </summary>
+            <param name="bcl">The standard .NET color</param>
+            <returns>The Irrlicht color</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Colorf.ToBCL">
+            <summary>
+            Gets an standard .NET color from the current Irrlicht color.
+            </summary>
+            <returns>The .NET color</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Colorf.FromBCL(System.Drawing.Color)">
+            <summary>
+            Makes an Irrlicht color from a standard .NET color.
+            </summary>
+            <param name="bcl">The standard .NET color</param>
+            <returns>The Irrlicht color</returns>
         </member>
         <member name="M:IrrlichtNETCP.ShadowVolumeSceneNode.SetMeshToRenderFrom(IrrlichtNETCP.Mesh)">
             <summary>
@@ -337,89 +363,19 @@
             </summary>
             <param name="mesh">The mesh</param>
         </member>
-        <member name="M:IrrlichtNETCP.TerrainSceneNode.GetBoundingBox(System.Int32,System.Int32)">
+        <member name="M:IrrlichtNETCP.FileSystem.AddZipFileArchive(System.String,System.Boolean,System.Boolean)">
             <summary>
-            Gets the bounding box for the specified patches
+            Adds to the current File System a zip/zlib-compatible archive
             </summary>
-            <returns>A Box3D</returns>
-            <param name="patchX">Patch X</param>
-            <param name="patchZ">Patch Z</param>
-        </member>
-        <member name="M:IrrlichtNETCP.TerrainSceneNode.OverrideLODDistance(System.Int32,System.Double)">
-            <summary>
-            Override the default generation of distance thresholds.
-            </summary>
-            <param name="LOD">LOD</param>
-            <param name="newDistance">Distance</param>
-        </member>
-        <member name="M:IrrlichtNETCP.TerrainSceneNode.ScaleTexture(System.Single,System.Single)">
-            <summary>
-            Scales the base texture, similar to makePlanarTextureMapping.
-            </summary>
-            <param name="scale">The scaling amount. Values above 1.0 increase the number of time the texture is drawn on the terrain. Values below 0 will decrease the number of times the texture is drawn on the terrain. Using negative values will flip the texture, as well as still scaling it.</param>
-            <param name="scale2">If set to 0 (default value), this will set the second texture coordinate set to the same values as in the first set. If this is another value than zero, it will scale the second texture coordinate set by this value.</param>
-        </member>
-        <member name="M:IrrlichtNETCP.TerrainSceneNode.SetCameraMovementDelta(System.Single)">
-            <summary>
-            Sets the movement camera threshold.
-            </summary>
-            <param name="delta">Delta</param>
-        </member>
-        <member name="M:IrrlichtNETCP.TerrainSceneNode.SetCameraRotationDelta(System.Single)">
-            <summary>
-            Sets the rotation camera threshold.
-            </summary>
-            <param name="delta">Delta</param>
-        </member>
-        <member name="M:IrrlichtNETCP.TerrainSceneNode.SetLODOfPatch(System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Manually sets the LOD of a patch.
-            </summary>
-            <param name="patchX">Patch x coordinate.</param>
-            <param name="patchZ">Patch z coordinate.</param>
-            <param name="LOD">The level of detail to set the patch to.</param>
+            <param name="name">Path to the archive</param>
+            <param name="ignoreCase">Will future archive-based name loading ignore case ?</param>
+            <param name="ignorePaths">Will future archive-based name loading ignore paths ?</param>
         </member>
         <member name="M:IrrlichtNETCP.SceneManager.#ctor(System.IntPtr)">
             <summary>
             Constructor
             </summary>
             <param name="raw">An IntPtr</param>
-        </member>
-        <member name="P:IrrlichtNETCP.SceneManager.ActiveCamera">
-            <summary>
-            Gets or sets the current active camera
-            </summary>
-        </member>
-        <member name="P:IrrlichtNETCP.SceneManager.MeshManipulator">
-            <summary>
-            Gets an item for easy manipulating/getting informations on a mesh
-            </summary>
-        </member>
-        <member name="P:IrrlichtNETCP.SceneManager.CollisionManager">
-            <summary>
-            Gets an object used to get informations on collisions
-            </summary>
-        </member>
-        <member name="P:IrrlichtNETCP.SceneManager.ShadowColor">
-            <summary>
-            Gets or sets the shadow color (default must be something like (100, 100, 100))
-            </summary>
-        </member>
-        <member name="P:IrrlichtNETCP.SceneManager.SceneNodeRenderPass">
-            <summary>
-            Gets the current scene node render pass. Generally useless.
-            </summary>
-        </member>
-        <member name="P:IrrlichtNETCP.SceneManager.VideoDriver">
-            <summary>
-            Gets the current video driver.
-            </summary>
-        </member>
-        <member name="P:IrrlichtNETCP.SceneManager.RootSceneNode">
-            <summary>
-            Gets the root scene node. And empty node with position = rotation = (0, 0, 0) and scale = (1, 1, 1)
-            Moreover, all node that do not have any parent is a child from the the root scene node.
-            </summary>
         </member>
         <member name="M:IrrlichtNETCP.SceneManager.AddAnimatedMeshSceneNode(IrrlichtNETCP.AnimatedMesh)">
             <summary>
@@ -600,8 +556,8 @@
         </member>
         <member name="M:IrrlichtNETCP.SceneManager.AddSkyDomeSceneNode(IrrlichtNETCP.Texture,System.UInt32,System.UInt32,System.Double,System.Double,IrrlichtNETCP.SceneNode)">
             <summary>
-            Adds a skydome scene node to the scene graph.
-            A skydome is a large (half-) sphere with a panoramic texture on the inside and is drawn around the camera position.
+            Adds a skydome scene node to the scene graph. 
+            A skydome is a large (half-) sphere with a panoramic texture on the inside and is drawn around the camera position. 
             </summary>
             <param name="texture">Texture for the dome. </param>
             <param name="horiRes">Number of vertices of a horizontal layer of the sphere. </param>
@@ -613,8 +569,8 @@
         </member>
         <member name="M:IrrlichtNETCP.SceneManager.AddSphereSceneNode(System.Single,System.Int32,IrrlichtNETCP.SceneNode)">
             <summary>
-            Adds a sphere scene node for test purposes to the scene.
-            It is a simple sphere.
+            Adds a sphere scene node for test purposes to the scene. 
+            It is a simple sphere. 
             </summary>
             <param name="radius">Radius of the sphere. </param>
             <param name="polycount">Polycount of the sphere. </param>
@@ -633,14 +589,14 @@
         </member>
         <member name="M:IrrlichtNETCP.SceneManager.RegisterNodeForRendering(IrrlichtNETCP.SceneNode,IrrlichtNETCP.SceneNodeRenderPass)">
             <summary>
-            Registers a node for rendering it at a specific time.
+            Registers a node for rendering it at a specific time. 
             </summary>
             <param name="node">Node to register for drawing. Usually scene nodes would set 'this' as parameter here because they want to be drawn. </param>
             <param name="pass">Specifies when the mode wants to be drawn in relation to the other nodes. For example, if the node is a shadow, it usually wants to be drawn after all other nodes and will use Shadow for this.</param>
         </member>
         <member name="M:IrrlichtNETCP.SceneManager.RegisterNodeForRendering(IrrlichtNETCP.SceneNode)">
             <summary>
-            Registers a node for rendering it at a specific time.
+            Registers a node for rendering it at a specific time. 
             </summary>
             <param name="node">Node to register for drawing. Usually scene nodes would set 'this' as parameter here because they want to be drawn. </param>
         </member>
@@ -782,123 +738,118 @@
         </member>
         <member name="M:IrrlichtNETCP.SceneManager.SaveScene(System.String)">
             <summary>
-            Saves the current scene into a file.
+            Saves the current scene into a file. 
             </summary>
             <param name="filename">File where the scene is saved into. </param>
         </member>
         <member name="M:IrrlichtNETCP.SceneManager.LoadScene(System.String)">
             <summary>
-            Loads a scene. Note that the current scene is not cleared before.
+            Loads a scene. Note that the current scene is not cleared before. 
             </summary>
             <param name="filename">File where the scene is going to be saved into.</param>
         </member>
-        <member name="M:IrrlichtNETCP.Texture.Lock">
+        <member name="P:IrrlichtNETCP.SceneManager.ActiveCamera">
             <summary>
-            Call this before any modification/read of the texture via GetPixel/SetPixel
-            If you try to modify/acces the texture without it, it will still work but really slower
-            Because it will lock and unlock the texture each time you access a pixel.
-            </summary>
-            <returns>Pointer to the lock result. You can use it in an unsafe context or use GetPixel/SetPixel</returns>
-        </member>
-        <member name="M:IrrlichtNETCP.Texture.Unlock">
-            <summary>
-            You must always call this after each lock.
+            Gets or sets the current active camera
             </summary>
         </member>
-        <member name="M:IrrlichtNETCP.Texture.SetPixel(System.Int32,System.Int32,IrrlichtNETCP.Color)">
+        <member name="P:IrrlichtNETCP.SceneManager.MeshManipulator">
             <summary>
-            Sets the current color of a pixel
-            </summary>
-            <param name="x">Width of the pixel</param>
-            <param name="y">Height of the pixel</param>
-            <param name="color">Color of the pixel</param>
-        </member>
-        <member name="M:IrrlichtNETCP.Texture.GetPixel(System.Int32,System.Int32)">
-            <summary>
-            Gets the current color of the pixel.
-            </summary>
-            <param name="x">Width of the pixel</param>
-            <param name="y">Height of the pixel</param>
-            <returns>The color</returns>
-        </member>
-        <member name="M:IrrlichtNETCP.Texture.Save(System.String)">
-            <summary>
-            Saves the texture to a file
-            </summary>
-            <param name="name">Path to the file in Irrlicht's working directory</param>
-        </member>
-        <member name="M:IrrlichtNETCP.Texture.Modify(IrrlichtNETCP.ModifyPixel)">
-            <summary>
-            Modifies the texture using a simple callback called on each pixel's modification.
-            </summary>
-            <param name="callback">Callback called for each pixel</param>
-        </member>
-        <member name="M:IrrlichtNETCP.Texture.Retrieve">
-            <summary>
-            Safe and fast way to retrieve all pixels of the texture.
-            </summary>
-            <returns>A two-dimension array with all pixels [x,y]</returns>
-        </member>
-        <member name="P:IrrlichtNETCP.VideoDriver.FPS">
-            <summary>
-            Retrieves the FPS (Frame Per Second) Number
-            Be careful because on the application's start it is set to 0.
+            Gets an item for easy manipulating/getting informations on a mesh
             </summary>
         </member>
-        <member name="M:IrrlichtNETCP.VideoDriver.BeginScene(System.Boolean,System.Boolean,IrrlichtNETCP.Color)">
+        <member name="P:IrrlichtNETCP.SceneManager.CollisionManager">
             <summary>
-            Begin the scene
-            </summary>
-            <param name="back">Should the back buffer be cleared ?</param>
-            <param name="z">Should the Z buffer be cleared ? (useless on 2D-only applications)</param>
-            <param name="col">Color of the backbuffer</param>
-            <returns>False if failed</returns>
-        </member>
-        <member name="M:IrrlichtNETCP.VideoDriver.EndScene">
-            <summary>
-            Ends the scene
+            Gets an object used to get informations on collisions
             </summary>
         </member>
-        <member name="M:IrrlichtNETCP.VideoDriver.AddTexture(IrrlichtNETCP.Dimension2D,System.String,IrrlichtNETCP.ColorFormat)">
+        <member name="P:IrrlichtNETCP.SceneManager.ShadowColor">
             <summary>
-            Creates an empty texture
+            Gets or sets the shadow color (default must be something like (100, 100, 100))
             </summary>
-            <param name="size">Size of the teture</param>
-            <param name="name">Name of the texture on the texture pool</param>
-            <param name="fmt">Pixel format</param>
-            <returns>The created texture</returns>
         </member>
-        <member name="M:IrrlichtNETCP.VideoDriver.GetTexture(System.String)">
+        <member name="P:IrrlichtNETCP.SceneManager.SceneNodeRenderPass">
             <summary>
-            Retrieves the texture
+            Gets the current scene node render pass. Generally useless.
             </summary>
-            <param name="name">Path to the texture</param>
-            <returns>The texture</returns>
         </member>
-        <member name="M:IrrlichtNETCP.VideoDriver.MakeColorKeyTexture(IrrlichtNETCP.Texture,IrrlichtNETCP.Position2D)">
+        <member name="P:IrrlichtNETCP.SceneManager.VideoDriver">
             <summary>
-            Creates an 1bit alpha channel of the texture based on a pixel position color
+            Gets the current video driver.
             </summary>
-            <param name="texture">Input texture that will be modified</param>
-            <param name="colorKeyPixelPos">Position of the pixel with the color key</param>
         </member>
-        <member name="M:IrrlichtNETCP.VideoDriver.MakeColorKeyTexture(IrrlichtNETCP.Texture,IrrlichtNETCP.Color)">
+        <member name="P:IrrlichtNETCP.SceneManager.RootSceneNode">
             <summary>
-            Creates an 1bit alpha channel of the texture based on a color
+            Gets the root scene node. And empty node with position = rotation = (0, 0, 0) and scale = (1, 1, 1)
+            Moreover, all node that do not have any parent is a child from the the root scene node.
             </summary>
-            <param name="texture">Input texture that will be modified</param>
-            <param name="color">Color</param>
         </member>
-        <member name="M:IrrlichtNETCP.VideoDriver.MakeNormalMapTexture(IrrlichtNETCP.Texture,System.Single)">
+        <member name="M:IrrlichtNETCP.Box3D.AddInternalPoint(System.Single,System.Single,System.Single)">
             <summary>
-            Creates a normal map from heightmap texture
+            Adds a point to the bounding box, causing it to grow bigger,
+            if point is outside of the box.
             </summary>
-            <param name="texture">Input texture that will be modified</param>
-            <param name="amplitude">Constant value which by the height information is multiplied</param>
+            <param name="x"> X Coordinate of the point to add to this box.</param>
+            <param name="y"> Y Coordinate of the point to add to this box.</param>
+            <param name="z"> Z Coordinate of the point to add to this box.</param>
+        </member>
+        <member name="M:IrrlichtNETCP.Box3D.AddInternalPoint(IrrlichtNETCP.Vector3D)">
+            <summary>
+            Adds a point to the bounding box, causing it to grow bigger,
+            if point is outside of the box
+            </summary>
+            <param name="p"> Point to add into the box.</param>
+        </member>
+        <member name="M:IrrlichtNETCP.Box3D.AddInternalBox(IrrlichtNETCP.Box3D)">
+            <summary>
+            Adds an other bounding box to the bounding box, causing it to grow bigger,
+            if the box is outside of the box
+            </summary>
+            <param name="b"> Other bounding box to add into this box.</param>
+        </member>
+        <member name="M:IrrlichtNETCP.Box3D.IsPointInside(IrrlichtNETCP.Vector3D)">
+            <summary>
+            Determinates if a point is within this box.
+            </summary>
+            <param name="p">: Point to check.</param>
+            <returns> Returns true if the point is withing the box, and false if it is not.</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Box3D.IsPointTotalInside(IrrlichtNETCP.Vector3D)">
+            <summary>
+            Determinates if a point is within this box and its borders.
+            </summary>
+            <param name="p"> Point to check.</param>
+            <returns> Returns true if the point is withing the box, and false if it is not.</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Box3D.IntersectsWithBox(IrrlichtNETCP.Box3D)">
+            <summary>
+            Determinates if the box intersects with an other box.
+            </summary>
+            <param name="other">Other box to check a intersection with.</param>
+            <returns> Returns true if there is a intersection with the other box,
+            otherwise false.</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Box3D.GetEdges(IrrlichtNETCP.Vector3D[]@)">
+            <summary>
+            Stores all 8 edges of the box into a array
+            </summary>
+            <param name="edges">Aray of 8 edges</param>
+        </member>
+        <member name="P:IrrlichtNETCP.Box3D.Center">
+            <summary>
+            returns center of the bounding box
+            </summary>
+        </member>
+        <member name="T:IrrlichtNETCP.OnShaderConstantSetDelegate">
+            <summary>
+            Delegate called each time the engine wants to define a shader constant.
+            </summary>
+            <param name="services">Used to define constant and work with shader.</param>
+            <param name="userData">Userdata int which can be specified when creating the shader.</param>
         </member>
         <member name="M:IrrlichtNETCP.GPUProgrammingServices.AddHighLevelShaderMaterial(System.String,System.String,IrrlichtNETCP.VertexShaderType,System.String,System.String,IrrlichtNETCP.PixelShaderType,IrrlichtNETCP.OnShaderConstantSetDelegate,IrrlichtNETCP.MaterialType,System.Int32)">
             <summary>
-            Adds a new material renderer to the VideoDriver, based on a high level shading language. Currently only HLSL/D3D9 and GLSL/OpenGL is supported.
+            Adds a new material renderer to the VideoDriver, based on a high level shading language. Currently only HLSL/D3D9 and GLSL/OpenGL is supported. 
             </summary>
             <param name="program">String containing the source of the vertex shader program. This can be "" if no vertex program should be used. </param>
             <param name="ventrypoint">Name of the function of the vertexShaderProgram </param>
@@ -913,7 +864,7 @@
         </member>
         <member name="M:IrrlichtNETCP.GPUProgrammingServices.AddHighLevelShaderMaterialFromFiles(System.String,System.String,IrrlichtNETCP.VertexShaderType,System.String,System.String,IrrlichtNETCP.PixelShaderType,IrrlichtNETCP.OnShaderConstantSetDelegate,IrrlichtNETCP.MaterialType,System.Int32)">
             <summary>
-            Adds a new material renderer to the VideoDriver, based on a high level shading language. Currently only HLSL/D3D9 and GLSL/OpenGL is supported.
+            Adds a new material renderer to the VideoDriver, based on a high level shading language. Currently only HLSL/D3D9 and GLSL/OpenGL is supported. 
             </summary>
             <param name="program">String containing the path to the vertex shader program. This can be "" (empty string) if no vertex program should be used. </param>
             <param name="ventrypoint">Name of the function of the vertexShaderProgram </param>
@@ -948,6 +899,13 @@
             <param name="userData">An user data int. This int can be set to any value and will be set as parameter in the callback method when calling OnSetConstants(). In this way it is easily possible to use the same callback method for multiple materials and distinguish between them during the call. </param>
             <returns>The Material to use with SetMaterial (with a C-style explicit cast). -1 if failed</returns>
         </member>
+        <member name="T:IrrlichtNETCP.GPUProgrammingServices.OnNativeSCSD">
+            <summary>
+            You must NOT use this delegate since it is a native delegate. Use OnShaderConstantSetDelegate instead !
+            </summary>
+            <param name="services">(DON'T USE) Memory address of services</param>
+            <param name="userData">(DON'T USE) User Data</param>
+        </member>
         <member name="F:IrrlichtNETCP.ShaderConstantCallback.scclist">
             <summary>
             This list is used to keep the callback from the terrible Garbage Collector's recycle bin.
@@ -957,29 +915,77 @@
             contain every callback (task that should not be
             </summary>
         </member>
-        <member name="M:IrrlichtNETCP.Vector2D.GetDistanceFromSQ(IrrlichtNETCP.Vector2D)">
+        <member name="M:IrrlichtNETCP.TerrainSceneNode.GetBoundingBox(System.Int32,System.Int32)">
             <summary>
-            Returns squared distance from an other point.
-            Here, the vector is interpreted as point in 3 dimensional space.
+            Gets the bounding box for the specified patches
             </summary>
+            <returns>A Box3D</returns>
+            <param name="patchX">Patch X</param>
+            <param name="patchZ">Patch Z</param>
         </member>
-        <member name="M:IrrlichtNETCP.Vector2D.IsBetweenPoints(IrrlichtNETCP.Vector2D,IrrlichtNETCP.Vector2D)">
+        <member name="M:IrrlichtNETCP.TerrainSceneNode.OverrideLODDistance(System.Int32,System.Double)">
             <summary>
-            Returns if the point represented by this vector is between to points
+            Override the default generation of distance thresholds.
             </summary>
-            <param name="begin">Start point of line</param>
-            <param name="end">End point of line</param>
-            <returns> True if between points, false if not. </returns>
+            <param name="LOD">LOD</param>
+            <param name="newDistance">Distance</param>
         </member>
-        <member name="M:IrrlichtNETCP.Vector2D.GetInterpolated(IrrlichtNETCP.Vector2D,System.Single)">
-             \param other: other vector to interpolate between
-                    \param d: value between 0.0f and 1.0f.</member>
-        <member name="T:IrrlichtNETCP.OnShaderConstantSetDelegate">
+        <member name="M:IrrlichtNETCP.TerrainSceneNode.ScaleTexture(System.Single,System.Single)">
             <summary>
-            Delegate called each time the engine wants to define a shader constant.
+            Scales the base texture, similar to makePlanarTextureMapping.
             </summary>
-            <param name="services">Used to define constant and work with shader.</param>
-            <param name="userData">Userdata int which can be specified when creating the shader.</param>
+            <param name="scale">The scaling amount. Values above 1.0 increase the number of time the texture is drawn on the terrain. Values below 0 will decrease the number of times the texture is drawn on the terrain. Using negative values will flip the texture, as well as still scaling it.</param>
+            <param name="scale2">If set to 0 (default value), this will set the second texture coordinate set to the same values as in the first set. If this is another value than zero, it will scale the second texture coordinate set by this value.</param>
+        </member>
+        <member name="M:IrrlichtNETCP.TerrainSceneNode.SetCameraMovementDelta(System.Single)">
+            <summary>
+            Sets the movement camera threshold.
+            </summary>
+            <param name="delta">Delta</param>
+        </member>
+        <member name="M:IrrlichtNETCP.TerrainSceneNode.SetCameraRotationDelta(System.Single)">
+            <summary>
+            Sets the rotation camera threshold.
+            </summary>
+            <param name="delta">Delta</param>
+        </member>
+        <member name="M:IrrlichtNETCP.TerrainSceneNode.SetLODOfPatch(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Manually sets the LOD of a patch.
+            </summary>
+            <param name="patchX">Patch x coordinate.</param>
+            <param name="patchZ">Patch z coordinate.</param>
+            <param name="LOD">The level of detail to set the patch to.</param>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.MakeIdentity">
+            <summary> Set matrix to identity. </summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.GetM(System.Int32,System.Int32)">
+            <summary> Direct accessing every row and colum of the matrix values </summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.IsIdentity">
+            <summary> Returns true if the matrix is the identity matrix. </summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixPerspectiveFovLH(System.Single,System.Single,System.Single,System.Single)">
+            <summary> Builds a left-handed perspective projection matrix based on a field of view</summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixPerspectiveRH(System.Single,System.Single,System.Single,System.Single)">
+            <summary> Builds a right-handed perspective projection matrix.</summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixPerspectiveLH(System.Single,System.Single,System.Single,System.Single)">
+            <summary> Builds a left-handed perspective projection matrix.</summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixOrthoLH(System.Single,System.Single,System.Single,System.Single)">
+            <summary> Builds a left-handed orthogonal projection matrix.</summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.BuildProjectionMatrixOrthoRH(System.Single,System.Single,System.Single,System.Single)">
+            <summary> Builds a right-handed orthogonal projection matrix.</summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.BuildCameraLookAtMatrixLH(IrrlichtNETCP.Vector3D,IrrlichtNETCP.Vector3D,IrrlichtNETCP.Vector3D)">
+            <summary> Builds a left-handed look-at matrix.</summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Matrix4.BuildCameraLookAtMatrixRH(IrrlichtNETCP.Vector3D,IrrlichtNETCP.Vector3D,IrrlichtNETCP.Vector3D)">
+            <summary> Builds a right-handed look-at matrix.</summary>
         </member>
     </members>
 </doc>
