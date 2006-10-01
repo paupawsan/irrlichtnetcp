@@ -1,5 +1,6 @@
 using System;
 using System.Text;
+using System.Collections;
 using System.IO;
 using IrrlichtNETCP;
 using IrrlichtNETCP.Inheritable;
@@ -121,24 +122,24 @@ namespace IrrlichtNETCP.Extensions
                 int drawcount = 0;
                 int max = (Particles.Length < MaxDensity) ? Particles.Length : MaxDensity;
 
-                double d = pos.DistanceFromSQ(campos) / NewMath.Sqr(GRASS_PATCH_SIZE);
+                double d = pos.DistanceFrom(campos) / GRASS_PATCH_SIZE;
                 if (d > 1.0)
-                    max = (int)(((double)max) / Math.Sqrt(d));
+                    max = (int)(((double)max) / d);
 
                 //Matrix4 m = new Matrix4();
 
                 for (int i = 0; i < max; i++)
                 {
-                    int idx = drawcount * 4;
-
+                	int idx = drawcount * 4;
+                	
                     GrassParticle particle = Particles[i];
                     Vector3D gpos = particle.pos + pos;
 
-                    if (!cbox.IsPointInside(gpos))
-                        continue;
-
                     double dist = campos.DistanceFromSQ(gpos);
                     if (dist > NewMath.Sqr(DrawDistance))
+                        continue;
+                        
+                    if (!cbox.IsPointInside(gpos))
                         continue;
 
                     if (dist > NewMath.Sqr(DrawDistance * 0.5))
@@ -150,18 +151,17 @@ namespace IrrlichtNETCP.Extensions
 
                             if (i1 < i2)
                                 continue;
-                            //int c = ((int)(255f - (i2 * 255f) / i1));
                         }
                     }
 
                     int igridsize = GRASS_PATCH_SIZE / (int)WindRes;
                     int ihalfres = (int)WindRes / 2;
 
-                    int xgrid = (int)(particle.pos.X / ((float)igridsize) + ihalfres);
-                    int zgrid = (int)(particle.pos.Z / ((float)igridsize) + ihalfres);
+                    int xgrid = (int)(particle.pos.X / (igridsize) + ihalfres);
+                    int zgrid = (int)(particle.pos.Z / (igridsize) + ihalfres);
 
-                    float xnext = particle.pos.X / ((float)GRASS_PATCH_SIZE / (float)WindRes) + (WindRes / 2f) - xgrid;
-                    float znext = particle.pos.Z / ((float)GRASS_PATCH_SIZE / (float)WindRes) + (WindRes / 2f) - zgrid;
+                    float xnext = particle.pos.X / (GRASS_PATCH_SIZE / WindRes) + (WindRes / 2f) - xgrid;
+                    float znext = particle.pos.Z / (GRASS_PATCH_SIZE / WindRes) + (WindRes / 2f) - zgrid;
 
                     Vector2D wind1 = WindGrid[xgrid * WindRes + zgrid];
                     Vector2D wind2 = WindGrid[(xgrid + 1) * WindRes + zgrid];
@@ -230,46 +230,51 @@ namespace IrrlichtNETCP.Extensions
             if (Particles.Length * 4 > Vertices.Length || Particles.Length * 6 > Indices.Length)
             {
                 int oldSize = Vertices.Length;
-                Vertex3D[] newvert = new Vertex3D[Particles.Length * 4];
-
+				ArrayList newvert = new ArrayList();
+				
                 int i = 0;
-                for (i = 0; i < newvert.Length; i++)
+                for (i = 0; i < (Particles.Length * 4); i++)
                 {
                     if (i < oldSize)
-                        newvert[i] = Vertices[i];
+                        newvert.Add(Vertices[i]);
                     else
                     {
-                        newvert[i] = new Vertex3D();
-                        newvert[i].Normal = new Vector3D(0, 1, 0);
+                        Vertex3D temp = new Vertex3D();
+                        temp.Normal = new Vector3D(0, 1, 0);
+                        newvert.Add(temp);
                     }
                 }
-                Vertices = newvert;
+                Vertices = (Vertex3D[])newvert.ToArray(typeof(Vertex3D));
+                
+                
+                newvert.Clear();
 
                 int oldIdxSize = Indices.Length;
                 int oldvertices = oldSize;
-                ushort[] newindices = new ushort[Particles.Length * 12];
 
                 for (i = 0; i < oldIdxSize; i++)
-                    newindices[i] = Indices[i];
-                Indices = newindices;
-                for (i = oldIdxSize; i < Indices.Length; i += 12)
+                    newvert.Add(Indices[i]);
+                    
+                for (i = oldIdxSize; i < (Particles.Length * 12); i += 12)
                 {
-                    Indices[0 + i] = (ushort)(0 + oldvertices);
-                    Indices[1 + i] = (ushort)(2 + oldvertices);
-                    Indices[2 + i] = (ushort)(1 + oldvertices);
-                    Indices[3 + i] = (ushort)(0 + oldvertices);
-                    Indices[4 + i] = (ushort)(3 + oldvertices);
-                    Indices[5 + i] = (ushort)(2 + oldvertices);
+                    newvert.Add((ushort)(0 + oldvertices));
+                    newvert.Add((ushort)(2 + oldvertices));
+                    newvert.Add((ushort)(1 + oldvertices));
+                    newvert.Add((ushort)(0 + oldvertices));
+                    newvert.Add((ushort)(3 + oldvertices));
+                    newvert.Add((ushort)(2 + oldvertices));
 
-                    Indices[6 + i] = (ushort)(1 + oldvertices);
-                    Indices[7 + i] = (ushort)(2 + oldvertices);
-                    Indices[8 + i] = (ushort)(0 + oldvertices);
-                    Indices[9 + i] = (ushort)(2 + oldvertices);
-                    Indices[10 + i] = (ushort)(3 + oldvertices);
-                    Indices[11 + i] = (ushort)(0 + oldvertices);
+                    newvert.Add((ushort)(1 + oldvertices));
+                    newvert.Add((ushort)(2 + oldvertices));
+                    newvert.Add((ushort)(0 + oldvertices));
+                    newvert.Add((ushort)(2 + oldvertices));
+                    newvert.Add((ushort)(3 + oldvertices));
+                    newvert.Add((ushort)(0 + oldvertices));
 
                     oldvertices += 4;
                 }
+                Indices = (ushort[])newvert.ToArray(typeof(ushort));
+                newvert.Clear();
             }
         }
 
@@ -297,12 +302,12 @@ namespace IrrlichtNETCP.Extensions
             m.RotationDegrees = Terrain.Rotation;
             m.Translation = Terrain.AbsolutePosition;
             m.MakeInverse();*/
-
+            
             Color[,] TGMRetrieve = TerrainGrassMap.Retrieve();
             Color[,] TCMRetrieve = TerrainColourMap.Retrieve();
             Color[,] THMRetrieve = TerrainHeightMap.Retrieve();
-            System.Collections.ArrayList toremove = new System.Collections.ArrayList();
-            int fcount = count;
+            System.Collections.ArrayList tosave = new System.Collections.ArrayList();
+            
             for (int i = 0; i < count; i++)
             {
                 Particles[i].points = new Vector3D[4];
@@ -339,19 +344,11 @@ namespace IrrlichtNETCP.Extensions
                    z1 < 1 ||
                    x1 > TerrainHeightMap.OriginalSize.Width - 1 ||
                    z1 > TerrainHeightMap.OriginalSize.Height - 1)
-                {
-                    fcount--;
-                    toremove.Add(i);
                     continue;
-                }
 
                 Color cDensity = TGMRetrieve[x1, z1];
                 if (rand.Next(0, 255) > cDensity.A || cDensity.A < 1)
-                {
-                    fcount--;
-                    toremove.Add(i);
                     continue;
-                }
 
                 float ay = THMRetrieve[x1, z1].B * Terrain.Scale.Y;
                 float by = THMRetrieve[x1 + 1, z1].B * Terrain.Scale.Y;
@@ -369,7 +366,7 @@ namespace IrrlichtNETCP.Extensions
                 Particles[i].color = TCMRetrieve[x1, z1];
                 Particles[i].startColor = TCMRetrieve[x1, z1];
 
-                BoundingBox.AddInternalPoint(Particles[i].pos);
+                _bbox.AddInternalPoint(Particles[i].pos);
 
                 Vector3D dimensions = new Vector3D(0.5f * size.Width,
                                                    -0.5f * size.Height,
@@ -386,21 +383,11 @@ namespace IrrlichtNETCP.Extensions
                 Particles[i].points[1] = Particles[i].pos + new Vector3D(dimensions.X, -dimensions.Y, dimensions.Z);
                 Particles[i].points[2] = Particles[i].pos - new Vector3D(dimensions.X, dimensions.Y, dimensions.Z);
                 Particles[i].points[3] = Particles[i].pos - new Vector3D(dimensions.X, -dimensions.Y, dimensions.Z);
+            	tosave.Add(Particles[i]);
             }
 
-            GrassParticle[] temp = new GrassParticle[fcount];
-            int rk = -1;
-            for (int k = 0; k < temp.Length; k++)
-            {
-                rk++;
-                if (toremove.Contains(rk))
-                {
-                    k--;
-                    continue;
-                }
-                temp[k] = Particles[rk];
-            }
-            Particles = temp;
+            Particles = (GrassParticle[])tosave.ToArray(typeof(GrassParticle));
+            tosave.Clear();
             if (save)
                 return Save();
 
@@ -454,7 +441,7 @@ namespace IrrlichtNETCP.Extensions
             }
         }
 
-        Box3D _bbox = new Box3D();
+        Box3D _bbox;
         public override Box3D BoundingBox { get { return _bbox; } }
 
         float[] v1, v2, v3, v4;
