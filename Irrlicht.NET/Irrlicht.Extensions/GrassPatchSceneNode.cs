@@ -233,16 +233,12 @@ namespace IrrlichtNETCP.Extensions
 				ArrayList newvert = new ArrayList();
 				
                 int i = 0;
-                for (i = 0; i < (Particles.Length * 4); i++)
+                newvert.AddRange(Vertices);
+                for (i = oldSize; i < (Particles.Length * 4); i++)
                 {
-                    if (i < oldSize)
-                        newvert.Add(Vertices[i]);
-                    else
-                    {
-                        Vertex3D temp = new Vertex3D();
-                        temp.Normal = new Vector3D(0, 1, 0);
-                        newvert.Add(temp);
-                    }
+                   Vertex3D temp = new Vertex3D();
+                   temp.Normal = new Vector3D(0, 1, 0);
+                   newvert.Add(temp);
                 }
                 Vertices = (Vertex3D[])newvert.ToArray(typeof(Vertex3D));
                 
@@ -252,8 +248,7 @@ namespace IrrlichtNETCP.Extensions
                 int oldIdxSize = Indices.Length;
                 int oldvertices = oldSize;
 
-                for (i = 0; i < oldIdxSize; i++)
-                    newvert.Add(Indices[i]);
+                newvert.AddRange(Indices);
                     
                 for (i = oldIdxSize; i < (Particles.Length * 12); i += 12)
                 {
