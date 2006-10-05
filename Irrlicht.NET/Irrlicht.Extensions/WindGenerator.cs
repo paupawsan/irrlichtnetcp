@@ -2,7 +2,7 @@ using System;
 using IrrlichtNETCP;
 using IrrlichtNETCP.Inheritable;
 
-namespace IrrlichtNETCP
+namespace IrrlichtNETCP.Extensions
 {	
 	public class WindGenerator
 	{		
@@ -23,11 +23,10 @@ namespace IrrlichtNETCP
 		float _regularity;
 		public float Regularity { get { return _regularity; } set { _regularity = value; } }
 		
-		const float PI = 3.14159265f;
 		public Vector2D Wind(Vector3D position, uint timeMs)
 		{
 		    float seed = (timeMs + position.X*7*fcos(timeMs/120000.0f) + position.Z*7*fsin(timeMs/120000.0f))/ 1000.0f;
-		    float dir = 2*PI*noise( seed / Regularity );
+		    float dir = 2*NewMath.PI*noise( seed / Regularity );
 		    float amp = Strength*fsin( seed );
 		 
 		    return new Vector2D( amp*fcos(dir), amp*fsin(dir) );
@@ -42,17 +41,17 @@ namespace IrrlichtNETCP
 		
 		float fcos(float f)
 		{
-			return (float)Math.Cos(f);
+			return NewMath.FCos(f);
 		}
 		
 		float fsin(float f)
 		{
-			return (float)Math.Sin(f);
+			return NewMath.FSin(f);
 		}
 		
 		float cosInterpolater(float a, float b, float x)
 		{
-		   float ft = x * 3.1415927f;
+		   float ft = x * NewMath.PI;
 		   float f = (1 - (fcos(ft))) * .5f;
 		   return  a*(1-f) + b*f;
 		}

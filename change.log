@@ -14,6 +14,8 @@ Irrlicht .NET CP 0.6
 -Corrected Matrix4 to a class so that it can be instancied via new Matrix4()
 -Corrected bug with DrawIndexedTriangleList / Fan
 -Added CameraSceneNode.ViewFrustrum, which is almost complete
+-Changed IrrlichtDevice constructor's protection level to prevent from
+ creating IrrlichtDevice with an IntPtr argument.
 
 =============================================================================
 Irrlicht .NET CP 0.5

@@ -116,8 +116,8 @@ namespace IrrlichtNETCP
         public void RotateBy(double degrees, Vector2D center)
         {
             degrees *= Math.PI / 180.0;
-            float cs = (float)Math.Cos(degrees);
-            float sn = (float)Math.Sin(degrees);
+            float cs = NewMath.FCos(degrees);
+            float sn = NewMath.FSin(degrees);
             X -= center.X;
             Y -= center.Y;
 

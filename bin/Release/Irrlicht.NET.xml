@@ -851,10 +851,10 @@
             <summary>
             Adds a new material renderer to the VideoDriver, based on a high level shading language. Currently only HLSL/D3D9 and GLSL/OpenGL is supported. 
             </summary>
-            <param name="program">String containing the source of the vertex shader program. This can be "" if no vertex program should be used. </param>
+            <param name="vsprogram">String containing the source of the vertex shader program. This can be "" if no vertex program should be used. </param>
             <param name="ventrypoint">Name of the function of the vertexShaderProgram </param>
             <param name="vsCompileTarget">Vertex shader version where the high level shader should be compiled to. </param>
-            <param name="pixelShaderProgram">String containing the source of the pixel shader program. This can be "" if no pixel shader should be used.</param>
+            <param name="psprogram">String containing the source of the pixel shader program. This can be "" if no pixel shader should be used.</param>
             <param name="psEntryPoint">Entry name of the function of the pixelShaderEntryPointName </param>
             <param name="psCompileTarget">Pixel shader version where the high level shader should be compiled to. </param>
             <param name="callback">Delegate in which you can set the needed vertex and pixel shader program constants.</param>

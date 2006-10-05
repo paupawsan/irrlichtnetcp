@@ -74,6 +74,11 @@ namespace IrrlichtNETCP
         {
             return new Vector3D(first.X - other.X, first.Y - other.Y, first.Z - other.Z);
         }
+        
+        public static Vector3D operator -(Vector3D first)
+        {
+            return new Vector3D(-first.X, -first.Y, -first.Z);
+        }
 
         public static Vector3D operator *(Vector3D first, float other)
         {
@@ -81,6 +86,16 @@ namespace IrrlichtNETCP
         }
 
         public static Vector3D operator /(Vector3D first, float other)
+        {
+            return new Vector3D(first.X / other, first.Y / other, first.Z / other);
+        }
+
+        public static Vector3D operator *(float other, Vector3D first)
+        {
+            return new Vector3D(first.X * other, first.Y * other, first.Z * other);
+        }
+
+        public static Vector3D operator /(float other, Vector3D first)
         {
             return new Vector3D(first.X / other, first.Y / other, first.Z / other);
         }
@@ -105,8 +120,8 @@ namespace IrrlichtNETCP
         public void RotateXZBy(double degrees, Vector3D center)
         {
             degrees *= Math.PI / 180.0;
-            float cs = (float)Math.Cos(degrees);
-            float sn = (float)Math.Sin(degrees);
+            float cs = NewMath.FCos(degrees);
+            float sn = NewMath.FSin(degrees);
             X -= center.X;
             Z -= center.Z;
             Set(X * cs - Z * sn, Y, X * sn + Z * cs);
@@ -117,8 +132,8 @@ namespace IrrlichtNETCP
         public void RotateXYBy(double degrees, Vector3D center)
         {
             degrees *= Math.PI / 180.0;
-            float cs = (float)Math.Cos(degrees);
-            float sn = (float)Math.Sin(degrees);
+            float cs = NewMath.FCos(degrees);
+            float sn = NewMath.FSin(degrees);
             X -= center.X;
             Y -= center.Y;
             Set(X * cs - Y * sn, X * sn + Y * cs, Z);
@@ -129,8 +144,8 @@ namespace IrrlichtNETCP
         public void RotateYZBy(double degrees, Vector3D center)
         {
             degrees *= Math.PI / 180.0;
-            float cs = (float)Math.Cos(degrees);
-            float sn = (float)Math.Sin(degrees);
+            float cs = NewMath.FCos(degrees);
+            float sn = NewMath.FSin(degrees);
             Z -= center.Z;
             Y -= center.Y;
             Set(X, Y * cs - Z * sn, Y * sn + Z * cs);

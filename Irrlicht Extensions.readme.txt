@@ -11,9 +11,14 @@ license.txt).
 To use them, just add the library "Irrlicht.Extensions.dll" to your .NET
 project and the using "IrrlichtNETCP.Extensions".
 
+Note : Some of them are port of native scene nodes made by other people. These
+ones are marked "originaly made by ...".
+
 List of scene nodes :
--BeamNode by zitzu
+-BeamNode by zitzu, originally made by cdBarrett
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=19
--WindGenerator by DeusXL
--GrassPatchSceneNode by DeusXL
+-WindGenerator by DeusXL, originally made by Klasker
+-GrassPatchSceneNode by DeusXL, originally made by Bitplane
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?p=105
+-WaterSceneNode by DeusXL
+ http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=54

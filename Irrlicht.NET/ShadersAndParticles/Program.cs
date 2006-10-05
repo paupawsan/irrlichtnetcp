@@ -266,7 +266,7 @@ namespace ShadersAndParticles
             Particles = new Particle[36];
             lastParticleCreation = now;
             //A little offset for the particles to go up and down.
-            Vector3D offset = new Vector3D(0, (float)Math.Cos(now) / 10f, 0);
+            Vector3D offset = new Vector3D(0, NewMath.FCos(now) / 10f, 0);
             //For every particle in our array
             for (int i = 0; i < 36; i++)
             {
@@ -278,7 +278,7 @@ namespace ShadersAndParticles
                 //Particle.Vector represents the direction and speed of the particle.
                 //As you may have seen, I love cosines and sinus and here again I used
                 //it to create a "circle" effect
-                Particles[i].Vector = new Vector3D((float)Math.Cos(angle) / 5f, 0, (float)Math.Sin(angle) / 5f) + offset;
+                Particles[i].Vector = new Vector3D((float)Math.Cos(angle) / 5f, 0, NewMath.FSin(angle) / 5f) + offset;
                 //Start Vector is the same as the vector... It is useless here but serves for the affector.
                 Particles[i].StartVector = Particles[0].Vector;
                 //Start Time is now and End Time is now + 10 seconds

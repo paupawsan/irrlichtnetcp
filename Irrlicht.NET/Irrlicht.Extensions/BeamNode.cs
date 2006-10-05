@@ -57,7 +57,7 @@ namespace IrrlichtNETCP.Extensions
 
             //angle in X-Z plane
             angle.Y = (float)Math.Atan2(x, z);
-            angle.Y *= (float)(180 / 3.14); //converting from rad to degrees
+            angle.Y *= (float)(180 / NewMath.PI); //converting from rad to degrees
 
             //just making sure angle is somewhere between 0-360 degrees
             if (angle.Y < 0) angle.Y += 360;
@@ -67,7 +67,7 @@ namespace IrrlichtNETCP.Extensions
             float z1 = (float)Math.Sqrt(x * x + z * z);
 
             angle.X = (float)Math.Atan2(z1, y);
-            angle.X *= (float)(180 / 3.14); //converting from rad to degrees
+            angle.X *= (float)(180 / NewMath.PI); //converting from rad to degrees
             angle.X -= 90;
 
             //just making sure angle is somewhere between 0-360 degrees

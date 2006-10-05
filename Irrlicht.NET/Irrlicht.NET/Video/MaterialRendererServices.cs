@@ -43,7 +43,12 @@ namespace IrrlichtNETCP
 
         public void SetPixelShaderConstant(string name, float[] floats)
         {
-            MaterialRendererServices_SetPixelShaderConstantA(_raw, name, floats, floats.Length);
+            SetPixelShaderConstant(name, floats, floats.Length);
+        }
+
+        public void SetPixelShaderConstant(string name, float fl)
+        {
+            SetPixelShaderConstant(name, new float[] { fl } );
         }
 
         public void SetVertexShaderConstant(float[] data, int startRegister)
@@ -53,7 +58,12 @@ namespace IrrlichtNETCP
 
         public void SetVertexShaderConstant(string name, float[] floats)
         {
-            MaterialRendererServices_SetVertexShaderConstantA(_raw, name, floats, floats.Length);
+           SetVertexShaderConstant(name, floats, floats.Length);
+        }
+
+        public void SetVertexShaderConstant(string name, float fl)
+        {
+           SetVertexShaderConstant(name, new float[] { fl });
         }
 
         public VideoDriver VideoDriver

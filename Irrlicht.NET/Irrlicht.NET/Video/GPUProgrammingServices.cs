@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.IO;
 
 namespace IrrlichtNETCP
 {
@@ -28,19 +29,31 @@ namespace IrrlichtNETCP
         /// <summary>
         /// Adds a new material renderer to the VideoDriver, based on a high level shading language. Currently only HLSL/D3D9 and GLSL/OpenGL is supported. 
         /// </summary>
-        /// <param name="program">String containing the source of the vertex shader program. This can be "" if no vertex program should be used. </param>
+        /// <param name="vsprogram">String containing the source of the vertex shader program. This can be "" if no vertex program should be used. </param>
         /// <param name="ventrypoint">Name of the function of the vertexShaderProgram </param>
         /// <param name="vsCompileTarget">Vertex shader version where the high level shader should be compiled to. </param>
-        /// <param name="pixelShaderProgram">String containing the source of the pixel shader program. This can be "" if no pixel shader should be used.</param>
+        /// <param name="psprogram">String containing the source of the pixel shader program. This can be "" if no pixel shader should be used.</param>
         /// <param name="psEntryPoint">Entry name of the function of the pixelShaderEntryPointName </param>
         /// <param name="psCompileTarget">Pixel shader version where the high level shader should be compiled to. </param>
         /// <param name="callback">Delegate in which you can set the needed vertex and pixel shader program constants.</param>
         /// <param name="baseMat">Base material which renderstates will be used to shade the material. </param>
         /// <param name="userData">An user data int. This int can be set to any value and will be set as parameter in the callback method when calling OnSetConstants(). In this way it is easily possible to use the same delegate method for multiple materials and distinguish between them during the call.</param>
         /// <returns>The Material to use with SetMaterial (with a C-style explicit cast). -1 if failed</returns>
-        public int AddHighLevelShaderMaterial(string program, string ventrypoint, VertexShaderType vsCompileTarget, string pixelShaderProgram, string psEntryPoint, PixelShaderType psCompileTarget, OnShaderConstantSetDelegate callback, MaterialType baseMat, int userData)
+        public int AddHighLevelShaderMaterial(string vsprogram, string ventrypoint, VertexShaderType vsCompileTarget, string psprogram, string psEntryPoint, PixelShaderType psCompileTarget, OnShaderConstantSetDelegate callback, MaterialType baseMat, int userData)
         {
-            return GPU_AddHighLevelShaderMaterial(_raw, program, ventrypoint, vsCompileTarget, pixelShaderProgram, psEntryPoint, psCompileTarget, new ShaderConstantCallback(callback).OnNativeShaderConstant, baseMat, userData);
+            //WORKAROUND : Bug found by DeusXL, little workaround I don't like at all but needed !
+            string vsfilename = System.IO.Path.GetTempFileName();
+            StreamWriter vssw = new StreamWriter(vsfilename, false);
+            string psfilename = System.IO.Path.GetTempFileName();
+            StreamWriter pssw = new StreamWriter(psfilename, false);
+            vssw.WriteLine(vsprogram);
+            pssw.WriteLine(psprogram);
+            vssw.Close();
+            pssw.Close();
+            int ret = AddHighLevelShaderMaterialFromFiles(vsfilename, ventrypoint, vsCompileTarget, psfilename, psEntryPoint, psCompileTarget, callback, baseMat, userData);
+            try { File.Delete(vsfilename); File.Delete(psfilename); }
+            catch (Exception) { }
+            return ret;
         }
 
         /// <summary>
@@ -90,8 +103,9 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes	
-        [DllImport(Native.Dll)]
-        static extern int GPU_AddHighLevelShaderMaterial(IntPtr gpu, string program, string ventrypoint, VertexShaderType vsCompileTarget, string pixelShaderProgram, string psEntryPoint, PixelShaderType psCompileTarget, OnNativeSCSD callback, MaterialType baseMat, int userData);
+        //For now it is disabled and replaced by a workaround (see above)
+        //[DllImport(Native.Dll)]
+        //static extern int GPU_AddHighLevelShaderMaterial(IntPtr gpu, string program, string ventrypoint, VertexShaderType vsCompileTarget, string pixelShaderProgram, string psEntryPoint, PixelShaderType psCompileTarget, OnNativeSCSD callback, MaterialType baseMat, int userData);
         
         [DllImport(Native.Dll)]
         static extern int GPU_AddHighLevelShaderMaterialFromFiles(IntPtr gpu, string file, string ventrypoint, VertexShaderType vsCompileTarget, string psfile, string psEntryPoint, PixelShaderType psCompileTarget, OnNativeSCSD callback, MaterialType baseMat, int userData);

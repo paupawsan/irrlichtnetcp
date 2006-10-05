@@ -36,6 +36,7 @@
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="BeamNode.cs" />
     <Compile Include="GrassPatchSceneNode.cs" />
+    <Compile Include="WaterSceneNode.cs" />
     <Compile Include="WindGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

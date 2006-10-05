@@ -8,23 +8,24 @@ namespace IrrlichtNETCP
     public delegate bool OnEventDelegate(Event ev);
 	public class IrrlichtDevice : NativeElement
 	{
-        public IrrlichtDevice(IntPtr raw)
+        internal IrrlichtDevice(IntPtr raw)
             : base(raw)
         {
         }
+
 		public IrrlichtDevice(DriverType type, Dimension2D dim, int bits, bool fullscreen, bool stencil, bool vsync, bool antialias)
-		    : this(CreateDevice(type, dim.ToUnmanaged(), bits, fullscreen, stencil, vsync, antialias))
 		{
-            Console.WriteLine("Irrlicht.NET CP v" + CPVersion + " running.");
+            Console.WriteLine("Irrlicht.NET CP v" + CPVersion + " running");
+            Initialize(CreateDevice(type, dim.ToUnmanaged(), bits, fullscreen, stencil, vsync, antialias));
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 			MainNativeEvent = OnNativeEvent;
             Device_SetCallback(_raw, MainNativeEvent);
         }
         
         public IrrlichtDevice(DriverType type, Dimension2D dim, int bits, bool fullscreen, bool stencil, bool vsync, bool antialias, IntPtr windowHandle)
-            : this(CreateDeviceA(type, dim.ToUnmanaged(), bits, fullscreen, stencil, vsync, antialias, windowHandle.ToInt32()))
         {
-            Console.WriteLine("Irrlicht.NET CP v" + CPVersion + " running.");
+            Console.WriteLine("Irrlicht.NET CP v" + CPVersion + " running");
+            Initialize(CreateDeviceA(type, dim.ToUnmanaged(), bits, fullscreen, stencil, vsync, antialias, windowHandle.ToInt32()));
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             MainNativeEvent = OnNativeEvent;
             Device_SetCallback(_raw, MainNativeEvent);
@@ -210,7 +211,7 @@ namespace IrrlichtNETCP
             get
             {
                 System.Reflection.AssemblyName an =
-                    System.Reflection.Assembly.GetAssembly(typeof(IrrlichtDevice)).GetName();
+                    System.Reflection.Assembly.GetAssembly(this.GetType()).GetName();
                 return an.Version.ToString();
             }
         }
