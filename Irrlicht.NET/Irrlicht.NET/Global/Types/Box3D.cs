@@ -132,7 +132,7 @@ namespace IrrlichtNETCP
 		/// <param name="edges">Aray of 8 edges</param>
 		public void GetEdges(out Vector3D[] edges)
 		{
-			edges = new Vector3D[6];
+			edges = new Vector3D[8];
 			Vector3D middle = (MinEdge + MaxEdge) / 2;
 			Vector3D diag = middle - MaxEdge;
 			
