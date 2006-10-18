@@ -2,6 +2,7 @@
 
 void Pointer_SafeRelease(IntPtr pointer)
 {
+    #ifdef WIN32
     if(!pointer)
         return;
     irr::IUnknown* i = ( irr::IUnknown*)pointer;
@@ -10,7 +11,6 @@ void Pointer_SafeRelease(IntPtr pointer)
         i->drop();
         return;
     }
-    #ifdef WIN32
     delete pointer;
 	#endif
 }

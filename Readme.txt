@@ -52,10 +52,10 @@ III SDK Directories/Files
 /Irrlicht.NET : C# part of the wrapper with solutions provided for MonoDevelop
 			    and Visual Studio 2005. It can however be compiled on any
 			    .NET IDE/compilator
-/IrrlichtW : C++/C part of the wrapper with solutions provided for Code::BLocks
+/IrrlichtW : C++/C part of the wrapper with solutions provided for Code::Blocks
 			    and Visual Studio 2005. It can however be compiled on any
 			    Irrlicht-compatible IDE/compilator.
-/Irrlicht SDK : Constains all include and libraries needed to compile IrrlichtW
+/Irrlicht SDK : Contains all include and libraries needed to compile IrrlichtW
 			    on Linux and Windows (Visual Studio and GCC).
 			    Taken from the official Irrlicht SDK.
 			    			

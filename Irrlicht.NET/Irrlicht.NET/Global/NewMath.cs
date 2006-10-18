@@ -18,6 +18,14 @@ namespace IrrlichtNETCP
         public static float FTan(double angle) { return (float)Math.Tan(angle); }
 
         public const float PI = 3.14159265f;
+        public const float RADTODEG = 180f / PI;
+        public const float DEGTORAD = PI / 180f;
+		public const float ROUNDING_ERROR	= float.Epsilon;
+		
+		public static bool Equals(float a, float b)
+		{
+			return (a + ROUNDING_ERROR > b) && (a - ROUNDING_ERROR < b);
+		}
 	}
 	
 }

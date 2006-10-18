@@ -69,15 +69,16 @@ namespace IrrlichtNETCP.Extensions
 		{                 
 			if(!Visible)
 				return;
-           foreach(ClampedTerrain terr in clampList)
-               terr.terrain.SetMaterialType(ClampShader);     
+           foreach(TerrainSceneNode terr in clampList)
+           	    if(terr != null)
+                   terr.SetMaterialType(ClampShader);     
                
        	    _waternode.Visible = false;        
 			CameraSceneNode camera = _scene.ActiveCamera;
 			
 			_scene.ActiveCamera = _fixedcam;
-            _fixedcam.FarValue = camera.FarValue;        
-           	if(camera.Position.Y >= Position.Y)
+            _fixedcam.FarValue = camera.FarValue;
+            if (camera.Position.Y >= Position.Y)
            	{                      	
                 	_fixedcam.Position = new Vector3D(camera.Position.X,
                 	                                 2 * Position.Y - camera.Position.Y,
@@ -98,8 +99,9 @@ namespace IrrlichtNETCP.Extensions
            _driver.SetRenderTarget(_rt, true, true, Color.TransparentGray);      	
            _scene.DrawAll();
                
-           foreach(ClampedTerrain terr in clampList)
-               terr.terrain.SetMaterialType(MaterialType.DetailMap);
+           foreach(TerrainSceneNode terr in clampList)
+           	   if(terr != null)
+                   terr.SetMaterialType(MaterialType.DetailMap);
            _driver.SetRenderTarget(null, true, true, Color.Gray);
            _scene.ActiveCamera = camera;
            _waternode.Visible = true;       
@@ -108,10 +110,7 @@ namespace IrrlichtNETCP.Extensions
 		System.Collections.ArrayList clampList = new System.Collections.ArrayList();
 		public void ApplyClampingOnTerrain(TerrainSceneNode terrain)
 		{
-			ClampedTerrain clamp;
-			clamp.terrain = terrain;
-			clamp.oldmat = terrain.GetMaterial(0);
-			clampList.Add(clamp);
+			clampList.Add(terrain);
 		}
 		
 		public Colorf AddedColor = Colorf.From(255, 1, 1, 5);
@@ -119,18 +118,19 @@ namespace IrrlichtNETCP.Extensions
 		public float WaveHeight = 3f;
 		public float WaveLength = 50f;
 		public float WaveSpeed = 10f;
-		public float WaveDisplacement = 10f;
+		public float WaveDisplacement = 7f;
+		public float WaveRepetition = 5f;
         void OnShaderSet(MaterialRendererServices services, int userData) 
         {
         	if(userData == 1)
-        	{
+            {
         		services.SetPixelShaderConstant("DiffuseMap", 0f);
         		services.SetPixelShaderConstant("DetailMap", 1f);
-        		Vector3D pos = _waternode.Position;
-        		services.SetPixelShaderConstant("WaterPosition", pos.ToShader());
+                services.SetPixelShaderConstant("WaterPosition", WaterNode.Position.ToShader());
         		return;
-        	}
-        	services.SetVertexShaderConstant("Time", (float)((DateTime.Now.TimeOfDay.TotalMilliseconds)));
+            }
+            float time = (float)((DateTime.Now.TimeOfDay.TotalMilliseconds));
+        	services.SetVertexShaderConstant("Time", time);
         	services.SetVertexShaderConstant("WaveHeight", WaveHeight);
         	services.SetVertexShaderConstant("WaveLength", WaveLength);
         	services.SetVertexShaderConstant("WaveSpeed", WaveSpeed);
@@ -138,6 +138,7 @@ namespace IrrlichtNETCP.Extensions
         	services.SetPixelShaderConstant("AddedColor", AddedColor.ToShader());
         	services.SetPixelShaderConstant("MultiColor", MultiColor.ToShader());
         	services.SetPixelShaderConstant("WaveDisplacement", WaveDisplacement);
+        	services.SetPixelShaderConstant("WaveRepetition", WaveRepetition);
         	services.SetPixelShaderConstant("UnderWater", _scene.ActiveCamera.Position.Y < Position.Y ? 1.0f : 0.0f);
         }
         
@@ -150,16 +151,15 @@ namespace IrrlichtNETCP.Extensions
 						"void main()\n" +
 						"{\n" +
 						"	waterpos = ftransform();\n" +
-						"	addition = (sin((gl_Vertex.x/WaveLength) + (Time * WaveSpeed / 10000.0)) * WaveHeight) +\n" +
-						"                   (cos((gl_Vertex.z/WaveLength) + (Time * WaveSpeed / 10000.0)) * WaveHeight);\n" +
-						"	addition += sin(gl_Vertex.x) / 10.0 + cos(gl_Vertex.z) / 10.0;\n" +
-						"	waterpos.y += addition;\n" +
+						"	addition = (sin((gl_Vertex.x/WaveLength) + (Time * WaveSpeed / 10000.0))) +\n" +
+						"              (cos((gl_Vertex.z/WaveLength) + (Time * WaveSpeed / 10000.0)));\n" +
+                        "	waterpos.y += addition * WaveHeight;\n" +
 						"	gl_Position = waterpos;\n" +
 						"}\n";
         static string FRAGMENT_GLSL = 
         				"uniform sampler2D ReflectionTexture;\n" +
 						"uniform vec4 AddedColor, MultiColor;\n" +
-						"uniform float UnderWater, WaveDisplacement;\n" +
+						"uniform float UnderWater, WaveDisplacement, WaveRepetition;\n" +
 						"varying vec4 waterpos;\n" +
 						"varying float addition;\n" +
 						"void main()\n" +
@@ -167,17 +167,16 @@ namespace IrrlichtNETCP.Extensions
 						"	vec4 projCoord = waterpos * vec4(1.0 / waterpos.w);\n" +
 						"	projCoord += vec4(1.0);\n" +
 						"	projCoord *= vec4(0.5);\n" +
-						"	projCoord.x += sin(addition) * (WaveDisplacement / 1000.0);\n" +
-						"	projCoord.y += cos(addition) * (WaveDisplacement / 1000.0);\n" +
+						"	projCoord.x += sin(addition * WaveRepetition) * (WaveDisplacement / 1000.0);\n" +
+						"	projCoord.y += cos(addition * WaveRepetition) * (WaveDisplacement / 1000.0);\n" +
 						"	projCoord = clamp(projCoord, 0.001, 0.999);\n" +
 						"	if(UnderWater == 0.0)\n" +
 						"		projCoord.y = 1.0 - projCoord.y;\n" +
 						"	vec4 refTex = texture2D(ReflectionTexture, vec2(projCoord));\n" +
 						"	refTex = (refTex + AddedColor) * MultiColor;\n" +
-						"	gl_FragColor = refTex * refTex;\n" +
-                        "	gl_FragColor += refTex;\n" +
+                        "	gl_FragColor = refTex;\n" +
                         "	if(UnderWater == 1.0)\n" +
-                        "	    gl_FragColor *= (MultiColor / 1.3);\n" +
+                        "	    gl_FragColor *= (MultiColor / 1.1);\n" +
 						"}\n";
 		static string CLAMP_VERTEX_GLSL = 
 						"varying float cutoff;\n" + 
@@ -202,10 +201,5 @@ namespace IrrlichtNETCP.Extensions
 						"	gl_FragColor = color; \n" +
 						"}\n";
         #endregion
-	}
-	internal struct ClampedTerrain
-	{
-		public TerrainSceneNode terrain;
-		public Material oldmat;
 	}
 }

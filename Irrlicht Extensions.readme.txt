@@ -14,6 +14,12 @@ project and the using "IrrlichtNETCP.Extensions".
 Note : Some of them are port of native scene nodes made by other people. These
 ones are marked "originaly made by ...".
 
+Note 2 : Irrlicht Extensions is a library that changes all the time, with
+new features, optimizations and bugfixes. To be sure you always have the
+newest version, just visit this page :
+http://svn.sourceforge.net/viewvc/irrlichtnetcp/bin/Release/Irrlicht.Extensions.dll?view=log
+and get the last DLL.
+
 List of scene nodes :
 -BeamNode by zitzu, originally made by cdBarrett
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=19
