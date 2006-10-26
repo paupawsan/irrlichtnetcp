@@ -54,6 +54,7 @@ extern "C"
     EXPORT IntPtr SceneManager_GetRootSceneNode(IntPtr scenemanager);
 	EXPORT void SceneManager_SaveScene(IntPtr scenemanager, M_STRING filename);
 	EXPORT void SceneManager_LoadScene(IntPtr scenemanager, M_STRING filename);
+	EXPORT void SceneManager_Clear(IntPtr scenemanager);
 
 	EXPORT bool SceneCollisionManager_GetCollisionPoint(IntPtr SCM, M_LINE3D ray, IntPtr selector, M_VECT3DF collisionpoint, M_TRIANGLE3DF outtriangle);
 	EXPORT void SceneCollisionManager_GetCollisionResultPoint(IntPtr SCM, IntPtr selector, M_VECT3DF ellipsoidPosition, M_VECT3DF ellipsoidRadius, M_VECT3DF ellipsoidDirectionAndSpeed, M_TRIANGLE3DF outTriangle, bool *outFalling, float slidingSpeed, M_VECT3DF gravity, M_VECT3DF outCol);

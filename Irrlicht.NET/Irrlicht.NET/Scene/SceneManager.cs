@@ -525,6 +525,11 @@ namespace IrrlichtNETCP
 										typeof(TriangleSelector));
 		}
 		
+		public void Clear()
+		{
+			SceneManager_Clear(_raw);
+		}
+		
 		public Animator CreateFollowSplineAnimator(int startTime, Vector3D[] points, float speed, float tightness)
 		{
             float[] Xs = new float[points.Length];
@@ -921,6 +926,9 @@ namespace IrrlichtNETCP
 
         [DllImport(Native.Dll)]
         static extern void SceneManager_LoadScene(IntPtr scenemanager, string filename);
+        
+        [DllImport(Native.Dll)]
+        static extern void SceneManager_Clear(IntPtr scenemanager);
 		#endregion
 	}
 	

@@ -126,6 +126,12 @@ void SceneManager_AddToDeletionQueue(IntPtr scenemanager, IntPtr node)
     GetSceneFromIntPtr(scenemanager)->addToDeletionQueue((ISceneNode*)node);
 }
 
+
+void SceneManager_Clear(IntPtr scenemanager)
+{
+    GetSceneFromIntPtr(scenemanager)->clear();
+}
+
 IntPtr SceneManager_CreateCollisionResponseAnimator(IntPtr scenemanager, IntPtr world, IntPtr sceneNode,M_VECT3DF ellipsoidRadius, M_VECT3DF gravityPerSecond,M_VECT3DF ellipsoidTranslation, float slidingValue)
 {
     return GetSceneFromIntPtr(scenemanager)->createCollisionResponseAnimator((ITriangleSelector*) world, (ISceneNode*) sceneNode, MU_VECT3DF(ellipsoidRadius), MU_VECT3DF(gravityPerSecond), MU_VECT3DF(ellipsoidTranslation), slidingValue);

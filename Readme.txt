@@ -51,7 +51,7 @@ III SDK Directories/Files
 /medias : Medias files used by the SDK examples.
 /Irrlicht.NET : C# part of the wrapper with solutions provided for MonoDevelop
 			    and Visual Studio 2005. It can however be compiled on any
-			    .NET IDE/compilator
+			    .NET IDE/compilator.
 /IrrlichtW : C++/C part of the wrapper with solutions provided for Code::Blocks
 			    and Visual Studio 2005. It can however be compiled on any
 			    Irrlicht-compatible IDE/compilator.
