@@ -31,6 +31,9 @@
 		</Compiler>
 		<Linker>
 			<Add option="-s" />
+			<Add library="GL" />
+			<Add library="GLU" />
+			<Add library="Xxf86vm" />
 			<Add library="../Irrlicht SDK/lib/Linux/libIrrlicht.a" />
 			<Add directory="/home/deusxl/Projects/irrlicht-1.0/lib/Linux" />
 		</Linker>
