@@ -48,6 +48,23 @@
             Retrieves a tool to manipulate Irrlicht's files.
             </summary>
         </member>
+        <member name="M:IrrlichtNETCP.MetaTriangleSelector.AddTriangleSelector(IrrlichtNETCP.TriangleSelector)">
+            <summary>
+            Adds a triangle selector to the collection of triangle selectors in this metaTriangleSelector.
+            </summary>
+            <param name="toAdd">Triangle selector to add to the list</param>
+        </member>
+        <member name="M:IrrlichtNETCP.MetaTriangleSelector.RemoveAllTriangleSelectors">
+            <summary>
+            Removes all triangle selectors from the collection.
+            </summary>
+        </member>
+        <member name="M:IrrlichtNETCP.MetaTriangleSelector.RemoveTriangleSelector(IrrlichtNETCP.TriangleSelector)">
+            <summary>
+            Removes a specific triangle selector which was added before from the collection.
+            </summary>
+            <param name="toRemove">Triangle selector which is in the list but will be removed.</param>
+        </member>
         <member name="F:IrrlichtNETCP.AnimatedMeshSceneNode.MainEventDelegate">
             <summary>
             This delegate must never been collected by GC and that's why we

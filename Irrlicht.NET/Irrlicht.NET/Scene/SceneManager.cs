@@ -518,11 +518,11 @@ namespace IrrlichtNETCP
 		/// A meta triangle selector is nothing more than a collection of one or more triangle selectors providing together the interface of one triangle selector. In this way, collision tests can be done with different triangle soups in one pass.
 		/// </summary>
 		/// <returns>A TriangleSelector</returns>
-		public TriangleSelector CreateMetaTriangleSelector()
+        public MetaTriangleSelector CreateMetaTriangleSelector()
 		{
-			return (TriangleSelector)
+            return (MetaTriangleSelector)
 				NativeElement.GetObject(SceneManager_CreateMetaTriangleSelector(_raw),
-										typeof(TriangleSelector));
+                                        typeof(MetaTriangleSelector));
 		}
 		
 		public void Clear()

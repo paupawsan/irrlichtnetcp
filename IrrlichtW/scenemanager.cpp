@@ -318,3 +318,19 @@ void SceneCollisionManager_GetScreenCoordinatesFrom3DPosition(IntPtr SCM, M_VECT
 {
 	UM_POS2DS(((ISceneCollisionManager*)SCM)->getScreenCoordinatesFrom3DPosition(MU_VECT3DF(pos), (ICameraSceneNode*)camera), sc);
 }
+
+
+void MetaTriangleSelector_AddTriangleSelector(IntPtr mts, IntPtr toadd)
+{
+	((IMetaTriangleSelector*)mts)->addTriangleSelector((ITriangleSelector*)toadd);
+}
+
+void MetaTriangleSelector_RemoveAllTriangleSelectors(IntPtr mts)
+{
+	((IMetaTriangleSelector*)mts)->removeAllTriangleSelectors();
+}
+
+void MetaTriangleSelector_RemoveTriangleSelector(IntPtr mts, IntPtr toadd)
+{
+	((IMetaTriangleSelector*)mts)->removeTriangleSelector((ITriangleSelector*)toadd);
+}

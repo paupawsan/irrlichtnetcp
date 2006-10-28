@@ -63,4 +63,8 @@ extern "C"
 	EXPORT IntPtr SceneCollisionManager_GetSceneNodeFromRayBB(IntPtr SCM, M_LINE3D ray, int idBitMask, bool noDebug);
 	EXPORT IntPtr SceneCollisionManager_GetSceneNodeFromScreenCoordinatesBB(IntPtr SCM, M_POS2DS pos, int idBitMask, bool noDebug);
 	EXPORT void SceneCollisionManager_GetScreenCoordinatesFrom3DPosition(IntPtr SCM, M_VECT3DF pos, IntPtr camera, M_POS2DS sc);
+
+	EXPORT void MetaTriangleSelector_AddTriangleSelector(IntPtr mts, IntPtr toadd);
+	EXPORT void MetaTriangleSelector_RemoveAllTriangleSelectors(IntPtr mts);
+	EXPORT void MetaTriangleSelector_RemoveTriangleSelector(IntPtr mts, IntPtr toadd);
 }
