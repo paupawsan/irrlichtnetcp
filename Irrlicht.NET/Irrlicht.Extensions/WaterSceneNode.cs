@@ -38,7 +38,7 @@ namespace IrrlichtNETCP.Extensions
            	 
             int dmat = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
                  VERTEX_GLSL, "main", VertexShaderType._1_1, FRAGMENT_GLSL,
-                 "main", PixelShaderType._1_1, OnShaderSet, MaterialType.Solid, 0); 
+                 "main", PixelShaderType._1_1, OnShaderSet, MaterialType.TransparentAlphaChannel, 0); 
                  
             ClampShader = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
                  CLAMP_VERTEX_GLSL, "main", VertexShaderType._1_1, CLAMP_FRAGMENT_GLSL,
@@ -113,13 +113,14 @@ namespace IrrlichtNETCP.Extensions
 			clampList.Add(terrain);
 		}
 		
-		public Colorf AddedColor = Colorf.From(255, 1, 1, 5);
+		public Colorf AddedColor = Colorf.From(255, 1, 1, 30);
 		public Colorf MultiColor = Colorf.From(255, 190, 190, 210);
 		public float WaveHeight = 3f;
 		public float WaveLength = 50f;
 		public float WaveSpeed = 10f;
 		public float WaveDisplacement = 7f;
 		public float WaveRepetition = 5f;
+        public float RefractionFactor = 0.8f;
         void OnShaderSet(MaterialRendererServices services, int userData) 
         {
         	if(userData == 1)
@@ -139,6 +140,7 @@ namespace IrrlichtNETCP.Extensions
         	services.SetPixelShaderConstant("MultiColor", MultiColor.ToShader());
         	services.SetPixelShaderConstant("WaveDisplacement", WaveDisplacement);
         	services.SetPixelShaderConstant("WaveRepetition", WaveRepetition);
+            services.SetPixelShaderConstant("RefractionFactor", RefractionFactor);
         	services.SetPixelShaderConstant("UnderWater", _scene.ActiveCamera.Position.Y < Position.Y ? 1.0f : 0.0f);
         }
         
@@ -159,7 +161,7 @@ namespace IrrlichtNETCP.Extensions
         static string FRAGMENT_GLSL = 
         				"uniform sampler2D ReflectionTexture;\n" +
 						"uniform vec4 AddedColor, MultiColor;\n" +
-						"uniform float UnderWater, WaveDisplacement, WaveRepetition;\n" +
+                        "uniform float UnderWater, WaveDisplacement, WaveRepetition, RefractionFactor;\n" +
 						"varying vec4 waterpos;\n" +
 						"varying float addition;\n" +
 						"void main()\n" +
@@ -177,6 +179,7 @@ namespace IrrlichtNETCP.Extensions
                         "	gl_FragColor = refTex;\n" +
                         "	if(UnderWater == 1.0)\n" +
                         "	    gl_FragColor *= (MultiColor / 1.1);\n" +
+                        "   gl_FragColor.a = RefractionFactor;" +
 						"}\n";
 		static string CLAMP_VERTEX_GLSL = 
 						"varying float cutoff;\n" + 
