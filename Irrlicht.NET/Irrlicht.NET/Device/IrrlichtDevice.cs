@@ -206,6 +206,11 @@ namespace IrrlichtNETCP
             }
 		}
 
+        public override string ToString()
+        {
+            return "Irrlicht .NET CP v" + CPVersion;
+        }
+
         public string CPVersion
         {
             get

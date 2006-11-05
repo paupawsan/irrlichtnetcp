@@ -25,6 +25,7 @@ extern "C"
 	EXPORT void VideoDriver_Draw3DBox(IntPtr videodriver, M_BOX3D box, M_SCOLOR color);
 	EXPORT void VideoDriver_Draw3DLine(IntPtr videodriver, M_VECT3DF start, M_VECT3DF end, M_SCOLOR color);
 	EXPORT void VideoDriver_Draw3DTriangle(IntPtr videodriver, M_TRIANGLE3DF tri, M_SCOLOR color);
+	EXPORT E_DRIVER_TYPE VideoDriver_GetDriverType(IntPtr videodriver);
 	EXPORT void VideoDriver_GetScreenSize(IntPtr videodriver, M_DIM2DS size);
 	EXPORT void VideoDriver_GetTransform(IntPtr videodriver, E_TRANSFORMATION_STATE state, M_MAT4 mat);
 	EXPORT void VideoDriver_SetTransform(IntPtr videodriver, E_TRANSFORMATION_STATE state, M_MAT4 mat);
@@ -32,6 +33,7 @@ extern "C"
 	EXPORT void VideoDriver_DrawIndexedTriangleListA(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
 	EXPORT void VideoDriver_DrawIndexedTriangleFan(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
 	EXPORT void VideoDriver_DrawIndexedTriangleFanA(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
+	EXPORT void VideoDriver_DrawMeshBuffer(IntPtr videodriver, IntPtr meshbuffer);
 	EXPORT bool VideoDriver_GetTextureCreationFlag(IntPtr videodriver, E_TEXTURE_CREATION_FLAG flag);
 	EXPORT void VideoDriver_GetViewPort(IntPtr videodriver, M_RECT viewport);
 	EXPORT bool VideoDriver_QueryFeature(IntPtr videodriver, E_VIDEO_DRIVER_FEATURE feat);

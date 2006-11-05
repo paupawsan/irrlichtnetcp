@@ -135,6 +135,7 @@ namespace IrrlichtNETCP.Inheritable
                     break;
                 case CSN_FLOAT_METHOD.GET_BOUNDING_BOX:
                     CSN_SET_TEMP_FLOATS(_raw, BoundingBox.ToUnmanaged());
+                    CSN_PVOID_METHODS(_raw, CSN_VOID_METHOD.MANUAL_UPDATE_BOUNDINGBOX, IntPtr.Zero, 0, 0, null);
                     break;
                 case CSN_FLOAT_METHOD.GET_POSITION:
                     CSN_SET_TEMP_FLOATS(_raw, Position.ToUnmanaged());
@@ -415,7 +416,8 @@ namespace IrrlichtNETCP.Inheritable
         SET_SCALE,
         SET_TRIANGLE_SELECTOR,
         SET_VISIBLE,
-        UPDATE_ABSOLUTE_POSITION
+        UPDATE_ABSOLUTE_POSITION,
+        MANUAL_UPDATE_BOUNDINGBOX
     };
 
     internal enum CSN_FLOAT_METHOD

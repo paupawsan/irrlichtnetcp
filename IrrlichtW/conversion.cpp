@@ -45,12 +45,17 @@ M_STRING UM_STRING(const wchar_t* base)
 
 M_STRING UM_STRING(const M_STRING base)
 {
+    // Bug found by Copland, to be tested, it seems that a C-style cast is enough (and needed on Windows ?) because mbstowcs is deprecated.
+    #ifdef _MSC_VER
+    return (M_STRING)base;
+    #else
     size_t size = mbstowcs(NULL, base, 0);
     M_STRING tor = new char[size + 1];
     for(unsigned int i = 0; i < size; i++)
         tor[i] = base[i];
     tor[size] = '\0';
     return tor;
+    #endif
 }
 
 void UM_DIM2DS(irr::core::dimension2d<int> base, M_DIM2DS t)

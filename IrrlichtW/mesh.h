@@ -11,6 +11,7 @@ extern "C"
     EXPORT IntPtr AnimatedMesh_GetMesh(IntPtr mesh, int frame, int detailLevel, int startFrameloop, int endFrameloop);
     EXPORT E_ANIMATED_MESH_TYPE AnimatedMesh_GetMeshType(IntPtr mesh);
 
+	EXPORT IntPtr MeshBuffer_Create(int type);
 	EXPORT void MeshBuffer_GetBoundingBox(IntPtr meshb, M_BOX3D bb);
 	EXPORT void MeshBuffer_SetBoundingBox(IntPtr meshb, M_BOX3D bb);
 	EXPORT int MeshBuffer_GetIndexCount(IntPtr meshb);

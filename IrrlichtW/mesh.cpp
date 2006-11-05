@@ -39,6 +39,15 @@ IMeshBuffer* GetMBForIntPtr(IntPtr mb)
 	return ((IMeshBuffer*)mb);
 }
 
+IntPtr MeshBuffer_Create(int type)
+{
+	if(type == 0)
+		return new SMeshBuffer();
+	else if(type == 1)
+		return new SMeshBufferLightMap();
+	return new SMeshBufferTangents();
+}
+
 void MeshBuffer_GetBoundingBox(IntPtr meshb, M_BOX3D bb)
 {
 	UM_BOX3D(GetMBForIntPtr(meshb)->getBoundingBox(), bb);
@@ -68,7 +77,26 @@ unsigned short MeshBuffer_GetIndex(IntPtr meshb, int nr)
 
 void MeshBuffer_SetIndex(IntPtr meshb, int nr, unsigned short val)
 {
-	GetMBForIntPtr(meshb)->getIndices()[nr] = val;
+	if(GetMBForIntPtr(meshb)->getIndexCount() > nr)
+		GetMBForIntPtr(meshb)->getIndices()[nr] = val;
+	else
+	{
+		switch(MeshBuffer_GetVertexType(meshb))
+		{
+			case EVT_STANDARD:
+				((SMeshBuffer*)meshb)->Indices.push_back(val);
+				MeshBuffer_SetIndex(meshb, nr, val);
+				break;
+			case EVT_2TCOORDS:
+				((SMeshBufferLightMap*)meshb)->Indices.push_back(val);
+				MeshBuffer_SetIndex(meshb, nr, val);
+				break;
+			case EVT_TANGENTS:
+				((SMeshBufferTangents*)meshb)->Indices.push_back(val);
+				MeshBuffer_SetIndex(meshb, nr, val);
+				break;
+		}
+	}
 }
 
 IntPtr MeshBuffer_GetMaterial(IntPtr meshb)
@@ -98,7 +126,14 @@ IntPtr MeshBuffer_GetVertex(IntPtr meshb, int nr)
 
 void MeshBuffer_SetVertex(IntPtr meshb, int nr, IntPtr vert)
 {
-	(((S3DVertex*)GetMBForIntPtr(meshb)->getVertices())[nr]) = *((S3DVertex*)vert);
+	SMeshBuffer *mb = ((SMeshBuffer*)meshb);
+	if(nr >= mb->getVertexCount())
+	{
+		mb->Vertices.push_back(*((S3DVertex*)vert));
+		MeshBuffer_SetVertex(meshb, nr, vert);
+	}
+	else
+		(((S3DVertex*)(mb->getVertices()))[nr]) = *((S3DVertex*)vert);
 }
 
 IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, int nr)
@@ -108,5 +143,12 @@ IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, int nr)
 
 void MeshBuffer_SetVertex2T(IntPtr meshb, int nr, IntPtr vert)
 {
-	(((S3DVertex2TCoords*)GetMBForIntPtr(meshb)->getVertices())[nr]) = *((S3DVertex2TCoords*)vert);
+	SMeshBufferLightMap *mb = ((SMeshBufferLightMap*)meshb);
+	if(nr >= mb->getVertexCount())
+	{
+		mb->Vertices.push_back(*((S3DVertex2TCoords*)vert));
+		MeshBuffer_SetVertex2T(meshb, nr, vert);
+	}
+	else
+		(((S3DVertex2TCoords*)(mb->getVertices()))[nr]) = *((S3DVertex2TCoords*)vert);
 }

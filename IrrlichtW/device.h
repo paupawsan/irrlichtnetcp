@@ -2,12 +2,8 @@
 
 extern "C"
 {
-    #ifdef WIN32
-    typedef bool (__stdcall *CALLBACK)(IntPtr);
-    #else
-    typedef bool (*CALLBACK)(IntPtr);
-    #endif
-
+    typedef bool (STDCALL EVENTCALLBACK)(IntPtr);
+ 
     EXPORT IntPtr CreateDevice(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias);
     EXPORT IntPtr CreateDeviceA(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias, int handle);
     EXPORT void Device_SetWindowCaption(IntPtr device, M_STRING caption);
@@ -25,7 +21,7 @@ extern "C"
     EXPORT M_STRING Device_GetVersion(IntPtr device);
     EXPORT bool Device_IsWindowActive(IntPtr device);
     EXPORT void Device_SetResizeable(IntPtr device, bool resizeable);
-    EXPORT void Device_SetCallback(IntPtr device, CALLBACK);
+    EXPORT void Device_SetCallback(IntPtr device, EVENTCALLBACK);
 
     EXPORT int VideoModeList_GetDesktopDepth(IntPtr videomodelist);
     EXPORT void VideoModeList_GetDesktopResolution(IntPtr videomodelist, M_DIM2DS res);

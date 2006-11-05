@@ -36,9 +36,9 @@ namespace IrrlichtNETCP.Extensions
         // Video Driver
         VideoDriver driver;
 
+        ushort[] indices = { 0, 2, 3, 2, 1, 3, 1, 0, 3, 2, 0, 1 };
         void DrawQuad(IrrQuad quad)
         {
-            ushort[] indices = { 0, 2, 3, 2, 1, 3, 1, 0, 3, 2, 0, 1 };
             driver.SetMaterial(Material);
             driver.DrawIndexedTriangleList(quad.verts, 4, indices, 4);
         }
@@ -87,7 +87,7 @@ namespace IrrlichtNETCP.Extensions
             // Setup the beam material
             Material.Wireframe = false;
             Material.Lighting = false;
-            Material.MaterialType = MaterialType.TransparentAddColor;
+            Material.MaterialType = MaterialType.TransparentAlphaChannel;
             Material.Texture1 = mgr.VideoDriver.GetTexture(szBeam);
 
             // Default to 32 units for the scale
@@ -102,12 +102,11 @@ namespace IrrlichtNETCP.Extensions
             driver.SetTransform(TransformationState.World, AbsoluteTransformation);
             // Figure out quads based on start/end points.
             Matrix4 m = new Matrix4();
-            m.MakeIdentity();
             m.RotationDegrees = getTargetAngle(vStart, vEnd);
             Vector3D vUp = new Vector3D(0, 1, 0);
             Vector3D vRight = new Vector3D(-1, 0, 0);
-            m.TransformVect(vRight);
-            m.TransformVect(vUp);
+            m.TransformVect(ref vRight);
+            m.TransformVect(ref vUp);
 
             // Draw the first cross
             IrrQuad beam = new IrrQuad();
@@ -123,13 +122,16 @@ namespace IrrlichtNETCP.Extensions
             beam.verts[2] = new Vertex3D(vEnd + vRight * -flScale, new Vector3D(0, 1, 1), beamColor, new Vector2D(1, 0));
             beam.verts[3] = new Vertex3D(vEnd + vRight * flScale, new Vector3D(0, 0, 1), beamColor, new Vector2D(0, 0));
             DrawQuad(beam);
+
+            if (DebugDataVisible)
+                driver.Draw3DBox(BoundingBox, Color.White);
         }
 
         public override void OnPreRender()
         {
             if (Visible)
             {
-                smgr.RegisterNodeForRendering(this);   
+                smgr.RegisterNodeForRendering(this, SceneNodeRenderPass.Solid);   
             }
             base.OnPreRender();
         }
@@ -157,25 +159,46 @@ namespace IrrlichtNETCP.Extensions
 
         public Vector3D StartPoint
         {
-            //get {return vStart;}
-            set {vStart=value;}
+            get {return vStart;}
+            set { vStart = value; RecalculateBoundingBox(); }
         }
 
         public Vector3D EndPoint
         {
-            //get { return vEnd; }
-            set { vEnd = value; }
+            get { return vEnd; }
+            set { vEnd = value; RecalculateBoundingBox(); }
         }
+
+        public void RecalculateBoundingBox()
+        {
+            Matrix4 m = new Matrix4();
+            m.RotationDegrees = getTargetAngle(vStart, vEnd);
+            Vector3D vUp = new Vector3D(0, 1, 0);
+            Vector3D vRight = new Vector3D(-1, 0, 0);
+            m.TransformVect(ref vRight);
+            m.TransformVect(ref vUp);
+            Box.MinEdge = (vStart + vUp * flScale);
+            Box.MaxEdge = (vEnd + vRight * -flScale);
+            Box.AddInternalPoint(vStart + vUp * flScale);
+            Box.AddInternalPoint(vStart + vUp * -flScale);
+            Box.AddInternalPoint(vEnd + vUp * -flScale);
+            Box.AddInternalPoint(vEnd + vUp * flScale);
+
+            Box.AddInternalPoint(vStart + vRight * flScale);
+            Box.AddInternalPoint(vStart + vRight * -flScale);
+            Box.AddInternalPoint(vEnd + vRight * -flScale);
+            Box.AddInternalPoint(vEnd + vRight * flScale);
+       }
 
         public float BeamScale
         {
-           // get { return flScale; }
+            get { return flScale; }
             set { flScale = value; }
         }
 
        public Color BeamColor
         {
-           // get { return beamColor; }
+            get { return beamColor; }
             set { beamColor = value; }
         }
     }

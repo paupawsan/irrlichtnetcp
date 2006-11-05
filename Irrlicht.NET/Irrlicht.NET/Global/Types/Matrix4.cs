@@ -462,7 +462,7 @@ namespace IrrlichtNETCP
 			        - (getMInsecure(1, 0) * getMInsecure(3, 1) - getMInsecure(3, 0) * getMInsecure(1, 1)) * (getMInsecure(0, 2) * getMInsecure(2, 3) - getMInsecure(2, 2) * getMInsecure(0, 3))	+ (getMInsecure(2, 0) * getMInsecure(3, 1) - getMInsecure(3, 0) * getMInsecure(2, 1)) * (getMInsecure(0, 2) * getMInsecure(1, 3) - getMInsecure(1, 2) * getMInsecure(0, 3));
 			
 			if (d == 0f)
-			return false;
+			    return false;
 			
 			d = 1f / d;
 			
@@ -486,7 +486,7 @@ namespace IrrlichtNETCP
 			return true;
 		}
 		
-		public Vector3D RotateVect( Vector3D vect )
+		public Vector3D RotateVect(ref Vector3D vect )
 	    {
 	    	Vector3D tmp = new Vector3D(vect.X, vect.Y, vect.Z);
 	        vect.X = tmp.X*M[0] + tmp.Y*M[4] + tmp.Z*M[8];
@@ -495,7 +495,7 @@ namespace IrrlichtNETCP
 	        return vect;
 	    }
 	    
-	    public Vector3D TransformVect(Vector3D vect)
+	    public Vector3D TransformVect(ref Vector3D vect)
         {
             float[] vector = { 0, 0, 0 };
 

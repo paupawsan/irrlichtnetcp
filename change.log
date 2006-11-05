@@ -8,6 +8,12 @@ Irrlicht .NET CP 0.7
 =============================================================================
 -Added SceneManager.Clear
 -Added MetaTriangleSelectors
+-Corrected bug with custom scene nodes' transformed bounding boxes which were
+ making them disappear all the time
+-Added VideoDriver.DrawMeshBuffer
+-Added MeshBuffer constructor, it can be used to make external loaders
+ (via VideoDriver.DrawMeshBuffer)
+-Added VideoDriver.DriverType and VideoDriver.Name (and ToString methods)
 
 =============================================================================
 Irrlicht .NET CP 0.6

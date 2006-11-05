@@ -1,11 +1,4 @@
 #include "main.h"
-
-#ifdef WIN32
-#define STDCALL __stdcall*
-#else
-#define STDCALL *
-#endif
-
 extern "C"
 {
     typedef enum
@@ -26,7 +19,8 @@ extern "C"
         SET_SCALE,
         SET_TRIANGLE_SELECTOR,
         SET_VISIBLE,
-        UPDATE_ABSOLUTE_POSITION
+        UPDATE_ABSOLUTE_POSITION,
+		MANUAL_UPDATE_BOUNDINGBOX
     } CSN_VOID_METHOD;
 
     typedef enum
@@ -60,7 +54,6 @@ extern "C"
     typedef int (STDCALL CSN_CALLBACK_INT)(CSN_INT_METHOD method, IntPtr arg1, int arg2);
     typedef IntPtr (STDCALL CSN_CALLBACK_INTPTR)(CSN_INTPTR_METHOD method, IntPtr arg1, int arg2);
     typedef void (STDCALL CSN_CALLBACK_FLOAT)(CSN_FLOAT_METHOD method);
-
     EXPORT void CSN_PVOID_METHODS(IntPtr csn, CSN_VOID_METHOD method, IntPtr arg1, int arg2, unsigned int arg3, float *arg4);
     EXPORT int CSN_PINT_METHODS(IntPtr csn, CSN_INT_METHOD method, IntPtr arg1, int arg2);
     EXPORT IntPtr CSN_PINTPTR_METHODS(IntPtr csn, CSN_INTPTR_METHOD method, IntPtr arg1, int arg2);

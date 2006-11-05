@@ -2,11 +2,7 @@
 
 extern "C"
 {
-    #ifdef WIN32
-    typedef void (__stdcall *ANIMATIONENDCALLBACK)(IntPtr);
-    #else
-    typedef void (*ANIMATIONENDCALLBACK)(IntPtr);
-    #endif
+    typedef void (STDCALL ANIMATIONENDCALLBACK)(IntPtr);
 
     //Shadow Volume Scene Node
     EXPORT void ShadowVolume_SetMeshToRenderFrom(IntPtr shadow, IntPtr mesh);

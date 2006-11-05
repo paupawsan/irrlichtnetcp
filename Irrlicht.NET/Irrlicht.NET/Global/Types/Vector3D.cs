@@ -110,11 +110,12 @@ namespace IrrlichtNETCP
             return first.X != other.X || first.Y != other.Y || first.Z != other.Z;
         }
 
-        public void Invert()
+        public Vector3D Invert()
         {
             X *= -1.0f;
             Y *= -1.0f;
             Z *= -1.0f;
+            return this;
         }
 
         public void RotateXZBy(double degrees, Vector3D center)

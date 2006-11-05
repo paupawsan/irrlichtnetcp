@@ -21,14 +21,14 @@ class EventReceiver : public IEventReceiver
         return false;
     }
 
-    void setCallback(CALLBACK call)
+    void setCallback(EVENTCALLBACK call)
     {
         IsCallbackDefined = true;
         _callback = call;
     }
     protected:
     bool IsCallbackDefined;
-    CALLBACK _callback;
+    EVENTCALLBACK _callback;
 };
 
 IntPtr CreateDevice(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias)
@@ -130,7 +130,7 @@ void Device_SetResizeable(IntPtr device, bool resizeable)
      GetDeviceFromIntPtr(device)->setResizeAble(resizeable);
 }
 
-void Device_SetCallback(IntPtr device, CALLBACK call)
+void Device_SetCallback(IntPtr device, EVENTCALLBACK call)
 {
     ((EventReceiver*)GetDeviceFromIntPtr(device)->getEventReceiver())->setCallback(call);
 }

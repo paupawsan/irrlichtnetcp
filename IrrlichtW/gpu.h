@@ -9,11 +9,7 @@ extern "C"
 	EXPORT void MaterialRendererServices_SetVertexShaderConstant(IntPtr mrs, float *data, int startRegister, int constantAmount);
 	EXPORT void MaterialRendererServices_SetVertexShaderConstantA(IntPtr mrs, M_STRING name, float *floats, int count);
 
-    #ifdef WIN32
-    typedef bool (__stdcall *SHADERCALLBACK)(IntPtr, int);
-    #else //Linux or MacOS, no need for stdcall
-    typedef bool (*SHADERCALLBACK)(IntPtr, int);
-    #endif
+    typedef bool (STDCALL SHADERCALLBACK)(IntPtr, int);
 
 	EXPORT int GPU_AddHighLevelShaderMaterial(IntPtr gpu, M_STRING program, M_STRING ventrypoint, E_VERTEX_SHADER_TYPE vsCompileTarget, M_STRING pixelShaderProgram, M_STRING psEntryPoint, E_PIXEL_SHADER_TYPE psCompileTarget, SHADERCALLBACK callback, E_MATERIAL_TYPE baseMat, int userData);
 	EXPORT int GPU_AddHighLevelShaderMaterialFromFiles(IntPtr gpu, M_STRING file, M_STRING ventrypoint, E_VERTEX_SHADER_TYPE vsCompileTarget, M_STRING psfile, M_STRING psEntryPoint, E_PIXEL_SHADER_TYPE psCompileTarget, SHADERCALLBACK callback, E_MATERIAL_TYPE baseMat, int userData);

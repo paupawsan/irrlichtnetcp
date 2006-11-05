@@ -102,6 +102,11 @@ void VideoDriver_Draw2DImageD(IntPtr videodriver, IntPtr texture, M_RECT destPos
 	delete[] colors;
 }
 
+void VideoDriver_DrawMeshBuffer(IntPtr videodriver, IntPtr meshbuffer)
+{
+	GetVideoFromIntPtr(videodriver)->drawMeshBuffer((IMeshBuffer*)meshbuffer);
+}
+
 void VideoDriver_Draw2DLine(IntPtr videodriver, M_POS2DS start, M_POS2DS end, M_SCOLOR color)
 {
 	GetVideoFromIntPtr(videodriver)->draw2DLine(MU_POS2DS(start), MU_POS2DS(end), MU_SCOLOR(color));
@@ -171,6 +176,11 @@ void VideoDriver_DrawIndexedTriangleFanA(IntPtr videodriver, IntPtr *vertices, i
 		list[i] = *(( S3DVertex2TCoords*)vertices[i]);
 	GetVideoFromIntPtr(videodriver)->drawIndexedTriangleFan(list, vertexCount, indexList, triangleCount);
 	delete[] list;
+}
+
+E_DRIVER_TYPE VideoDriver_GetDriverType(IntPtr videodriver)
+{
+	return GetVideoFromIntPtr(videodriver)->getDriverType();
 }
 
 bool VideoDriver_GetTextureCreationFlag(IntPtr videodriver, E_TEXTURE_CREATION_FLAG flag)

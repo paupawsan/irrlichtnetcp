@@ -2,16 +2,9 @@
 
 extern "C"
 {
-    #ifdef WIN32
-    typedef void (__stdcall *EMITTERCALLBACK)(unsigned int, unsigned int, IntPtr);
-    #else
-    typedef void (*EMITTERCALLBACK)(unsigned int, unsigned int, IntPtr);
-    #endif
-    #ifdef WIN32
-    typedef void (__stdcall *AFFECTORCALLBACK)(unsigned int, IntPtr*, int);
-    #else
-    typedef void (*AFFECTORCALLBACK)(unsigned int, IntPtr*, int);
-    #endif
+    typedef void (STDCALL EMITTERCALLBACK)(unsigned int, unsigned int, IntPtr);
+    
+	typedef void (STDCALL AFFECTORCALLBACK)(unsigned int, IntPtr*, int);
 
     EXPORT void Emitter_AddParticle(IntPtr emitter, IntPtr *part, int count);
 

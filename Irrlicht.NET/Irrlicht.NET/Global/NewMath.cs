@@ -26,6 +26,5 @@ namespace IrrlichtNETCP
 		{
 			return (a + ROUNDING_ERROR > b) && (a - ROUNDING_ERROR < b);
 		}
-	}
-	
+	}	
 }

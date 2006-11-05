@@ -179,6 +179,11 @@ namespace IrrlichtNETCP
             VideoDriver_Draw3DLine(_raw, start.ToUnmanaged(), end.ToUnmanaged(), color.ToUnmanaged());
         }
 
+        public void DrawMeshBuffer(MeshBuffer buffer)
+        {
+            VideoDriver_DrawMeshBuffer(_raw, buffer.Raw);
+        }
+
         public void Draw3DLine(Line3D line, Color color)
         {
             Draw3DLine(line.Start, line.End, color);
@@ -426,6 +431,21 @@ namespace IrrlichtNETCP
             }
         }
 
+        public DriverType DriverType
+        {
+            get { return VideoDriver_GetDriverType(_raw); }
+        }
+
+        public string Name
+        {
+            get { return this.DriverType.ToString(); }
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public Color AmbientLight
         {
             set
@@ -513,6 +533,9 @@ namespace IrrlichtNETCP
         static extern void VideoDriver_Draw2DLine(IntPtr videodriver, int[] start, int[] end, int[] color);
 
         [DllImport(Native.Dll)]
+        static extern void VideoDriver_DrawMeshBuffer(IntPtr videodriver, IntPtr meshbuffer);
+
+        [DllImport(Native.Dll)]
         static extern void VideoDriver_Draw2DPolygon(IntPtr videodriver, int[] center, float radius, int[] color, int vertexCount);
 
         [DllImport(Native.Dll)]
@@ -541,6 +564,9 @@ namespace IrrlichtNETCP
 
         [DllImport(Native.Dll)]
         static extern void VideoDriver_DrawIndexedTriangleFan(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);
+
+        [DllImport(Native.Dll)]
+        static extern DriverType VideoDriver_GetDriverType(IntPtr videodriver);
 
         [DllImport(Native.Dll)]
         static extern bool VideoDriver_GetTextureCreationFlag(IntPtr videodriver, TextureCreationFlag flag);

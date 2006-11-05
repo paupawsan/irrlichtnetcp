@@ -36,17 +36,24 @@ namespace IrrlichtNETCP.Extensions
                 new Dimension2Df(1, 1));
            	_current++; 
            	 
-            int dmat = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
+            int dmat = (int)MaterialType.Reflection2Layer;
+            if(_driver.DriverType == DriverType.OpenGL)
+                dmat = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
                  VERTEX_GLSL, "main", VertexShaderType._1_1, FRAGMENT_GLSL,
-                 "main", PixelShaderType._1_1, OnShaderSet, MaterialType.TransparentAlphaChannel, 0); 
-                 
-            ClampShader = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
+                 "main", PixelShaderType._1_1, OnShaderSet, MaterialType.TransparentAlphaChannel, 0);
+
+            if (_driver.DriverType == DriverType.OpenGL)
+                ClampShader = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
                  CLAMP_VERTEX_GLSL, "main", VertexShaderType._1_1, CLAMP_FRAGMENT_GLSL,
                  "main", PixelShaderType._1_1, OnShaderSet, MaterialType.TransparentAlphaChannel, 1);
+            else
+                ClampShader = (int)MaterialType.DetailMap;
                  
            	_waternode = _scene.AddMeshSceneNode(wmesh.GetMesh(0), this, -1);  
             _waternode.SetMaterialType(dmat);
             _waternode.SetMaterialFlag(MaterialFlag.BackFaceCulling, false);
+            _waternode.SetMaterialFlag(MaterialFlag.Lighting, false);
+            _waternode.SetMaterialFlag(MaterialFlag.FogEnable, false);
             
             _rt = _driver.CreateRenderTargetTexture(precision);
             _waternode.SetMaterialTexture(0, _rt); 
@@ -64,10 +71,18 @@ namespace IrrlichtNETCP.Extensions
 				return _waternode;
 			}
 		}
+
+        public override Box3D BoundingBox
+        {
+            get
+            {
+                return WaterNode.BoundingBox;
+            }
+        }
 		
 		public void Update()
-		{                 
-			if(!Visible)
+		{
+            if (!Visible || !_scene.ActiveCamera.ViewFrustrum.BoundingBox.IntersectsWithBox(TransformedBoundingBox))
 				return;
            foreach(TerrainSceneNode terr in clampList)
            	    if(terr != null)
@@ -166,9 +181,9 @@ namespace IrrlichtNETCP.Extensions
 						"varying float addition;\n" +
 						"void main()\n" +
 						"{\n" +
-						"	vec4 projCoord = waterpos * vec4(1.0 / waterpos.w);\n" +
+						"	vec4 projCoord = waterpos / waterpos.w;\n" +
 						"	projCoord += vec4(1.0);\n" +
-						"	projCoord *= vec4(0.5);\n" +
+						"	projCoord *= 0.5;\n" +
 						"	projCoord.x += sin(addition * WaveRepetition) * (WaveDisplacement / 1000.0);\n" +
 						"	projCoord.y += cos(addition * WaveRepetition) * (WaveDisplacement / 1000.0);\n" +
 						"	projCoord = clamp(projCoord, 0.001, 0.999);\n" +
@@ -196,7 +211,7 @@ namespace IrrlichtNETCP.Extensions
 						"void main()\n" +
 						"{\n" +	
 						"	vec4 color = texture2D(DiffuseMap, gl_TexCoord[0].st) * 3.0 *\n" + 
-						"                     texture2D(DetailMap, vec2(gl_TexCoord[0].x * 100.0, gl_TexCoord[0].y * 100.0));\n" +
+						"                texture2D(DetailMap, vec2(gl_TexCoord[0].x * 100.0, gl_TexCoord[0].y * 100.0));\n" +
 						"	if(cutoff <= (WaterPosition.y - 10.0))\n" +
 						"		color.a = 0.0;\n" +
 						"	else\n" +

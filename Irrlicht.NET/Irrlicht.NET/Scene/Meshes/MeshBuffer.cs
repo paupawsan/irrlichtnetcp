@@ -10,6 +10,11 @@ namespace IrrlichtNETCP
         {
         }
 
+        public MeshBuffer(VertexType type)
+            : this(MeshBuffer_Create((int)type))
+        {
+        }
+
         public Box3D BoundingBox
         {
             get
@@ -55,7 +60,7 @@ namespace IrrlichtNETCP
             return MeshBuffer_GetIndex(_raw, nr);
         }
 
-        public void GetIndex(int nr, ushort val)
+        public void SetIndex(int nr, ushort val)
         {
             MeshBuffer_SetIndex(_raw, nr, val);
         }
@@ -69,6 +74,7 @@ namespace IrrlichtNETCP
             set
             {
                 MeshBuffer_SetMaterial(_raw, value.Raw);
+                Material.MaterialType = value.MaterialType;
             }
         }
 
@@ -101,6 +107,9 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
+        [DllImport(Native.Dll)]
+        static extern IntPtr MeshBuffer_Create(int type);
+
         [DllImport(Native.Dll)]
         static extern void MeshBuffer_GetBoundingBox(IntPtr meshb, [MarshalAs(UnmanagedType.LPArray)] float[] bb);
         

@@ -44,17 +44,17 @@ class CustomSceneNode : public ISceneNode
     {
         FLOAT_S2(GET_R_TRANSFORMATION, MU_MAT4)
     }
-	aabbox3d<f32> Box;
-	void updBB()
-	{
-		updBB();
-		c_float(GET_BOUNDING_BOX);
-		Box = MU_BOX3D(tempFloats);
-	}
+	core::aabbox3d<f32> Box;
     virtual const aabbox3d<f32>& getBoundingBox() const
     {
+		c_float(GET_BOUNDING_BOX);
 		return Box;
     }
+	virtual void updBB()
+	{
+		Box.reset(0.0f, 0.0f, 0.0f);
+		Box.addInternalBox(MU_BOX3D(tempFloats));
+	}
     virtual aabbox3d<f32> getTransformedBoundingBox()
     {
         FLOAT_S2(GET_TRANSFORMED_BOUNDING_BOX, MU_BOX3D)
@@ -185,6 +185,7 @@ class CustomSceneNode : public ISceneNode
             VOID_S(SET_TRIANGLE_SELECTOR, ISceneNode::setTriangleSelector((ITriangleSelector*)arg1))
             VOID_S(SET_VISIBLE, ISceneNode::setVisible(arg2 == 0 ? false : true))
             VOID_S(UPDATE_ABSOLUTE_POSITION, ISceneNode::updateAbsolutePosition())
+			VOID_S(MANUAL_UPDATE_BOUNDINGBOX, updBB())
         }
     }
 

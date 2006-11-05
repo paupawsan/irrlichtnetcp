@@ -13,6 +13,32 @@ namespace IrrlichtNETCP
 		public Material(IntPtr raw) : base(raw)
 		{
 		}
+
+        public void CopyTo(Material dest)
+        {
+            dest.AmbientColor = AmbientColor;
+            dest.AnisotropicFilter = AnisotropicFilter;
+            dest.BackfaceCulling = BackfaceCulling;
+            dest.BilinearFilter = BilinearFilter;
+            dest.DiffuseColor = DiffuseColor;
+            dest.EmissiveColor = EmissiveColor;
+            dest.FogEnable = FogEnable;
+            dest.GouraudShading = GouraudShading;
+            dest.Lighting = Lighting;
+            dest.MaterialType = MaterialType;
+            dest.MaterialTypeParam = MaterialTypeParam;
+            dest.NormalizeNormals = NormalizeNormals;
+            dest.Shininess = Shininess;
+            dest.SpecularColor = SpecularColor;
+            dest.Texture1 = Texture1;
+            dest.Texture2 = Texture2;
+            dest.Texture3 = Texture3;
+            dest.Texture4 = Texture4;
+            dest.TrilinearFilter = TrilinearFilter;
+            dest.Wireframe = Wireframe;
+            dest.ZBuffer = ZBuffer;
+            dest.ZWriteEnable = ZWriteEnable;
+        }
 		
 		public Color AmbientColor
 		{
@@ -114,7 +140,10 @@ namespace IrrlichtNETCP
 			}
 			set
 			{
-				Material_SetTexture1(_raw, value.Raw);
+                if (value != null)
+                    Material_SetTexture1(_raw, value.Raw);
+                else
+                    Material_SetTexture1(_raw, IntPtr.Zero);
 			}
 		}
 		
@@ -125,8 +154,11 @@ namespace IrrlichtNETCP
 				return (Texture) NativeElement.GetObject(Material_GetTexture2(_raw), typeof(Texture));
 			}
 			set
-			{
-				Material_SetTexture2(_raw, value.Raw);
+            {
+                if (value != null)
+                    Material_SetTexture2(_raw, value.Raw);
+                else
+                    Material_SetTexture2(_raw, IntPtr.Zero);
 			}
         }
 
@@ -138,7 +170,10 @@ namespace IrrlichtNETCP
             }
             set
             {
-                Material_SetTexture3(_raw, value.Raw);
+                if (value != null)
+                    Material_SetTexture3(_raw, value.Raw);
+                else
+                    Material_SetTexture3(_raw, IntPtr.Zero);
             }
         }
 
@@ -150,7 +185,10 @@ namespace IrrlichtNETCP
             }
             set
             {
-                Material_SetTexture4(_raw, value.Raw);
+                if (value != null)
+                    Material_SetTexture4(_raw, value.Raw);
+                else
+                    Material_SetTexture4(_raw, IntPtr.Zero);
             }
         }
 		
