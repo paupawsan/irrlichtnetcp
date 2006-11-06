@@ -225,7 +225,8 @@ namespace ShadersAndParticles
             //Please notice that many types already has a "ToShader" func made especially
             //For exporting to shader floats !
             //If the structure you want has no such function, then simply use "ToUnmanaged" instead
-            Matrix4 invWorld = Driver.GetTransform(TransformationState.World);
+            Matrix4 world = Driver.GetTransform(TransformationState.World);
+            Matrix4 invWorld = world;
             invWorld.MakeInverse();
 
             services.SetVertexShaderConstant(invWorld.ToShader(), 0, 4);
@@ -233,16 +234,14 @@ namespace ShadersAndParticles
             Matrix4 worldviewproj;
             worldviewproj = Driver.GetTransform(TransformationState.Projection);
             worldviewproj *= Driver.GetTransform(TransformationState.View);
-            worldviewproj *= Driver.GetTransform(TransformationState.World);
+            worldviewproj *= world;
 
             services.SetVertexShaderConstant(worldviewproj.ToShader(), 4, 4);
 
             services.SetVertexShaderConstant(Scene.ActiveCamera.Position.ToShader(), 8, 1);
 
-            Colorf col = Colorf.Blue;
-            services.SetVertexShaderConstant(col.ToShader(), 9, 1);
+            services.SetVertexShaderConstant(Colorf.Blue.ToShader(), 9, 1);
 
-            Matrix4 world = Driver.GetTransform(TransformationState.World);
             world = world.GetTransposed();
             services.SetVertexShaderConstant(world.ToShader(), 10, 4);
         }

@@ -98,22 +98,22 @@ namespace IrrlichtNETCP
         }
 
         #region Premade Colors
-        public static Color Red { get { return new Color(255, 255, 0, 0); } }
-        public static Color Green { get { return new Color(255, 0, 255, 0); } }
-        public static Color Blue { get { return new Color(255, 0, 0, 255); } }
-        public static Color Black { get { return new Color(255, 0, 0, 0); } }
-        public static Color White { get { return new Color(255, 255, 255, 255); } }
-        public static Color Yellow { get { return new Color(255, 255, 255, 0); } }
-        public static Color Purple { get { return new Color(255, 255, 0, 255); } }
-        public static Color Gray { get { return new Color(255, 100, 100, 100); } }
-        public static Color TransparentRed { get { return new Color(0, 255, 0, 0); } }
-        public static Color TransparentGreen { get { return new Color(0, 0, 255, 0); } }
-        public static Color TransparentBlue { get { return new Color(0, 0, 0, 255); } }
-        public static Color TransparentBlack { get { return new Color(0, 0, 0, 0); } }
-        public static Color TransparentWhite { get { return new Color(0, 255, 255, 255); } }
-        public static Color TransparentYellow { get { return new Color(0, 255, 255, 0); } }
-        public static Color TransparentPurple { get { return new Color(0, 255, 0, 255); } }
-        public static Color TransparentGray { get { return new Color(0, 100, 100, 100); } }
+        public static Color Red  =  new Color(255, 255, 0, 0);
+        public static Color Green  =  new Color(255, 0, 255, 0);
+        public static Color Blue  =  new Color(255, 0, 0, 255);
+        public static Color Black  =  new Color(255, 0, 0, 0);
+        public static Color White  =  new Color(255, 255, 255, 255);
+        public static Color Yellow  =  new Color(255, 255, 255, 0);
+        public static Color Purple  =  new Color(255, 255, 0, 255);
+        public static Color Gray  =  new Color(255, 100, 100, 100);
+        public static Color TransparentRed  =  new Color(0, 255, 0, 0);
+        public static Color TransparentGreen  =  new Color(0, 0, 255, 0);
+        public static Color TransparentBlue  =  new Color(0, 0, 0, 255);
+        public static Color TransparentBlack  =  new Color(0, 0, 0, 0);
+        public static Color TransparentWhite  =  new Color(0, 255, 255, 255);
+        public static Color TransparentYellow  =  new Color(0, 255, 255, 0);
+        public static Color TransparentPurple  =  new Color(0, 255, 0, 255);
+        public static Color TransparentGray  =  new Color(0, 100, 100, 100);
         #endregion
     }
 
@@ -185,22 +185,22 @@ namespace IrrlichtNETCP
         }
 
         #region Premade Colors
-        public static Colorf Red { get { return new Colorf(255, 255, 0, 0); } }
-        public static Colorf Green { get { return new Colorf(255, 0, 255, 0); } }
-        public static Colorf Blue { get { return new Colorf(255, 0, 0, 255); } }
-        public static Colorf Black { get { return new Colorf(255, 0, 0, 0); } }
-        public static Colorf White { get { return new Colorf(255, 255, 255, 255); } }
-        public static Colorf Yellow { get { return new Colorf(255, 255, 255, 0); } }
-        public static Colorf Purple { get { return new Colorf(255, 255, 0, 255); } }
-        public static Colorf Gray { get { return new Colorf(255, 100, 100, 100); } }
-        public static Colorf TransparentRed { get { return new Colorf(0, 255, 0, 0); } }
-        public static Colorf TransparentGreen { get { return new Colorf(0, 0, 255, 0); } }
-        public static Colorf TransparentBlue { get { return new Colorf(0, 0, 0, 255); } }
-        public static Colorf TransparentBlack { get { return new Colorf(0, 0, 0, 0); } }
-        public static Colorf TransparentWhite { get { return new Colorf(0, 255, 255, 255); } }
-        public static Colorf TransparentYellow { get { return new Colorf(0, 255, 255, 0); } }
-        public static Colorf TransparentPurple { get { return new Colorf(0, 255, 0, 255); } }
-        public static Colorf TransparentGray { get { return new Colorf(0, 100, 100, 100); } }
+        public static Colorf Red = new Colorf(255, 255, 0, 0);
+        public static Colorf Green = new Colorf(255, 0, 255, 0);
+        public static Colorf Blue = new Colorf(255, 0, 0, 255);
+        public static Colorf Black = new Colorf(255, 0, 0, 0);
+        public static Colorf White  =  new Colorf(255, 255, 255, 255);
+        public static Colorf Yellow = new Colorf(255, 255, 255, 0);
+        public static Colorf Purple  =  new Colorf(255, 255, 0, 255);
+        public static Colorf Gray  =  new Colorf(255, 100, 100, 100);
+        public static Colorf TransparentRed  =  new Colorf(0, 255, 0, 0);
+        public static Colorf TransparentGreen  =  new Colorf(0, 0, 255, 0);
+        public static Colorf TransparentBlue  =  new Colorf(0, 0, 0, 255);
+        public static Colorf TransparentBlack  =  new Colorf(0, 0, 0, 0);
+        public static Colorf TransparentWhite  =  new Colorf(0, 255, 255, 255);
+        public static Colorf TransparentYellow  =  new Colorf(0, 255, 255, 0);
+        public static Colorf TransparentPurple  =  new Colorf(0, 255, 0, 255);
+        public static Colorf TransparentGray  =  new Colorf(0, 100, 100, 100);
         #endregion
     }
 }

@@ -10,12 +10,15 @@ namespace IrrlichtNETCP
 		{
 			MakeIdentity();
 		}
+
+        public Matrix4(float[] m)
+        {
+            M = m;
+        }
 	
 		public static Matrix4 From(float[] m)
 		{
-			Matrix4 mat = new Matrix4();
-			mat.M = m;
-			return mat;
+			return new Matrix4(m);
 		}
 		
 		public Vector3D Translation
@@ -127,48 +130,39 @@ namespace IrrlichtNETCP
 		/// <summary> Set matrix to identity. </summary>
 		public void MakeIdentity()
 		{
-			M = new float[16];
-			for (int i=0; i<16; ++i)
-				M[i] = 0.0f;
-			
-			M[0] = M[5] = M[10] = M[15] = 1;
+			M = new float[] { 1f, 0f, 0f, 0f, 
+                              0f, 1f, 0f, 0f, 
+                              0f, 0f, 1f, 0f,
+                              0f, 0f, 0f, 1f };
 		}
 		
 		/// <summary> Direct accessing every row and colum of the matrix values </summary>
-		public float GetM(int row, int col)
+		public float GetM(int col, int row)
 		{
 			if (row < 0 || row >= 4 ||
 				col < 0 || col >= 4)
 				throw new ArgumentOutOfRangeException("Invalid index for accessing matrix members");
-			
-			return M[col * 4 + row];
+
+            return M[row * 4 + col];
 		}
 		
-		public void SetM(int row, int col, float m)
+		public void SetM(int col, int row, float m)
 		{
 			if (row < 0 || row >= 4 ||
 				col < 0 || col >= 4)
 				throw new ArgumentOutOfRangeException("Invalid index for accessing matrix members");
 			
-			M[col * 4 + row] = m;
+			M[row * 4 + col] = m;
 		}
-		
-		private float getMInsecure(int row, int col)
-		{
-			if (row < 0 || row >= 4 ||
-				col < 0 || col >= 4)
-				throw new ArgumentOutOfRangeException("Invalid index for accessing matrix members");
-			
-			return M[col * 4 + row];
+
+        private float GetMInsecure(int col, int row)
+		{			
+			return M[row * 4 + col];
 		}
-		
-		private void setMInsecure(int row, int col, float m)
-		{
-			if (row < 0 || row >= 4 ||
-				col < 0 || col >= 4)
-				throw new ArgumentOutOfRangeException("Invalid index for accessing matrix members");
-			
-			M[col * 4 + row] = m;
+
+        private void SetMInsecure(int col, int row, float m)
+		{			
+			M[row * 4 + col] = m;
 		}
 
 		/// <summary> Returns true if the matrix is the identity matrix. </summary>
@@ -194,20 +188,18 @@ namespace IrrlichtNETCP
 
         public Matrix4 GetTransposed()
         {
-            Matrix4 t = new Matrix4();
-            t.MakeIdentity();
+            float[] newM = new float[16];
 
             for (int r = 0; r < 4; ++r)
                 for (int c = 0; c < 4; ++c)
-                    t.SetM(r, c, this.GetM(c, r));
+                    newM[r * 4 + c] = GetMInsecure(c, r);
 
-            return t;
+            return new Matrix4(newM);
         }
 		
 		public static Matrix4 operator*(Matrix4 a, Matrix4 b)
 		{
 			Matrix4 tmtrx = new Matrix4();
-			tmtrx.MakeIdentity();
 						
 			tmtrx.M[0] = a.M[0]*b.M[0] + a.M[4]*b.M[1] + a.M[8]*b.M[2] + a.M[12]*b.M[3];
 			tmtrx.M[1] = a.M[1]*b.M[0] + a.M[5]*b.M[1] + a.M[9]*b.M[2] + a.M[13]*b.M[3];
@@ -237,25 +229,25 @@ namespace IrrlichtNETCP
 			float h = (float)(Math.Cos(fieldOfViewRadians/2) / Math.Sin(fieldOfViewRadians/2));
 			float w = h / aspectRatio;
 			
-			setMInsecure(0,0,2*zNear/w);
-			setMInsecure(1,0,0);
-			setMInsecure(2,0,0);
-			setMInsecure(3,0,0);
+			SetMInsecure(0,0,2*zNear/w);
+			SetMInsecure(1,0,0);
+			SetMInsecure(2,0,0);
+			SetMInsecure(3,0,0);
 			
-			setMInsecure(0,1,0);
-			setMInsecure(1,1,2*zNear/h);
-			setMInsecure(2,1,0);
-			setMInsecure(3,1,0);
+			SetMInsecure(0,1,0);
+			SetMInsecure(1,1,2*zNear/h);
+			SetMInsecure(2,1,0);
+			SetMInsecure(3,1,0);
 			
-			setMInsecure(0,2,0);
-			setMInsecure(1,2,0);
-			setMInsecure(2,2,zFar/(zFar-zNear));
-			setMInsecure(3,2,-1);
+			SetMInsecure(0,2,0);
+			SetMInsecure(1,2,0);
+			SetMInsecure(2,2,zFar/(zFar-zNear));
+			SetMInsecure(3,2,-1);
 			
-			setMInsecure(0,3,0);
-			setMInsecure(1,3,0);
-			setMInsecure(2,3,zNear*zFar/(zNear-zFar));
-			setMInsecure(3,3,0);
+			SetMInsecure(0,3,0);
+			SetMInsecure(1,3,0);
+			SetMInsecure(2,3,zNear*zFar/(zNear-zFar));
+			SetMInsecure(3,3,0);
 		}
 		
 		/// <summary> Builds a left-handed perspective projection matrix based on a field of view</summary>
@@ -264,121 +256,121 @@ namespace IrrlichtNETCP
 			float h = (float)(Math.Cos(fieldOfViewRadians/2) / Math.Sin(fieldOfViewRadians/2));
 			float w = h / aspectRatio;
 			
-			setMInsecure(0,0,2*zNear/w);
-			setMInsecure(1,0,0);
-			setMInsecure(2,0,0);
-			setMInsecure(3,0,0);
+			SetMInsecure(0,0,2*zNear/w);
+			SetMInsecure(1,0,0);
+			SetMInsecure(2,0,0);
+			SetMInsecure(3,0,0);
 			
-			setMInsecure(0,1,0);
-			setMInsecure(1,1,2*zNear/h);
-			setMInsecure(2,1,0);
-			setMInsecure(3,1,0);
+			SetMInsecure(0,1,0);
+			SetMInsecure(1,1,2*zNear/h);
+			SetMInsecure(2,1,0);
+			SetMInsecure(3,1,0);
 			
-			setMInsecure(0,2,0);
-			setMInsecure(1,2,0);
-			setMInsecure(2,2,zFar/(zFar-zNear));
-			setMInsecure(3,2,1);
+			SetMInsecure(0,2,0);
+			SetMInsecure(1,2,0);
+			SetMInsecure(2,2,zFar/(zFar-zNear));
+			SetMInsecure(3,2,1);
 			
-			setMInsecure(0,3,0);
-			setMInsecure(1,3,0);
-			setMInsecure(2,3,zNear*zFar/(zNear-zFar));
-			setMInsecure(3,3,0);
+			SetMInsecure(0,3,0);
+			SetMInsecure(1,3,0);
+			SetMInsecure(2,3,zNear*zFar/(zNear-zFar));
+			SetMInsecure(3,3,0);
 		}
 		
 		/// <summary> Builds a right-handed perspective projection matrix.</summary>
 		public void BuildProjectionMatrixPerspectiveRH(float widthOfViewVolume, float heightOfViewVolume, float zNear, float zFar)
 		{
-			setMInsecure(0,0,2*zNear/widthOfViewVolume);
-			setMInsecure(1,0,0);
-			setMInsecure(2,0,0);
-			setMInsecure(3,0,0);
+			SetMInsecure(0,0,2*zNear/widthOfViewVolume);
+			SetMInsecure(1,0,0);
+			SetMInsecure(2,0,0);
+			SetMInsecure(3,0,0);
 			
-			setMInsecure(0,1,0);
-			setMInsecure(1,1,2*zNear/heightOfViewVolume);
-			setMInsecure(2,1,0);
-			setMInsecure(3,1,0);
+			SetMInsecure(0,1,0);
+			SetMInsecure(1,1,2*zNear/heightOfViewVolume);
+			SetMInsecure(2,1,0);
+			SetMInsecure(3,1,0);
 			
-			setMInsecure(0,2,0);
-			setMInsecure(1,2,0);
-			setMInsecure(2,2,zFar/(zNear-zFar));
-			setMInsecure(3,2,-1);
+			SetMInsecure(0,2,0);
+			SetMInsecure(1,2,0);
+			SetMInsecure(2,2,zFar/(zNear-zFar));
+			SetMInsecure(3,2,-1);
 			
-			setMInsecure(0,3,0);
-			setMInsecure(1,3,0);
-			setMInsecure(2,3,zNear*zFar/(zNear-zFar));
-			setMInsecure(3,3,0);
+			SetMInsecure(0,3,0);
+			SetMInsecure(1,3,0);
+			SetMInsecure(2,3,zNear*zFar/(zNear-zFar));
+			SetMInsecure(3,3,0);
 		}
 		
 		/// <summary> Builds a left-handed perspective projection matrix.</summary>
 		public void BuildProjectionMatrixPerspectiveLH(float widthOfViewVolume, float heightOfViewVolume, float zNear, float zFar)
 		{
-			setMInsecure(0,0,2*zNear/widthOfViewVolume);
-			setMInsecure(1,0,0);
-			setMInsecure(2,0,0);
-			setMInsecure(3,0,0);
+			SetMInsecure(0,0,2*zNear/widthOfViewVolume);
+			SetMInsecure(1,0,0);
+			SetMInsecure(2,0,0);
+			SetMInsecure(3,0,0);
 			
-			setMInsecure(0,1,0);
-			setMInsecure(1,1,2*zNear/heightOfViewVolume);
-			setMInsecure(2,1,0);
-			setMInsecure(3,1,0);
+			SetMInsecure(0,1,0);
+			SetMInsecure(1,1,2*zNear/heightOfViewVolume);
+			SetMInsecure(2,1,0);
+			SetMInsecure(3,1,0);
 			
-			setMInsecure(0,2,0);
-			setMInsecure(1,2,0);
-			setMInsecure(2,2,zFar/(zNear-zFar));
-			setMInsecure(3,2,1);
+			SetMInsecure(0,2,0);
+			SetMInsecure(1,2,0);
+			SetMInsecure(2,2,zFar/(zNear-zFar));
+			SetMInsecure(3,2,1);
 			
-			setMInsecure(0,3,0);
-			setMInsecure(1,3,0);
-			setMInsecure(2,3,zNear*zFar/(zNear-zFar));
-			setMInsecure(3,3,0);
+			SetMInsecure(0,3,0);
+			SetMInsecure(1,3,0);
+			SetMInsecure(2,3,zNear*zFar/(zNear-zFar));
+			SetMInsecure(3,3,0);
 		}
 		
 		/// <summary> Builds a left-handed orthogonal projection matrix.</summary>
 		public void BuildProjectionMatrixOrthoLH(float widthOfViewVolume, float heightOfViewVolume, float zNear, float zFar)
 		{
-			setMInsecure(0,0,2/widthOfViewVolume);
-			setMInsecure(1,0,0);
-			setMInsecure(2,0,0);
-			setMInsecure(3,0,0);
+			SetMInsecure(0,0,2/widthOfViewVolume);
+			SetMInsecure(1,0,0);
+			SetMInsecure(2,0,0);
+			SetMInsecure(3,0,0);
 			
-			setMInsecure(0,1,0);
-			setMInsecure(1,1,2/heightOfViewVolume);
-			setMInsecure(2,1,0);
-			setMInsecure(3,1,0);
+			SetMInsecure(0,1,0);
+			SetMInsecure(1,1,2/heightOfViewVolume);
+			SetMInsecure(2,1,0);
+			SetMInsecure(3,1,0);
 			
-			setMInsecure(0,2,0);
-			setMInsecure(1,2,0);
-			setMInsecure(2,2,1/(zNear-zFar));
-			setMInsecure(3,2,0);
+			SetMInsecure(0,2,0);
+			SetMInsecure(1,2,0);
+			SetMInsecure(2,2,1/(zNear-zFar));
+			SetMInsecure(3,2,0);
 			
-			setMInsecure(0,3,0);
-			setMInsecure(1,3,0);
-			setMInsecure(2,3,zNear/(zNear-zFar));
-			setMInsecure(3,3,1);
+			SetMInsecure(0,3,0);
+			SetMInsecure(1,3,0);
+			SetMInsecure(2,3,zNear/(zNear-zFar));
+			SetMInsecure(3,3,1);
 		}
 		
 		/// <summary> Builds a right-handed orthogonal projection matrix.</summary>
 		public void BuildProjectionMatrixOrthoRH(float widthOfViewVolume, float heightOfViewVolume, float zNear, float zFar)
 		{
-			setMInsecure(0,0,2/widthOfViewVolume);
-			setMInsecure(1,0,0);
-			setMInsecure(2,0,0);
-			setMInsecure(3,0,0);
+			SetMInsecure(0,0,2/widthOfViewVolume);
+			SetMInsecure(1,0,0);
+			SetMInsecure(2,0,0);
+			SetMInsecure(3,0,0);
 			
-			setMInsecure(0,1,0);
-			setMInsecure(1,1,2/heightOfViewVolume);
-			setMInsecure(2,1,0);
-			setMInsecure(3,1,0);
+			SetMInsecure(0,1,0);
+			SetMInsecure(1,1,2/heightOfViewVolume);
+			SetMInsecure(2,1,0);
+			SetMInsecure(3,1,0);
 			
-			setMInsecure(0,2,0);
-			setMInsecure(1,2,0);
-			setMInsecure(2,2,1/(zNear-zFar));
-			setMInsecure(3,2,0);
+			SetMInsecure(0,2,0);
+			SetMInsecure(1,2,0);
+			SetMInsecure(2,2,1/(zNear-zFar));
+			SetMInsecure(3,2,0);
 			
-			setMInsecure(0,3,0);
-			setMInsecure(1,3,0);
-			setMInsecure(2,3,zNear/(zNear-zFar));
-			setMInsecure(3,3,-1);
+			SetMInsecure(0,3,0);
+			SetMInsecure(1,3,0);
+			SetMInsecure(2,3,zNear/(zNear-zFar));
+			SetMInsecure(3,3,-1);
 		}
 		
 		/// <summary> Builds a left-handed look-at matrix.</summary>
@@ -392,25 +384,25 @@ namespace IrrlichtNETCP
 			
 			Vector3D yaxis = zaxis.CrossProduct(xaxis);
 			
-			setMInsecure(0,0,xaxis.X);
-			setMInsecure(1,0,yaxis.X);
-			setMInsecure(2,0,zaxis.X);
-			setMInsecure(3,0,0);
+			SetMInsecure(0,0,xaxis.X);
+			SetMInsecure(1,0,yaxis.X);
+			SetMInsecure(2,0,zaxis.X);
+			SetMInsecure(3,0,0);
 			
-			setMInsecure(0,1,xaxis.Y);
-			setMInsecure(1,1,yaxis.Y);
-			setMInsecure(2,1,zaxis.Y);
-			setMInsecure(3,1,0);
+			SetMInsecure(0,1,xaxis.Y);
+			SetMInsecure(1,1,yaxis.Y);
+			SetMInsecure(2,1,zaxis.Y);
+			SetMInsecure(3,1,0);
 			
-			setMInsecure(0,2,xaxis.Z);
-			setMInsecure(1,2,yaxis.Z);
-			setMInsecure(2,2,zaxis.Z);
-			setMInsecure(3,2,0);
+			SetMInsecure(0,2,xaxis.Z);
+			SetMInsecure(1,2,yaxis.Z);
+			SetMInsecure(2,2,zaxis.Z);
+			SetMInsecure(3,2,0);
 			
-			setMInsecure(0,3,-xaxis.DotProduct(position));
-			setMInsecure(1,3,-yaxis.DotProduct(position));
-			setMInsecure(2,3,-zaxis.DotProduct(position));
-			setMInsecure(3,3,1.0f);
+			SetMInsecure(0,3,-xaxis.DotProduct(position));
+			SetMInsecure(1,3,-yaxis.DotProduct(position));
+			SetMInsecure(2,3,-zaxis.DotProduct(position));
+			SetMInsecure(3,3,1.0f);
 		}
 		
 		/// <summary> Builds a right-handed look-at matrix.</summary>
@@ -424,25 +416,25 @@ namespace IrrlichtNETCP
 			
 			Vector3D yaxis = zaxis.CrossProduct(xaxis);
 			
-			setMInsecure(0,0,xaxis.X);
-			setMInsecure(1,0,yaxis.X);
-			setMInsecure(2,0,zaxis.X);
-			setMInsecure(3,0,0);
+			SetMInsecure(0,0,xaxis.X);
+			SetMInsecure(1,0,yaxis.X);
+			SetMInsecure(2,0,zaxis.X);
+			SetMInsecure(3,0,0);
 			
-			setMInsecure(0,1,xaxis.Y);
-			setMInsecure(1,1,yaxis.Y);
-			setMInsecure(2,1,zaxis.Y);
-			setMInsecure(3,1,0);
+			SetMInsecure(0,1,xaxis.Y);
+			SetMInsecure(1,1,yaxis.Y);
+			SetMInsecure(2,1,zaxis.Y);
+			SetMInsecure(3,1,0);
 			
-			setMInsecure(0,2,xaxis.Z);
-			setMInsecure(1,2,yaxis.Z);
-			setMInsecure(2,2,zaxis.Z);
-			setMInsecure(3,2,0);
+			SetMInsecure(0,2,xaxis.Z);
+			SetMInsecure(1,2,yaxis.Z);
+			SetMInsecure(2,2,zaxis.Z);
+			SetMInsecure(3,2,0);
 			
-			setMInsecure(0,3,-xaxis.DotProduct(position));
-			setMInsecure(1,3,-yaxis.DotProduct(position));
-			setMInsecure(2,3,-zaxis.DotProduct(position));
-			setMInsecure(3,3,1.0f);
+			SetMInsecure(0,3,-xaxis.DotProduct(position));
+			SetMInsecure(1,3,-yaxis.DotProduct(position));
+			SetMInsecure(2,3,-zaxis.DotProduct(position));
+			SetMInsecure(3,3,1.0f);
 		}
 		
 		public void MakeInverse()
@@ -455,33 +447,32 @@ namespace IrrlichtNETCP
 		public bool GetInverse(out Matrix4 outM)
 		{
 			outM = new Matrix4();
-			outM.MakeIdentity();
 			
-			float d = (getMInsecure(0, 0) * getMInsecure(1, 1) - getMInsecure(1, 0) * getMInsecure(0, 1)) * (getMInsecure(2, 2) * getMInsecure(3, 3) - getMInsecure(3, 2) * getMInsecure(2, 3))	- (getMInsecure(0, 0) * getMInsecure(2, 1) - getMInsecure(2, 0) * getMInsecure(0, 1)) * (getMInsecure(1, 2) * getMInsecure(3, 3) - getMInsecure(3, 2) * getMInsecure(1, 3))
-					+ (getMInsecure(0, 0) * getMInsecure(3, 1) - getMInsecure(3, 0) * getMInsecure(0, 1)) * (getMInsecure(1, 2) * getMInsecure(2, 3) - getMInsecure(2, 2) * getMInsecure(1, 3))	+ (getMInsecure(1, 0) * getMInsecure(2, 1) - getMInsecure(2, 0) * getMInsecure(1, 1)) * (getMInsecure(0, 2) * getMInsecure(3, 3) - getMInsecure(3, 2) * getMInsecure(0, 3))
-			        - (getMInsecure(1, 0) * getMInsecure(3, 1) - getMInsecure(3, 0) * getMInsecure(1, 1)) * (getMInsecure(0, 2) * getMInsecure(2, 3) - getMInsecure(2, 2) * getMInsecure(0, 3))	+ (getMInsecure(2, 0) * getMInsecure(3, 1) - getMInsecure(3, 0) * getMInsecure(2, 1)) * (getMInsecure(0, 2) * getMInsecure(1, 3) - getMInsecure(1, 2) * getMInsecure(0, 3));
+			float d = (GetMInsecure(0, 0) * GetMInsecure(1, 1) - GetMInsecure(1, 0) * GetMInsecure(0, 1)) * (GetMInsecure(2, 2) * GetMInsecure(3, 3) - GetMInsecure(3, 2) * GetMInsecure(2, 3))	- (GetMInsecure(0, 0) * GetMInsecure(2, 1) - GetMInsecure(2, 0) * GetMInsecure(0, 1)) * (GetMInsecure(1, 2) * GetMInsecure(3, 3) - GetMInsecure(3, 2) * GetMInsecure(1, 3))
+					+ (GetMInsecure(0, 0) * GetMInsecure(3, 1) - GetMInsecure(3, 0) * GetMInsecure(0, 1)) * (GetMInsecure(1, 2) * GetMInsecure(2, 3) - GetMInsecure(2, 2) * GetMInsecure(1, 3))	+ (GetMInsecure(1, 0) * GetMInsecure(2, 1) - GetMInsecure(2, 0) * GetMInsecure(1, 1)) * (GetMInsecure(0, 2) * GetMInsecure(3, 3) - GetMInsecure(3, 2) * GetMInsecure(0, 3))
+			        - (GetMInsecure(1, 0) * GetMInsecure(3, 1) - GetMInsecure(3, 0) * GetMInsecure(1, 1)) * (GetMInsecure(0, 2) * GetMInsecure(2, 3) - GetMInsecure(2, 2) * GetMInsecure(0, 3))	+ (GetMInsecure(2, 0) * GetMInsecure(3, 1) - GetMInsecure(3, 0) * GetMInsecure(2, 1)) * (GetMInsecure(0, 2) * GetMInsecure(1, 3) - GetMInsecure(1, 2) * GetMInsecure(0, 3));
 			
 			if (d == 0f)
 			    return false;
 			
 			d = 1f / d;
 			
-			outM.setMInsecure(0, 0, d * (getMInsecure(1, 1) * (getMInsecure(2, 2) * getMInsecure(3, 3) - getMInsecure(3, 2) * getMInsecure(2, 3)) + getMInsecure(2, 1) * (getMInsecure(3, 2) * getMInsecure(1, 3) - getMInsecure(1, 2) * getMInsecure(3, 3)) + getMInsecure(3, 1) * (getMInsecure(1, 2) * getMInsecure(2, 3) - getMInsecure(2, 2) * getMInsecure(1, 3))));
-			outM.setMInsecure(1, 0, d * (getMInsecure(1, 2) * (getMInsecure(2, 0) * getMInsecure(3, 3) - getMInsecure(3, 0) * getMInsecure(2, 3)) + getMInsecure(2, 2) * (getMInsecure(3, 0) * getMInsecure(1, 3) - getMInsecure(1, 0) * getMInsecure(3, 3)) + getMInsecure(3, 2) * (getMInsecure(1, 0) * getMInsecure(2, 3) - getMInsecure(2, 0) * getMInsecure(1, 3))));
-			outM.setMInsecure(2, 0, d * (getMInsecure(1, 3) * (getMInsecure(2, 0) * getMInsecure(3, 1) - getMInsecure(3, 0) * getMInsecure(2, 1)) + getMInsecure(2, 3) * (getMInsecure(3, 0) * getMInsecure(1, 1) - getMInsecure(1, 0) * getMInsecure(3, 1)) + getMInsecure(3, 3) * (getMInsecure(1, 0) * getMInsecure(2, 1) - getMInsecure(2, 0) * getMInsecure(1, 1))));
-			outM.setMInsecure(3, 0, d * (getMInsecure(1, 0) * (getMInsecure(3, 1) * getMInsecure(2, 2) - getMInsecure(2, 1) * getMInsecure(3, 2)) + getMInsecure(2, 0) * (getMInsecure(1, 1) * getMInsecure(3, 2) - getMInsecure(3, 1) * getMInsecure(1, 2)) + getMInsecure(3, 0) * (getMInsecure(2, 1) * getMInsecure(1, 2) - getMInsecure(1, 1) * getMInsecure(2, 2))));
-			outM.setMInsecure(0, 1, d * (getMInsecure(2, 1) * (getMInsecure(0, 2) * getMInsecure(3, 3) - getMInsecure(3, 2) * getMInsecure(0, 3)) + getMInsecure(3, 1) * (getMInsecure(2, 2) * getMInsecure(0, 3) - getMInsecure(0, 2) * getMInsecure(2, 3)) + getMInsecure(0, 1) * (getMInsecure(3, 2) * getMInsecure(2, 3) - getMInsecure(2, 2) * getMInsecure(3, 3))));
-			outM.setMInsecure(1, 1, d * (getMInsecure(2, 2) * (getMInsecure(0, 0) * getMInsecure(3, 3) - getMInsecure(3, 0) * getMInsecure(0, 3)) + getMInsecure(3, 2) * (getMInsecure(2, 0) * getMInsecure(0, 3) - getMInsecure(0, 0) * getMInsecure(2, 3)) + getMInsecure(0, 2) * (getMInsecure(3, 0) * getMInsecure(2, 3) - getMInsecure(2, 0) * getMInsecure(3, 3))));
-			outM.setMInsecure(2, 1, d * (getMInsecure(2, 3) * (getMInsecure(0, 0) * getMInsecure(3, 1) - getMInsecure(3, 0) * getMInsecure(0, 1)) + getMInsecure(3, 3) * (getMInsecure(2, 0) * getMInsecure(0, 1) - getMInsecure(0, 0) * getMInsecure(2, 1)) + getMInsecure(0, 3) * (getMInsecure(3, 0) * getMInsecure(2, 1) - getMInsecure(2, 0) * getMInsecure(3, 1))));
-			outM.setMInsecure(3, 1, d * (getMInsecure(2, 0) * (getMInsecure(3, 1) * getMInsecure(0, 2) - getMInsecure(0, 1) * getMInsecure(3, 2)) + getMInsecure(3, 0) * (getMInsecure(0, 1) * getMInsecure(2, 2) - getMInsecure(2, 1) * getMInsecure(0, 2)) + getMInsecure(0, 0) * (getMInsecure(2, 1) * getMInsecure(3, 2) - getMInsecure(3, 1) * getMInsecure(2, 2))));
-			outM.setMInsecure(0, 2, d * (getMInsecure(3, 1) * (getMInsecure(0, 2) * getMInsecure(1, 3) - getMInsecure(1, 2) * getMInsecure(0, 3)) + getMInsecure(0, 1) * (getMInsecure(1, 2) * getMInsecure(3, 3) - getMInsecure(3, 2) * getMInsecure(1, 3)) + getMInsecure(1, 1) * (getMInsecure(3, 2) * getMInsecure(0, 3) - getMInsecure(0, 2) * getMInsecure(3, 3))));
-			outM.setMInsecure(1, 2, d * (getMInsecure(3, 2) * (getMInsecure(0, 0) * getMInsecure(1, 3) - getMInsecure(1, 0) * getMInsecure(0, 3)) + getMInsecure(0, 2) * (getMInsecure(1, 0) * getMInsecure(3, 3) - getMInsecure(3, 0) * getMInsecure(1, 3)) + getMInsecure(1, 2) * (getMInsecure(3, 0) * getMInsecure(0, 3) - getMInsecure(0, 0) * getMInsecure(3, 3))));
-			outM.setMInsecure(2, 2, d * (getMInsecure(3, 3) * (getMInsecure(0, 0) * getMInsecure(1, 1) - getMInsecure(1, 0) * getMInsecure(0, 1)) + getMInsecure(0, 3) * (getMInsecure(1, 0) * getMInsecure(3, 1) - getMInsecure(3, 0) * getMInsecure(1, 1)) + getMInsecure(1, 3) * (getMInsecure(3, 0) * getMInsecure(0, 1) - getMInsecure(0, 0) * getMInsecure(3, 1))));
-			outM.setMInsecure(3, 2, d * (getMInsecure(3, 0) * (getMInsecure(1, 1) * getMInsecure(0, 2) - getMInsecure(0, 1) * getMInsecure(1, 2)) + getMInsecure(0, 0) * (getMInsecure(3, 1) * getMInsecure(1, 2) - getMInsecure(1, 1) * getMInsecure(3, 2)) + getMInsecure(1, 0) * (getMInsecure(0, 1) * getMInsecure(3, 2) - getMInsecure(3, 1) * getMInsecure(0, 2))));
-			outM.setMInsecure(0, 3, d * (getMInsecure(0, 1) * (getMInsecure(2, 2) * getMInsecure(1, 3) - getMInsecure(1, 2) * getMInsecure(2, 3)) + getMInsecure(1, 1) * (getMInsecure(0, 2) * getMInsecure(2, 3) - getMInsecure(2, 2) * getMInsecure(0, 3)) + getMInsecure(2, 1) * (getMInsecure(1, 2) * getMInsecure(0, 3) - getMInsecure(0, 2) * getMInsecure(1, 3))));
-			outM.setMInsecure(1, 3, d * (getMInsecure(0, 2) * (getMInsecure(2, 0) * getMInsecure(1, 3) - getMInsecure(1, 0) * getMInsecure(2, 3)) + getMInsecure(1, 2) * (getMInsecure(0, 0) * getMInsecure(2, 3) - getMInsecure(2, 0) * getMInsecure(0, 3)) + getMInsecure(2, 2) * (getMInsecure(1, 0) * getMInsecure(0, 3) - getMInsecure(0, 0) * getMInsecure(1, 3))));
-			outM.setMInsecure(2, 3, d * (getMInsecure(0, 3) * (getMInsecure(2, 0) * getMInsecure(1, 1) - getMInsecure(1, 0) * getMInsecure(2, 1)) + getMInsecure(1, 3) * (getMInsecure(0, 0) * getMInsecure(2, 1) - getMInsecure(2, 0) * getMInsecure(0, 1)) + getMInsecure(2, 3) * (getMInsecure(1, 0) * getMInsecure(0, 1) - getMInsecure(0, 0) * getMInsecure(1, 1))));
-			outM.setMInsecure(3, 3, d * (getMInsecure(0, 0) * (getMInsecure(1, 1) * getMInsecure(2, 2) - getMInsecure(2, 1) * getMInsecure(1, 2)) + getMInsecure(1, 0) * (getMInsecure(2, 1) * getMInsecure(0, 2) - getMInsecure(0, 1) * getMInsecure(2, 2)) + getMInsecure(2, 0) * (getMInsecure(0, 1) * getMInsecure(1, 2) - getMInsecure(1, 1) * getMInsecure(0, 2))));
+			outM.SetMInsecure(0, 0, d * (GetMInsecure(1, 1) * (GetMInsecure(2, 2) * GetMInsecure(3, 3) - GetMInsecure(3, 2) * GetMInsecure(2, 3)) + GetMInsecure(2, 1) * (GetMInsecure(3, 2) * GetMInsecure(1, 3) - GetMInsecure(1, 2) * GetMInsecure(3, 3)) + GetMInsecure(3, 1) * (GetMInsecure(1, 2) * GetMInsecure(2, 3) - GetMInsecure(2, 2) * GetMInsecure(1, 3))));
+			outM.SetMInsecure(1, 0, d * (GetMInsecure(1, 2) * (GetMInsecure(2, 0) * GetMInsecure(3, 3) - GetMInsecure(3, 0) * GetMInsecure(2, 3)) + GetMInsecure(2, 2) * (GetMInsecure(3, 0) * GetMInsecure(1, 3) - GetMInsecure(1, 0) * GetMInsecure(3, 3)) + GetMInsecure(3, 2) * (GetMInsecure(1, 0) * GetMInsecure(2, 3) - GetMInsecure(2, 0) * GetMInsecure(1, 3))));
+			outM.SetMInsecure(2, 0, d * (GetMInsecure(1, 3) * (GetMInsecure(2, 0) * GetMInsecure(3, 1) - GetMInsecure(3, 0) * GetMInsecure(2, 1)) + GetMInsecure(2, 3) * (GetMInsecure(3, 0) * GetMInsecure(1, 1) - GetMInsecure(1, 0) * GetMInsecure(3, 1)) + GetMInsecure(3, 3) * (GetMInsecure(1, 0) * GetMInsecure(2, 1) - GetMInsecure(2, 0) * GetMInsecure(1, 1))));
+			outM.SetMInsecure(3, 0, d * (GetMInsecure(1, 0) * (GetMInsecure(3, 1) * GetMInsecure(2, 2) - GetMInsecure(2, 1) * GetMInsecure(3, 2)) + GetMInsecure(2, 0) * (GetMInsecure(1, 1) * GetMInsecure(3, 2) - GetMInsecure(3, 1) * GetMInsecure(1, 2)) + GetMInsecure(3, 0) * (GetMInsecure(2, 1) * GetMInsecure(1, 2) - GetMInsecure(1, 1) * GetMInsecure(2, 2))));
+			outM.SetMInsecure(0, 1, d * (GetMInsecure(2, 1) * (GetMInsecure(0, 2) * GetMInsecure(3, 3) - GetMInsecure(3, 2) * GetMInsecure(0, 3)) + GetMInsecure(3, 1) * (GetMInsecure(2, 2) * GetMInsecure(0, 3) - GetMInsecure(0, 2) * GetMInsecure(2, 3)) + GetMInsecure(0, 1) * (GetMInsecure(3, 2) * GetMInsecure(2, 3) - GetMInsecure(2, 2) * GetMInsecure(3, 3))));
+			outM.SetMInsecure(1, 1, d * (GetMInsecure(2, 2) * (GetMInsecure(0, 0) * GetMInsecure(3, 3) - GetMInsecure(3, 0) * GetMInsecure(0, 3)) + GetMInsecure(3, 2) * (GetMInsecure(2, 0) * GetMInsecure(0, 3) - GetMInsecure(0, 0) * GetMInsecure(2, 3)) + GetMInsecure(0, 2) * (GetMInsecure(3, 0) * GetMInsecure(2, 3) - GetMInsecure(2, 0) * GetMInsecure(3, 3))));
+			outM.SetMInsecure(2, 1, d * (GetMInsecure(2, 3) * (GetMInsecure(0, 0) * GetMInsecure(3, 1) - GetMInsecure(3, 0) * GetMInsecure(0, 1)) + GetMInsecure(3, 3) * (GetMInsecure(2, 0) * GetMInsecure(0, 1) - GetMInsecure(0, 0) * GetMInsecure(2, 1)) + GetMInsecure(0, 3) * (GetMInsecure(3, 0) * GetMInsecure(2, 1) - GetMInsecure(2, 0) * GetMInsecure(3, 1))));
+			outM.SetMInsecure(3, 1, d * (GetMInsecure(2, 0) * (GetMInsecure(3, 1) * GetMInsecure(0, 2) - GetMInsecure(0, 1) * GetMInsecure(3, 2)) + GetMInsecure(3, 0) * (GetMInsecure(0, 1) * GetMInsecure(2, 2) - GetMInsecure(2, 1) * GetMInsecure(0, 2)) + GetMInsecure(0, 0) * (GetMInsecure(2, 1) * GetMInsecure(3, 2) - GetMInsecure(3, 1) * GetMInsecure(2, 2))));
+			outM.SetMInsecure(0, 2, d * (GetMInsecure(3, 1) * (GetMInsecure(0, 2) * GetMInsecure(1, 3) - GetMInsecure(1, 2) * GetMInsecure(0, 3)) + GetMInsecure(0, 1) * (GetMInsecure(1, 2) * GetMInsecure(3, 3) - GetMInsecure(3, 2) * GetMInsecure(1, 3)) + GetMInsecure(1, 1) * (GetMInsecure(3, 2) * GetMInsecure(0, 3) - GetMInsecure(0, 2) * GetMInsecure(3, 3))));
+			outM.SetMInsecure(1, 2, d * (GetMInsecure(3, 2) * (GetMInsecure(0, 0) * GetMInsecure(1, 3) - GetMInsecure(1, 0) * GetMInsecure(0, 3)) + GetMInsecure(0, 2) * (GetMInsecure(1, 0) * GetMInsecure(3, 3) - GetMInsecure(3, 0) * GetMInsecure(1, 3)) + GetMInsecure(1, 2) * (GetMInsecure(3, 0) * GetMInsecure(0, 3) - GetMInsecure(0, 0) * GetMInsecure(3, 3))));
+			outM.SetMInsecure(2, 2, d * (GetMInsecure(3, 3) * (GetMInsecure(0, 0) * GetMInsecure(1, 1) - GetMInsecure(1, 0) * GetMInsecure(0, 1)) + GetMInsecure(0, 3) * (GetMInsecure(1, 0) * GetMInsecure(3, 1) - GetMInsecure(3, 0) * GetMInsecure(1, 1)) + GetMInsecure(1, 3) * (GetMInsecure(3, 0) * GetMInsecure(0, 1) - GetMInsecure(0, 0) * GetMInsecure(3, 1))));
+			outM.SetMInsecure(3, 2, d * (GetMInsecure(3, 0) * (GetMInsecure(1, 1) * GetMInsecure(0, 2) - GetMInsecure(0, 1) * GetMInsecure(1, 2)) + GetMInsecure(0, 0) * (GetMInsecure(3, 1) * GetMInsecure(1, 2) - GetMInsecure(1, 1) * GetMInsecure(3, 2)) + GetMInsecure(1, 0) * (GetMInsecure(0, 1) * GetMInsecure(3, 2) - GetMInsecure(3, 1) * GetMInsecure(0, 2))));
+			outM.SetMInsecure(0, 3, d * (GetMInsecure(0, 1) * (GetMInsecure(2, 2) * GetMInsecure(1, 3) - GetMInsecure(1, 2) * GetMInsecure(2, 3)) + GetMInsecure(1, 1) * (GetMInsecure(0, 2) * GetMInsecure(2, 3) - GetMInsecure(2, 2) * GetMInsecure(0, 3)) + GetMInsecure(2, 1) * (GetMInsecure(1, 2) * GetMInsecure(0, 3) - GetMInsecure(0, 2) * GetMInsecure(1, 3))));
+			outM.SetMInsecure(1, 3, d * (GetMInsecure(0, 2) * (GetMInsecure(2, 0) * GetMInsecure(1, 3) - GetMInsecure(1, 0) * GetMInsecure(2, 3)) + GetMInsecure(1, 2) * (GetMInsecure(0, 0) * GetMInsecure(2, 3) - GetMInsecure(2, 0) * GetMInsecure(0, 3)) + GetMInsecure(2, 2) * (GetMInsecure(1, 0) * GetMInsecure(0, 3) - GetMInsecure(0, 0) * GetMInsecure(1, 3))));
+			outM.SetMInsecure(2, 3, d * (GetMInsecure(0, 3) * (GetMInsecure(2, 0) * GetMInsecure(1, 1) - GetMInsecure(1, 0) * GetMInsecure(2, 1)) + GetMInsecure(1, 3) * (GetMInsecure(0, 0) * GetMInsecure(2, 1) - GetMInsecure(2, 0) * GetMInsecure(0, 1)) + GetMInsecure(2, 3) * (GetMInsecure(1, 0) * GetMInsecure(0, 1) - GetMInsecure(0, 0) * GetMInsecure(1, 1))));
+			outM.SetMInsecure(3, 3, d * (GetMInsecure(0, 0) * (GetMInsecure(1, 1) * GetMInsecure(2, 2) - GetMInsecure(2, 1) * GetMInsecure(1, 2)) + GetMInsecure(1, 0) * (GetMInsecure(2, 1) * GetMInsecure(0, 2) - GetMInsecure(0, 1) * GetMInsecure(2, 2)) + GetMInsecure(2, 0) * (GetMInsecure(0, 1) * GetMInsecure(1, 2) - GetMInsecure(1, 1) * GetMInsecure(0, 2))));
 			
 			return true;
 		}

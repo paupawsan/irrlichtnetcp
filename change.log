@@ -14,6 +14,9 @@ Irrlicht .NET CP 0.7
 -Added MeshBuffer constructor, it can be used to make external loaders
  (via VideoDriver.DrawMeshBuffer)
 -Added VideoDriver.DriverType and VideoDriver.Name (and ToString methods)
+-Fixed inversion between row and column on Matrix4 class. This fix won't need
+ change on your code (and is based on a fix from Irrlicht SDK).
+ Also optimized a bit this Matrix4 class.
 
 =============================================================================
 Irrlicht .NET CP 0.6
