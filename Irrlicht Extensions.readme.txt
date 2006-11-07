@@ -26,5 +26,5 @@ List of scene nodes :
 -WindGenerator by DeusXL, originally made by Klasker
 -GrassPatchSceneNode by DeusXL, originally made by Bitplane
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?p=105
--WaterSceneNode by DeusXL
+-WaterSceneNode by DeusXL (HLSL translation by peter)
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=54

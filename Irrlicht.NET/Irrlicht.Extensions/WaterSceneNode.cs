@@ -1,7 +1,7 @@
 using System;
 using IrrlichtNETCP;
 using IrrlichtNETCP.Inheritable;
-
+//Made by DeusXL, A lot of thanks to peter for giving the HLSL translation on the forum !
 namespace IrrlichtNETCP.Extensions
 {
 	public class WaterSceneNode : ISceneNode
@@ -39,15 +39,21 @@ namespace IrrlichtNETCP.Extensions
             int dmat = (int)MaterialType.Reflection2Layer;
             if(_driver.DriverType == DriverType.OpenGL)
                 dmat = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
-                 VERTEX_GLSL, "main", VertexShaderType._1_1, FRAGMENT_GLSL,
+                 WATER_VERTEX_GLSL, "main", VertexShaderType._1_1, WATER_FRAGMENT_GLSL,
                  "main", PixelShaderType._1_1, OnShaderSet, MaterialType.TransparentAlphaChannel, 0);
+            else
+                dmat = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
+                 WATER_HLSL, "vertexMain", VertexShaderType._2_0, WATER_HLSL,
+                 "pixelMain", PixelShaderType._2_0, OnShaderSet, MaterialType.TransparentAlphaChannel, 2);
 
             if (_driver.DriverType == DriverType.OpenGL)
                 ClampShader = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
                  CLAMP_VERTEX_GLSL, "main", VertexShaderType._1_1, CLAMP_FRAGMENT_GLSL,
                  "main", PixelShaderType._1_1, OnShaderSet, MaterialType.TransparentAlphaChannel, 1);
             else
-                ClampShader = (int)MaterialType.DetailMap;
+                ClampShader = _driver.GPUProgrammingServices.AddHighLevelShaderMaterial(
+                 CLAMP_HLSL, "vertexMain", VertexShaderType._2_0, CLAMP_HLSL,
+                 "pixelMain", PixelShaderType._2_0, OnShaderSet, MaterialType.TransparentAlphaChannel, 3);
                  
            	_waternode = _scene.AddMeshSceneNode(wmesh.GetMesh(0), this, -1);  
             _waternode.SetMaterialType(dmat);
@@ -136,15 +142,27 @@ namespace IrrlichtNETCP.Extensions
 		public float WaveDisplacement = 7f;
 		public float WaveRepetition = 5f;
         public float RefractionFactor = 0.8f;
-        void OnShaderSet(MaterialRendererServices services, int userData) 
+        void OnShaderSet(MaterialRendererServices services, int userData)
         {
-        	if(userData == 1)
+            if (userData == 2 || userData == 3) //All DirectX Shaders
             {
-        		services.SetPixelShaderConstant("DiffuseMap", 0f);
-        		services.SetPixelShaderConstant("DetailMap", 1f);
-                services.SetPixelShaderConstant("WaterPosition", WaterNode.Position.ToShader());
+                Matrix4 worldViewProj;
+                worldViewProj = _driver.GetTransform(TransformationState.Projection);
+                worldViewProj *= _driver.GetTransform(TransformationState.View);
+                worldViewProj *= _driver.GetTransform(TransformationState.World);
+                services.SetVertexShaderConstant("mWorldViewProj", worldViewProj.ToShader(), 16);
+            }
+            if (userData == 1 || userData == 3) //Clamp Shaders
+            {
+                if (userData == 1) //OpenGL Clamp Shader
+                {
+                    services.SetPixelShaderConstant("DiffuseMap", 0f);
+                    services.SetPixelShaderConstant("DetailMap", 1f);
+                }
+                services.SetPixelShaderConstant("WaterPositionY", WaterNode.Position.Y);
         		return;
             }
+            //Water Shaders
             float time = (float)((DateTime.Now.TimeOfDay.TotalMilliseconds));
         	services.SetVertexShaderConstant("Time", time);
         	services.SetVertexShaderConstant("WaveHeight", WaveHeight);
@@ -160,7 +178,7 @@ namespace IrrlichtNETCP.Extensions
         }
         
         #region Shaders
-        static string VERTEX_GLSL = 
+        static string WATER_VERTEX_GLSL = 
         				"uniform float Time;\n" +
 						"uniform float WaveHeight, WaveLength, WaveSpeed;\n" +
 						"varying vec4 waterpos;\n" +
@@ -173,7 +191,7 @@ namespace IrrlichtNETCP.Extensions
                         "	waterpos.y += addition * WaveHeight;\n" +
 						"	gl_Position = waterpos;\n" +
 						"}\n";
-        static string FRAGMENT_GLSL = 
+        static string WATER_FRAGMENT_GLSL = 
         				"uniform sampler2D ReflectionTexture;\n" +
 						"uniform vec4 AddedColor, MultiColor;\n" +
                         "uniform float UnderWater, WaveDisplacement, WaveRepetition, RefractionFactor;\n" +
@@ -196,6 +214,64 @@ namespace IrrlichtNETCP.Extensions
                         "	    gl_FragColor *= (MultiColor / 1.1);\n" +
                         "   gl_FragColor.a = RefractionFactor;" +
 						"}\n";
+        static string WATER_HLSL =
+                        "uniform float Time;\n" +
+                        "float4x4 mWorldViewProj;\n" +
+                        "float WaveHeight, WaveLength, WaveSpeed;\n" +
+                        "float4 AddedColor, MultiColor;\n" +
+                        "float UnderWater, WaveDisplacement, WaveRepetition, RefractionFactor;\n" +
+                        "struct VS_OUTPUT\n" +
+                        "{\n" +
+                        "    float4 Position : POSITION;\n" +
+                        "    float4 Diffuse : COLOR0;\n" +
+                        "    float2 TexCoord : TEXCOORD0;\n" +
+                        "};\n" +
+                        "VS_OUTPUT vertexMain( in float4 vPosition : POSITION,\n" +
+                        "                      in float3 vNormal : NORMAL,\n" +
+                        "                      float2 texCoord : TEXCOORD0 )\n" +
+                        "{\n" +
+                        "    VS_OUTPUT Output;\n" +
+                        "    Output.Position = mul(vPosition, mWorldViewProj);\n" +
+                        "    float addition = (sin((vPosition.x/WaveLength) + (Time * WaveSpeed / 10000.0))) +\n" +
+                        "                     (cos((vPosition.z/WaveLength) + (Time * WaveSpeed / 10000.0)));\n" +
+                        "    Output.Position.y += addition * WaveHeight;\n" +
+                        "    Output.Diffuse = float4(addition, addition, addition, addition);\n" +
+                        "    Output.TexCoord = Output.Position / Output.Position.w;\n" +
+                        "    return Output;\n" +
+                        "}\n" +
+                        "struct PS_OUTPUT\n" +
+                        "{\n" +
+                        "    float4 RGBColor : COLOR0;\n" +
+                        "};\n" +
+                        "texture ReflectionTexture;\n" +
+                        "sampler MySampler = sampler_state\n" +
+                        "{\n" +
+                        "    Texture = ReflectionTexture;\n" +
+                        "    AddressU = CLAMP;\n" +
+                        "    AddressV = CLAMP;\n" +
+                        "};\n" +
+                        "PS_OUTPUT pixelMain( float2 TexCoord : TEXCOORD0,\n" +
+                        "                     float4 Position : POSITION,\n" +
+                        "                     float4 Diffuse : COLOR0 )\n" +
+                        "{\n" +
+                        "    PS_OUTPUT Output;\n" +
+                        "    float2 projCoord = TexCoord;\n" +
+                        "    float addition = Diffuse.r;\n" +
+                        "    projCoord += float2(1.0, 1.0);\n" +
+                        "    projCoord *= 0.5;\n" +
+                        "    projCoord.x += sin(addition * WaveRepetition) * (WaveDisplacement / 1000.0);\n" +
+                        "    projCoord.y += cos(addition *WaveRepetition) * (WaveDisplacement / 1000.0);\n" +
+                        "    if(UnderWater == 1.0)\n" +
+                        "        projCoord.y = 1.0 - projCoord.y;\n" +
+                        "    projCoord = clamp(projCoord, 0.001, 0.999);\n" +
+                        "    float4 refTex = tex2D(MySampler, projCoord);\n" +
+                        "    refTex = (refTex + AddedColor) * MultiColor;\n" +
+                        "    Output.RGBColor = refTex;\n" +
+                        "    if(UnderWater == 1.0)\n" +
+                        "        Output.RGBColor *= (MultiColor / 1.1);\n" +
+                        "    Output.RGBColor.a = RefractionFactor;\n" +
+                        "    return Output;\n" +
+                        "}";
 		static string CLAMP_VERTEX_GLSL = 
 						"varying float cutoff;\n" + 
 						"void main()\n" + 
@@ -206,18 +282,63 @@ namespace IrrlichtNETCP.Extensions
 						"}\n";
 		static string CLAMP_FRAGMENT_GLSL = 
 						"uniform sampler2D DiffuseMap, DetailMap;\n" +
-						"uniform vec3 WaterPosition;\n" +
+                        "uniform float WaterPositionY;\n" +
 						"varying float cutoff;\n" +
 						"void main()\n" +
 						"{\n" +	
-						"	vec4 color = texture2D(DiffuseMap, gl_TexCoord[0].st) * 3.0 *\n" + 
-						"                texture2D(DetailMap, vec2(gl_TexCoord[0].x * 100.0, gl_TexCoord[0].y * 100.0));\n" +
-						"	if(cutoff <= (WaterPosition.y - 10.0))\n" +
+						"	vec4 color = texture2D(DiffuseMap, gl_TexCoord[0].st) * 2.0 *\n" + 
+						"                texture2D(DetailMap, vec2(gl_TexCoord[0].x * 5.0, gl_TexCoord[0].y * 5.0));\n" +
+                        "	if(cutoff <= (WaterPositionY - 10.0))\n" +
 						"		color.a = 0.0;\n" +
 						"	else\n" +
 						"		color.a = 1.0;\n" +
 						"	gl_FragColor = color; \n" +
 						"}\n";
+
+        static string CLAMP_HLSL = 
+                        "uniform float Time;\n" +
+                        "float4x4 mWorldViewProj;\n" +
+                        "float WaterPositionY;\n" +
+                        "struct VS_OUTPUT\n" +
+                        "{\n" +
+	                    "    float4 Position : POSITION;\n" +
+	                    "    float4 Diffuse : COLOR0;\n" +
+	                    "    float2 TexCoord : TEXCOORD0;\n" +
+	                    "    float2 TexCoord1 : TEXCOORD1;\n" +
+                        "};\n" +
+                        "VS_OUTPUT vertexMain( in float4 vPosition : POSITION,\n" +
+					    "                      in float3 vNormal : NORMAL,\n" +
+					    "                      float2 texCoord : TEXCOORD0,\n" +
+					    "                      float2 texCoord1 : TEXCOORD1)\n" +
+                        "{\n" +
+	                    "    VS_OUTPUT Output;\n" +
+	                    "    Output.Position = mul(vPosition, mWorldViewProj);\n" +
+	                    "    Output.Diffuse = vPosition;\n" +
+	                    "    Output.TexCoord = texCoord;\n" +
+	                    "    Output.TexCoord1 = texCoord1;\n" +
+	                    "    return Output;\n" +
+                        "}\n" +
+                        "struct PS_OUTPUT\n" +
+                        "{\n" +
+	                    "    float4 RGBColor : COLOR0;\n" +
+                        "};\n" +
+                        "sampler2D DiffuseMap;\n" +
+                        "sampler2D DetailMap;\n" +
+                        "PS_OUTPUT pixelMain( float2 TexCoord : TEXCOORD0,\n" +
+					    "                     float2 TexCoord1 : TEXCOORD1,\n" +
+					    "                     float4 Position : POSITION,\n" +
+					    "                     float4 Diffuse : COLOR0 )\n" +
+                        "{\n" +
+	                    "    PS_OUTPUT Output;\n" +
+	                    "    float4 color = tex2D(DiffuseMap, TexCoord) * 2.0f *\n" +
+				        "                   tex2D(DetailMap, float2(TexCoord1.x * 5.0f, TexCoord1.y * 5.0f));\n" +
+                        "    if(Diffuse.y <= WaterPositionY)\n" +
+		                "        color.a = 0.0;\n" +
+	                    "    else\n" +
+		                "        color.a = 1.0;\n" +							
+	                    "    Output.RGBColor = color;\n" +
+	                    "    return Output;\n" +
+                        "}";
         #endregion
 	}
 }
