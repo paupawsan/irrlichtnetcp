@@ -52,6 +52,31 @@ namespace IrrlichtNETCP
             return new Vector3D(Y * p.Z - Z * p.Y, Z * p.X - X * p.Z, X * p.Y - Y * p.X);
         }
 
+        public Vector3D HorizontalAngle
+        {
+            get
+            {
+                Vector3D angle = new Vector3D();
+
+                angle.Y = (float)Math.Atan2(X, Z);
+                angle.Y *= NewMath.RADTODEG;
+
+                if (angle.Y < 0.0f) angle.Y += 360.0f;
+                if (angle.Y >= 360.0f) angle.Y -= 360.0f;
+
+                float z1 = (float)Math.Sqrt(X * X + Z * Z);
+
+                angle.X = (float)Math.Atan2(z1, Y);
+                angle.X *= NewMath.RADTODEG;
+                angle.X -= 90.0f;
+
+                if (angle.X < 0.0f) angle.X += 360.0f;
+                if (angle.X >= 360.0f) angle.X -= 360.0f;
+
+                return angle;
+            }
+        }
+
         public bool IsBetweenPoints(Vector3D begin, Vector3D end)
         {
             float f = ((end - begin).LengthSQ);

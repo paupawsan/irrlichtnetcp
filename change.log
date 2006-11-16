@@ -17,6 +17,7 @@ Irrlicht .NET CP 0.7
 -Fixed inversion between row and column on Matrix4 class. This fix won't need
  change on your code (and is based on a fix from Irrlicht SDK).
  Also optimized a bit this Matrix4 class.
+-Added Vector3D.HorizontalAngle
 
 =============================================================================
 Irrlicht .NET CP 0.6
@@ -52,40 +53,52 @@ Irrlicht .NET CP 0.4
 -Corrected F Key enumeration (thanks to Rowan Lewis)
 -Added Vector2D structure (thanks to sh1ny)
 -Added VideoDriver.DeleteAllDynamicLights (thanks to sh1ny)
--Added ToBCL/FromBCL methods to Color/Colorf and Rect structures. These methods can be used to convert to standard .NET.
--Changed main namespace from "Irrlicht.NET" to "IrrlichtNETCP" due to several issues (thanks to dmoonfire for the idea)
+-Added ToBCL/FromBCL methods to Color/Colorf and Rect structures. These 
+ methods can be used to convert to standard .NET.
+-Changed main namespace from "Irrlicht.NET" to "IrrlichtNETCP" due to several 
+ issues (thanks to dmoonfire for the idea)
 -Improved a lot MeshManipulator wrapper with documentation.
 -Now uses Irrlicht 1.1, list of modifications :
 	-Changed AddTestSceneNode to AddCubeSceneNode.
 	-Added AddSkyDomeSceneNode
 	-Added AddSphereSceneNode
 	-Added Material type : PointCloud
-	-Added Texture3 and Texture4 on Material class (also corrected GetTexture2 that returned Texture1)
+	-Added Texture3 and Texture4 on Material class (also corrected GetTexture2 
+	 that returned Texture1)
 	-Added SceneManager.SaveScene/LoadScene
-	-Added VideoDriver.CreateScreenShot and VideoDriver.WriteImageToFile. Notice that Irrlicht.NET CP's WriteImageToFile supports 
-			a lot of formats whereas Irrlicht's writeImageToFile only supports bmp for now. So you can save screenshots with this wrapper
-			in bmp, png, jpeg, gif... Whatever !
-	-Added VideoDriver.TextureCount, VideoDriver.PrimitiveDrawnCount and VideoDriver.GetTextureByIndex
+	-Added VideoDriver.CreateScreenShot and VideoDriver.WriteImageToFile. 
+	 Notice that Irrlicht.NET CP's WriteImageToFile supports 
+	 a lot of formats whereas Irrlicht's writeImageToFile only supports 
+	 bmp for now. So you can save screenshots with this wrapper in bmp, png, 
+	 jpeg, gif... Whatever !
+	-Added VideoDriver.TextureCount, VideoDriver.PrimitiveDrawnCount 
+	 and VideoDriver.GetTextureByIndex
 
 =============================================================================
 Irrlicht .NET CP 0.3
 =============================================================================
--Adding Texture access via 3 methods : Get/SetPixel (slow), Modify/Retrieve (fast and secure), unsafe code (fast and unsecure), 
- also added Texture.Save which supports jpeg, png, gif, bmp... (added a tutorial on the project ShadersAndParticle)
+-Adding Texture access via 3 methods : Get/SetPixel (slow), 
+ Modify/Retrieve (fast and secure), unsafe code (fast and unsecure), 
+ also added Texture.Save which supports jpeg, png, gif, bmp... (added a 
+ tutorial on the project ShadersAndParticle)
 -Adding MeshBuffer to support advanced physics
 -Bugfix : Again platform-dependent and several speed issues.
 -Bugfix : Stupid bug in Vector's length and Normalize null vectors.
 -Bugfix : Some bool values always set to TRUE (bug with Visual Studio 8)
--Major Bugfix : Memory leaks corrected, now the memory is stable, even with hundredth of emitters/affectors
+-Major Bugfix : Memory leaks corrected, now the memory is stable, even with 
+ hundredth of emitters/affectors
 
 =============================================================================
 Irrlicht .NET CP 0.2
 =============================================================================
 -Adding shader support
--Adding inheritable IParticleAffector and IParticleEmitter to perform these operations from .NET code
+-Adding inheritable IParticleAffector and IParticleEmitter to perform these 
+ operations from .NET code
 -Adding "array features" such as KeyMapping and FollowSplineAnimators
--Adding ToShader methods on common types to convert colors, vectors and matrices to shader constants
--Bugfix : Platform-dependent code which did not do the same on Linux and Windows
+-Adding ToShader methods on common types to convert colors, vectors and 
+ matrices to shader constants
+-Bugfix : Platform-dependent code which did not do the same on Linux and 
+ Windows
 
 =============================================================================
 Irrlicht .NET CP 0.1

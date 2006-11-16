@@ -150,7 +150,7 @@ namespace IrrlichtNETCP.Extensions
                 worldViewProj = _driver.GetTransform(TransformationState.Projection);
                 worldViewProj *= _driver.GetTransform(TransformationState.View);
                 worldViewProj *= _driver.GetTransform(TransformationState.World);
-                services.SetVertexShaderConstant("mWorldViewProj", worldViewProj.ToShader(), 16);
+                services.SetVertexShaderConstant("mWorldViewProj", worldViewProj.ToShader());
             }
             if (userData == 1 || userData == 3) //Clamp Shaders
             {
@@ -211,8 +211,12 @@ namespace IrrlichtNETCP.Extensions
 						"	refTex = (refTex + AddedColor) * MultiColor;\n" +
                         "	gl_FragColor = refTex;\n" +
                         "	if(UnderWater == 1.0)\n" +
+                        "   {\n" +
                         "	    gl_FragColor *= (MultiColor / 1.1);\n" +
-                        "   gl_FragColor.a = RefractionFactor;" +
+                        "       gl_FragColor.a = 0.7;" +
+                        "   }\n" +
+                        "   else\n" +
+                        "       gl_FragColor.a = RefractionFactor;" +
 						"}\n";
         static string WATER_HLSL =
                         "uniform float Time;\n" +
@@ -267,9 +271,13 @@ namespace IrrlichtNETCP.Extensions
                         "    float4 refTex = tex2D(MySampler, projCoord);\n" +
                         "    refTex = (refTex + AddedColor) * MultiColor;\n" +
                         "    Output.RGBColor = refTex;\n" +
-                        "    if(UnderWater == 1.0)\n" +
-                        "        Output.RGBColor *= (MultiColor / 1.1);\n" +
-                        "    Output.RGBColor.a = RefractionFactor;\n" +
+                        "	 if(UnderWater == 1.0)\n" +
+                        "    {\n" +
+                        "	     Output.RGBColor *= (MultiColor / 1.1);\n" +
+                        "        Output.RGBColor.a = 0.7;" +
+                        "    }\n" +
+                        "    else\n" +
+                        "        Output.RGBColor.a = RefractionFactor;" +
                         "    return Output;\n" +
                         "}";
 		static string CLAMP_VERTEX_GLSL = 
@@ -287,7 +295,7 @@ namespace IrrlichtNETCP.Extensions
 						"void main()\n" +
 						"{\n" +	
 						"	vec4 color = texture2D(DiffuseMap, gl_TexCoord[0].st) * 2.0 *\n" + 
-						"                texture2D(DetailMap, vec2(gl_TexCoord[0].x * 5.0, gl_TexCoord[0].y * 5.0));\n" +
+						"                texture2D(DetailMap, vec2(gl_TexCoord[0].x * 20.0, gl_TexCoord[0].y * 20.0));\n" +
                         "	if(cutoff <= (WaterPositionY - 10.0))\n" +
 						"		color.a = 0.0;\n" +
 						"	else\n" +
@@ -331,7 +339,7 @@ namespace IrrlichtNETCP.Extensions
                         "{\n" +
 	                    "    PS_OUTPUT Output;\n" +
 	                    "    float4 color = tex2D(DiffuseMap, TexCoord) * 2.0f *\n" +
-				        "                   tex2D(DetailMap, float2(TexCoord1.x * 5.0f, TexCoord1.y * 5.0f));\n" +
+				        "                   tex2D(DetailMap, float2(TexCoord1.x * 20.0f, TexCoord1.y * 20.0f));\n" +
                         "    if(Diffuse.y <= WaterPositionY)\n" +
 		                "        color.a = 0.0;\n" +
 	                    "    else\n" +

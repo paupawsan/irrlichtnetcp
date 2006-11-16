@@ -166,7 +166,7 @@ namespace IrrlichtNETCP
         }
 
         public float[] ToUnmanaged() { return new float[] { R, G, B, A }; }
-        public float[] ToShader() { return new float[] { R / 255, G / 255, B / 255, A / 255 }; }
+        public float[] ToShader() { return new float[] { R / 255f, G / 255f, B / 255f, A / 255f }; }
         public static Colorf FromUnmanaged(float[] un) { return From(un[0], un[1], un[2], un[3]); }
         public override string ToString()
         {
