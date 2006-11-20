@@ -13,7 +13,14 @@ namespace IrrlichtNETCP
         {
             get
             {
-                return GUIFileOpenDialog_GetFilename(_raw);
+                try
+                {
+                    return GUIFileOpenDialog_GetFilename(_raw);
+                }
+                catch (Exception)
+                {
+                    return "";
+                }
             }
         }
 

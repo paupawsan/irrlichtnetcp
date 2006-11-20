@@ -26,7 +26,14 @@ namespace IrrlichtNETCP
 
         public string GetItemText(int id)
         {
-            return GUIContextMenu_GetItemText(_raw, id);
+            try 
+            {
+                return GUIContextMenu_GetItemText(_raw, id);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
         }
 
         public GUIContextMenu GetSubMenu(int id)

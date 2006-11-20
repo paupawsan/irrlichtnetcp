@@ -35,7 +35,11 @@ wchar_t *MU_WCHAR(const M_STRING base)
 
 M_STRING UM_STRING(const wchar_t* base)
 {
+	if(!base)
+		return "";
     size_t size = wcstombs(NULL, base, 0);
+	if(size == 0)
+		return "";
     M_STRING tor = new char[size + 1];
     for(unsigned int i = 0; i < size; i++)
         tor[i] = (char)base[i];

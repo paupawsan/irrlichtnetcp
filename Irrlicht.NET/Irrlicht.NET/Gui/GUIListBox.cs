@@ -27,7 +27,14 @@ namespace IrrlichtNETCP
 
         public string GetListItem(int id)
         {
-            return GUIListBox_GetListItem(_raw, id);
+            try
+            {
+                return GUIListBox_GetListItem(_raw, id);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
         }
 
         public void SetIconFont(GUIFont font)

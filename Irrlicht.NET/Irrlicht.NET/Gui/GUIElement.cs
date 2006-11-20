@@ -135,7 +135,14 @@ namespace IrrlichtNETCP
         {
             get
             {
-                return GuiElem_GetText(_raw);
+                try
+                {
+                    return GuiElem_GetText(_raw);
+                }
+                catch (Exception)
+                {
+                    return "";
+                }
             }
             set
             {

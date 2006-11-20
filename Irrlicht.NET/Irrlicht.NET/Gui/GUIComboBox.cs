@@ -21,7 +21,14 @@ namespace IrrlichtNETCP
 
         public string GetItem(int index)
         {
-            return GUIComboBox_GetItem(_raw, index);
+            try 
+            {
+                return GUIComboBox_GetItem(_raw, index);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
         }
 
         public int ItemCount
