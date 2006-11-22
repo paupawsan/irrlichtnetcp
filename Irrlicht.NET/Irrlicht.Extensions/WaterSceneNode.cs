@@ -219,66 +219,63 @@ namespace IrrlichtNETCP.Extensions
                         "       gl_FragColor.a = RefractionFactor;" +
 						"}\n";
         static string WATER_HLSL =
-                        "uniform float Time;\n" +
-                        "float4x4 mWorldViewProj;\n" +
-                        "float WaveHeight, WaveLength, WaveSpeed;\n" +
-                        "float4 AddedColor, MultiColor;\n" +
-                        "float UnderWater, WaveDisplacement, WaveRepetition, RefractionFactor;\n" +
-                        "struct VS_OUTPUT\n" +
-                        "{\n" +
-                        "    float4 Position : POSITION;\n" +
-                        "    float4 Diffuse : COLOR0;\n" +
-                        "    float2 TexCoord : TEXCOORD0;\n" +
-                        "};\n" +
-                        "VS_OUTPUT vertexMain( in float4 vPosition : POSITION,\n" +
-                        "                      in float3 vNormal : NORMAL,\n" +
-                        "                      float2 texCoord : TEXCOORD0 )\n" +
-                        "{\n" +
-                        "    VS_OUTPUT Output;\n" +
-                        "    Output.Position = mul(vPosition, mWorldViewProj);\n" +
-                        "    float addition = (sin((vPosition.x/WaveLength) + (Time * WaveSpeed / 10000.0))) +\n" +
-                        "                     (cos((vPosition.z/WaveLength) + (Time * WaveSpeed / 10000.0)));\n" +
-                        "    Output.Position.y += addition * WaveHeight;\n" +
-                        "    Output.Diffuse = float4(addition, addition, addition, addition);\n" +
-                        "    Output.TexCoord = Output.Position / Output.Position.w;\n" +
-                        "    return Output;\n" +
-                        "}\n" +
-                        "struct PS_OUTPUT\n" +
-                        "{\n" +
-                        "    float4 RGBColor : COLOR0;\n" +
-                        "};\n" +
-                        "texture ReflectionTexture;\n" +
-                        "sampler MySampler = sampler_state\n" +
-                        "{\n" +
-                        "    Texture = ReflectionTexture;\n" +
-                        "    AddressU = CLAMP;\n" +
-                        "    AddressV = CLAMP;\n" +
-                        "};\n" +
-                        "PS_OUTPUT pixelMain( float2 TexCoord : TEXCOORD0,\n" +
-                        "                     float4 Position : POSITION,\n" +
-                        "                     float4 Diffuse : COLOR0 )\n" +
-                        "{\n" +
-                        "    PS_OUTPUT Output;\n" +
-                        "    float2 projCoord = TexCoord;\n" +
-                        "    float addition = Diffuse.r;\n" +
-                        "    projCoord += float2(1.0, 1.0);\n" +
-                        "    projCoord *= 0.5;\n" +
-                        "    projCoord.x += sin(addition * WaveRepetition) * (WaveDisplacement / 1000.0);\n" +
-                        "    projCoord.y += cos(addition *WaveRepetition) * (WaveDisplacement / 1000.0);\n" +
-                        "    if(UnderWater == 1.0)\n" +
-                        "        projCoord.y = 1.0 - projCoord.y;\n" +
-                        "    projCoord = clamp(projCoord, 0.001, 0.999);\n" +
-                        "    float4 refTex = tex2D(MySampler, projCoord);\n" +
-                        "    refTex = (refTex + AddedColor) * MultiColor;\n" +
-                        "    Output.RGBColor = refTex;\n" +
-                        "	 if(UnderWater == 1.0)\n" +
-                        "    {\n" +
-                        "	     Output.RGBColor *= (MultiColor / 1.1);\n" +
-                        "        Output.RGBColor.a = 0.7;" +
-                        "    }\n" +
-                        "    else\n" +
-                        "        Output.RGBColor.a = RefractionFactor;" +
-                        "    return Output;\n" +
+                        "uniform float Time;\n" + 
+                        "float4x4 mWorldViewProj;\n" + 
+                        "float WaveHeight;\n" + 
+                        "float WaveLength;\n" + 
+                        "float WaveSpeed;\n" + 
+                        "float4 AddedColor;\n" + 
+                        "float4 MultiColor;\n" + 
+                        "float UnderWater;\n" + 
+                        "float WaveDisplacement;\n" + 
+                        "float WaveRepetition;\n" + 
+                        "float RefractionFactor;\n" + 
+                        "struct VS_OUTPUT\n" + 
+                        "{\n" + 
+                        "    float4 Position : POSITION;\n" + 
+                        "    float4 TexCoord : TEXCOORD0;\n" + 
+                        "    float  Addition : TEXCOORD1;\n" + 
+                        "};\n" + 
+                        "VS_OUTPUT vertexMain( float4 vPosition : POSITION,\n" + 
+                        "                      float2 texCoord : TEXCOORD0 )\n" + 
+                        "{\n" + 
+                        "    VS_OUTPUT Output;\n" + 
+                        "   Output.Position = mul( vPosition, mWorldViewProj );\n" + 
+                        "   Output.Addition = ( sin( ( vPosition.x / WaveLength ) + ( Time * WaveSpeed / 10000.0 ) ) ) +\n" + 
+                        "                 ( cos( ( vPosition.z / WaveLength ) + ( Time * WaveSpeed / 10000.0 ) ) );\n" + 
+                        "   Output.TexCoord = Output.Position;\n" + 
+                        "   Output.TexCoord.y += Output.Addition * WaveHeight;\n" + 
+                        "   return Output;\n" + 
+                        "}\n" + 
+                        "struct PS_OUTPUT\n" + 
+                        "{\n" + 
+                        "    float4 RGBColor : COLOR0;\n" + 
+                        "};\n" + 
+                        "texture ReflectionTexture;\n" + 
+                        "sampler MySampler = sampler_state\n" + 
+                        "{\n" + 
+                        "    Texture = ReflectionTexture;\n" + 
+                        "    AddressU = CLAMP;\n" + 
+                        "    AddressV = CLAMP;\n" + 
+                        "};\n" + 
+                        "PS_OUTPUT pixelMain( VS_OUTPUT In )\n" + 
+                        "{\n" + 
+                        "   PS_OUTPUT Output;\n" +                            
+                        "   float4 projCoord = In.TexCoord / In.TexCoord.w;\n" + 
+                        "   projCoord += float4( 1.0, 1.0, 1.0, 1.0 );\n" + 
+                        "   projCoord *= 0.5;\n" + 
+                        "   projCoord.x += sin( In.Addition * WaveRepetition ) * ( WaveDisplacement / 1000.0 );\n" + 
+                        "   projCoord.y += cos( In.Addition * WaveRepetition ) * ( WaveDisplacement / 1000.0 );\n" + 
+                        "   projCoord = clamp( projCoord, 0.001, 0.999 );\n" + 
+                        "   if( UnderWater == 1.0 )\n" + 
+                        "      projCoord.y = 1.0 - projCoord.y;\n" + 
+                        "   float4 refTex = tex2D( MySampler, projCoord );\n" + 
+                        "   refTex = (refTex + AddedColor) * MultiColor;\n" + 
+                        "   Output.RGBColor = refTex;\n" + 
+                        "   if( UnderWater == 1.0 )\n" + 
+                        "      Output.RGBColor *= (MultiColor / 1.1); \n" +    
+                        "   Output.RGBColor.a = RefractionFactor;\n" +
+                        "   return Output;\n" + 
                         "}";
 		static string CLAMP_VERTEX_GLSL = 
 						"varying float cutoff;\n" + 
