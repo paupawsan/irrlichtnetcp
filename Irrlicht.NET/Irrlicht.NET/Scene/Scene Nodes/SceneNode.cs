@@ -310,7 +310,7 @@ namespace IrrlichtNETCP
 
         public void SetMaterialTexture(int layer, Texture text)
         {
-            SceneNode_SetMaterialTexture(_raw, layer, text.Raw);
+            SceneNode_SetMaterialTexture(_raw, layer, (text == null ? IntPtr.Zero : text.Raw));
         }
 
         public void SetMaterialType(MaterialType type)
