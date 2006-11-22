@@ -18,6 +18,7 @@ Irrlicht .NET CP 0.7
  change on your code (and is based on a fix from Irrlicht SDK).
  Also optimized a bit this Matrix4 class.
 -Added Vector3D.HorizontalAngle
+-Added GuiSkin class and all methods (but not yet inheritable).
 
 =============================================================================
 Irrlicht .NET CP 0.6

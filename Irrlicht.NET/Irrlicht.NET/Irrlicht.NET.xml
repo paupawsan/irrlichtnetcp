@@ -244,6 +244,55 @@
             <param name="mesh">Mesh on which the operation is performed. </param>
             <param name="color">New color.</param>
         </member>
+        <member name="M:IrrlichtNETCP.GUISkin.GetColor(IrrlichtNETCP.GuiDefaultColor)">
+            <summary>
+            Returns the default color.
+            </summary>
+            <param name="color">Specified default color</param>
+            <returns></returns>
+        </member>
+        <member name="M:IrrlichtNETCP.GUISkin.SetColor(IrrlichtNETCP.GuiDefaultColor,IrrlichtNETCP.Color)">
+            <summary>
+            Sets the default color.
+            </summary>
+            <param name="color">Specified default color</param>
+            <param name="col">New color</param>
+        </member>
+        <member name="M:IrrlichtNETCP.GUISkin.GetDefaultText(IrrlichtNETCP.GuiDefaultText)">
+            <summary>
+            Returns a default text.
+            For example for Message box button captions: "OK", "Cancel", "Yes", "No" and so on. 
+            </summary>
+            <param name="text">Specified default text</param>
+            <returns></returns>
+        </member>
+        <member name="M:IrrlichtNETCP.GUISkin.SetDefaultText(IrrlichtNETCP.GuiDefaultText,System.String)">
+            <summary>
+            Sets a default text.
+            For example for Message box button captions: "OK", "Cancel", "Yes", "No" and so on.
+            </summary>
+            <param name="text">Specified default text</param>
+            <param name="txt">New text</param>
+        </member>
+        <member name="M:IrrlichtNETCP.GUISkin.GetSize(IrrlichtNETCP.GuiDefaultSize)">
+            <summary>
+            Returns the default size.
+            </summary>
+            <param name="size">Specified default size</param>
+            <returns></returns>
+        </member>
+        <member name="M:IrrlichtNETCP.GUISkin.SetSize(IrrlichtNETCP.GuiDefaultSize,System.Int32)">
+            <summary>
+            Sets a default size.
+            </summary>
+            <param name="size">Specified default size</param>
+            <param name="s">New size</param>
+        </member>
+        <member name="P:IrrlichtNETCP.GUISkin.Font">
+            <summary>
+            Gets/Sets the default font for the skin.
+            </summary>
+        </member>
         <member name="M:IrrlichtNETCP.VideoDriver.BeginScene(System.Boolean,System.Boolean,IrrlichtNETCP.Color)">
             <summary>
             Begin the scene

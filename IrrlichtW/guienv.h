@@ -33,4 +33,13 @@ extern "C"
 	EXPORT void GuiEnv_SetFocus(IntPtr guienv, IntPtr element);
 	EXPORT void GuiEnv_SetSkin(IntPtr guienv, IntPtr skin);
 	EXPORT IntPtr GuiEnv_GetBuiltInFont(IntPtr guienv);
+
+	EXPORT void GuiSkin_GetColor(IntPtr gskin, EGUI_DEFAULT_COLOR which, M_SCOLOR color);
+	EXPORT M_STRING GuiSkin_GetDefaultText(IntPtr gskin, EGUI_DEFAULT_TEXT which);
+	EXPORT IntPtr GuiSkin_GetFont(IntPtr gskin);
+	EXPORT int GuiSkin_GetSize(IntPtr gskin, EGUI_DEFAULT_SIZE which);
+	EXPORT void GuiSkin_SetColor(IntPtr gskin, EGUI_DEFAULT_COLOR which, M_SCOLOR color);
+	EXPORT void GuiSkin_SetDefaultText(IntPtr gskin, EGUI_DEFAULT_TEXT which, M_STRING text);
+	EXPORT void GuiSkin_SetFont(IntPtr gskin, IntPtr font);
+	EXPORT void GuiSkin_SetSize(IntPtr gskin, EGUI_DEFAULT_SIZE which, int size);
 }

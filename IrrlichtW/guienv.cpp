@@ -161,3 +161,44 @@ void GuiEnv_SetSkin(IntPtr guienv, IntPtr skin)
 {
 	GetGui(guienv)->setSkin((IGUISkin*) skin);
 }
+
+
+void GuiSkin_GetColor(IntPtr gskin, EGUI_DEFAULT_COLOR which, M_SCOLOR color)
+{
+	UM_SCOLOR(((IGUISkin*)gskin)->getColor(which), color);
+}
+
+M_STRING GuiSkin_GetDefaultText(IntPtr gskin, EGUI_DEFAULT_TEXT which)
+{
+	return UM_STRING(((IGUISkin*)gskin)->getDefaultText(which));
+}
+
+IntPtr GuiSkin_GetFont(IntPtr gskin)
+{
+	return ((IGUISkin*)gskin)->getFont();
+}
+
+int GuiSkin_GetSize(IntPtr gskin, EGUI_DEFAULT_SIZE which)
+{
+	return ((IGUISkin*)gskin)->getSize(which);
+}
+
+void GuiSkin_SetColor(IntPtr gskin, EGUI_DEFAULT_COLOR which, M_SCOLOR color)
+{
+	((IGUISkin*)gskin)->setColor(which, MU_SCOLOR(color));
+}
+
+void GuiSkin_SetDefaultText(IntPtr gskin, EGUI_DEFAULT_TEXT which, M_STRING text)
+{
+	((IGUISkin*)gskin)->setDefaultText(which, MU_WCHAR(text));
+}
+
+void GuiSkin_SetFont(IntPtr gskin, IntPtr font)
+{
+	((IGUISkin*)gskin)->setFont((IGUIFont*)font);
+}
+
+void GuiSkin_SetSize(IntPtr gskin, EGUI_DEFAULT_SIZE which, int size)
+{
+	((IGUISkin*)gskin)->setSize(which, size);
+}
