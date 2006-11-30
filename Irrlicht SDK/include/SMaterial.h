@@ -247,8 +247,8 @@ namespace video
 		//! default constructor, creates a solid material with standard colors
 		SMaterial()
 		: MaterialType(EMT_SOLID), AmbientColor(255,255,255,255), DiffuseColor(255,255,255,255),
-			EmissiveColor(0,0,0,0), SpecularColor(0,0,0,0),
-			Shininess(0.0f), MaterialTypeParam(0.0f), MaterialTypeParam2(0.0f),
+			EmissiveColor(0,0,0,0), SpecularColor(255,255,255,255),
+			Shininess(0.0f), MaterialTypeParam(0.0f), MaterialTypeParam2(0.0f), Thickness(1.0f),
 			Texture1(0), Texture2(0), Texture3(0), Texture4(0),
 			Wireframe(false), PointCloud(false), GouraudShading(true), Lighting(true),
 			ZBuffer(true), ZWriteEnable(true), BackfaceCulling(true),
@@ -277,8 +277,7 @@ namespace video
 		SColor SpecularColor;
 
 		//! Value affecting the size of specular highlights. A value of 20 is common.
-		/** If set to 0, no specular highlights are being used. Currently, specular highlights
-		are only implemented in the D3D9 and D3D8 driver.
+		/** If set to 0, no specular highlights are being used.
 		To activate, simply set the shininess of a material to a value other than 0:
 		Using scene nodes:
 		\code
@@ -317,6 +316,9 @@ namespace video
 		/** Mostly ignored. */
 		f32 MaterialTypeParam2;
 
+		//! Thickness of non-3dimensional elements such as lines and points.
+		f32 Thickness;
+
 		//! Texture layer union.
 		union
 		{
@@ -342,7 +344,7 @@ namespace video
 		//! material flag union.
 		/** This enables the user to access the
 		material flag using e.g: material.Wireframe = true or
-		material.flag[EMF_WIREFRAME] = true; */
+		material.Flags[EMF_WIREFRAME] = true; */
 		union
 		{
 			struct
@@ -406,6 +408,8 @@ namespace video
 				SpecularColor != b.SpecularColor ||
 				Shininess != b.Shininess ||
 				MaterialTypeParam != b.MaterialTypeParam ||
+				MaterialTypeParam2 != b.MaterialTypeParam2 ||
+				Thickness != b.Thickness ||
 				Wireframe != b.Wireframe ||
 				PointCloud != b.PointCloud ||
 				GouraudShading != b.GouraudShading ||
@@ -417,7 +421,11 @@ namespace video
 				TrilinearFilter != b.TrilinearFilter ||
 				AnisotropicFilter != b.AnisotropicFilter ||
 				FogEnable != b.FogEnable ||
-				NormalizeNormals != b.NormalizeNormals;
+				NormalizeNormals != b.NormalizeNormals ||
+				Texture1 != b.Texture1 ||
+				Texture2 != b.Texture2 ||
+				Texture3 != b.Texture3 ||
+				Texture4 != b.Texture4;
 		}
 	};
 

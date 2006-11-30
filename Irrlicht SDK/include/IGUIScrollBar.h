@@ -27,6 +27,9 @@ namespace gui
 		//! sets the maximum value of the scrollbar. must be > 0
 		virtual void setMax(s32 max) = 0;
 
+		//! sets the small step value
+		virtual void setSmallStep(s32 step) = 0;
+
 		//! gets the current position of the scrollbar
 		virtual s32 getPos() = 0;
 

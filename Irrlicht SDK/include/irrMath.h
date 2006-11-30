@@ -6,6 +6,16 @@
 #define __IRR_MATH_H_INCLUDED__
 
 #include "irrTypes.h"
+#include <math.h>
+#ifdef __sun__
+#define sqrtf(X) sqrt(X)
+#define sinf(X) sin(X)
+#define cosf(X) cos(X)
+#define ceilf(X) ceil(X)
+#define floorf(X) floor(X)
+#define powf(X,Y) pow(X,Y)
+#define fmodf(X,Y) fmod(X,Y)
+#endif
 
 namespace irr
 {
@@ -59,12 +69,37 @@ namespace core
 		return a < 0 ? -a : a;
 	}
 
+	//! returns linear interpolation of a and b with ratio t
+	//! \return: a if t==0, b if t==1, and the linear interpolation else
+	template<class T>
+	inline T lerp(const T a, const T b, const T t)
+	{
+		return (a*(1-t)) + (b*t);
+	}
+
 	//! returns if a float equals the other one, taking floating 
 	//! point rounding errors into account
 	inline bool equals(f32 a, f32 b)
 	{
 		return (a + ROUNDING_ERROR > b) && (a - ROUNDING_ERROR < b);
 	}
+
+	inline s32 floor32 ( f32 x )
+	{
+		return (s32) floorf ( x );
+	}
+
+	inline s32 ceil32 ( f32 x )
+	{
+		return (s32) ceilf ( x );
+	}
+
+
+	inline s32 round32 ( f32 x )
+	{
+		return (s32) ( x + 0.5f );
+	}
+
 
 } // end namespace core
 }// end namespace irr

@@ -86,7 +86,6 @@ namespace scene
 		//! Unweld vertices
 		virtual IMesh* createMeshUniquePrimitives(IMesh* mesh) const = 0;
 
-
 		//! Recalculates the bounding box for a meshbuffer
 		virtual void recalculateBoundingBox(scene::IMeshBuffer* buffer) const = 0;
 

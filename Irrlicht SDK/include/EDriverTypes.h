@@ -24,7 +24,7 @@ namespace video
 		//! clipping in 3D mode.
 		EDT_SOFTWARE, 
 
-		//! The Apfelbaum Software Renderer, an alternative software renderer for Irrlicht.
+		//! The Burning's Software Renderer, an alternative software renderer for Irrlicht.
 		//! Basically it can be described as the Irrlicht Software renderer on steroids. It rasterizes
 		//! 3D geometry perfectly: It is able to perform correct 3d clipping, perspective 
 		//! correct texture mapping, perspective correct color mapping, and renders 

@@ -51,10 +51,11 @@ namespace scene
 		//! .oct file for Paul Nette's FSRad or from Murphy McCauley's Blender .oct exporter.
 		//! The oct file format contains 3D geometry and lightmaps and can 
 		//! be loaded directly by Irrlicht
-		EAMTS_OCT,
+		EAMT_OCT,
 
 		//! Blitz Basic .b3d file, the file format by Mark Sibly
-		EAMTS_B3D
+		EAMT_B3D
+
 	};
 
 	//! Interface for an animated mesh.

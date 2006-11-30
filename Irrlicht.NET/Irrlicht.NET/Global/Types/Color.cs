@@ -95,7 +95,12 @@ namespace IrrlichtNETCP
         public override int GetHashCode()
         {
             return ToString().GetHashCode();
-        }
+        } 
+        
+        public uint getLuminance()
+		{
+			return (uint)(0.3f*R + 0.59f*G + 0.11f*B);
+		}
 
         #region Premade Colors
         public static Color Red  =  new Color(255, 255, 0, 0);
@@ -182,6 +187,11 @@ namespace IrrlichtNETCP
         public override int GetHashCode()
         {
             return ToString().GetHashCode();
+        }
+
+        public uint getLuminance()
+        {
+            return (uint)(0.3f * R + 0.59f * G + 0.11f * B);
         }
 
         #region Premade Colors

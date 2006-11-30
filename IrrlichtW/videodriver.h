@@ -33,6 +33,7 @@ extern "C"
 	EXPORT void VideoDriver_DrawIndexedTriangleListA(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
 	EXPORT void VideoDriver_DrawIndexedTriangleFan(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
 	EXPORT void VideoDriver_DrawIndexedTriangleFanA(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
+	EXPORT void VideoDriver_DrawVertexPrimitiveList(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount, E_VERTEX_TYPE vType, E_PRIMITIVE_TYPE pType);
 	EXPORT void VideoDriver_DrawMeshBuffer(IntPtr videodriver, IntPtr meshbuffer);
 	EXPORT bool VideoDriver_GetTextureCreationFlag(IntPtr videodriver, E_TEXTURE_CREATION_FLAG flag);
 	EXPORT void VideoDriver_GetViewPort(IntPtr videodriver, M_RECT viewport);

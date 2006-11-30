@@ -26,15 +26,15 @@ namespace scene
 		//! destructor
 		~SMeshBufferLightMap() {}; 
 
-        //! returns the material of this meshbuffer
-        virtual const video::SMaterial& getMaterial() const
+		//! returns the material of this meshbuffer
+		virtual const video::SMaterial& getMaterial() const
 		{
 			return Material;
 		}
 
 
 		//! returns the material of this meshbuffer
-        video::SMaterial& getMaterial()
+		video::SMaterial& getMaterial()
 		{
 			return Material;
 		}
@@ -106,10 +106,9 @@ namespace scene
 			return video::EVT_2TCOORDS;
 		}
 
-
-		video::SMaterial Material;						//! material for this meshBuffer.
-		core::array<video::S3DVertex2TCoords> Vertices;		//! Array of vertices
-		core::array<u16> Indices;	//! Array of the Indices.
+		video::SMaterial Material; //! material for this meshBuffer.
+		core::array<video::S3DVertex2TCoords> Vertices; //! Array of vertices
+		core::array<u16> Indices; //! Array of the Indices.
 		core::aabbox3d<f32> BoundingBox;
 	};
 

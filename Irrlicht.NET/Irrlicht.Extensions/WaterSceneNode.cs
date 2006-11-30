@@ -120,12 +120,12 @@ namespace IrrlichtNETCP.Extensions
            _driver.SetRenderTarget(_rt, true, true, Color.TransparentGray);      	
            _scene.DrawAll();
                
-           foreach(TerrainSceneNode terr in clampList)
+           /*foreach(TerrainSceneNode terr in clampList)
            	   if(terr != null)
-                   terr.SetMaterialType(MaterialType.DetailMap);
+                   terr.SetMaterialType(MaterialType.DetailMap);*/
            _driver.SetRenderTarget(null, true, true, Color.Gray);
            _scene.ActiveCamera = camera;
-           _waternode.Visible = true;       
+           //_waternode.Visible = true;       
 		}
 		static int ClampShader;
 		System.Collections.ArrayList clampList = new System.Collections.ArrayList();
@@ -292,7 +292,7 @@ namespace IrrlichtNETCP.Extensions
 						"void main()\n" +
 						"{\n" +	
 						"	vec4 color = texture2D(DiffuseMap, gl_TexCoord[0].st) * 2.0 *\n" + 
-						"                texture2D(DetailMap, vec2(gl_TexCoord[0].x * 20.0, gl_TexCoord[0].y * 20.0));\n" +
+						"                texture2D(DetailMap, vec2(gl_TexCoord[0].s * 20.0, gl_TexCoord[0].t * 20.0));\n" +
                         "	if(cutoff <= (WaterPositionY - 10.0))\n" +
 						"		color.a = 0.0;\n" +
 						"	else\n" +

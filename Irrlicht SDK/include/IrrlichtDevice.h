@@ -132,7 +132,7 @@ while(device->run())
 		//! Returns the version of the engine.
 		/** The returned string
 		will look like this: "1.2.3" or this: "1.2". */
-		virtual const char* getVersion() = 0;
+		virtual const c8* getVersion() = 0;
 
 		//! Sets a new event receiver to receive events.
 		virtual void setEventReceiver(IEventReceiver* receiver) = 0;

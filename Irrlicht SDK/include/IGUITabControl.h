@@ -48,7 +48,7 @@ namespace gui
 		virtual ~IGUITabControl() {};
 
 		//! Adds a tab
-		virtual IGUITab* addTab(wchar_t* caption, s32 id=-1) = 0;
+		virtual IGUITab* addTab(const wchar_t* caption, s32 id=-1) = 0;
 
 		//! Returns amount of tabs in the tabcontrol
 		virtual s32 getTabcount() = 0;

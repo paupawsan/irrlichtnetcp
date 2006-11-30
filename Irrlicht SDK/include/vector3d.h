@@ -5,9 +5,7 @@
 #ifndef __IRR_POINT_3D_H_INCLUDED__
 #define __IRR_POINT_3D_H_INCLUDED__
 
-#include <math.h>
 #include "irrMath.h"
-#include "irrTypes.h"
 
 namespace irr
 {
@@ -83,18 +81,14 @@ namespace core
 		/** Here, the vector is interpreted as point in 3 dimensional space. */
 		f64 getDistanceFrom(const vector3d<T>& other) const
 		{
-			f64 vx = X - other.X; f64 vy = Y - other.Y; f64 vz = Z - other.Z;
-			return sqrt(vx*vx + vy*vy + vz*vz);
+			return vector3d<T>(X - other.X, Y - other.Y, Z - other.Z).getLength();
 		}
 
 		//! Returns squared distance from an other point. 
 		/** Here, the vector is interpreted as point in 3 dimensional space. */
 		T getDistanceFromSQ(const vector3d<T>& other) const
 		{
-			T vx = X - other.X;
-			T vy = Y - other.Y;
-			T vz = Z - other.Z;
-			return (vx*vx + vy*vy + vz*vz);
+			return vector3d<T>(X - other.X, Y - other.Y, Z - other.Z).getLengthSQ();
 		}
 
 		//! Calculates the cross product with another vector

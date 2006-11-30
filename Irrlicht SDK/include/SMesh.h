@@ -5,8 +5,10 @@
 #ifndef __S_MESH_H_INCLUDED__
 #define __S_MESH_H_INCLUDED__
 
-#include "IMeshBuffer.h"
 #include "IMesh.h"
+#include "IMeshBuffer.h"
+#include "aabbox3d.h"
+#include "irrArray.h"
 
 namespace irr
 {

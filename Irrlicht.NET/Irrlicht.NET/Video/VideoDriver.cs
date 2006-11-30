@@ -238,8 +238,8 @@ namespace IrrlichtNETCP
 
         public void DrawIndexedTriangleFan(Vertex3DT2[] vertices, int vertexCount, ushort[] indexFan, int triangleCount)
         {
-            IntPtr[] rawFan = new IntPtr[vertices.Length];
-            for (int i = 0; i < vertices.Length; i++)
+            IntPtr[] rawFan = new IntPtr[vertexCount];
+            for (int i = 0; i < vertexCount; i++)
                 rawFan[i] = vertices[i].Raw;
             VideoDriver_DrawIndexedTriangleFanA(_raw, rawFan, vertexCount, indexFan, triangleCount);
         }
@@ -276,6 +276,58 @@ namespace IrrlichtNETCP
             for (ushort i = 0; i < vertices.Length; i++)
                 indexList[i] = i;
             DrawIndexedTriangleList(vertices, indexList);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3DT2[] vertices, int vertexCount, ushort[] indexList, int triangleCount, PrimitiveType pType)
+        {
+            IntPtr[] rawlist = new IntPtr[vertices.Length];
+            for (int i = 0; i < vertices.Length; i++)
+                rawlist[i] = vertices[i].Raw;
+            VideoDriver_DrawVertexPrimitiveList(_raw, rawlist, vertexCount, indexList, triangleCount, VertexType.T2Coords, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3DT2[] vertices, ushort[] indexList, int triangleCount, PrimitiveType pType)
+        {
+            DrawVertexPrimitiveList(vertices, vertices.Length, indexList, triangleCount, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3DT2[] vertices, ushort[] indexList, PrimitiveType pType)
+        {
+            DrawVertexPrimitiveList(vertices, indexList, vertices.Length / 3, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3DT2[] vertices, PrimitiveType pType)
+        {
+            ushort[] indexList = new ushort[vertices.Length];
+            for (ushort i = 0; i < vertices.Length; i++)
+                indexList[i] = i;
+            DrawVertexPrimitiveList(vertices, indexList, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3D[] vertices, int vertexCount, ushort[] indexList, int triangleCount, PrimitiveType pType)
+        {
+            IntPtr[] rawlist = new IntPtr[vertexCount];
+            for (int i = 0; i < vertices.Length; i++)
+                rawlist[i] = vertices[i].Raw;
+            VideoDriver_DrawVertexPrimitiveList(_raw, rawlist, vertexCount, indexList, triangleCount, VertexType.Standard, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3D[] vertices, ushort[] indexList,int triangleCount, PrimitiveType pType)
+        {
+            DrawVertexPrimitiveList(vertices, vertices.Length, indexList, triangleCount, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3D[] vertices, ushort[] indexList, PrimitiveType pType)
+        {
+            DrawVertexPrimitiveList(vertices, indexList, vertices.Length / 3, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3D[] vertices, PrimitiveType pType)
+        {
+            ushort[] indexList = new ushort[vertices.Length];
+            for (ushort i = 0; i < vertices.Length; i++)
+                indexList[i] = i;
+            DrawVertexPrimitiveList(vertices, indexList, pType);
         }
 
         public bool GetTextureCreationFlag(TextureCreationFlag flag)
@@ -564,7 +616,10 @@ namespace IrrlichtNETCP
 
         [DllImport(Native.Dll)]
         static extern void VideoDriver_DrawIndexedTriangleFan(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);
-
+        
+        [DllImport(Native.Dll)]
+        static extern void VideoDriver_DrawVertexPrimitiveList(IntPtr videodriver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount, VertexType vType, PrimitiveType pType);
+        
         [DllImport(Native.Dll)]
         static extern DriverType VideoDriver_GetDriverType(IntPtr videodriver);
 
@@ -642,8 +697,9 @@ namespace IrrlichtNETCP
     public enum VideoDriverFeature
     {
         RenderToTarget = 0,
-        BilnearFilter,
         HardwareTL,
+        MultiTexture,
+        BilnearFilter,
         MipMap,
         StencilBuffer,
         VertexShader_1_1,
@@ -654,10 +710,13 @@ namespace IrrlichtNETCP
         PixelShader_1_3,
         PixelShader_1_4,
         PixelShader_2_0,
+        PixelShader_3_0,
         ARB_VertexProgram_1,
         ARB_FragmentProgram_1,
         ARB_GLSL,
         HLSL,
+        TextureNPOT,
+        FrameBufferObject,
         Count
     }
 
@@ -666,5 +725,18 @@ namespace IrrlichtNETCP
         View,
         World,
         Projection
+    }
+
+    public enum PrimitiveType
+    {
+        Points = 0,
+        LineStrip,
+        LineLoop,
+        Lines,
+        TriangleStrip,
+        Triangles,
+        QuadStrip,
+        Quads,
+        Polygon
     }
 }

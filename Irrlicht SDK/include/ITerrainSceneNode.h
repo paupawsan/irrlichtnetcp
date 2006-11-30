@@ -10,6 +10,7 @@
 #ifndef __I_TERRAIN_SCENE_NODE_H__
 #define __I_TERRAIN_SCENE_NODE_H__
 
+#include "ETerrainElements.h"
 #include "ISceneNode.h"
 #include "SMeshBufferLightMap.h"
 #include "IMesh.h"
@@ -19,27 +20,6 @@ namespace irr
 {
 namespace scene
 {
-	//! enumeration for patch sizes specifying the size of patches in the TerrainSceneNode
-	enum E_TERRAIN_PATCH_SIZE
-	{
-		//! patch size of 9, at most, use 4 levels of detail with this patch size.
-		ETPS_9 = 9,
-
-		//! patch size of 17, at most, use 5 levels of detail with this patch size.
-		ETPS_17 = 17,
-
-		//! patch size of 33, at most, use 6 levels of detail with this patch size.
-		ETPS_33 = 33,
-
-		//! patch size of 65, at most, use 7 levels of detail with this patch size.
-		ETPS_65 = 65,
-
-		//! patch size of 129, at most, use 8 levels of detail with this patch size.
-		ETPS_129 = 129
-	};
-
-	class ISceneManager;
-
 	//! A scene node for displaying terrain using the geo mip map algorithm.
 	/** The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and 
 	 * the GeoMipMapSceneNode developed by Spinz. They made their code available for Irrlicht 
@@ -116,6 +96,9 @@ namespace scene
 
 		//! Returns center of terrain.
 		virtual core::vector3df getTerrainCenter() = 0;
+
+		//! Returns height of a point of the terrain.
+		virtual f32 getHeight( f32 x, f32 y ) = 0;
 
 		//! Sets the movement camera threshold.
 		/** It is used to determine when to recalculate

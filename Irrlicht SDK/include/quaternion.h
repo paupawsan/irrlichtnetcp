@@ -7,6 +7,7 @@
 
 #include "irrTypes.h"
 #include "matrix4.h"
+#include "vector3d.h"
 
 namespace irr
 {
@@ -153,9 +154,9 @@ inline quaternion& quaternion::operator=(const matrix4& m)
 		scale = sqrtf(diag) * 2.0f; // get scale from diagonal
 
 		// TODO: speed this up
-		X = ( m(1,2) - m(2,1)) / scale;
-		Y = ( m(2,0) - m(0,2)) / scale;
-		Z = ( m(0,1) - m(1,0)) / scale;
+		X = ( m(2,1) - m(1,2)) / scale;
+		Y = ( m(0,2) - m(2,0)) / scale;
+		Z = ( m(1,0) - m(0,1)) / scale;
 		W = 0.25f * scale;
 	}
 	else
@@ -170,7 +171,7 @@ inline quaternion& quaternion::operator=(const matrix4& m)
 			X = 0.25f * scale;
 			Y = (m(0,1) + m(1,0)) / scale;
 			Z = (m(2,0) + m(0,2)) / scale;
-			W = (m(1,2) - m(2,1)) / scale;
+			W = (m(2,1) - m(1,2)) / scale;
 		}
 		else if ( m(1,1) > m(2,2))
 		{
@@ -182,7 +183,7 @@ inline quaternion& quaternion::operator=(const matrix4& m)
 			X = (m(0,1) + m(1,0) ) / scale;
 			Y = 0.25f * scale;
 			Z = (m(1,2) + m(2,1) ) / scale;
-			W = (m(2,0) - m(0,2) ) / scale;
+			W = (m(0,2) - m(2,0) ) / scale;
 		}
 		else
 		{
@@ -191,10 +192,10 @@ inline quaternion& quaternion::operator=(const matrix4& m)
 			scale  = sqrtf( 1.0f + m(2,2) - m(0,0) - m(1,1)) * 2.0f;
 
 			// TODO: speed this up
-			X = (m(2,0) + m(0,2)) / scale;
+			X = (m(0,2) + m(2,0)) / scale;
 			Y = (m(1,2) + m(2,1)) / scale;
 			Z = 0.25f * scale;
-			W = (m(0,1) - m(1,0)) / scale;
+			W = (m(1,0) - m(0,1)) / scale;
 		}
 	}
 
@@ -250,23 +251,23 @@ inline matrix4 quaternion::getMatrix() const
 	core::matrix4 m;
 
 	m(0,0) = 1.0f - 2.0f*Y*Y - 2.0f*Z*Z;
-	m(0,1) = 2.0f*X*Y + 2.0f*Z*W;
-	m(0,2) = 2.0f*X*Z - 2.0f*Y*W;
-	m(0,3) = 0.0f;
-
-	m(1,0) = 2.0f*X*Y - 2.0f*Z*W;
-	m(1,1) = 1.0f - 2.0f*X*X - 2.0f*Z*Z;
-	m(1,2) = 2.0f*Z*Y + 2.0f*X*W;
-	m(1,3) = 0.0f;
-
-	m(2,0) = 2.0f*X*Z + 2.0f*Y*W;
-	m(2,1) = 2.0f*Z*Y - 2.0f*X*W;
-	m(2,2) = 1.0f - 2.0f*X*X - 2.0f*Y*Y;
-	m(2,3) = 0.0f;
-
+	m(1,0) = 2.0f*X*Y + 2.0f*Z*W;
+	m(2,0) = 2.0f*X*Z - 2.0f*Y*W;
 	m(3,0) = 0.0f;
+
+	m(0,1) = 2.0f*X*Y - 2.0f*Z*W;
+	m(1,1) = 1.0f - 2.0f*X*X - 2.0f*Z*Z;
+	m(2,1) = 2.0f*Z*Y + 2.0f*X*W;
 	m(3,1) = 0.0f;
+
+	m(0,2) = 2.0f*X*Z + 2.0f*Y*W;
+	m(1,2) = 2.0f*Z*Y - 2.0f*X*W;
+	m(2,2) = 1.0f - 2.0f*X*X - 2.0f*Y*Y;
 	m(3,2) = 0.0f;
+
+	m(0,3) = 0.0f;
+	m(1,3) = 0.0f;
+	m(2,3) = 0.0f;
 	m(3,3) = 1.0f;
 
 	return m;

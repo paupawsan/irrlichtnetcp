@@ -139,7 +139,7 @@ public:
 	//! destructor
 	~string()
 	{
-		allocator.deallocate(array); // (delete [] array;
+		allocator.deallocate(array); // delete [] array;
 	}
 
 
@@ -171,10 +171,10 @@ public:
 		{
 			if (!array)
 			{
-				array = allocator.allocate((T)1); //new T[1];
+				array = allocator.allocate(1); //new T[1];
 				allocated = 1;
-				used = 1;
 			}
+			used = 1;
 			array[0] = 0x0;
 			return *this;
 		}
@@ -190,8 +190,8 @@ public:
 			++p;
 		}
 
-		// we'll take the old string for a while, because the new string could be
-		// a part of the current string.
+		// we'll take the old string for a while, because the new
+		// string could be a part of the current string.
 		T* oldArray = array;
 
 		allocated = used = len+1;
@@ -237,6 +237,8 @@ public:
 	//! Comparison operator
 	bool operator ==(const T* str) const
 	{
+		if (!str)
+			return false;
 		s32 i;
 		for(i=0; array[i] && str[i]; ++i)
 			if (array[i] != str[i])
@@ -367,6 +369,8 @@ public:
 	//! compares the first n characters of the strings
 	bool equalsn(const T* str, int len) const
 	{
+		if (!str)
+			return false;
 		int i;
 		for(i=0; array[i] && str[i] && i < len; ++i)
 			if (array[i] != str[i])
@@ -395,6 +399,9 @@ public:
 	/** \param other: Char string to append. */
 	void append(const T* other)
 	{
+		if (!other)
+			return;
+	
 		--used;
 
 		s32 len = 0;
@@ -492,6 +499,9 @@ public:
 	or -1 if not found. */
 	s32 findFirstChar(T* c, int count) const
 	{
+		if (!c)
+			return -1;
+
 		for (s32 i=0; i<used; ++i)
 			for (int j=0; j<count; ++j)
 				if (array[i] == c[j])
@@ -513,7 +523,7 @@ public:
 	{
 		for (int i=0; i<used; ++i)
 		{
-            int j;
+			int j;
 			for (j=0; j<count; ++j)
 				if (array[i] == c[j])
 					break;
@@ -537,7 +547,7 @@ public:
 	{
 		for (int i=used-2; i>=0; --i)
 		{
-            int j;
+			int j;
 			for (j=0; j<count; ++j)
 				if (array[i] == c[j])
 					break;
@@ -573,6 +583,35 @@ public:
 		for (s32 i=used-1; i>=0; --i)
 			if (array[i] == c)
 				return i;
+
+		return -1;
+	}
+
+	//! finds another string in this string
+	//! \param str: Another string
+	//! \return Returns positions where the string has been found, 
+	//! or -1 if not found.
+	template <class B>
+	s32 find(B* str) const
+	{
+		if (str && *str)
+		{
+			int len = 0;
+
+			while (str[len])
+				++len;
+			
+			for (int i=0; i<(int)(used-len); ++i)
+			{
+				int j=0;
+
+				while(str[j] && array[i+j] == str[j])
+					++j;
+
+				if (!str[j])
+					return i;
+			}
+		}
 
 		return -1;
 	}
@@ -623,7 +662,7 @@ public:
 	{
 		append(string<T>(i));
 	}
-    	
+
 	//! replaces all characters of a special type with another one
 	void replace(T toReplace, T replaceWith)
 	{
@@ -636,8 +675,8 @@ public:
 	/** Removes whitespace from begin and end of the string. */
 	void trim()
 	{
-		const char whitespace[] = " \t\n";
-		const int whitespacecount = 3;
+		const c8 whitespace[] = " \t\n\r";
+		const int whitespacecount = 4;
 
 		// find start and end of real string without whitespace
 		int begin = findFirstCharNotInList(whitespace, whitespacecount);

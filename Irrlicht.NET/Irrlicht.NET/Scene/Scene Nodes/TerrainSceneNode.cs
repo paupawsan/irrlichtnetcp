@@ -54,6 +54,17 @@ namespace IrrlichtNETCP
 				TerrainSceneNode_SetDynamicSelectorUpdate(_raw, value);
 			}
 		}
+
+        /// <summary>
+        /// Returns the height for a specified point.
+        /// </summary>
+        /// <param name="x">X-coordinate on the terrain</param>
+        /// <param name="z">Z-coordinate on the terrain</param>
+        /// <returns></returns>
+        public float GetHeight(float x, float z)
+        {
+            return TerrainSceneNode_GetHeight(_raw, x, z);
+        }
 		
 		/// <summary>
 		/// Gets the bounding box for the specified patches
@@ -132,7 +143,10 @@ namespace IrrlichtNETCP
 		
 		[DllImport(Native.Dll)]
         static extern void TerrainSceneNode_GetTerrainCenter(IntPtr terrain, [MarshalAs(UnmanagedType.LPArray)] float[] center);
-		
+
+        [DllImport(Native.Dll)]
+        static extern float TerrainSceneNode_GetHeight(IntPtr terrain, float x, float z);
+
 		[DllImport(Native.Dll)]
 		static extern void TerrainSceneNode_OverrideLODDistance(IntPtr terrain, int lod, double newDistance);
 		

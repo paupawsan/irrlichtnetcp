@@ -32,6 +32,7 @@ class IGUIMeshViewer;
 class IGUICheckBox;
 class IGUIListBox;
 class IGUIFileOpenDialog;
+class IGUIColorSelectDialog;
 class IGUIInOutFader;
 class IGUIStaticText;
 class IGUIEditBox;
@@ -203,6 +204,16 @@ public:
 	 Returns a pointer to the created file open dialog. Returns 0 if an error occured.
 	 This pointer should not be dropped. See IUnknown::drop() for more information. */
 	virtual IGUIFileOpenDialog* addFileOpenDialog(const wchar_t* title = 0, 
+		bool modal=true, IGUIElement* parent=0, s32 id=-1) = 0;
+
+	//! Adds a color select dialog.
+	/** \param modal: Defines if the dialog is modal. This means, that all other
+	 gui elements which were created before the message box cannot be used
+	 until this messagebox is removed.
+	 \return
+	 Returns a pointer to the created file open dialog. Returns 0 if an error occured.
+	 This pointer should not be dropped. See IUnknown::drop() for more information. */
+	virtual IGUIColorSelectDialog* addColorSelectDialog(const wchar_t* title = 0, 
 		bool modal=true, IGUIElement* parent=0, s32 id=-1) = 0;
 
 	//! Adds a static text. 

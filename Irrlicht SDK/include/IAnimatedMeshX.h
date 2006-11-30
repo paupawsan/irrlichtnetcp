@@ -6,6 +6,7 @@
 #define __I_ANIMATED_MESH_X_H_INCLUDED__
 
 #include "IAnimatedMesh.h"
+#include "irrArray.h"
 
 namespace irr
 {

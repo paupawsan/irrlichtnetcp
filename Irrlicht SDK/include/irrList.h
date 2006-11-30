@@ -36,35 +36,35 @@ public:
 	public:
 
 		Iterator() : current(0) {};
-	
+
 		Iterator& operator ++() { current = current->next; return *this; };
 		Iterator& operator --() { current = current->prev; return *this; };
 		Iterator operator ++(s32) { Iterator tmp = *this; current = current->next; return tmp; };
-  		Iterator operator --(s32) { Iterator tmp = *this; current = current->prev; return tmp; };
+		Iterator operator --(s32) { Iterator tmp = *this; current = current->prev; return tmp; };
 
-		Iterator operator+(s32 num) const 
-		{ 
-			Iterator tmp = *this; 
+		Iterator operator+(s32 num) const
+		{
+			Iterator tmp = *this;
 
-			if (num >= 0) 
-				while (num-- && tmp.current != 0) ++tmp; 
-			else 
-				while (num++ && tmp.current != 0) --tmp; 
+			if (num >= 0)
+				while (num-- && tmp.current != 0) ++tmp;
+			else
+				while (num++ && tmp.current != 0) --tmp;
 
-			return tmp; 
-		} 
+			return tmp;
+		}
 
-		Iterator& operator+=(s32 num) 
-		{ 
-			if (num >= 0) 
-				while (num-- && this->current != 0) ++(*this); 
-			else 
-				while (num++ && this->current != 0) --(*this); 
+		Iterator& operator+=(s32 num)
+		{
+			if (num >= 0)
+				while (num-- && this->current != 0) ++(*this);
+			else
+				while (num++ && this->current != 0) --(*this);
 
-			return *this; 
-		} 
+			return *this;
+		}
 
-		Iterator operator-(s32 num) const  { return (*this)+(-num);          } 
+		Iterator operator-(s32 num) const  { return (*this)+(-num);          }
 		Iterator operator-=(s32 num) const { (*this)+=(-num);  return *this; }
 
 		bool operator ==(const Iterator& other) const { return current == other.current; };
@@ -84,7 +84,14 @@ public:
 
 	//! constructor
 	list()
-		: root(0), last(0), size(0)	{}
+		: root(0), last(0), size(0) {}
+
+
+	//! copy constructor
+	list(const list<T>& other)
+	{
+		*this = other;
+	}
 
 
 	//! destructor
@@ -95,8 +102,23 @@ public:
 
 
 
+	//! Assignment operator 
+	void operator=(const list<T>& other) 
+	{ 
+		clear();
+ 
+		SKListNode* node = other.root; 
+		while(node) 
+		{ 
+			push_back(node->element); 
+			node = node->next; 
+		} 
+	} 
+
+
+
 	//! Returns amount of elements in list.
-	//! \return Returns amount of elements in the list. 
+	//! \return Returns amount of elements in the list.
 	u32 getSize() const
 	{
 		return size;
@@ -104,7 +126,7 @@ public:
 
 
 
-	//! Clears the list, deletes all elements in the list. All existing 
+	//! Clears the list, deletes all elements in the list. All existing
 	//! iterators of this list will be invalid.
 	void clear()
 	{
@@ -218,7 +240,7 @@ public:
 		it.current->next = node;
 		++size;
 
-		if (it.current == last) 
+		if (it.current == last)
 			last = node;
 	}
 
@@ -241,7 +263,7 @@ public:
 		it.current->prev = node;
 		++size;
 
-		if (it.current == root) 
+		if (it.current == root)
 			root = node;
 	}
 

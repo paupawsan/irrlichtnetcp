@@ -5,7 +5,6 @@
 #ifndef __IRR_POINT_2D_H_INCLUDED__
 #define __IRR_POINT_2D_H_INCLUDED__
 
-#include <math.h> 
 #include "irrMath.h"
 
 namespace irr

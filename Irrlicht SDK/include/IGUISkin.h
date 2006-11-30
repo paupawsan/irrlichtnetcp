@@ -32,7 +32,10 @@ namespace gui
 		EGST_WINDOWS_CLASSIC,
 
 		//! Like EGST_WINDOWS_CLASSIC, but with metallic shaded windows and buttons
-		EGST_WINDOWS_METALLIC
+		EGST_WINDOWS_METALLIC,
+
+		//! Some other nice looking built-in skin
+		EGST_BURNING_SKIN
 	};
 
 	//! Enumeration for skin colors
@@ -40,36 +43,52 @@ namespace gui
 	{
 		//! Dark shadow for three-dimensional display elements.
 		EGDC_3D_DARK_SHADOW = 0,
+
 		//! Shadow color for three-dimensional display elements (for edges facing away from the light source).
 		EGDC_3D_SHADOW,
+
 		//! Face color for three-dimensional display elements and for dialog box backgrounds.
 		EGDC_3D_FACE,
+
 		//! Highlight color for three-dimensional display elements (for edges facing the light source.)
 		EGDC_3D_HIGH_LIGHT,
+
 		//! Light color for three-dimensional display elements (for edges facing the light source.)
 		EGDC_3D_LIGHT,
+
 		//! Active window border.
 		EGDC_ACTIVE_BORDER,
+
 		//! Active window title bar text.
 		EGDC_ACTIVE_CAPTION,
+
 		//! Background color of multiple document interface (MDI) applications.
 		EGDC_APP_WORKSPACE,
+
 		//! Text on a button
 		EGDC_BUTTON_TEXT,
+
 		//! Grayed (disabled) text.
 		EGDC_GRAY_TEXT,
+
 		//! Item(s) selected in a control.
 		EGDC_HIGH_LIGHT,
+
 		//! Text of item(s) selected in a control.
 		EGDC_HIGH_LIGHT_TEXT,
+
 		//! Inactive window border.
 		EGDC_INACTIVE_BORDER,
+
 		//! Inactive window caption.
 		EGDC_INACTIVE_CAPTION,
+
 		//! Tool tip color
 		EGDC_TOOLTIP,
+
 		//! Scrollbar gray area
 		EGDC_SCROLLBAR,
+
 		//! Window background
 		EGDC_WINDOW,
 
@@ -102,7 +121,13 @@ namespace gui
 
 		//! height of a default button
 		EGDS_BUTTON_HEIGHT,
-		
+	
+		//! distance for text from background
+		EGDS_TEXT_DISTANCE_X,
+
+		//! distance for text from background
+		EGDS_TEXT_DISTANCE_Y,
+
 		//! this value is not used, it only specifies the amount of default sizes
 		//! available.
 		EGDS_COUNT

@@ -16,7 +16,7 @@ namespace scene
 	class IAnimatedMeshSceneNode;
 
 	//! Callback interface for catching events of ended animations.
-	/** Implement this interface and use 
+	/** Implement this interface and use
 	 IAnimatedMeshSceneNode::setAnimationEndCallback to be able to
 	 be notified if an animation playback has ended.
 	**/
@@ -25,7 +25,7 @@ namespace scene
 	public:
 
 		//! Will be called when the animation playback has ended.
-		//! See IAnimatedMeshSceneNode::setAnimationEndCallback for 
+		//! See IAnimatedMeshSceneNode::setAnimationEndCallback for
 		//! more informations.
 		//! \param node: Node of which the animation has ended.
 		virtual void OnAnimationEnd(IAnimatedMeshSceneNode* node) = 0;
@@ -48,10 +48,10 @@ namespace scene
 		//! Destructor
 		virtual ~IAnimatedMeshSceneNode() {};
 
-		//! Sets the current frame number. 
-		//! From now on the animation is played from this frame. 
+		//! Sets the current frame number.
+		//! From now on the animation is played from this frame.
 		//! \param frame: Number of the frame to let the animation be started from.
-		//! The frame number must be a valid frame number of the IMesh used by this 
+		//! The frame number must be a valid frame number of the IMesh used by this
 		//! scene node. Set IAnimatedMesh::getMesh() for details.
 		virtual void setCurrentFrame(s32 frame) = 0;
 
@@ -75,22 +75,22 @@ namespace scene
 		//! \param id: Id of the shadow scene node. This id can be used to identify
 		//! the node later.
 		//! \param zfailmethod: If set to true, the shadow will use the zfail method,
-		//! if not, zpass is used. 
-		//! \param infinity: Value used by the shadow volume algorithm to scale the 
-		//! shadow volume. 
+		//! if not, zpass is used.
+		//! \param infinity: Value used by the shadow volume algorithm to scale the
+		//! shadow volume.
 		//! \return Returns pointer to the created shadow scene node.
 		//! This pointer should not be dropped. See IUnknown::drop() for more information.
 		virtual IShadowVolumeSceneNode* addShadowVolumeSceneNode(s32 id=-1,
 			bool zfailmethod=true, f32 infinity=10000.0f) = 0;
 
-		//! Returns a pointer to a child node, wich has the same transformation as 
-		//! the corrsesponding joint, if the mesh in this scene node is a ms3d mesh.
+		//! Returns a pointer to a child node, wich has the same transformation as
+		//! the corresponding joint, if the mesh in this scene node is a ms3d mesh.
 		//! Otherwise 0 is returned. With this method it is possible to
 		//! attach scene nodes to joints more easily. In this way, it is
 		//! for example possible to attach a weapon to the left hand of an
 		//! animated model. This example shows how:
 		//! \code
-		//! ISceneNode* hand = 
+		//! ISceneNode* hand =
 		//!		yourMS3DAnimatedMeshSceneNode->getMS3DJointNode("LeftHand");
 		//! hand->addChild(weaponSceneNode);
 		//! \endcode
@@ -102,14 +102,14 @@ namespace scene
 		//! ms3d mesh or the name of the joint could not be found.
 		virtual ISceneNode* getMS3DJointNode(const c8* jointName) = 0;
 
-		//! Returns a pointer to a child node, wich has the same transformation as 
-		//! the corrsesponding joint, if the mesh in this scene node is a x mesh.
+		//! Returns a pointer to a child node, which has the same transformation as
+		//! the corresponding joint, if the mesh in this scene node is a x mesh.
 		//! Otherwise 0 is returned. With this method it is possible to
 		//! attach scene nodes to joints more easily. In this way, it is
 		//! for example possible to attach a weapon to the left hand of an
 		//! animated model. This example shows how:
 		//! \code
-		//! ISceneNode* hand = 
+		//! ISceneNode* hand =
 		//!		yourMS3DAnimatedMeshSceneNode->getXJointNode("LeftHand");
 		//! hand->addChild(weaponSceneNode);
 		//! \endcode
@@ -121,7 +121,26 @@ namespace scene
 		//! ms3d mesh or the name of the joint could not be found.
 		virtual ISceneNode* getXJointNode(const c8* jointName) = 0;
 
-		//! Starts a default MD2 animation. 
+		//! Returns a pointer to a child node, wich has the same transformation as
+		//! the corresponding joint, if the mesh in this scene node is a b3d mesh.
+		//! Otherwise 0 is returned. With this method it is possible to
+		//! attach scene nodes to joints more easily. In this way, it is
+		//! for example possible to attach a weapon to the left hand of an
+		//! animated model. This example shows how:
+		//! \code
+		//! ISceneNode* hand =
+		//!		yourB3DAnimatedMeshSceneNode->getB3DJointNode("LeftHand");
+		//! hand->addChild(weaponSceneNode);
+		//! \endcode
+		//! Please note that the SceneNode returned by this method may not exist
+		//! before this call and is created by it.
+		//! \param jointName: Name of the joint.
+		//! \return Returns a pointer to the scene node which represents the joint
+		//! with the specified name. Returns 0 if the contained mesh is not an
+		//! ms3d mesh or the name of the joint could not be found.
+		virtual ISceneNode* getB3DJointNode(const c8* jointName) = 0;
+
+		//! Starts a default MD2 animation.
 		//! With this method it is easily possible to start a Run, Attack,
 		//! Die or whatever animation, if the mesh contained in this scene
 		//! node is a md2 mesh. Otherwise, nothing happenes.
@@ -131,7 +150,7 @@ namespace scene
 		//! if the mesh in the scene node is not a md2 mesh.
 		virtual bool setMD2Animation(EMD2_ANIMATION_TYPE anim) = 0;
 
-		//! Starts a special MD2 animation. 
+		//! Starts a special MD2 animation.
 		//! With this method it is easily possible to start a Run, Attack,
 		//! Die or whatever animation, if the mesh contained in this scene
 		//! node is a md2 mesh. Otherwise, nothing happenes. This method uses
@@ -158,7 +177,7 @@ namespace scene
 		virtual void setAnimationEndCallback(IAnimationEndCallBack* callback=0) = 0;
 
 		//! Sets if the scene node should not copy the materials of the mesh but use them in a read only style.
-		/* In this way it is possible to change the materials a mesh causing all mesh scene nodes 
+		/* In this way it is possible to change the materials a mesh causing all mesh scene nodes
 		referencing this mesh to change too. */
 		virtual void setReadOnlyMaterials(bool readonly) = 0;
 
@@ -167,6 +186,10 @@ namespace scene
 
 		//! Sets a new mesh
 		virtual void setMesh(IAnimatedMesh* mesh) = 0;
+
+		//! Returns the current mesh
+		virtual IAnimatedMesh* getMesh(void) = 0;
+
 	};
 
 } // end namespace scene

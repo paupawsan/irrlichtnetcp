@@ -7,6 +7,7 @@
 
 #include "IUnknown.h"
 #include "ESceneNodeTypes.h"
+#include "ISceneManager.h"
 #include "ISceneNodeAnimator.h"
 #include "ITriangleSelector.h"
 #include "SMaterial.h"
@@ -21,9 +22,6 @@ namespace irr
 {
 namespace scene
 {
-
-	class ISceneManager;
-
 	//! Scene node interface.
 	/** A scene node is a node in the hirachical scene graph. Every scene node may have children,
 	which are other scene nodes. Children move relative the their parents position. If the parent of a node is not
@@ -60,8 +58,8 @@ namespace scene
 
 			// delete all animators
 			core::list<ISceneNodeAnimator*>::Iterator ait = Animators.begin();
-				for (; ait != Animators.end(); ++ait)
-					(*ait)->drop();
+			for (; ait != Animators.end(); ++ait)
+				(*ait)->drop();
 
 			if (TriangleSelector)
 				TriangleSelector->drop();
@@ -116,7 +114,7 @@ namespace scene
 
 		//! Returns the name of the node.
 		//! \return Returns name as wide character string.
-		virtual const char* getName() const
+		virtual const c8* getName() const
 		{
 			return Name.c_str();
 		}
@@ -124,7 +122,7 @@ namespace scene
 
 		//! Sets the name of the node.
 		//! \param name: New name of the scene node.
-		virtual void setName(const char* name)
+		virtual void setName(const c8* name)
 		{
 			Name = name;
 		}
@@ -311,9 +309,9 @@ namespace scene
 		//! This function is needed for inserting the node into the scene hirachy on a
 		//! optimal position for minimizing renderstate changes, but can also be used
 		//! to directly modify the material of a scene node.
-		//! \param i: Zero based index i. The maximal value for this may be getMaterialCount() - 1.
+		//! \param num: Zero based index. The maximal value is getMaterialCount() - 1.
 		//! \return Returns the material of that index.
-		virtual video::SMaterial& getMaterial(s32 i)
+		virtual video::SMaterial& getMaterial(s32 num)
 		{
 			return *((video::SMaterial*)0);
 		}
@@ -538,7 +536,7 @@ namespace scene
 		//! updates the absolute position based on the relative and the parents position
 		virtual void updateAbsolutePosition()
 		{
-			if (Parent)
+			if (Parent && SceneManager && (Parent != SceneManager->getRootSceneNode()))
 				AbsoluteTransformation =
 					Parent->getAbsoluteTransformation() * getRelativeTransformation();
 			else
@@ -563,7 +561,7 @@ namespace scene
 		virtual void serializeAttributes(io::IAttributes* out, io::SAttributeReadWriteOptions* options=0)
 		{
 			out->addString	("Name", Name.c_str());
-			out->addInt		("Id", ID );
+			out->addInt	("Id", ID );
 			out->addVector3d("Position", RelativeTranslation );
 			out->addVector3d("Rotation", RelativeRotation );
 			out->addVector3d("Scale", RelativeScale );

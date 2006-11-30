@@ -8,6 +8,7 @@
 #include "rect.h"
 #include "SColor.h"
 #include "ITexture.h"
+#include "irrArray.h"
 #include "matrix4.h"
 #include "dimension2d.h"
 #include "position2d.h"
@@ -16,6 +17,7 @@
 #include "SLight.h"
 #include "IImageLoader.h"
 #include "IImageWriter.h"
+#include "IMeshBuffer.h"
 #include "triangle3d.h"
 #include "SExposedVideoData.h"
 #include "IMaterialRenderer.h"
@@ -45,14 +47,20 @@ namespace video
 		//! Is driver able to render to a surface?
 		EVDF_RENDER_TO_TARGET = 0,
 
-		//! Is driver able to render with a bilinear filter applied?
-		EVDF_BILINEAR_FILTER,
-
 		//! Is hardeware transform and lighting supported?
 		EVDF_HARDWARE_TL,
 
+		//! Are multiple textures per material possible?
+		EVDF_MULTITEXTURE,
+
+		//! Is driver able to render with a bilinear filter applied?
+		EVDF_BILINEAR_FILTER,
+
 		//! Can the driver handle mip maps?
 		EVDF_MIP_MAP,
+
+		//! Can the driver update mip maps automatically?
+		EVDF_MIP_MAP_AUTO_UPDATE,
 
 		//! Are stencilbuffers switched on and does the device support stencil buffers?
 		EVDF_STENCIL_BUFFER,
@@ -94,7 +102,13 @@ namespace video
 		EVDF_ARB_GLSL,
 
 		//! Is HLSL supported?
-		EVDF_HLSL
+		EVDF_HLSL,
+
+		//! Are non-power-of-two textures supported?
+		EVDF_TEXTURE_NPOT,
+
+		//! Are framebuffer objects supported?
+		EVDF_FRAMEBUFFER_OBJECT
 	};
 
 	//! enumeration for geometry transformation states
@@ -222,10 +236,9 @@ namespace video
 		the driver may choose to create the texture in another color format.
 		\return Returns a pointer to the new created Texture.
 		This pointer should not be dropped. See IUnknown::drop() for more information.
-		The format of the new texture will be chosen by the driver, and will in most
-		cases have the ECF_A1R5G5B5 or ECF_A8R8G8B8 format. */
+		The format of the new texture will be chosen by the driver. */
 		virtual ITexture* addTexture(const core::dimension2d<s32>& size,
-			const c8* name, ECOLOR_FORMAT format = ECF_A1R5G5B5) = 0;
+			const c8* name, ECOLOR_FORMAT format = ECF_A8R8G8B8) = 0;
 
 		//! Creates a texture from a loaded IImage.
 		/** \param name: A name for the texture. Later calls of getTexture() with this name
@@ -233,8 +246,7 @@ namespace video
 		\param image: Image from which the texture is created from.
 		\return Returns a pointer to the new created Texture.
 		This pointer should not be dropped. See IUnknown::drop() for more information.
-		The format of the new texture will be chosen by the driver, and will in most
-		cases have the ECF_A1R5G5B5 or ECF_A8R8G8B8 format. */
+		The format of the new texture will be chosen by the driver. */
 		virtual ITexture* addTexture(const c8* name, IImage* image) = 0;
 
 		//! Creates a render target texture.
@@ -245,7 +257,7 @@ namespace video
 		\return Returns a pointer to the created texture or 0 if the texture could not
 		be created. If you no longer need the image, you should call ITexture::drop().
 		See IUnknown::drop() for more information. */
-		virtual ITexture* createRenderTargetTexture(core::dimension2d<s32> size) = 0;
+		virtual ITexture* createRenderTargetTexture(const core::dimension2d<s32>& size) = 0;
 
 		//! Removes a texture from the texture cache and deletes it, freeing lot of memory.
 		/** Please note that after calling this, the pointer to the ITexture
@@ -302,7 +314,7 @@ namespace video
 		way:
 		\code
 		// create render target
-		ITexture* target = driver->createRenderTargetTexture(core::dimension2d<s32>(128,128);
+		ITexture* target = driver->createRenderTargetTexture(core::dimension2d<s32>(128,128));
 
 		// ...
 
@@ -336,6 +348,19 @@ namespace video
 		//! Gets the area of the current viewport.
 		/** \return Returns rectangle of the current vieport. */
 		virtual const core::rect<s32>& getViewPort() const = 0;
+
+		//! draws a vertex primitive list
+		/** Note that there may be at maximum 65536 vertices, because the
+		index list is an array of 16 bit values each with a maximum value
+		of 65536. If there are more than 65536 vertices in the list,
+		results of this operation are not defined.
+		\param vertices: Pointer to array of vertices.
+		\param vertexCount: Amount of vertices in the array.
+		\param indexList: Pointer to array of indizes.
+		\param triangleCount: amount of Triangles.
+		\param vType: Vertex type, e.g. EVT_STANDARD for S3DVertex.
+		\param pType: Primitive type, e.g. EPT_TRIANGLE_FAN for a triangle fan. */
+		virtual void drawVertexPrimitiveList(const void* vertices, s32 vertexCount, const u16* indexList, s32 triangleCount, E_VERTEX_TYPE vType, scene::E_PRIMITIVE_TYPE pType) = 0;
 
 		//! Draws an indexed triangle list.
 		/** Note that there may be at maximum 65536 vertices, because the
@@ -464,6 +489,29 @@ namespace video
 			const core::rect<s32>& sourceRect, const core::rect<s32>* clipRect = 0,
 			SColor color=SColor(255,255,255,255), bool useAlphaChannelOfTexture=false) = 0;
 
+		//! draws a set of 2d images, using a color and the alpha
+		/** channel of the texture if desired. The images are drawn
+		beginning at pos and concatenated in one line. All drawings
+		are clipped against clipRect (if != 0).
+		The subtextures are defined by the array of sourceRects
+		and are chosen by the indices given.
+		\param texture: Texture to be drawn.
+		\param pos: Upper left 2d destination position where the image will be drawn.
+		\param sourceRects: Source rectangles of the image.
+		\param indices: List of indices which choose the actual rectangle used each time.
+		\param clipRect: Pointer to rectangle on the screen where the image is clipped to.
+		This pointer can be 0. Then the image is not clipped.
+		\param color: Color with which the image is colored.
+		Note that the alpha component is used: If alpha is other than 255, the image will be transparent.
+		\param useAlphaChannelOfTexture: If true, the alpha channel of the texture is
+		used to draw the image. */
+		virtual void draw2DImage(video::ITexture* texture,
+				const core::position2d<s32>& pos,
+				const core::array<core::rect<s32> >& sourceRects,
+				const core::array<s32>& indices,
+				const core::rect<s32>* clipRect, SColor color,
+				bool useAlphaChannelOfTexture) = 0;
+
 		//! Draws a part of the texture into the rectangle.
 		/** Suggested and first implemented by zola.
 		\param texture: the texture to draw from
@@ -577,6 +625,12 @@ namespace video
 		/** \return Size of screen or render window. */
 		virtual core::dimension2d<s32> getScreenSize() = 0;
 
+		//! Returns the size of the current render target, or the screen size if the driver 
+		//! doesnt support render to texture
+		/** \return Size of render target or screen/window */
+		virtual core::dimension2d<s32> getCurrentRenderTargetSize() = 0;
+
+
 		//! Returns current frames per second value.
 		/** \return Returns amount of frames per second drawn. **/
 		virtual s32 getFPS() = 0;
@@ -667,7 +721,7 @@ namespace video
 		\return Returns the created image.
 		If you no longer need the image, you should call IImage::drop().
 		See IUnknown::drop() for more information. */
-		virtual IImage* createImageFromFile(const char* filename) = 0;
+		virtual IImage* createImageFromFile(const c8* filename) = 0;
 
 		//! Creates a software image from a file.
 		/** No hardware texture will
@@ -685,7 +739,7 @@ namespace video
 		\param image: Image to write to disk
 		\param filename: name of the file to write
 		\return Returns true on success */
-		virtual bool writeImageToFile(IImage* image, const char* filename) = 0;
+		virtual bool writeImageToFile(IImage* image, const c8* filename) = 0;
 
 		//! Creates a software image from a byte array.
 		/** No hardware texture will
@@ -728,7 +782,7 @@ namespace video
 		-1 is returned if an error occured. (For example if you tried to add
 		an material renderer to the software renderer or the null device, which do not accept
 		material renderers.) */
-		virtual s32 addMaterialRenderer(IMaterialRenderer* renderer, const char* name = 0) = 0;
+		virtual s32 addMaterialRenderer(IMaterialRenderer* renderer, const c8* name = 0) = 0;
 
 		//! Returns pointer to material renderer or null if not existing.
 		/** \param idx: Id of the material renderer. Can be a value of the E_MATERIAL_TYPE enum or a
@@ -744,13 +798,13 @@ namespace video
 		returned name will be also used when serializing Materials.
 		\param idx: Id of the material renderer. Can be a value of the E_MATERIAL_TYPE enum or a
 		value which was returned by addMaterialRenderer(). */
-		virtual const char* getMaterialRendererName(s32 idx) = 0;
+		virtual const c8* getMaterialRendererName(s32 idx) = 0;
 
 		//! Sets the name of a material renderer.
 		/** Will have no effect on built-in material renderers.
 		\param idx: Id of the material renderer. Can be a value of the E_MATERIAL_TYPE enum or a
 		value which was returned by addMaterialRenderer(). */
-		virtual void setMaterialRendererName(s32 idx, const char* name) = 0;
+		virtual void setMaterialRendererName(s32 idx, const c8* name) = 0;
 
 		//! Creates material attributes list from a material, usable for serialization and more.
 		/** Please note that the videodriver will use the material renderer names from

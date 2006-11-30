@@ -35,6 +35,9 @@ enum EGUI_ELEMENT_TYPE
 	//! A file open dialog (IGUIFileOpenDialog)
 	EGUIET_FILE_OPEN_DIALOG,
 
+	//! A color select open dialog (IGUIColorSelectDialog)
+	EGUIET_COLOR_SELECT_DIALOG,
+
 	//! A in/out fader (IGUIInOutFader)
 	EGUIET_IN_OUT_FADER,
 

@@ -35,7 +35,7 @@ enum E_VERTEX_SHADER_TYPE
 };
 
 //! Names for all vertex shader types, each entry corresponds to a E_VERTEX_SHADER_TYPE entry.
-const char* const VERTEX_SHADER_TYPE_NAMES[] = {
+const c8* const VERTEX_SHADER_TYPE_NAMES[] = {
 	"vs_1_1",
 	"vs_2_0",
 	"vs_2_a",
@@ -59,7 +59,7 @@ enum E_PIXEL_SHADER_TYPE
 };
 
 //! Names for all pixel shader types, each entry corresponds to a E_PIXEL_SHADER_TYPE entry.
-const char* const PIXEL_SHADER_TYPE_NAMES[] = {
+const c8* const PIXEL_SHADER_TYPE_NAMES[] = {
 	"ps_1_1", 
 	"ps_1_2",
 	"ps_1_3",

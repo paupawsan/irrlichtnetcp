@@ -71,7 +71,9 @@
  	
  	public enum SceneNodeRenderPass
  	{
- 		LightAndCamera,
+ 		LightAndCamera, //Deprecated, use Light or Camera instead
+        Light,
+        Camera,
  		SkyBox,
  		Automatic,
  		Solid,

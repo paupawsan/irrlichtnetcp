@@ -981,6 +981,14 @@
             contain every callback (task that should not be
             </summary>
         </member>
+        <member name="M:IrrlichtNETCP.TerrainSceneNode.GetHeight(System.Single,System.Single)">
+            <summary>
+            Returns the height for a specified point.
+            </summary>
+            <param name="x">X-coordinate on the terrain</param>
+            <param name="z">Z-coordinate on the terrain</param>
+            <returns></returns>
+        </member>
         <member name="M:IrrlichtNETCP.TerrainSceneNode.GetBoundingBox(System.Int32,System.Int32)">
             <summary>
             Gets the bounding box for the specified patches

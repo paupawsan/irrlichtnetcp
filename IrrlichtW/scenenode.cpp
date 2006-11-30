@@ -287,6 +287,11 @@ IntPtr TerrainSceneNode_GetMesh(IntPtr terrain)
     return ((ITerrainSceneNode*)terrain)->getMesh();
 }
 
+float TerrainSceneNode_GetHeight(IntPtr terrain, float x, float z)
+{
+	return ((ITerrainSceneNode*)terrain)->getHeight(x, z);
+}
+
 void TerrainSceneNode_GetTerrainCenter(IntPtr terrain, M_VECT3DF center)
 {
     UM_VECT3DF(((ITerrainSceneNode*)terrain)->getTerrainCenter(), center);

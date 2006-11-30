@@ -58,6 +58,7 @@
 #include "IGUIEditBox.h"
 #include "IGUIEnvironment.h"
 #include "IGUIFileOpenDialog.h"
+#include "IGUIColorSelectDialog.h"
 #include "IGUIFont.h"
 #include "IGUIImage.h"
 #include "IGUIInOutFader.h"
@@ -85,6 +86,7 @@
 #include "ISceneManager.h"
 #include "ISceneNode.h"
 #include "IAttributes.h"
+#include "ISceneUserDataSerializer.h"
 #include "ITriangleSelector.h"
 #include "ISceneNodeAnimator.h"
 #include "ISceneCollisionManager.h"
@@ -127,12 +129,11 @@
 #include "SMeshBuffer.h"
 #include "SMeshBufferLightMap.h"
 #include "SMeshBufferTangents.h"
+#include "SViewFrustrum.h"
 #include "irrTypes.h"
 
-//! Irrlicht SDK Version
-#define IRRLICHT_SDK_VERSION "1.1"
 
-/*! \mainpage Irrlicht Engine 1.1 API documentation
+/*! \mainpage Irrlicht Engine 1.2 API documentation
  *
  * <div align="center"><img src="logobig.png" ></div>
  *
@@ -243,30 +244,6 @@
  * a look into the examples directory of the SDK.
  */
 
-#include <wchar.h>
-#ifdef _IRR_WINDOWS_
-//! Define for swprintf because this method does not match the ISO C standard
-//! on Windows platforms, but it does on all other ones.
-#define   swprintf   _snwprintf
-#endif // _IRR_WINDOWS_
-
-#ifdef _IRR_WINDOWS_
-
-#ifdef IRRLICHT_EXPORTS
-#define IRRLICHT_API __declspec(dllexport)
-#else
-#define IRRLICHT_API __declspec(dllimport)
-#endif // IRRLICHT_EXPORT
-#else
-#define IRRLICHT_API 
-#endif // _IRR_WINDOWS_
-
-#if defined(_STDCALL_SUPPORTED)
-#define IRRCALLCONV __stdcall  // Declare the calling convention.
-#else
-#define IRRCALLCONV
-#endif // STDCALL_SUPPORTED
-
 #include "SIrrCreationParameters.h"
 
 //! Everything in the Irrlicht Engine can be found in this namespace.
@@ -300,7 +277,7 @@ namespace irr
 		bool stencilbuffer=false,
 		bool vsync=false,
 		IEventReceiver* receiver = 0,
-		const char* sdk_version_do_not_use = IRRLICHT_SDK_VERSION);
+		const c8* sdk_version_do_not_use = IRRLICHT_SDK_VERSION);
 
 	//! Creates an Irrlicht device with the option to specify advanced parameters. 
 	/** Usually you should used createDevice() for creating an Irrlicht Engine device.

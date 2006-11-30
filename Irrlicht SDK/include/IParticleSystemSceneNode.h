@@ -99,7 +99,7 @@ public:
 	//! returned pointer, after you don't need it any more, see
 	//! IUnknown::drop() for more informations.
 	virtual IParticleEmitter* createPointEmitter(
-		core::vector3df direction = core::vector3df(0.0f,0.03f,0.0f), 
+		const core::vector3df& direction = core::vector3df(0.0f,0.03f,0.0f), 
 		u32 minParticlesPerSecond = 5,
 		u32 maxParticlesPerSecond = 10,
 		video::SColor minStartColor = video::SColor(255,0,0,0),
@@ -130,8 +130,8 @@ public:
 	//! returned pointer, after you don't need it any more, see
 	//! IUnknown::drop() for more informations.
 	virtual IParticleEmitter* createBoxEmitter(
-		core::aabbox3d<f32> box = core::aabbox3d<f32>(-10,28,-10,10,30,10),
-		core::vector3df direction = core::vector3df(0.0f,0.03f,0.0f), 
+		const core::aabbox3df& box = core::aabbox3df(-10,28,-10,10,30,10),
+		const core::vector3df& direction = core::vector3df(0.0f,0.03f,0.0f), 
 		u32 minParticlesPerSecond = 5,
 		u32 maxParticlesPerSecond = 10,
 		video::SColor minStartColor = video::SColor(255,0,0,0),
@@ -172,7 +172,7 @@ public:
 	//! returned pointer, after you don't need it any more, see
 	//! IUnknown::drop() for more informations.
 	virtual IParticleAffector* createGravityAffector(
-		core::vector3df gravity = core::vector3df(0.0f,-0.03f,0.0f),
+		const core::vector3df& gravity = core::vector3df(0.0f,-0.03f,0.0f),
 		u32 timeForceLost = 1000) = 0;
 };
 

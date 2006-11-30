@@ -9,7 +9,7 @@ namespace irr
 namespace io
 {
 	class IWriteFile;
-};
+}
 
 namespace video
 {
@@ -37,7 +37,7 @@ public:
 	virtual bool writeImage(io::IWriteFile *file, IImage *image) = 0;
 };
 
-}; // namespace video
-}; // namespace irr
+} // namespace video
+} // namespace irr
 
 #endif // _I_IMAGE_WRITER_H_INCLUDED__

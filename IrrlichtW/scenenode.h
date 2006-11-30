@@ -60,6 +60,7 @@ extern "C"
     EXPORT void TerrainSceneNode_GetBoundingBoxA(IntPtr terrain, M_BOX3D box);
     EXPORT int TerrainSceneNode_GetIndexCount(IntPtr terrain);
     EXPORT IntPtr TerrainSceneNode_GetMesh(IntPtr terrain);
+    EXPORT float TerrainSceneNode_GetHeight(IntPtr terrain, float x, float z);
     EXPORT void TerrainSceneNode_GetTerrainCenter(IntPtr terrain, M_VECT3DF center);
     EXPORT void TerrainSceneNode_OverrideLODDistance(IntPtr terrain, int lod, double newDistance);
     EXPORT void TerrainSceneNode_ScaleTexture(IntPtr terrain, float scale, float scale2);

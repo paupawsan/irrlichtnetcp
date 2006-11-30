@@ -5,7 +5,6 @@
 #ifndef __I_CAMERA_SCENE_NODE_H_INCLUDED__
 #define __I_CAMERA_SCENE_NODE_H_INCLUDED__
 
-#include "SViewFrustrum.h"
 #include "ISceneNode.h"
 #include "IEventReceiver.h"
 
@@ -13,6 +12,8 @@ namespace irr
 {
 namespace scene
 {
+
+	struct SViewFrustrum;
 
 	//! Scene Node which is a (controlable) camera.
 	/** The whole scene will be

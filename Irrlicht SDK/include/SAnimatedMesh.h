@@ -6,6 +6,9 @@
 #define __S_ANIMATED_MESH_H_INCLUDED__
 
 #include "IAnimatedMesh.h"
+#include "IMesh.h"
+#include "aabbox3d.h"
+#include "irrArray.h"
 
 namespace irr
 {

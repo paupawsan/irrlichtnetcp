@@ -40,7 +40,7 @@ namespace scene
 		\param target: Target scene node of the new animator.
 		\return Returns pointer to the new scene node animator or null if not successful. You need to
 		drop this pointer after calling this, see IUnknown::drop() for details. */
-		virtual ISceneNodeAnimator* createSceneNodeAnimator(const char* typeName, ISceneNode* target) = 0;
+		virtual ISceneNodeAnimator* createSceneNodeAnimator(const c8* typeName, ISceneNode* target) = 0;
 
 		//! returns amount of scene node animator types this factory is able to create
 		virtual s32 getCreatableSceneNodeAnimatorTypeCount() = 0;

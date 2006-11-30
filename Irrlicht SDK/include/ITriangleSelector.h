@@ -9,6 +9,7 @@
 #include "triangle3d.h"
 #include "aabbox3d.h"
 #include "matrix4.h"
+#include "line3d.h"
 
 namespace irr
 {

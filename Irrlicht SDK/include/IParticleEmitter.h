@@ -22,7 +22,7 @@ enum E_PARTICLE_EMITTER_TYPE
 };
 
 //! Names for built in particle emitters
-const char* const ParticleEmitterTypeNames[] = 
+const c8* const ParticleEmitterTypeNames[] = 
 {
 	"Point",
 	"Box",
@@ -32,7 +32,7 @@ const char* const ParticleEmitterTypeNames[] =
 //! A particle emitter for using with particle systems.
 /** A Particle emitter emitts new particles into a particle system.
 */
-class IParticleEmitter : public virtual IUnknown
+class IParticleEmitter : public virtual io::IAttributeExchangingObject
 {
 public:
 

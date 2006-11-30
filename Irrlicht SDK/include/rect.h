@@ -57,6 +57,21 @@ namespace core
 			return *this;
 		}
 
+		rect<T> operator-(const position2d<T>& pos) const
+		{
+			rect<T> ret(*this);
+			ret.UpperLeftCorner -= pos;
+			ret.LowerRightCorner -= pos;
+			return ret;
+		}
+
+		const rect<T>& operator-=(const position2d<T>& pos)
+		{
+			UpperLeftCorner -= pos;
+			LowerRightCorner -= pos;
+			return *this;
+		}
+
 		bool operator == (const rect<T>& other) const
 		{
 			return (UpperLeftCorner == other.UpperLeftCorner &&

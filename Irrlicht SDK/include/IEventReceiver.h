@@ -141,7 +141,7 @@ struct SEvent
 			gui::IGUIElement* Caller;
 
 			//! Type of GUI Event
-			gui::EGUI_EVENT_TYPE EventType;			
+			gui::EGUI_EVENT_TYPE EventType;
 
 		} GUIEvent;
 

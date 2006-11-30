@@ -10,6 +10,7 @@
 #include "dimension2d.h"
 #include "EDriverTypes.h"
 #include "irrString.h"
+#include "matrix4.h"
 
 namespace irr
 {
@@ -21,50 +22,50 @@ namespace video
 //! should be created.
 enum E_TEXTURE_CREATION_FLAG
 {
-	//! Forces the driver to create 16 bit textures always, indepenent of
+	//! Forces the driver to create 16 bit textures always, independent of
 	//! which format the file on disk has. When choosing this you may loose
 	//! some color detail, but gain much speed and memory. 16 bit textures
 	//! can be transferred twice as fast as 32 bit textures and only use 
 	//! half of the space in memory.
-	//! When using this flag, it does not make sence to use the flags
+	//! When using this flag, it does not make sense to use the flags
 	//! ETCF_ALWAYS_32_BIT, ETCF_OPTIMIZED_FOR_QUALITY,
 	//! or ETCF_OPTIMIZED_FOR_SPEED at the same time.
 	ETCF_ALWAYS_16_BIT = 0x00000001,
 
-	//! Forces the driver to create 32 bit textures always, indepenent of
+	//! Forces the driver to create 32 bit textures always, independent of
 	//! which format the file on disk has. Please note that some drivers 
-	//! (like the software device) will ignore this, because they only are
+	//! (like the software device) will ignore this, because they are only
 	//! able to create and use 16 bit textures.
-	//! When using this flag, it does not make sence to use the flags
+	//! When using this flag, it does not make sense to use the flags
 	//! ETCF_ALWAYS_16_BIT, ETCF_OPTIMIZED_FOR_QUALITY,
 	//! or ETCF_OPTIMIZED_FOR_SPEED at the same time.
 	ETCF_ALWAYS_32_BIT = 0x00000002,
 
-	//! Lets the driver decide in which format the texutures are created and
+	//! Lets the driver decide in which format the textures are created and
 	//! tries to make the textures look as good as possible.
 	//! Usually it simply chooses the format in which the texture was stored on disk.
-	//! When using this flag, it does not make sence to use the flags
+	//! When using this flag, it does not make sense to use the flags
 	//! ETCF_ALWAYS_16_BIT, ETCF_ALWAYS_32_BIT, 
 	//! or ETCF_OPTIMIZED_FOR_SPEED at the same time.
 	ETCF_OPTIMIZED_FOR_QUALITY  = 0x00000004,
 
-	//! Lets the driver decide in which format the texutures are created and
+	//! Lets the driver decide in which format the textures are created and
 	//! tries to create them maximizing render speed.
-	//! When using this flag, it does not make sence to use the flags
+	//! When using this flag, it does not make sense to use the flags
 	//! ETCF_ALWAYS_16_BIT, ETCF_ALWAYS_32_BIT, or ETCF_OPTIMIZED_FOR_QUALITY,
 	//! at the same time.
 	ETCF_OPTIMIZED_FOR_SPEED = 0x00000008,
 
-	//! Automaticly creates mip map levels for the textures.
+	//! Automatically creates mip map levels for the textures.
 	ETCF_CREATE_MIP_MAPS = 0x00000010,
 
 	//! This flag is never used, it only forces the compiler to 
-    //! compile these enumeration values to 32 bit.
+	//! compile these enumeration values to 32 bit.
 	ETCF_FORCE_32_BIT_DO_NOT_USE = 0x7fffffff
 };
 
 
-//! Helper function, helps to get the wished texture creation format from the flags.
+//! Helper function, helps to get the desired texture creation format from the flags.
 //! Returns either ETCF_ALWAYS_32_BIT, ETCF_ALWAYS_16_BIT, ETCF_OPTIMIZED_FOR_QUALITY,
 //! or ETCF_OPTIMIZED_FOR_SPEED.
 inline E_TEXTURE_CREATION_FLAG getTextureFormatFromFlags(u32 flags)
@@ -81,12 +82,11 @@ inline E_TEXTURE_CREATION_FLAG getTextureFormatFromFlags(u32 flags)
 }
 
 
-//! Interface for a Video Driver dependent Texture.
+//! Interface of a Video Driver dependent Texture.
 /**
 	An ITexture is created by an IVideoDriver by using IVideoDriver::addTexture or
-	IVideoDriver::getTexture. After this, this texture may only be used by this VideoDriver.
-	As you can imagine, textures of the DirectX and the OpenGL device will not be compatible,
-	for example.
+	IVideoDriver::getTexture. After that, the texture may only be used by this VideoDriver.
+	As you can imagine, textures of the DirectX and the OpenGL device will, e.g., not be compatible.
 	An exception is the Software device and the NULL device, their textures are compatible.
 	If you try to use a texture created by one device with an other device, the device
 	will refuse to do that and write a warning or an error message to the output buffer.
@@ -96,7 +96,7 @@ class ITexture : public virtual IUnknown
 public:
 
 	//! constructor
-	ITexture(const char* name) : Name(name) { Name.make_lower(); }
+	ITexture(const c8* name) : Name(name) { Name.make_lower(); }
 
 	//! destructor
 	virtual ~ITexture() {};
@@ -137,10 +137,8 @@ public:
 	virtual E_DRIVER_TYPE getDriverType() = 0;
 
 	//! Returns the color format of texture.
-	/** This format is in most cases
-	ECF_A1R5G5B5 or ECF_A8R8G8B8.
-	\return Returns the color format of texture. */
-	virtual ECOLOR_FORMAT getColorFormat() = 0;
+	/** \return Returns the color format of texture. */
+	virtual ECOLOR_FORMAT getColorFormat() const = 0;
 
 	//! Returns pitch of texture (in bytes).
 	/** The pitch is the amount of bytes
@@ -159,9 +157,13 @@ public:
 	//! Returns name of texture (in most cases this is the filename)
 	const core::stringc& getName() { return Name; }
 
+	//! Returns texture transformation matrix
+	core::matrix4& getTransformation() { return Transformation; }
+
 protected:
 
 	core::stringc Name;
+	core::matrix4 Transformation;
 };
 
 

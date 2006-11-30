@@ -59,14 +59,14 @@ public:
 
 
 	//! Returns parent of this element.
-	IGUIElement* getParent()
+	IGUIElement* getParent() const
 	{
 		return Parent;
 	}
 
 
 	//! Returns the relative rectangle of this element.
-	core::rect<s32> getRelativePosition()
+	core::rect<s32> getRelativePosition() const
 	{
 		return RelativeRect;
 	}
@@ -133,7 +133,7 @@ public:
 				--it;
 			}
 
-		if (AbsoluteRect.isPointInside(point) && IsVisible)
+		if (AbsoluteClippingRect.isPointInside(point) && IsVisible)
 			target = this;
 		
 		return target;

@@ -12,7 +12,8 @@
 #include "SColor.h"
 #include "SMaterial.h"
 #include "IEventReceiver.h"
-#include "ITerrainSceneNode.h"
+#include "ETerrainElements.h"
+#include "ESceneNodeTypes.h"
 #include "SceneParameters.h"
 
 namespace irr
@@ -46,9 +47,15 @@ namespace scene
 	specifying when the mode wants to be drawn in relation to the other nodes. */
 	enum E_SCENE_NODE_RENDER_PASS
 	{
-		//! Scene nodes which are lights or camera should use this,
-		//! the very first pass.
+		//! Deprecated. You should use ESNRP_LIGHT or ESNRP_CAMERA instead
 		ESNRP_LIGHT_AND_CAMERA,
+
+		//! Camera pass. The active view is set up here.
+		//! The very first pass.
+		ESNRP_CAMERA,
+
+		//! In this pass, lights are transformed into camera space and added to the driver
+		ESNRP_LIGHT,
 
 		//! This is used for sky boxes.
 		ESNRP_SKY_BOX,
@@ -613,7 +620,7 @@ namespace scene
 		 terrain could not be created, for example because the heightmap could not be loaded.
 		 The returned pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual ITerrainSceneNode* addTerrainSceneNode(
-				const char* heightMapFileName,
+				const c8* heightMapFileName,
 				ISceneNode* parent=0, s32 id=-1,
 			const core::vector3df& position = core::vector3df(0.0f,0.0f,0.0f),
 			const core::vector3df& rotation = core::vector3df(0.0f,0.0f,0.0f),
@@ -741,7 +748,7 @@ namespace scene
 		 taken.
 		 \return Returns pointer to the first scene node with this id,
 		 and null if no scene node could be found. */
-		virtual ISceneNode* getSceneNodeFromName(const char* name, ISceneNode* start=0) = 0;
+		virtual ISceneNode* getSceneNodeFromName(const c8* name, ISceneNode* start=0) = 0;
 
 		//! Returns the current active camera.
 		/** \return The active camera is returned. Note that this can be NULL, if there
@@ -794,7 +801,7 @@ namespace scene
 		 If you no longer need the animator, you should call ISceneNodeAnimator::drop().
 		 See IUnknown::drop() for more information. */
 		virtual ISceneNodeAnimator* createFlyCircleAnimator(const core::vector3df& center,
-			f32 radius, f32 speed=0.001f) = 0;
+			f32 radius, f32 speed=0.001f, const core::vector3df& direction= core::vector3df ( 0.f, 1.f, 0.f ) ) = 0;
 
 		//! Creates a fly straight animator, which lets the attached scene node fly or move along a line between two points.
 		/** \param startPoint: Start point of the line.

@@ -23,7 +23,7 @@ enum E_LIGHT_TYPE
 };
 
 //! Names for light types
-const char* const LightTypeNames[] =
+const c8* const LightTypeNames[] =
 {
 	"Point",
 	"Directional",

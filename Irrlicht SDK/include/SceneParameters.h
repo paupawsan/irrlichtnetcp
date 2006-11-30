@@ -23,7 +23,7 @@ namespace scene
 	    scene::CSM_TEXTURE_PATH, "path/to/your/textures");
 	\endcode
 	**/ 
-	const char* const CSM_TEXTURE_PATH = "CSM_TexturePath";
+	const c8* const CSM_TEXTURE_PATH = "CSM_TexturePath";
 
 	//! Name of the parameter for changing the texture path of the built-in lmts loader.
 	/** Use it like this:
@@ -32,7 +32,7 @@ namespace scene
 	   scene::LMTS_TEXTURE_PATH, "path/to/your/textures");
 	\endcode
 	**/ 
-	const char* const LMTS_TEXTURE_PATH = "LMTS_TexturePath";
+	const c8* const LMTS_TEXTURE_PATH = "LMTS_TexturePath";
 
 	//! Name of the parameter for changing the texture path of the built-in my3d loader.
 	/** Use it like this:
@@ -41,7 +41,7 @@ namespace scene
 	   scene::MY3D_TEXTURE_PATH, "path/to/your/textures");
 	\endcode
 	**/ 
-	const char* const MY3D_TEXTURE_PATH = "MY3D_TexturePath";
+	const c8* const MY3D_TEXTURE_PATH = "MY3D_TexturePath";
 
 	//! Name of the parameter specifying the COLLADA mesh loading mode
 	/**
@@ -55,7 +55,7 @@ namespace scene
 	   scene::COLLADA_CREATE_SCENE_INSTANCES, true);
 	\endcode
 	*/
-	const char* const COLLADA_CREATE_SCENE_INSTANCES = "COLLADA_CreateSceneInstances";
+	const c8* const COLLADA_CREATE_SCENE_INSTANCES = "COLLADA_CreateSceneInstances";
 
 	//! Name of the parameter for changing the texture path of the built-in DMF loader.
 	/** Use it like this:
@@ -64,7 +64,7 @@ namespace scene
 	   scene::DMF_TEXTURE_PATH, "path/to/your/textures");
 	\endcode
 	**/ 
-	const char* const DMF_TEXTURE_PATH = "DMF_TexturePath";
+	const c8* const DMF_TEXTURE_PATH = "DMF_TexturePath";
 	
 	//! Name of the parameter for preserving DMF textures dir structure with built-in DMF loader.
 	/** Use it like this:
@@ -79,7 +79,7 @@ namespace scene
 	   scene::DMF_USE_MATERIALS_DIRS, true); 
 	\endcode
 	**/ 
-	const char* const DMF_USE_MATERIALS_DIRS = "DMF_MaterialsDir";
+	const c8* const DMF_USE_MATERIALS_DIRS = "DMF_MaterialsDir";
 
 	//! Name of the parameter for setting reference value of alpha in transparent materials.
 	/** Use it like this:
@@ -89,7 +89,7 @@ namespace scene
 	   scene::DMF_ALPHA_CHANNEL_REF, 0.1); 
 	\endcode
 	**/ 
-	const char* const DMF_ALPHA_CHANNEL_REF = "DMF_AlphaRef";
+	const c8* const DMF_ALPHA_CHANNEL_REF = "DMF_AlphaRef";
 	
 	//! Name of the parameter for choose to flip or not tga files.
 	/** Use it like this:
@@ -99,13 +99,13 @@ namespace scene
 	   scene::DMF_FLIP_ALPHA_TEXTURES, true); 
 	\endcode
 	**/ 
-	const char* const DMF_FLIP_ALPHA_TEXTURES = "DMF_FlipAlpha";
+	const c8* const DMF_FLIP_ALPHA_TEXTURES = "DMF_FlipAlpha";
 
 
 	//! Flag set as parameter when the scene manager is used as editor
 	/** In this way special animators like deletion animators can be stopped from
 	deleting scene nodes for example */
-	const char* const IRR_SCENE_MANAGER_IS_EDITOR = "IRR_Editor";
+	const c8* const IRR_SCENE_MANAGER_IS_EDITOR = "IRR_Editor";
 
 } // end namespace scene
 } // end namespace irr

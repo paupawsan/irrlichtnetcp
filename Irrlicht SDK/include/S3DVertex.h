@@ -36,12 +36,12 @@ struct S3DVertex
 	S3DVertex() {};
 
 	//! constructor
-	S3DVertex(f32 x, f32 y, f32 z, f32 nx, f32 ny, f32 nz, const SColor& c, f32 tu, f32 tv)
+	S3DVertex(f32 x, f32 y, f32 z, f32 nx, f32 ny, f32 nz, SColor c, f32 tu, f32 tv)
 		: Pos(x,y,z), Normal(nx,ny,nz), Color(c), TCoords(tu,tv) {}
 
 	//! constructor
 	S3DVertex(const core::vector3df& pos, const core::vector3df& normal,
-		const SColor& color, const core::vector2d<f32>& tcoords)
+		SColor color, const core::vector2d<f32>& tcoords)
 		: Pos(pos), Normal(normal), Color(color), TCoords(tcoords) {}
 
 	//! Position
@@ -80,21 +80,21 @@ struct S3DVertex2TCoords
 	S3DVertex2TCoords() {};
 
 	//! constructor with two different texture coords
-	S3DVertex2TCoords(f32 x, f32 y, f32 z, const SColor& c, f32 tu, f32 tv, f32 tu2, f32 tv2)
+	S3DVertex2TCoords(f32 x, f32 y, f32 z, SColor c, f32 tu, f32 tv, f32 tu2, f32 tv2)
 		: Pos(x,y,z), Color(c), TCoords(tu,tv), TCoords2(tu2,tv2) {}
 
 	//! constructor with two different texture coords
-	S3DVertex2TCoords(const core::vector3df& pos, const SColor& color,
+	S3DVertex2TCoords(const core::vector3df& pos, SColor color,
 		const core::vector2d<f32>& tcoords, const core::vector2d<f32>& tcoords2)
 		: Pos(pos), Color(color), TCoords(tcoords), TCoords2(tcoords2) {}
 
 	//! constructor with the same texture coords and normal
-	S3DVertex2TCoords(f32 x, f32 y, f32 z, f32 nx, f32 ny, f32 nz, const SColor& c, f32 tu, f32 tv)
+	S3DVertex2TCoords(f32 x, f32 y, f32 z, f32 nx, f32 ny, f32 nz, SColor c, f32 tu, f32 tv)
 		: Pos(x,y,z), Normal(nx,ny,nz), Color(c), TCoords(tu,tv), TCoords2(tu,tv) {}
 
 	//! constructor with the same texture coords and normal
 	S3DVertex2TCoords(const core::vector3df& pos, const core::vector3df& normal,
-		const SColor& color, const core::vector2d<f32>& tcoords)
+		SColor color, const core::vector2d<f32>& tcoords)
 		: Pos(pos), Normal(normal), Color(color), TCoords(tcoords), TCoords2(tcoords) {}
 
 	//! Position
@@ -142,7 +142,7 @@ struct S3DVertexTangents
 
 	//! constructor
 	S3DVertexTangents(const core::vector3df& pos,
-		const core::vector2df& tcoords,	const SColor& c)
+		const core::vector2df& tcoords,	SColor c)
 		: Pos(pos), Color(c), TCoords(tcoords) { }
 
 	//! Position

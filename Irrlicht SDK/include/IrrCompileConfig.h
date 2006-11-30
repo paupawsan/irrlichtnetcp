@@ -5,6 +5,9 @@
 #ifndef __IRR_COMPILE_CONFIG_H_INCLUDED__
 #define __IRR_COMPILE_CONFIG_H_INCLUDED__
 
+//! Irrlicht SDK Version
+#define IRRLICHT_SDK_VERSION "1.2"
+
 //! The defines for different operating system are:
 //! _XBOX for XBox
 //! WIN32 for Windows32
@@ -20,6 +23,10 @@
 
 #if !defined(_IRR_WINDOWS_) && !defined(_XBOX) && !defined(OS2) && !defined(MACOSX)
 #define LINUX
+#endif
+
+#if defined(__sparc__) || defined(__sun__)
+#define __BIG_ENDIAN__
 #endif
 
 //! Define _IRR_COMPILE_WITH_DIRECT3D_8_ and _IRR_COMPILE_WITH_DIRECT3D_9_ to compile 
@@ -39,9 +46,9 @@ and this to the linker settings: -ld3dx9 -ld3dx8 **/
 
 #endif
 
-//! Define _IRR_COMPILE_WITH_OPENGL_ to compile the irrlicht engine with OpenGL.
-/** If you do not wish the engine to be compiled with OpengGL, out comment this
-define. */
+//! Define _IRR_COMPILE_WITH_OPENGL_ to compile the Irrlicht engine with OpenGL.
+/** If you do not wish the engine to be compiled with OpengGL, comment this
+define out. */
 #if !defined(_XBOX)
 
 #define _IRR_COMPILE_WITH_OPENGL_
@@ -49,13 +56,28 @@ define. */
 #endif // ! _XBOX
 
 
-//! Define LINUX_OPENGL_USE_EXTENSIONS if the OpenGL renderer should use OpenGL extensions.
-/** For being able to do things like multi texturing. It is useful
- to comment out this define to disable opengl extensions in linux because
- on some linux versions, these extensions does not exist. */
-#if !defined(_IRR_WINDOWS_) && !defined(_XBOX) && !defined(OS2) && !defined(MACOSX)
-#define _IRR_LINUX_OPENGL_USE_EXTENSIONS_
+//! Define _IRR_COMPILE_WITH_X11_ to compile the Irrlicht engine with X11 support.
+/** If you do not wish the engine to be compiled with X11, comment this
+define out. */
+#if defined(LINUX)
+
+#define _IRR_COMPILE_WITH_X11_
+
+#endif
+
+
+//! Define _IRR_OPENGL_USE_EXTPOINTER_ if the OpenGL renderer should use OpenGL extensions via function pointers.
+/** On some systems there is no support for the dynamic extension of OpenGL
+ via function pointers such that this has to be undef'ed. */
+#if !defined(MACOSX) && !defined(__sun__)
+#define _IRR_OPENGL_USE_EXTPOINTER_
+#endif
+
+//! On some Linux systems the XF86 vidmode extension or X11 RandR are missing. Use these flags
+//! to remove the dependencies such that Irrlicht will compile on those systems, too.
+#if defined(LINUX) && !defined(__sun__)
 #define _IRR_LINUX_X11_VIDMODE_
+//#define _IRR_LINUX_X11_RANDR_
 #endif
 
 
@@ -105,6 +127,25 @@ watch registers, variables etc. This works with ASM, HLSL, and both with pixel a
 Note that the engine will run in D3D REF for this, which is a lot slower than HAL. */
 #define _IRR_D3D_NO_SHADER_DEBUGGING 
 
+
+#ifdef _IRR_WINDOWS_
+
+#ifdef IRRLICHT_EXPORTS
+#define IRRLICHT_API __declspec(dllexport)
+#else
+#define IRRLICHT_API __declspec(dllimport)
+#endif // IRRLICHT_EXPORT
+
+#if defined(_STDCALL_SUPPORTED)
+#define IRRCALLCONV __stdcall  // Declare the calling convention.
+#else
+#define IRRCALLCONV	__cdecl
+#endif // STDCALL_SUPPORTED
+
+#else
+#define IRRLICHT_API 
+#define IRRCALLCONV
+#endif // _IRR_WINDOWS_
 
 // We need to disable DIRECT3D9 support for Visual Studio 6.0 because 
 // those $%&$!! disabled support for it since Dec. 2004 and users are complaining

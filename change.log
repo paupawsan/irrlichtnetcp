@@ -19,6 +19,10 @@ Irrlicht .NET CP 0.7
  Also optimized a bit this Matrix4 class.
 -Added Vector3D.HorizontalAngle
 -Added GuiSkin class and all methods (but not yet inheritable).
+-Now uses Irrlicht 1.2, list of modifications :
+	-Corrected a lot of enums to fit Irrlicht 1.2
+	-A ton of new 'hidden' features, refer to Irrlicht 1.2 log for more info.
+	-Added VideoDriver.DrawVertexPrimitiveList
 
 =============================================================================
 Irrlicht .NET CP 0.6

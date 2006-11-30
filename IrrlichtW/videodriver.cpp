@@ -178,6 +178,43 @@ void VideoDriver_DrawIndexedTriangleFanA(IntPtr videodriver, IntPtr *vertices, i
 	delete[] list;
 }
 
+void VideoDriver_DrawVertexPrimitiveList(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount, E_VERTEX_TYPE vType, E_PRIMITIVE_TYPE pType)
+{
+	S3DVertex *list;
+	S3DVertex2TCoords *list2;
+	S3DVertexTangents *list3;
+	switch(vType)
+	{
+		default:
+		case EVT_STANDARD:
+			list = new S3DVertex[vertexCount];
+			for(int i = 0; i < vertexCount; i++)
+				list[i] = *((S3DVertex*)vertices[i]);
+			GetVideoFromIntPtr(videodriver)->drawVertexPrimitiveList(list, vertexCount, indexList, triangleCount, vType, pType);
+			break;
+			
+		case EVT_2TCOORDS:
+			list2 = new S3DVertex2TCoords[vertexCount];
+			for(int i = 0; i < vertexCount; i++)
+				list2[i] = *((S3DVertex2TCoords*)vertices[i]);
+			GetVideoFromIntPtr(videodriver)->drawVertexPrimitiveList(list2, vertexCount, indexList, triangleCount, vType, pType);
+			break;
+			
+		case EVT_TANGENTS:
+			list3 = new S3DVertexTangents[vertexCount];
+			for(int i = 0; i < vertexCount; i++)
+				list3[i] = *((S3DVertexTangents*)vertices[i]);
+			GetVideoFromIntPtr(videodriver)->drawVertexPrimitiveList(list3, vertexCount, indexList, triangleCount, vType, pType);
+			break;
+	}
+	if(list)
+		delete[] list;
+	if(list2)
+		delete[] list2;
+	if(list3)
+		delete[] list3;
+}
+
 E_DRIVER_TYPE VideoDriver_GetDriverType(IntPtr videodriver)
 {
 	return GetVideoFromIntPtr(videodriver)->getDriverType();

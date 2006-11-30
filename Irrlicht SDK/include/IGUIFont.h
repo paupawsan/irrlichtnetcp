@@ -29,7 +29,7 @@ public:
 	 \param color: Color of the text
 	 \param hcenter: Specifiies if the text should be centered horizontally into the rectangle.
 	 \param vcenter: Specifiies if the text should be centered vertically into the rectangle.
-	 \param clip: Optional pointer to a rectalgle against which the text will be clipped.
+	 \param clip: Optional pointer to a rectangle against which the text will be clipped.
 	 If the pointer is null, no clipping will be done. */
 	virtual void draw(const wchar_t* text, const core::rect<s32>& position, 
 		video::SColor color, bool hcenter=false, bool vcenter=false,
