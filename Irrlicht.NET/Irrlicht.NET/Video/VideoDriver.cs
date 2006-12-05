@@ -259,8 +259,8 @@ namespace IrrlichtNETCP
 
         public void DrawIndexedTriangleList(Vertex3DT2[] vertices, int vertexCount, ushort[] indexList, int triangleCount)
         {
-            IntPtr[] rawlist = new IntPtr[vertices.Length];
-            for (int i = 0; i < vertices.Length; i++)
+            IntPtr[] rawlist = new IntPtr[vertexCount];
+            for (int i = 0; i < rawlist.Length; i++)
                 rawlist[i] = vertices[i].Raw;
             VideoDriver_DrawIndexedTriangleListA(_raw, rawlist, vertexCount, indexList, triangleCount);
         }
@@ -280,8 +280,8 @@ namespace IrrlichtNETCP
 
         public void DrawVertexPrimitiveList(Vertex3DT2[] vertices, int vertexCount, ushort[] indexList, int triangleCount, PrimitiveType pType)
         {
-            IntPtr[] rawlist = new IntPtr[vertices.Length];
-            for (int i = 0; i < vertices.Length; i++)
+            IntPtr[] rawlist = new IntPtr[vertexCount];
+            for (int i = 0; i < rawlist.Length; i++)
                 rawlist[i] = vertices[i].Raw;
             VideoDriver_DrawVertexPrimitiveList(_raw, rawlist, vertexCount, indexList, triangleCount, VertexType.T2Coords, pType);
         }
@@ -307,7 +307,7 @@ namespace IrrlichtNETCP
         public void DrawVertexPrimitiveList(Vertex3D[] vertices, int vertexCount, ushort[] indexList, int triangleCount, PrimitiveType pType)
         {
             IntPtr[] rawlist = new IntPtr[vertexCount];
-            for (int i = 0; i < vertices.Length; i++)
+            for (int i = 0; i < rawlist.Length; i++)
                 rawlist[i] = vertices[i].Raw;
             VideoDriver_DrawVertexPrimitiveList(_raw, rawlist, vertexCount, indexList, triangleCount, VertexType.Standard, pType);
         }
