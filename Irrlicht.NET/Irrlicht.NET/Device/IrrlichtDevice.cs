@@ -73,6 +73,14 @@ namespace IrrlichtNETCP
 		{
 			return Device_Run(_raw);
 		}
+
+        /// <summary>
+        /// Closes the device.
+        /// </summary>
+        public void Close()
+        {
+            Device_Close(_raw);
+        }
 		
         /// <summary>
         /// Retrieves the scene manager which is needed for any modification on the scene.
@@ -266,7 +274,10 @@ namespace IrrlichtNETCP
 		static extern bool Device_Run(IntPtr raw);
 		
 		[DllImport(Native.Dll)]
-		static extern void Device_Drop(IntPtr raw);
+        static extern void Device_Drop(IntPtr raw);
+
+        [DllImport(Native.Dll)]
+        static extern void Device_Close(IntPtr raw);
 
 		[DllImport(Native.Dll)]
 		static extern IntPtr Device_GetTimer(IntPtr device);

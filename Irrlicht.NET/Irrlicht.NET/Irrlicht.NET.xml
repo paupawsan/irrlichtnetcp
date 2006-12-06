@@ -23,6 +23,11 @@
             </summary>
             <returns>True if done.</returns>
         </member>
+        <member name="M:IrrlichtNETCP.IrrlichtDevice.Close">
+            <summary>
+            Closes the device.
+            </summary>
+        </member>
         <member name="E:IrrlichtNETCP.IrrlichtDevice.OnEvent">
             <summary>
             Fired when an event occured.

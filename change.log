@@ -6,6 +6,11 @@
 =============================================================================
 Irrlicht .NET CP 0.7
 =============================================================================
+-Added IrrlichtDevice.Close which was on IrrlichtW but not on Irrlicht .NET
+
+=============================================================================
+Irrlicht .NET CP 0.7
+=============================================================================
 -Added SceneManager.Clear
 -Added MetaTriangleSelectors
 -Corrected bug with custom scene nodes' transformed bounding boxes which were
