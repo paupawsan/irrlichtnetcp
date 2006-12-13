@@ -53,7 +53,7 @@ namespace IrrlichtNETCP
 		{
 			get
 			{
-				return (RotationDegrees * 180.0f) / NewMath.PI;
+				return RotationDegrees * NewMath.DEGTORAD;
 			}
 			set
 			{
@@ -123,9 +123,45 @@ namespace IrrlichtNETCP
 			}
 			set
 			{
-				RotationRadian = (value * NewMath.PI) / 180.0f;
+				RotationRadian = value * NewMath.DEGTORAD;
 			}
 		}
+
+        public Vector3D InverseRotationDegrees
+        {
+            set
+            {
+                InverseRotationRadians = value * NewMath.DEGTORAD;
+            }
+        }
+
+        public Vector3D InverseRotationRadians
+        {
+            set
+            {
+                double cr = Math.Cos(value.X);
+                double sr = Math.Sin(value.X);
+                double cp = Math.Cos(value.Y);
+                double sp = Math.Sin(value.Y);
+                double cy = Math.Cos(value.Z);
+                double sy = Math.Sin(value.Z);
+
+                M[0] = (float)(cp * cy);
+                M[4] = (float)(cp * sy);
+                M[8] = (float)(-sp);
+
+                double srsp = sr * sp;
+                double crsp = cr * sp;
+
+                M[1] = (float)(srsp * cy - cr * sy);
+                M[5] = (float)(srsp * sy + cr * cy);
+                M[9] = (float)(sr * cp);
+
+                M[2] = (float)(crsp * cy + sr * sy);
+                M[6] = (float)(crsp * sy - sr * cy);
+                M[10] = (float)(cr * cp); 
+            }
+        }
 		
 		/// <summary> Set matrix to identity. </summary>
 		public void MakeIdentity()

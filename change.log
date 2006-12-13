@@ -7,6 +7,7 @@
 Irrlicht .NET CP 0.8
 =============================================================================
 -Added IrrlichtDevice.Close which was on IrrlichtW but not on Irrlicht .NET
+-Added Matrix4.InverseRotationDegrees (Radians also).
 
 =============================================================================
 Irrlicht .NET CP 0.7
