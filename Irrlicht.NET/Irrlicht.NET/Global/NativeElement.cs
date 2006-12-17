@@ -1,24 +1,23 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace IrrlichtNETCP
 {
 	public abstract class NativeElement : IDisposable
 	{
-		static  Hashtable Elements = new Hashtable();
+        static Dictionary<IntPtr, NativeElement> Elements = new Dictionary<IntPtr, NativeElement>();
 		public static object GetObject(IntPtr raw, Type t)
 		{
 			if(raw == IntPtr.Zero)
 				return null;
 			
-			if(!t.IsSubclassOf(typeof(NativeElement)))
-				throw new InvalidOperationException("Type must be inherited from Native Element !");
 			if(Elements.ContainsKey(raw))
 			{
 				//This condition should NEVER BE TRUE but
 				//in order to prevent stupid engine crashes I added it
 				if(Elements[raw] == null || !t.IsInstanceOfType(Elements[raw]))
-					Elements[raw] = Activator.CreateInstance(t,raw);
+					Elements[raw] = (NativeElement)Activator.CreateInstance(t,raw);
 				return Elements[raw];
 			}
 			return Activator.CreateInstance(t,raw);
@@ -43,7 +42,7 @@ namespace IrrlichtNETCP
 		public virtual void Dispose()
 		{
             if (Elements.ContainsKey(Raw))
-                Elements.Remove(Elements[Raw]);
+                Elements.Remove(Raw);
             if(_raw != IntPtr.Zero)
                 try { Pointer_SafeRelease(_raw); } catch { };
 		}

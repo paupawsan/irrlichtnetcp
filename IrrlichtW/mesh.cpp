@@ -70,6 +70,22 @@ void MeshBuffer_GetIndices(IntPtr meshb, unsigned short* indices)
 		indices[i] = GetMBForIntPtr(meshb)->getIndices()[i];
 }
 
+void MeshBuffer_SetIndices(IntPtr meshb, unsigned short* indices, int count)
+{
+		switch(MeshBuffer_GetVertexType(meshb))
+		{
+			case EVT_STANDARD:
+				((SMeshBuffer*)meshb)->Indices.set_pointer(indices, count);
+				break;
+			case EVT_2TCOORDS:
+				((SMeshBufferLightMap*)meshb)->Indices.set_pointer(indices, count);
+				break;
+			case EVT_TANGENTS:
+				((SMeshBufferTangents*)meshb)->Indices.set_pointer(indices, count);
+				break;
+		}
+}
+
 unsigned short MeshBuffer_GetIndex(IntPtr meshb, int nr)
 {
 	return GetMBForIntPtr(meshb)->getIndices()[nr];

@@ -174,7 +174,12 @@ namespace IrrlichtNETCP.Extensions
         	services.SetPixelShaderConstant("WaveDisplacement", WaveDisplacement);
         	services.SetPixelShaderConstant("WaveRepetition", WaveRepetition);
             services.SetPixelShaderConstant("RefractionFactor", RefractionFactor);
-        	services.SetPixelShaderConstant("UnderWater", _scene.ActiveCamera.Position.Y < Position.Y ? 1.0f : 0.0f);
+            services.SetPixelShaderConstant("UnderWater", IsUnderwater(_scene.ActiveCamera) ? 1.0f : 0.0f);
+        }
+
+        public bool IsUnderwater(SceneNode node)
+        {
+            return node.AbsolutePosition.Y < AbsolutePosition.Y;
         }
         
         #region Shaders

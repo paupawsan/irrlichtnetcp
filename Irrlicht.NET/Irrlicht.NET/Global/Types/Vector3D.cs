@@ -115,6 +115,16 @@ namespace IrrlichtNETCP
             return new Vector3D(first.X / other, first.Y / other, first.Z / other);
         }
 
+        public static Vector3D operator *(Vector3D first, Vector3D other)
+        {
+            return new Vector3D(first.X * other.X, first.Y * other.Y, first.Z * other.Z);
+        }
+
+        public static Vector3D operator /(Vector3D first, Vector3D other)
+        {
+            return new Vector3D(first.X / other.X, first.Y / other.Y, first.Z / other.Z);
+        }
+
         public static Vector3D operator *(float other, Vector3D first)
         {
             return new Vector3D(first.X * other, first.Y * other, first.Z * other);

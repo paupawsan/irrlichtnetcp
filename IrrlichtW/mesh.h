@@ -16,6 +16,7 @@ extern "C"
 	EXPORT void MeshBuffer_SetBoundingBox(IntPtr meshb, M_BOX3D bb);
 	EXPORT int MeshBuffer_GetIndexCount(IntPtr meshb);
 	EXPORT void MeshBuffer_GetIndices(IntPtr meshb, unsigned short* indices);
+	EXPORT void MeshBuffer_SetIndices(IntPtr meshb, unsigned short* indices, int count);
 	EXPORT unsigned short MeshBuffer_GetIndex(IntPtr meshb, int nr);
 	EXPORT void MeshBuffer_SetIndex(IntPtr meshb, int nr, unsigned short val);
 	EXPORT IntPtr MeshBuffer_GetMaterial(IntPtr meshb);

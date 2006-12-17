@@ -53,6 +53,10 @@ namespace IrrlichtNETCP
                 MeshBuffer_GetIndices(_raw, indices);
                 return indices;
             }
+            set
+            {
+                MeshBuffer_SetIndices(_raw, value, value.Length);
+            }
         }
 
         public ushort GetIndex(int nr)
@@ -121,6 +125,9 @@ namespace IrrlichtNETCP
 
         [DllImport(Native.Dll)]
         static extern void MeshBuffer_GetIndices(IntPtr meshb, [MarshalAs(UnmanagedType.LPArray)] ushort[] indices);
+
+        [DllImport(Native.Dll)]
+        static extern void MeshBuffer_SetIndices(IntPtr meshb, ushort[] indices, int count);
 
         [DllImport(Native.Dll)]
         static extern ushort MeshBuffer_GetIndex(IntPtr meshb, int nr);
