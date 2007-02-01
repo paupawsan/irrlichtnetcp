@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace IrrlichtNETCP
 {
@@ -21,8 +21,8 @@ namespace IrrlichtNETCP
         public static int Ceiling(float val) { return (int)Math.Ceiling(val); }
         public static int Floor(double val) { return (int)Math.Floor(val); }
         public static int Ceiling(double val) { return (int)Math.Ceiling(val); }
-        public static int Floor(decimal val) { return (int)Math.Floor(val); }
-        public static int Ceiling(decimal val) { return (int)Math.Ceiling(val); }
+        public static int Floor(decimal val) { return (int)Math.Floor((double)val); }
+        public static int Ceiling(decimal val) { return (int)Math.Ceiling((double)val); }
 
         public static float Lerp(float a, float b, float t)
         {
