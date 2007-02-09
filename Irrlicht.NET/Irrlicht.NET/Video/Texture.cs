@@ -16,7 +16,21 @@ namespace IrrlichtNETCP
 		public DriverType DriverType { get { return Texture_GetDriverType(_raw); } }
 		public Dimension2D OriginalSize{ get { int[] dim = new int[2]; Texture_GetOriginalSize(_raw, dim); return Dimension2D.FromUnmanaged(dim); } }
 		public int Pitch { get { return Texture_GetPitch(_raw); } }
-
+        //EDITED KIWSA
+        public virtual Matrix4 Transform
+        {
+            get
+            {
+                float[] mat = new float[16];
+                Texture_GetTransform(_raw, mat);
+                return Matrix4.FromUnmanaged(mat);
+            }
+            set
+            {
+                Texture_SetTransform(_raw, value.ToUnmanaged());
+            }
+        }
+        //END EDIT
         /// <summary>
         /// Call this before any modification/read of the texture via GetPixel/SetPixel
         /// If you try to modify/acces the texture without it, it will still work but really slower 
@@ -342,6 +356,12 @@ namespace IrrlichtNETCP
 		
 		[DllImport(Native.Dll)]
 		static extern void Texture_RegenerateMipMapLevels(IntPtr raw);
+
+        [DllImport(Native.Dll)]
+        static extern void Texture_GetTransform(IntPtr texture, [MarshalAs(UnmanagedType.LPArray)] float[] TxT);
+
+        [DllImport(Native.Dll)]
+        static extern void Texture_SetTransform(IntPtr texture, float[] TxT);
 
         [DllImport(Native.Dll)]
         static extern IntPtr Texture_Lock(IntPtr texture);

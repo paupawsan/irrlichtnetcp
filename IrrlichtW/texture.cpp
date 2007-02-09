@@ -24,7 +24,17 @@ s32 Texture_GetPitch(IntPtr texture)
 {
     return GetTextureFromPtr(texture)->getPitch();
 }
+//EDIT kiwsa
+void Texture_GetTransform(IntPtr texture,M_MAT4 TxT)
+{
+return UM_MAT4(GetTextureFromPtr(texture)->getTransformation(),TxT);
+}
 
+void Texture_SetTransform(IntPtr texture,M_MAT4 TxT)
+{
+GetTextureFromPtr(texture)->getTransformation() = MU_MAT4(TxT);
+}
+//End Edit Kiwsa
 void Texture_RegenerateMipMapLevels(IntPtr texture)
 {
     GetTextureFromPtr(texture)->regenerateMipMapLevels();
