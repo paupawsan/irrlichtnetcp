@@ -701,6 +701,7 @@ namespace IrrlichtNETCP
         MultiTexture,
         BilnearFilter,
         MipMap,
+        MipAutoUpdate, 
         StencilBuffer,
         VertexShader_1_1,
         VertexShader_2_0,
