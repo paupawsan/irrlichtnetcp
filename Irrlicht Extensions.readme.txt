@@ -28,3 +28,5 @@ List of scene nodes :
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?p=105
 -WaterSceneNode by DeusXL (HLSL translation by peter)
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=54
+-ATMOSphere by Lester, originally made by Pazystamo
+ http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=146
