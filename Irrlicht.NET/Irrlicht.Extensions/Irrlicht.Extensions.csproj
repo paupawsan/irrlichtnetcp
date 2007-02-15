@@ -37,6 +37,7 @@
     <Compile Include="ATMOSphere.cs" />
     <Compile Include="BeamNode.cs" />
     <Compile Include="GrassPatchSceneNode.cs" />
+    <Compile Include="LensflareSceneNode.cs" />
     <Compile Include="WaterSceneNode.cs" />
     <Compile Include="WindGenerator.cs" />
   </ItemGroup>

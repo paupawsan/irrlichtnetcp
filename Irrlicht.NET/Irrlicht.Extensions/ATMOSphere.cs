@@ -42,9 +42,7 @@ namespace IrrlichtNETCP.Extensions
 	       	uvX = 0.0f;
 	       	time_int_step = 0.0f;
 	       	
-	       
-	       	
-        	Start(-1);
+      
         }
         
        	public double DateToJulian(ushort y, ushort m,ushort d, ushort h,ushort min)
@@ -118,7 +116,37 @@ namespace IrrlichtNETCP.Extensions
 					dayspeed = value;
 				}	
 		}
+		
+		public Texture skyTexture
+		{
+			set	
+				{
 
+					dangus = value;
+				}
+		}
+		
+		public Texture starsTexture
+		{
+				set
+					{
+					stars = new Texture[6];
+    				for (int i = 0; i<6; i++)
+	    			{
+	    				stars[i] = value;
+  				
+    				} 
+					}
+		}
+		
+		public Texture sunTexture
+		{
+				set
+					{
+    				suntex = value;						
+					}
+		}
+		
 		public void prep_interpolation(double Jdate, double time)
 		{
 			Matrix4 mat = new Matrix4();
@@ -253,6 +281,13 @@ namespace IrrlichtNETCP.Extensions
     		vt.Z=sun_place.Z+cameraPos.Z;
 
     		sun.Position = vt;
+    		if (sun.Position.Z < cam.AbsolutePosition.Z)
+    			{
+    				sun.Visible = false;
+    			} else
+    			{
+    				sun.Visible = true;
+    			}
 		    //---sun movement end
 		    double inv = 1.0f - time_int_step;
     		uvX=(float)((sun_angle_from * inv + sun_angle_to * time_int_step)+90.0f)/180;
@@ -267,51 +302,35 @@ namespace IrrlichtNETCP.Extensions
     	
     	}
     	
-    	void setSkyImage(string filename)
-    	{
-    	}
-    	
-    	public override void Render()
-    	{
-	   	}
-    	
-    	void createSkyPalette()
+   	
+    	public void createSkyPalette()
     	{
     		
-    		dangus = driver.GetTexture("sky2.tga");
-
-    		Texture[] stars = new Texture[6];
-    		for (int i = 0; i<6; i++)
-    		{
-    			stars[i] = driver.GetTexture("stars.bmp");
-    		}
     		smgr.AddSkyBoxSceneNode(this, stars, -1);
-    		
-    		sky = new ATMOSkySceneNode(dangus, smgr.RootSceneNode, smgr, 80, skyid);
-    		
+
+		    sky = new ATMOSkySceneNode(dangus, smgr.RootSceneNode, smgr, 80, skyid);   		
     		sky.Material.MaterialType = MaterialType.TransparentAlphaChannel;
     		sky.Material.MaterialTypeParam = 0.01f;
  		
     		sun = smgr.AddBillboardSceneNode(this, new Dimension2Df(150,150), -1);
+    		sun.AutomaticCulling = true;
     		sun.GetMaterial(0).Lighting = false;
-    		sun.GetMaterial(0).Texture1 = driver.GetTexture("sun.tga");
+    		sun.GetMaterial(0).Texture1 = suntex;
     		sun.GetMaterial(0).MaterialTypeParam = 0.01f;
     		sun.GetMaterial(0).MaterialType = MaterialType.TransparentAlphaChannel;
     		
+    	    lens = new LensflareSceneNode(sun, smgr, -1, new Vector3D(0,0,0));
+			lens.Material.Texture1 = driver.GetTexture("flares.jpg");
+    		
     	}
     	
-    	void Start(int id)
-    	{
- 			skyid = id;
- 			createSkyPalette();
-    	}
-      	
+    	
        	SceneManager smgr;
        	VideoDriver driver;
      	
        	BillboardSceneNode sun;
        	ATMOSkySceneNode sky;
-
+		LensflareSceneNode lens;
 		Timer timer;
 		
        	double currentTime, startTime, dTime;
@@ -323,7 +342,8 @@ namespace IrrlichtNETCP.Extensions
        	
        	double J;
        	double J1;
-       	
+
+     	
        	double[] sun_angle;
 		double[] vieta;       	
        	float sun_interpolation_speed;
@@ -332,7 +352,8 @@ namespace IrrlichtNETCP.Extensions
        	
        	double sun_angle_from,sun_angle_to;
        	
-       	Image skyimage;
+       	Texture[] stars;
+       	Texture suntex;
        	int skyid;
        	float uvX;       	
     	Texture dangus;
@@ -342,6 +363,7 @@ namespace IrrlichtNETCP.Extensions
     	
 	}
 	
+
 	public class ATMOSkySceneNode : ISceneNode
 	{
         public ATMOSkySceneNode(Texture tex, SceneNode parent, SceneManager mgr, int faces, int id)

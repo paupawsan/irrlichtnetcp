@@ -30,3 +30,5 @@ List of scene nodes :
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=54
 -ATMOSphere by Lester, originally made by Pazystamo
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=146
+-LensFlareSceneNode by Lester 
+ http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=146
