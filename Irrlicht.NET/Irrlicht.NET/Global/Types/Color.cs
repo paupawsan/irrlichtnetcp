@@ -157,7 +157,7 @@ namespace IrrlichtNETCP
         /// <returns>The .NET color</returns>
         public System.Drawing.Color ToBCL()
         {
-            return System.Drawing.Color.FromArgb((int)A, (int)R, (int)G, (int)B);
+            return System.Drawing.Color.FromArgb((int)(A * 255f), (int)(R * 255f), (int)(G * 255f), (int)(B * 255f));
         }
 
         /// <summary>
@@ -167,11 +167,11 @@ namespace IrrlichtNETCP
         /// <returns>The Irrlicht color</returns>
         public static Colorf FromBCL(System.Drawing.Color bcl)
         {
-            return new Colorf(bcl.A, bcl.R, bcl.G, bcl.B);
+            return new Colorf((float)bcl.A / 255f, (float)bcl.R / 255f, (float)bcl.G / 255f, (float)bcl.B / 255f);
         }
 
         public float[] ToUnmanaged() { return new float[] { R, G, B, A }; }
-        public float[] ToShader() { return new float[] { R / 255f, G / 255f, B / 255f, A / 255f }; }
+        public float[] ToShader() { return new float[] { R, G, B, A }; }
         public static Colorf FromUnmanaged(float[] un) { return From(un[0], un[1], un[2], un[3]); }
         public override string ToString()
         {
@@ -189,28 +189,31 @@ namespace IrrlichtNETCP
             return ToString().GetHashCode();
         }
 
-        public uint getLuminance()
+        public uint Luminance
         {
-            return (uint)(0.3f * R + 0.59f * G + 0.11f * B);
+            get
+            {
+                return (uint)(0.3f * R * 255f + 0.59f * G * 255f + 0.11f * B * 255f);
+            }
         }
 
         #region Premade Colors
-        public static Colorf Red = new Colorf(255, 255, 0, 0);
-        public static Colorf Green = new Colorf(255, 0, 255, 0);
-        public static Colorf Blue = new Colorf(255, 0, 0, 255);
-        public static Colorf Black = new Colorf(255, 0, 0, 0);
-        public static Colorf White  =  new Colorf(255, 255, 255, 255);
-        public static Colorf Yellow = new Colorf(255, 255, 255, 0);
-        public static Colorf Purple  =  new Colorf(255, 255, 0, 255);
-        public static Colorf Gray  =  new Colorf(255, 100, 100, 100);
-        public static Colorf TransparentRed  =  new Colorf(0, 255, 0, 0);
-        public static Colorf TransparentGreen  =  new Colorf(0, 0, 255, 0);
-        public static Colorf TransparentBlue  =  new Colorf(0, 0, 0, 255);
-        public static Colorf TransparentBlack  =  new Colorf(0, 0, 0, 0);
-        public static Colorf TransparentWhite  =  new Colorf(0, 255, 255, 255);
-        public static Colorf TransparentYellow  =  new Colorf(0, 255, 255, 0);
-        public static Colorf TransparentPurple  =  new Colorf(0, 255, 0, 255);
-        public static Colorf TransparentGray  =  new Colorf(0, 100, 100, 100);
+        public static Colorf Red = new Colorf(1.0f, 1.0f, 0.0f, 0.0f);
+        public static Colorf Green = new Colorf(1.0f, 0.0f, 1.0f, 0.0f);
+        public static Colorf Blue = new Colorf(1.0f, 0.0f, 0.0f, 1.0f);
+        public static Colorf Black = new Colorf(1.0f, 0.0f, 0.0f, 0.0f);
+        public static Colorf White = new Colorf(1.0f, 1.0f, 1.0f, 1.0f);
+        public static Colorf Yellow = new Colorf(1.0f, 1.0f, 1.0f, 0.0f);
+        public static Colorf Purple = new Colorf(1.0f, 1.0f, 0.0f, 1.0f);
+        public static Colorf Gray = new Colorf(1.0f, 0.39f, 0.39f, 0.39f);
+        public static Colorf TransparentRed = new Colorf(0.0f, 1.0f, 0.0f, 0.0f);
+        public static Colorf TransparentGreen = new Colorf(0.0f, 0.0f, 1.0f, 0.0f);
+        public static Colorf TransparentBlue = new Colorf(0.0f, 0.0f, 0.0f, 1.0f);
+        public static Colorf TransparentBlack = new Colorf(0.0f, 0.0f, 0.0f, 0.0f);
+        public static Colorf TransparentWhite = new Colorf(0.0f, 1.0f, 1.0f, 1.0f);
+        public static Colorf TransparentYellow = new Colorf(0.0f, 1.0f, 1.0f, 0.0f);
+        public static Colorf TransparentPurple = new Colorf(0.0f, 1.0f, 0, 1.0f);
+        public static Colorf TransparentGray = new Colorf(0.0f, 0.39f, 0.39f, 0.39f);
         #endregion
-    }
+    } 
 }

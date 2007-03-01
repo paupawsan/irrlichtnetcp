@@ -8,6 +8,8 @@ Irrlicht .NET CP 0.8
 =============================================================================
 -Added IrrlichtDevice.Close which was on IrrlichtW but not on Irrlicht .NET
 -Added Matrix4.InverseRotationDegrees (Radians also).
+-Corrected a huge bug with Colorf. It was using values between 0f and 255f whereas Irrlicht uses values
+between 0f and 1f... You MUST now update all your softwares. (thanks to lester)
 
 =============================================================================
 Irrlicht .NET CP 0.7

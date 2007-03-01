@@ -133,9 +133,9 @@ namespace IrrlichtNETCP.Extensions
 		{
 			clampList.Add(terrain);
 		}
-		
-		public Colorf AddedColor = Colorf.From(255, 1, 1, 30);
-		public Colorf MultiColor = Colorf.From(255, 190, 190, 210);
+
+        public Colorf AddedColor = Colorf.From(1f, 0.01f, 0.01f, 0.11f);
+        public Colorf MultiColor = Colorf.From(1f, 0.74f, 0.74f, 0.82f);
 		public float WaveHeight = 3f;
 		public float WaveLength = 50f;
 		public float WaveSpeed = 10f;
