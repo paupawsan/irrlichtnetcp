@@ -71,9 +71,16 @@ namespace IrrlichtNETCP.Extensions
                 return material;
             }
         }
-        public int getMaterialCount()
+        public override int MaterialCount
         {
-            return 1;
+            get
+            {
+                return 1;
+            }
+        }
+        public override Material GetMaterial(int i)
+        {
+            return Material;
         }
 
         public override void OnPreRender()
