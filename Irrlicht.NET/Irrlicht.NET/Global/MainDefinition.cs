@@ -49,7 +49,8 @@
  		NormalMapTransparentVertexAlpha,
  		ParallaxMapSolid,
  		ParallaxMapTransparentAddColor,
- 		ParallaxMapTransparentVertexAlpha
+ 		ParallaxMapTransparentVertexAlpha,
+		OnTextureBlend,
  	}
  	
  	public enum MaterialFlag
@@ -66,6 +67,7 @@
  		AnisotropicFilter,
  		FogEnable,
  		NormalizeNormals,
+        TextureWrap,
  		MaterialFlagCount //Do not use
  	}
  	
