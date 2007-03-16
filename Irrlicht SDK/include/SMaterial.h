@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -7,6 +7,8 @@
 
 #include "SColor.h"
 #include "ITexture.h"
+#include "matrix4.h"
+#include "irrArray.h"
 
 namespace irr
 {
@@ -68,7 +70,7 @@ namespace video
 
 		//! Makes the material look like it was reflection the environment
 		//! around it. To make this possible, a texture called 'sphere map'
-		//! is used, which must be set as Texture1.
+		//! is used, which must be set as Textures[0].
 		EMT_SPHERE_MAP,
 
 		//! A reflecting material with an
@@ -179,10 +181,70 @@ namespace video
 		//! EMT_TRANSPARENT_VERTEX_ALPHA as base material.
 		EMT_PARALLAX_MAP_TRANSPARENT_VERTEX_ALPHA,
 
+		//! BlendFunc = source * sourceFactor + dest * destFactor ( E_BLEND_FUNC )
+		//! Using only Textures[0]. generic Blender
+		EMT_ONETEXTURE_BLEND,
+
 		//! This value is not used. It only forces this enumeration to compile in 32 bit.
 		EMT_FORCE_32BIT = 0x7fffffff
 	};
 
+	//! Flag for EMT_ONETEXTURE_BLEND, ( BlendFactor )
+	//! BlendFunc = source * sourceFactor + dest * destFactor
+	enum E_BLEND_FACTOR
+	{
+		EBF_ZERO	= 0,			// src & dest	(0, 0, 0, 0)
+		EBF_ONE,					// src & dest	(1, 1, 1, 1)
+		EBF_DST_COLOR, 				// src			(destR, destG, destB, destA)
+		EBF_ONE_MINUS_DST_COLOR, 	// src			(1-destR, 1-destG, 1-destB, 1-destA)
+		EBF_SRC_COLOR,				// dest			(srcR, srcG, srcB, srcA)
+		EBF_ONE_MINUS_SRC_COLOR, 	// dest			(1-srcR, 1-srcG, 1-srcB, 1-srcA)
+		EBF_SRC_ALPHA,				// src & dest	(srcA, srcA, srcA, srcA)
+		EBF_ONE_MINUS_SRC_ALPHA,	// src & dest	(1-srcA, 1-srcA, 1-srcA, 1-srcA)
+		EBF_DST_ALPHA,				// src & dest	(destA, destA, destA, destA)
+		EBF_ONE_MINUS_DST_ALPHA,	// src & dest	(1-destA, 1-destA, 1-destA, 1-destA)
+		EBF_SRC_ALPHA_SATURATE		// src			(min(srcA, 1-destA), idem, ...)
+	};
+
+	//! Texture coord clamp mode
+	enum E_TEXTURE_CLAMP
+	{
+		ETC_REPEAT = 0,
+		ETC_CLAMP,
+		ETC_CLAMP_TO_EDGE,
+		ETC_CLAMP_TO_BORDER,
+		ETC_MIRROR
+	};
+	static const char* const aTextureClampNames[] = {
+			"texture_clamp_repeat",
+			"texture_clamp_clamp",
+			"texture_clamp_clamp_to_edge",
+			"texture_clamp_clamp_to_border",
+			"texture_clamp_mirror", 0};
+
+	//! MaterialTypeParam: eg. DirectX: D3DTOP_MODULATE, D3DTOP_MODULATE2X, D3DTOP_MODULATE4X
+	enum E_MODULATE_FUNC
+	{
+		EMFN_MODULATE_1X	= 1,
+		EMFN_MODULATE_2X	= 2,
+		EMFN_MODULATE_4X	= 4
+	};
+
+	//! EMT_ONETEXTURE_BLEND: pack srcFact & dstFact and Modulo to MaterialTypeParam
+	inline f32 pack_texureBlendFunc ( const E_BLEND_FACTOR srcFact, const E_BLEND_FACTOR dstFact, const E_MODULATE_FUNC modulate )
+	{
+		u32 state = modulate << 16 | srcFact << 8 | dstFact;
+		return (f32&) state;
+	}
+
+	//! EMT_ONETEXTURE_BLEND: unpack srcFact & dstFact and Modulo to MaterialTypeParam
+	inline void unpack_texureBlendFunc ( E_BLEND_FACTOR &srcFact, E_BLEND_FACTOR &dstFact, E_MODULATE_FUNC &modulo, const f32 param )
+	{
+		u32 state = (u32&)(param);
+		modulo	= E_MODULATE_FUNC  ( ( state & 0x00FF0000 ) >> 16 );
+		srcFact = E_BLEND_FACTOR   ( ( state & 0x0000FF00 ) >> 8  );
+		dstFact = E_BLEND_FACTOR   ( ( state & 0x000000FF )       );
+	}
 
 	//! Material flags
 	enum E_MATERIAL_FLAG
@@ -233,28 +295,106 @@ namespace video
 		//! the normals will be normalized again, and the model will look as bright as it should.
 		EMF_NORMALIZE_NORMALS,
 
+		//! Access to all layers texture wrap settings. Overwrites separate layer settings.
+		EMF_TEXTURE_WRAP,
+
 		//! This is not a flag, but a value indicating how much flags there are.
 		EMF_MATERIAL_FLAG_COUNT
 	};
 
 	//! Maximum number of texture an SMaterial can have.
-	const s32 MATERIAL_MAX_TEXTURES = 4;
+	const u32 MATERIAL_MAX_TEXTURES = 4;
 
 
 	//! struct for holding parameters for a material renderer
-	struct SMaterial
+	class SMaterial
 	{
+	public:
 		//! default constructor, creates a solid material with standard colors
 		SMaterial()
 		: MaterialType(EMT_SOLID), AmbientColor(255,255,255,255), DiffuseColor(255,255,255,255),
 			EmissiveColor(0,0,0,0), SpecularColor(255,255,255,255),
 			Shininess(0.0f), MaterialTypeParam(0.0f), MaterialTypeParam2(0.0f), Thickness(1.0f),
-			Texture1(0), Texture2(0), Texture3(0), Texture4(0),
 			Wireframe(false), PointCloud(false), GouraudShading(true), Lighting(true),
 			ZBuffer(true), ZWriteEnable(true), BackfaceCulling(true),
-			BilinearFilter(true), TrilinearFilter(true), AnisotropicFilter(true),
+			BilinearFilter(true), TrilinearFilter(false), AnisotropicFilter(false),
 			FogEnable(false), NormalizeNormals(false)
-		{}
+		{
+			for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+			{
+				Textures[i] = 0;
+				TextureMatrix[i] = 0;
+				TextureWrap[i] = ETC_REPEAT;
+			}
+		}
+
+		SMaterial(const SMaterial& other)
+		{
+			// These pointers are checked during assignment
+			for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+			{
+				TextureMatrix[i] = 0;
+			}
+			*this = other;
+		}
+
+		~SMaterial()
+		{
+			for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+				if (TextureMatrix[i])
+					delete TextureMatrix[i];
+		}
+
+		SMaterial& operator=(const SMaterial& other)
+		{
+			MaterialType = other.MaterialType;
+
+			AmbientColor = other.AmbientColor;
+			DiffuseColor = other.DiffuseColor;
+			EmissiveColor = other.EmissiveColor;
+			SpecularColor = other.SpecularColor;
+			Shininess = other.Shininess;
+			MaterialTypeParam = other.MaterialTypeParam;
+			MaterialTypeParam2 = other.MaterialTypeParam2;
+			Thickness = other.Thickness;
+			for (u32 i=0; i<MATERIAL_MAX_TEXTURES; ++i)
+			{
+				Textures[i] = other.Textures[i];
+				if (TextureMatrix[i])
+				{
+					if (other.TextureMatrix[i])
+						*TextureMatrix[i] = *other.TextureMatrix[i];
+					else
+					{
+						delete TextureMatrix[i];
+						TextureMatrix[i] = 0;
+					}
+				}
+				else
+				{
+					if (other.TextureMatrix[i])
+						TextureMatrix[i] = new core::matrix4(*other.TextureMatrix[i]);
+					else
+						TextureMatrix[i] = 0;
+				}
+				TextureWrap[i] = other.TextureWrap[i];
+			}
+
+			Wireframe = other.Wireframe;
+			PointCloud = other.PointCloud;
+			GouraudShading = other.GouraudShading;
+			Lighting = other.Lighting;
+			ZBuffer = other.ZBuffer;
+			ZWriteEnable = other.ZWriteEnable;
+			BackfaceCulling = other.BackfaceCulling;
+			BilinearFilter = other.BilinearFilter;
+			TrilinearFilter = other.TrilinearFilter;
+			AnisotropicFilter = other.AnisotropicFilter;
+			FogEnable = other.FogEnable;
+			NormalizeNormals = other.NormalizeNormals;
+
+			return *this;
+		}
 
 		//! Type of the material. Specifies how everything is blended together
 		E_MATERIAL_TYPE MaterialType;
@@ -319,89 +459,177 @@ namespace video
 		//! Thickness of non-3dimensional elements such as lines and points.
 		f32 Thickness;
 
-		//! Texture layer union.
-		union
-		{
-			struct
-			{
-				//! Primary texture layer.
-				ITexture* Texture1;
+		//! Texture layer array.
+		ITexture* Textures[MATERIAL_MAX_TEXTURES];
 
-				//! Secondary texture layer
-				ITexture* Texture2;
+		//! Texture Matrix array
+		//! Do not acces the elements directly as the internal
+		//! ressource management has to cope with Null pointers etc.
+		core::matrix4* TextureMatrix[MATERIAL_MAX_TEXTURES];
 
-				//! Third texture layer
-				ITexture* Texture3;
-
-				//! Fourth texture layer
-				ITexture* Texture4;
-			};
-
-			//! Array of textures, the same as accessing through Texture1 and Texture2
-			ITexture* Textures[MATERIAL_MAX_TEXTURES];
-		};
+		//! Texture Address Mode
+		E_TEXTURE_CLAMP TextureWrap[MATERIAL_MAX_TEXTURES];
 
 		//! material flag union.
 		/** This enables the user to access the
 		material flag using e.g: material.Wireframe = true or
-		material.Flags[EMF_WIREFRAME] = true; */
-		union
+		material.setFlag(EMF_WIREFRAME, true); */
+		struct
 		{
-			struct
-			{
-				//! Draw as wireframe or filled triangles? Default: false
-				bool Wireframe;
+			//! Draw as wireframe or filled triangles? Default: false
+			bool Wireframe;
 
-				//! Draw as point cloud or filled triangles? Default: false
-				bool PointCloud;
+			//! Draw as point cloud or filled triangles? Default: false
+			bool PointCloud;
 
-				//! Flat or Gouraud shading? Default: true
-				bool GouraudShading;
+			//! Flat or Gouraud shading? Default: true
+			bool GouraudShading;
 
-				//! Will this material be lighted? Default: true
-				bool Lighting;
+			//! Will this material be lighted? Default: true
+			bool Lighting;
 
-				//! Is the ZBuffer enabled? Default: true
-				bool ZBuffer;
+			//! Is the ZBuffer enabled? Default: true
+			//! Changed from Bool to Integer
+			// ( 0 == ZBuffer Off, 1 == ZBuffer LessEqual, 2 == ZBuffer Equal )
+			u32 ZBuffer;
 
-				//! May be written to the zbuffer or is it readonly.
-				/** Default: true This flag is ignored, if the MaterialType
-				is a transparent type. */
-				bool ZWriteEnable;
+			//! May be written to the zbuffer or is it readonly.
+			/** Default: 1 This flag is ignored, if the MaterialType
+			is a transparent type. */
+			bool ZWriteEnable;
 
-				//! Is backfaceculling enabled? Default: true
-				bool BackfaceCulling;
+			//! Is backfaceculling enabled? Default: true
+			bool BackfaceCulling;
 
-				//! Is bilinear filtering enabled? Default: true
-				bool BilinearFilter;
+			//! Is bilinear filtering enabled? Default: true
+			bool BilinearFilter;
 
-				//! Is trilinear filtering enabled? Default: false
-				/** If the trilinear filter flag is enabled,
-				the bilinear filtering flag is ignored. */
-				bool TrilinearFilter;
+			//! Is trilinear filtering enabled? Default: false
+			/** If the trilinear filter flag is enabled,
+			the bilinear filtering flag is ignored. */
+			bool TrilinearFilter;
 
-				//! Is anisotropic filtering enabled? Default: false
-				/** In Irrlicht you can use anisotropic texture filtering in conjunction with bilinear or trilinear
-				texture filtering to improve rendering results. Primitives will look less blurry with this
-				flag switched on. */
-				bool AnisotropicFilter;
+			//! Is anisotropic filtering enabled? Default: false
+			/** In Irrlicht you can use anisotropic texture filtering
+			    in conjunction with bilinear or trilinear texture
+			    filtering to improve rendering results. Primitives
+			    will look less blurry with this flag switched on. */
+			bool AnisotropicFilter;
 
-				//! Is fog enabled? Default: false
-				bool FogEnable;
+			//! Is fog enabled? Default: false
+			bool FogEnable;
 
-				//! Should normals be normalized? Default: false
-				bool NormalizeNormals;
-			};
-
-			//! Array representing all flags.
-			bool Flags[EMF_MATERIAL_FLAG_COUNT];
+			//! Should normals be normalized? Default: false
+			bool NormalizeNormals;
 		};
 
+		core::matrix4& getTextureMatrix(u32 i)
+		{
+			if (i<MATERIAL_MAX_TEXTURES && !TextureMatrix[i])
+				TextureMatrix[i] = new core::matrix4(core::matrix4::EM4CONST_IDENTITY);
+			return *TextureMatrix[i];
+		}
+
+		const core::matrix4& getTextureMatrix(u32 i) const
+		{
+			if (i<MATERIAL_MAX_TEXTURES && TextureMatrix[i])
+				return *TextureMatrix[i];
+			else
+				return core::IdentityMatrix;
+		}
+
+		void setTextureMatrix(u32 i, const core::matrix4& mat)
+		{
+			if (i>=MATERIAL_MAX_TEXTURES)
+				return;
+			if (!TextureMatrix[i])
+				TextureMatrix[i] = new core::matrix4(mat);
+			else
+				*TextureMatrix[i] = mat;
+		}
+
+		void setFlag(E_MATERIAL_FLAG flag, bool value)
+		{
+			switch (flag)
+			{
+				case EMF_WIREFRAME:
+					Wireframe = value; break;
+				case EMF_POINTCLOUD:
+					PointCloud = value; break;
+				case EMF_GOURAUD_SHADING:
+					GouraudShading = value; break;
+				case EMF_LIGHTING:
+					Lighting = value; break;
+				case EMF_ZBUFFER:
+					ZBuffer = value; break;
+				case EMF_ZWRITE_ENABLE:
+					ZWriteEnable = value; break;
+				case EMF_BACK_FACE_CULLING:
+					BackfaceCulling = value; break;
+				case EMF_BILINEAR_FILTER:
+					BilinearFilter = value; break;
+				case EMF_TRILINEAR_FILTER:
+					TrilinearFilter = value; break;
+				case EMF_ANISOTROPIC_FILTER:
+					AnisotropicFilter = value; break;
+				case EMF_FOG_ENABLE:
+					FogEnable = value; break;
+				case EMF_NORMALIZE_NORMALS:
+					NormalizeNormals = value; break;
+				case EMF_TEXTURE_WRAP:
+					TextureWrap[0] = TextureWrap[1] = TextureWrap[2] = TextureWrap[3] = (E_TEXTURE_CLAMP)value;
+					break;
+				default:
+					break;
+			}
+		}
+
+		bool getFlag(E_MATERIAL_FLAG flag) const
+		{
+			switch (flag)
+			{
+				case EMF_WIREFRAME:
+					return Wireframe; break;
+				case EMF_POINTCLOUD:
+					return PointCloud; break;
+				case EMF_GOURAUD_SHADING:
+					return GouraudShading; break;
+				case EMF_LIGHTING:
+					return Lighting; break;
+				case EMF_ZBUFFER:
+					return ZBuffer!=0; break;
+				case EMF_ZWRITE_ENABLE:
+					return ZWriteEnable; break;
+				case EMF_BACK_FACE_CULLING:
+					return BackfaceCulling; break;
+				case EMF_BILINEAR_FILTER:
+					return BilinearFilter; break;
+				case EMF_TRILINEAR_FILTER:
+					return TrilinearFilter; break;
+				case EMF_ANISOTROPIC_FILTER:
+					return AnisotropicFilter; break;
+				case EMF_FOG_ENABLE:
+					return FogEnable; break;
+				case EMF_NORMALIZE_NORMALS:
+					return NormalizeNormals; break;
+				case EMF_TEXTURE_WRAP:
+					return !(TextureWrap[0] || TextureWrap[1] || TextureWrap[2] || TextureWrap[3]);
+				case EMF_MATERIAL_FLAG_COUNT:
+					break;
+			}
+
+			return false;
+		}
 
 		//! Compare operator
-		inline bool operator!=(const SMaterial& b)
+		inline bool operator!=(const SMaterial& b) const
 		{
-			return MaterialType != b.MaterialType ||
+			return 
+				Textures[0] != b.Textures[0] ||
+				Textures[1] != b.Textures[1] ||
+				Textures[2] != b.Textures[2] ||
+				Textures[3] != b.Textures[3] ||
+				MaterialType != b.MaterialType ||
 				AmbientColor != b.AmbientColor ||
 				DiffuseColor != b.DiffuseColor ||
 				EmissiveColor != b.EmissiveColor ||
@@ -422,11 +650,17 @@ namespace video
 				AnisotropicFilter != b.AnisotropicFilter ||
 				FogEnable != b.FogEnable ||
 				NormalizeNormals != b.NormalizeNormals ||
-				Texture1 != b.Texture1 ||
-				Texture2 != b.Texture2 ||
-				Texture3 != b.Texture3 ||
-				Texture4 != b.Texture4;
+				TextureWrap[0] != b.TextureWrap[0] ||
+				TextureWrap[1] != b.TextureWrap[1] ||
+				TextureWrap[2] != b.TextureWrap[2] ||
+				TextureWrap[3] != b.TextureWrap[3] ||
+				TextureMatrix[0] != b.TextureMatrix[0] ||
+				TextureMatrix[1] != b.TextureMatrix[1] ||
+				TextureMatrix[2] != b.TextureMatrix[2] ||
+				TextureMatrix[3] != b.TextureMatrix[3];
 		}
+		inline bool operator==(const SMaterial& b) const
+		{ return !(b!=*this); }
 	};
 
 } // end namespace video

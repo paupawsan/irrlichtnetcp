@@ -64,9 +64,9 @@ class CustomSceneNode : public ISceneNode
     {
         return c_int(GET_ID, 0, 0);
     }
-    virtual int getMaterialCount()
+    virtual unsigned int getMaterialCount()
     {
-        return c_int(GET_MATERIAL_COUNT, 0, 0);
+        return (unsigned int)c_int(GET_MATERIAL_COUNT, 0, 0);
     }
     virtual bool isVisible()
     {
@@ -98,13 +98,13 @@ class CustomSceneNode : public ISceneNode
     {
         c_void(ADD_CHILD, child, 0, 0, 0);
     }
-    virtual void OnPostRender(unsigned int timeMS)
+    virtual void OnAnimate(unsigned int timeMS)
     {
-        c_void(ON_POST_RENDER, 0, 0, timeMS, 0);
+        c_void(ON_ANIMATE, 0, 0, timeMS, 0);
     }
-    virtual void OnPreRender()
+    virtual void OnRegisterSceneNode()
     {
-        c_void(ON_PRE_RENDER, 0, 0, 0, 0);
+        c_void(ON_REGISTER_SCENE_NODE, 0, 0, 0, 0);
     }
     virtual void remove()
     {
@@ -171,8 +171,8 @@ class CustomSceneNode : public ISceneNode
         {
             VOID_S(ADD_ANIMATOR, ISceneNode::addAnimator((ISceneNodeAnimator*)arg1))
             VOID_S(ADD_CHILD, ISceneNode::addChild((ISceneNode*)arg1))
-            VOID_S(ON_POST_RENDER, ISceneNode::OnPostRender(arg3))
-            VOID_S(ON_PRE_RENDER, ISceneNode::OnPreRender())
+            VOID_S(ON_ANIMATE, ISceneNode::OnAnimate(arg3))
+			VOID_S(ON_REGISTER_SCENE_NODE, ISceneNode::OnRegisterSceneNode())
             VOID_S(REMOVE, ISceneNode::remove())
             VOID_S(REMOVE_ALL, ISceneNode::removeAll())
             VOID_S(REMOVE_ANIMATOR, ISceneNode::removeAnimator((ISceneNodeAnimator*)arg1))
@@ -194,7 +194,7 @@ class CustomSceneNode : public ISceneNode
         switch(method)
         {
             RETURN_S(GET_ID, ISceneNode::getID())
-            RETURN_S(GET_MATERIAL_COUNT, ISceneNode::getMaterialCount())
+            RETURN_S(GET_MATERIAL_COUNT, (int)ISceneNode::getMaterialCount())
             RETURN_S(IS_VISIBLE, ISceneNode::isVisible() ? 1 : 0)
             RETURN_S(REMOVE_CHILD, ISceneNode::removeChild((ISceneNode*)arg1) ? 1 : 0)
         }

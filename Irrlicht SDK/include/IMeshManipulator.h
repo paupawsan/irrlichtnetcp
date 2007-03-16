@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -9,6 +9,7 @@
 #include "vector3d.h"
 #include "IMeshBuffer.h"
 #include "aabbox3d.h"
+#include "IAnimatedMesh.h"
 
 namespace irr
 {
@@ -58,6 +59,11 @@ namespace scene
 		 \param scale: Scale factor. */
 		virtual void scaleMesh(IMesh* mesh, const core::vector3df& scale) const = 0;
 
+		//! Applies a transformation
+		/** \param mesh: Mesh on which the operation is performed.
+		 \param m: transformation matrix. */
+		virtual void transformMesh(IMesh* mesh, const core::matrix4& m) const = 0;
+
 		//! Clones a static IMesh into a modifyable SMesh.
 		/** All meshbuffers in the returned SMesh
 		are of type SMeshBuffer or SMeshBufferLightMap.
@@ -66,6 +72,7 @@ namespace scene
 		If you no longer need the cloned mesh, you should call SMesh::drop().
 		See IUnknown::drop() for more information. */
 		virtual SMesh* createMeshCopy(IMesh* mesh) const = 0;
+
 
 		//! Creates a planar texture mapping on the mesh
 		/** \param mesh: Mesh on which the operation is performed.
@@ -94,6 +101,11 @@ namespace scene
 
 		//! Returns amount of polygons in mesh.
 		virtual s32 getPolyCount(scene::IAnimatedMesh* mesh) const = 0;
+
+		//! create a new AnimatedMesh and adds the mesh to it
+		virtual IAnimatedMesh * createAnimatedMesh(scene::IMesh* mesh,
+			scene::E_ANIMATED_MESH_TYPE type = scene::EAMT_UNKNOWN) const = 0;
+
 	};
 
 } // end namespace scene

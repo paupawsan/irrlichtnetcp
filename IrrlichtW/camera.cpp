@@ -46,7 +46,7 @@ void Camera_GetViewMatrix(IntPtr camera, M_MAT4 toR)
 
 IntPtr Camera_GetViewFrustrum(IntPtr camera)
 {
-    return (IntPtr)(GetCameraFromIntPtr(camera)->getViewFrustrum());
+    return (IntPtr)(GetCameraFromIntPtr(camera)->getViewFrustum());
 }
 
 bool Camera_IsInputReceiverEnabled(IntPtr camera)
@@ -111,36 +111,36 @@ void Camera_SetUpVector(IntPtr camera, M_VECT3DF upvector)
 
 void VF_GetBoundingBox(IntPtr vf, M_BOX3D box)
 {
-    UM_BOX3D(((SViewFrustrum*)vf)->getBoundingBox(), box);
+    UM_BOX3D(((SViewFrustum*)vf)->getBoundingBox(), box);
 }
 
 void VF_GetFarLeftUp(IntPtr vf, M_VECT3DF pf)
 {
-    UM_VECT3DF(((SViewFrustrum*)vf)->getFarLeftUp(), pf);
+    UM_VECT3DF(((SViewFrustum*)vf)->getFarLeftUp(), pf);
 }
 
 void VF_GetFarLeftDown(IntPtr vf, M_VECT3DF pf)
 {
-    UM_VECT3DF(((SViewFrustrum*)vf)->getFarLeftDown(), pf);
+    UM_VECT3DF(((SViewFrustum*)vf)->getFarLeftDown(), pf);
 }
 
 void VF_GetFarRightDown(IntPtr vf, M_VECT3DF pf)
 {
-    UM_VECT3DF(((SViewFrustrum*)vf)->getFarRightDown(), pf);
+    UM_VECT3DF(((SViewFrustum*)vf)->getFarRightDown(), pf);
 }
 
 void VF_GetFarRightUp(IntPtr vf, M_VECT3DF pf)
 {
-    UM_VECT3DF(((SViewFrustrum*)vf)->getFarRightUp(), pf);
+    UM_VECT3DF(((SViewFrustum*)vf)->getFarRightUp(), pf);
 }
 
 void VF_RecalculateBoundingBox(IntPtr vf)
 {
-    ((SViewFrustrum*)vf)->recalculateBoundingBox();
+    ((SViewFrustum*)vf)->recalculateBoundingBox();
 }
 
 void VF_Transform(IntPtr vf, M_MAT4 mat)
 {
-    ((SViewFrustrum*)vf)->transform(MU_MAT4(mat));
+    ((SViewFrustum*)vf)->transform(MU_MAT4(mat));
 }
 

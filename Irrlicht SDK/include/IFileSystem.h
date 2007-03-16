@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -14,7 +14,7 @@ namespace irr
 namespace video
 {
 	class IVideoDriver;
-}
+} // end namespace video
 namespace io
 {
 
@@ -44,6 +44,19 @@ public:
 	The returned pointer should be dropped when no longer needed.
 	See IUnknown::drop() for more information. */
 	virtual IReadFile* createAndOpenFile(const c8* filename) = 0;
+
+	//! Creates an IReadFile interface for accessing memory like a file.
+	/** This allows you to use a pointer to memory where an IReadFile is requested.
+	\param memory: A pointer to the start of the file in memory
+	\param len: The length of the memory in bytes
+	\param fileName: The name given to this file
+	\param deleteMemoryWhenDropped: True if the memory should be deleted 
+	along with the IReadFile when it is dropped.
+	\return Returns a pointer to the created file interface.
+	The returned pointer should be dropped when no longer needed.
+	See IUnknown::drop() for more information. 
+	*/
+	virtual IReadFile* createMemoryReadFile(void* memory, s32 len, const c8* fileName, bool deleteMemoryWhenDropped=false) = 0;
 
 	//! Opens a file for write access.
 	/** \param filename: Name of file to open.
@@ -75,7 +88,7 @@ public:
 	\param ignorePaths: If set to true, files in the added archive can be accessed
 	without its complete path.
 	\return Returns true if the archive was added successful, false if not. */
-	virtual bool addUnZipFileArchive(const c8* filename, bool ignoreCase = true, bool ignorePaths = true) = 0;
+	virtual bool addFolderFileArchive(const c8* filename, bool ignoreCase = true, bool ignorePaths = true) = 0;
 	
 	//! Adds an pak archive to the file system.
 	/** After calling this, the Irrlicht Engine will search and open files directly from this archive too. 
@@ -88,8 +101,6 @@ public:
 	without its complete path.(should not use with Quake2 paks
 	\return Returns true if the archive was added successful, false if not. */
 	virtual bool addPakFileArchive(const c8* filename, bool ignoreCase = true, bool ignorePaths = true) = 0;
-
-
 
 	//! Returns the string of the current working directory.
 	virtual const c8* getWorkingDirectory() = 0;

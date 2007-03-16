@@ -123,17 +123,17 @@ namespace IrrlichtNETCP.Extensions
             beam.verts[3] = new Vertex3D(vEnd + vRight * flScale, new Vector3D(0, 0, 1), beamColor, new Vector2D(0, 0));
             DrawQuad(beam);
 
-            if (DebugDataVisible)
+            if (DebugDataVisible == DebugSceneType.BoundingBox)
                 driver.Draw3DBox(BoundingBox, Color.White);
         }
 
-        public override void OnPreRender()
+        public override void OnRegisterSceneNode()
         {
             if (Visible)
             {
                 smgr.RegisterNodeForRendering(this, SceneNodeRenderPass.Solid);   
             }
-            base.OnPreRender();
+            base.OnRegisterSceneNode();
         }
 
 
@@ -145,7 +145,7 @@ namespace IrrlichtNETCP.Extensions
             }
         }
 
-        public override int MaterialCount
+        public override uint MaterialCount
         {
             get
             {

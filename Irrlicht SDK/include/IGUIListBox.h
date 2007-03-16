@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -13,6 +13,7 @@ namespace irr
 namespace gui
 {
 	class IGUIFont;
+	class IGUISpriteBank;
 
 	//! Default list box GUI element.
 	class IGUIListBox : public IGUIElement
@@ -35,20 +36,21 @@ namespace gui
 		//! adds an list item, returns id of item
 		virtual s32 addItem(const wchar_t* text) = 0;
 
-		//! adds an list item with an icon.
-		/** \param text Text of list entry
-		 \param icon Text of the Icon. This text can be for example one of the texts defined in
-		 GUIIcons.h. 
-		 \return
-		returns the id of the new created item */
-		virtual s32 addItem(const wchar_t* text, const wchar_t* icon) = 0;
+		//! adds an list item with an icon
+		//! \param text Text of list entry
+		//! \param icon Sprite index of the Icon within the current sprite bank. Set it to -1 if you want no icon
+		//! \return
+		//! returns the id of the new created item
+		virtual s32 addItem(const wchar_t* text, s32 icon) = 0;
 
-		//! Sets the font which should be used as icon font. 
-		/** This font is set to the Irrlicht engine
-		 built-in-font by default. Icons can be displayed in front of every list item.
-		 An icon is a string, displayed with the icon font. When using the build-in-font of the
-		 Irrlicht engine as icon font, the icon strings defined in GUIIcons.h can be used. */
-		virtual void setIconFont(IGUIFont* font) = 0;
+		//! Removes an item from the list
+		virtual void removeItem(s32 index) = 0;
+
+		//! Sets the sprite bank which should be used to draw list icons. This font is set to the sprite bank of
+		//! the built-in-font by default. A sprite can be displayed in front of every list item.
+		//! An icon is an index within the icon sprite bank. Several default icons are available in the
+		//! skin through getIcon
+		virtual void setSpriteBank(IGUISpriteBank* bank) = 0;
 
 		//! clears the list, deletes all items in the listbox
 		virtual void clear() = 0;

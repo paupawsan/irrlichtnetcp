@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -67,7 +67,7 @@ namespace scene
 		//! for the ellipsoid.
 		//! \param translation: Translation of the ellipsoid relative 
 		//! to the position of the scene node.
-		virtual void setEllipsoidTranslation(core::vector3df translation) = 0;
+		virtual void setEllipsoidTranslation(const core::vector3df &translation) = 0;
 
 		//! Returns the translation of the ellipsoid for collision detection. See
 		//! ISceneNodeAnimatorCollisionResponse::setEllipsoidTranslation() for

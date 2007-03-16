@@ -47,11 +47,11 @@ namespace IrrlichtNETCP.Inheritable
                 case CSN_VOID_METHOD.ADD_CHILD:
                     AddChild((SceneNode)NativeElement.GetObject(arg1, typeof(SceneNode)));
                     break;
-                case CSN_VOID_METHOD.ON_POST_RENDER:
-                    OnPostRender(arg3);
+                case CSN_VOID_METHOD.ON_ANIMATE:
+                    OnAnimate(arg3);
                     break;
-                case CSN_VOID_METHOD.ON_PRE_RENDER:
-                    OnPreRender();
+                case CSN_VOID_METHOD.ON_REGISTER_SCENE_NODE:
+                    OnRegisterSceneNode();
                     break;
                 case CSN_VOID_METHOD.REMOVE:
                     Remove();
@@ -101,7 +101,7 @@ namespace IrrlichtNETCP.Inheritable
                 case CSN_INT_METHOD.GET_ID:
                     return ID;
                 case CSN_INT_METHOD.GET_MATERIAL_COUNT:
-                    return MaterialCount;
+                    return (int)MaterialCount;
                 case CSN_INT_METHOD.IS_VISIBLE:
                     return Visible ? 1 : 0;
                 case CSN_INT_METHOD.REMOVE_CHILD:
@@ -209,22 +209,22 @@ namespace IrrlichtNETCP.Inheritable
             }
         }
 
-        public override int MaterialCount
+        public override uint MaterialCount
         {
             get
             {
-                return CSN_PINT_METHODS(_raw, CSN_INT_METHOD.GET_MATERIAL_COUNT, IntPtr.Zero, 0);
+                return (uint)CSN_PINT_METHODS(_raw, CSN_INT_METHOD.GET_MATERIAL_COUNT, IntPtr.Zero, 0);
             }
         }
 
-        public override void OnPostRender(uint timeMS)
+        public override void OnAnimate(uint timeMS)
         {
-            CSN_PVOID_METHODS(_raw, CSN_VOID_METHOD.ON_POST_RENDER, IntPtr.Zero, 0, timeMS, null);
+            CSN_PVOID_METHODS(_raw, CSN_VOID_METHOD.ON_ANIMATE, IntPtr.Zero, 0, timeMS, null);
         }
 
-        public override void OnPreRender()
+        public override void OnRegisterSceneNode()
         {
-            CSN_PVOID_METHODS(_raw, CSN_VOID_METHOD.ON_PRE_RENDER, IntPtr.Zero, 0, 0, null);
+            CSN_PVOID_METHODS(_raw, CSN_VOID_METHOD.ON_REGISTER_SCENE_NODE, IntPtr.Zero, 0, 0, null);
         }
 
         public override SceneNode Parent
@@ -402,8 +402,8 @@ namespace IrrlichtNETCP.Inheritable
     {
         ADD_ANIMATOR = 0,
         ADD_CHILD,
-        ON_POST_RENDER,
-        ON_PRE_RENDER,
+        ON_ANIMATE,
+        ON_REGISTER_SCENE_NODE,
         REMOVE,
         REMOVE_ALL,
         REMOVE_ANIMATOR,

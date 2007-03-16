@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -188,6 +188,31 @@ namespace core
 		{
 			return dimension2d<T>(getWidth(), getHeight());
 		}
+
+
+		//! Adds a point to the rectangle, causing it to grow bigger, 
+		//! if point is outside of the box
+		//! \param p: Point to add into the box.
+		void addInternalPoint(const position2d<T>& p)
+		{
+			addInternalPoint(p.X, p.Y);
+		}
+
+		//! Adds a point to the bounding rectangle, causing it to grow bigger, 
+		//! if point is outside of the box.
+		//! \param x: X Coordinate of the point to add to this box.
+		//! \param y: Y Coordinate of the point to add to this box.
+		void addInternalPoint(T x, T y)
+		{
+			if (x>LowerRightCorner.X) LowerRightCorner.X = x;
+			if (y>LowerRightCorner.Y) LowerRightCorner.Y = y;
+
+			if (x<UpperLeftCorner.X) UpperLeftCorner.X = x;
+			if (y<UpperLeftCorner.Y) UpperLeftCorner.Y = y;
+		}
+
+
+
 
 		position2d<T> UpperLeftCorner;
 		position2d<T> LowerRightCorner;

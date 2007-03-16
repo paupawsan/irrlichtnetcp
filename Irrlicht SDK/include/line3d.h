@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -63,7 +63,7 @@ class line3d
 			return end - start;
 		}
 
-		//! Returns if the overgiven point is between start and end of the
+		//! Returns if the given point is between start and end of the
 		//! line. Assumes that the point is already somewhere on the line.
 		bool isPointBetweenStartAndEnd(const vector3d<T>& point) const
 		{
@@ -89,7 +89,7 @@ class line3d
 		//! Returns if the line intersects with a shpere
 		//! \param sorigin: Origin of the shpere.
 		//! \param sradius: Radius if the sphere.
-		//! \param outdistance: The distance to the firest intersection point.
+		//! \param outdistance: The distance to the first intersection point.
 		//! \return Returns true if there is an intersection.
 		//! If there is one, the distance to the first intersection point
 		//! is stored in outdistance.

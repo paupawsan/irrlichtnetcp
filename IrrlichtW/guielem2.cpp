@@ -246,7 +246,8 @@ void GUIFader_SetColor(IntPtr fader, M_SCOLOR color)
 
 int GUIListBox_AddItem(IntPtr listb, M_STRING text, M_STRING icon)
 {
-	return ((IGUIListBox*)listb)->addItem(MU_WCHAR(text), MU_WCHAR(icon));
+	//TODO: Change with 1.3
+	return ((IGUIListBox*)listb)->addItem(MU_WCHAR(text)/*, MU_WCHAR(icon)*/);
 }
 
 int GUIListBox_AddItemA(IntPtr listb, M_STRING text)
@@ -276,7 +277,8 @@ int GUIListBox_GetSelected(IntPtr listb)
 
 void GUIListBox_SetIconFont(IntPtr listb, IntPtr font)
 {
-	((IGUIListBox*)listb)->setIconFont((IGUIFont*)font);
+	//TODO: Change with 1.3 version
+	//((IGUIListBox*)listb)->setIconFont((IGUIFont*)font);
 }
 
 void GUIListBox_SetSelected(IntPtr listb, int sel)
@@ -401,7 +403,7 @@ bool GUITabControl_SetActiveTab(IntPtr tabc, int index)
 }
 
 
-IntPtr GUIToolBar_AddButton(IntPtr toolbar, int id, M_STRING text, IntPtr img, IntPtr pressedimg, bool isPushButton, bool useAlphaChannel)
+IntPtr GUIToolBar_AddButton(IntPtr toolbar, int id, M_STRING text, M_STRING tooltip, IntPtr img, IntPtr pressedimg, bool isPushButton, bool useAlphaChannel)
 {
-	return ((IGUIToolBar*)toolbar)->addButton(id, MU_WCHAR(text), (ITexture*)img, (ITexture*)pressedimg, isPushButton, useAlphaChannel);
+	return ((IGUIToolBar*)toolbar)->addButton(id, MU_WCHAR(text), MU_WCHAR(tooltip), (ITexture*)img, (ITexture*)pressedimg, isPushButton, useAlphaChannel);
 }

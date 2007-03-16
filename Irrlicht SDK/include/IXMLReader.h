@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -24,8 +24,8 @@ namespace io
 	//! For more informations on how to use the parser, see IIrrXMLReader
 	typedef IIrrXMLReader<c8, IUnknown> IXMLReaderUTF8;
 
-} // end namespace irr
 } // end namespace io
+} // end namespace irr
 
 #endif
 

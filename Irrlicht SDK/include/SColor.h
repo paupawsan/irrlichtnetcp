@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -6,6 +6,7 @@
 #define __COLOR_H_INCLUDED__
 
 #include "irrTypes.h"
+#include "irrMath.h"
 
 namespace irr
 {
@@ -58,14 +59,14 @@ namespace video
 
 
 	//! Returns A8R8G8B8 Color from A1R5G5B5 color
+	//! build a nicer 32 Bit Color by extending dest lower bits with source high bits
 	inline u32 A1R5G5B5toA8R8G8B8(u32 color)
 	{
-		// alpha value is first set to -65535 or 0, then shifted right
-		// to introduce sign bits and and'ed with the desired 8bit value.
-		return	( ( -( (s32) color & 0x00008000 ) >> (s32) 31 ) & 0xFF000000 |
-				( color & 0x00007C00 ) << 9 |
-				( color & 0x000003E0 ) << 6 |
-				( color & 0x0000001F ) << 3);
+		return	( (( -( (s32) color & 0x00008000 ) >> (s32) 31 ) & 0xFF000000 ) |
+				(( color & 0x00007C00 ) << 9) | (( color & 0x00007000 ) << 4) |
+				(( color & 0x000003E0 ) << 6) | (( color & 0x00000380 ) << 1) |
+				(( color & 0x0000001F ) << 3) | (( color & 0x0000001C ) >> 2) 
+				);
 	}
 
 
@@ -147,12 +148,12 @@ namespace video
 		return (color & 0x1F);
 	}
 
-
-	//! Returns the luminance from a 16 bit A1R5G5B5 color
-	inline u32 getLuminance(u16 color)
+	//! Returns the average from a 16 bit A1R5G5B5 color
+	inline s32 getAverage(s16 color)
 	{
 		return ((getRed(color)<<3) + (getGreen(color)<<3) + (getBlue(color)<<3)) / 3;
 	}
+
 
 
 	//! Class representing a 32 bit ARGB color.
@@ -200,9 +201,15 @@ namespace video
 		inline u32 getBlue() const { return color & 0xff; }
 
 		//! Returns the luminance of the color.
-		inline u32 getLuminance() const
+		inline f32 getLuminance() const
 		{
-			return (u32)(0.3f*getRed() + 0.59f*getGreen() + 0.11*getBlue());
+			return 0.3f*getRed() + 0.59f*getGreen() + 0.11f*getBlue();
+		}
+
+		//! Returns the average intensity of the color.
+		inline u32 getAverage() const
+		{
+			return ( getRed() + getGreen() + getBlue() ) / 3;
 		}
 
 		//! Sets the alpha component of the Color. The alpha component
@@ -275,12 +282,32 @@ namespace video
 		//! \return Returns interpolated color.
 		inline SColor getInterpolated(const SColor &other, f32 d) const
 		{
-			f32 inv = 1.0f - d;
+			const f32 inv = 1.0f - d;
 			return SColor((u32)(other.getAlpha()*inv + getAlpha()*d),
 				(u32)(other.getRed()*inv + getRed()*d),
 				(u32)(other.getGreen()*inv + getGreen()*d),
 				(u32)(other.getBlue()*inv + getBlue()*d));
 		}
+
+		//! Returns interpolated color. ( quadratic )
+		/** \param other0: other vector to interpolate between
+			\param other1: other vector to interpolate between
+		\param factor: value between 0.0f and 1.0f. */
+		inline SColor getInterpolated_quadratic(const SColor& v2, const SColor& v3, const f32 d) const
+		{
+			// this*(1-d)*(1-d) + 2 * v2 * (1-d) + v3 * d * d;
+			const f32 inv = 1.f - d;
+			const f32 mul0 = inv * inv;
+			const f32 mul1 = 2.f * d * inv;
+			const f32 mul2 = d * d;
+
+			return SColor ( core::clamp ( core::floor32 ( getAlpha() * mul0 + v2.getAlpha() * mul1 + v3.getAlpha() * mul2 ), 0, 255 ),
+							core::clamp ( core::floor32 ( getRed()   * mul0 + v2.getRed()   * mul1 + v3.getRed()   * mul2 ), 0, 255 ),
+							core::clamp ( core::floor32 ( getGreen() * mul0 + v2.getGreen() * mul1 + v3.getGreen() * mul2 ), 0, 255 ),
+							core::clamp ( core::floor32 ( getBlue()  * mul0 + v2.getBlue()  * mul1 + v3.getBlue()  * mul2 ), 0, 255 )
+						);
+		}
+
 
 		//! color in A8R8G8B8 Format
 		u32 color;
@@ -371,12 +398,33 @@ namespace video
 		//! \param other: Other color
 		//! \param d: value between 0.0f and 1.0f
 		//! \return Returns interpolated color.
-		inline SColorf getInterpolated(SColorf other, f32 d) const
+		inline SColorf getInterpolated(const SColorf &other, f32 d) const
 		{
-			f32 inv = 1.0f - d;
+			const f32 inv = 1.0f - d;
 			return SColorf(other.r*inv + r*d,
 				other.g*inv + g*d, other.b*inv + b*d, other.a*inv + a*d);
 		}
+
+		//! Returns interpolated color. ( quadratic )
+		/** \param other0: other vector to interpolate between
+			\param other1: other vector to interpolate between
+		\param factor: value between 0.0f and 1.0f. */
+		inline SColorf getInterpolated_quadratic(const SColorf& v2, const SColorf& v3, const f32 d) const
+		{
+			// this*(1-d)*(1-d) + 2 * v2 * (1-d) + v3 * d * d;
+			const f32 inv = 1.f - d;
+			const f32 mul0 = inv * inv;
+			const f32 mul1 = 2.f * d * inv;
+			const f32 mul2 = d * d;
+
+			return SColorf ( r * mul0 + v2.r * mul1 + v3.r * mul2,
+							 g * mul0 + v2.g * mul1 + v3.g * mul2,
+							 g * mul0 + v2.b * mul1 + v3.b * mul2,
+							 a * mul0 + v2.a * mul1 + v3.a * mul2
+							);
+		}
+
+
 
 		//! Sets a color component by index. R=0, G=1, B=2, A=3
 		inline void setColorComponentValue(s32 index, f32 value)
@@ -391,6 +439,72 @@ namespace video
 		}
 	};
 
+	//! Class representing a color in HSV format
+	/**	The color values for hue, saturation, value
+	are stored in a 32 bit floating point variable.
+	*/
+	class SColorHSL
+	{
+	public:
+		SColorHSL ( f32 h = 0.f, f32 s = 0.f, f32 l = 0.f )
+			: Hue ( h ), Saturation ( s ), Luminance ( l ) {}
+
+		void setfromRGB ( const SColor &color );
+		void settoRGB ( SColor &color ) const;
+
+		f32 Hue;
+		f32 Saturation;
+		f32 Luminance;
+
+		private:
+			inline u32 toRGB1(f32 rm1, f32 rm2, f32 rh) const;
+
+	};
+
+	inline void SColorHSL::settoRGB ( SColor &color ) const
+	{
+		if ( Saturation == 0.0f) // grey
+		{
+			u8 c = (u8) ( Luminance * 255.0 );
+			color.setRed ( c );
+			color.setGreen ( c );
+			color.setBlue ( c );
+			return;
+		}
+
+		f32 rm1, rm2;
+			
+		if ( Luminance <= 0.5f )
+		{
+			rm2 = Luminance + Luminance * Saturation;  
+		}
+		else
+		{
+			rm2 = Luminance + Saturation - Luminance * Saturation;
+		}
+
+		rm1 = 2.0f * Luminance - rm2;   
+
+		color.setRed ( toRGB1(rm1, rm2, Hue + (120.0f * core::DEGTORAD )) );
+		color.setGreen ( toRGB1(rm1, rm2, Hue) );
+		color.setBlue ( toRGB1(rm1, rm2, Hue - (120.0f * core::DEGTORAD) ) );
+	}
+
+
+	inline u32 SColorHSL::toRGB1(f32 rm1, f32 rm2, f32 rh) const
+	{
+		while ( rh > 2.f * core::PI )
+			rh -= 2.f * core::PI;
+
+		while ( rh < 0.f )
+			rh += 2.f * core::PI;
+
+		if      (rh <  60.0f * core::DEGTORAD ) rm1 = rm1 + (rm2 - rm1) * rh / (60.0f * core::DEGTORAD);
+		else if (rh < 180.0f * core::DEGTORAD ) rm1 = rm2;
+		else if (rh < 240.0f * core::DEGTORAD ) rm1 = rm1 + (rm2 - rm1) * ( ( 240.0f * core::DEGTORAD ) - rh) / (60.0f * core::DEGTORAD);
+		                
+		return (u32) (rm1 * 255.f);
+	}
 
 } // end namespace video
 } // end namespace irr

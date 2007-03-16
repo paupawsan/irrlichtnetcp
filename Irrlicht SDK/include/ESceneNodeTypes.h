@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -66,6 +66,9 @@ namespace scene
 		//! Particle System Scene Node
 		ESNT_PARTICLE_SYSTEM,
 
+		//! Quake3 Model Scene Node ( has tag to link to )
+		ESNT_MD3_SCENE_NODE,
+
 		//! Amount of build in Scene Nodes
 		ESNT_COUNT,
 
@@ -76,6 +79,48 @@ namespace scene
 		//! compile these enumeration values to 32 bit.
 		ESNT_FORCE_32_BIT = 0x7fffffff
 	};
+
+
+	//! An enumeration for all types of automatic culling for built-in scene nodes 
+	enum E_CULLING_TYPE
+	{
+		EAC_OFF = 0,
+		EAC_BOX,
+		EAC_FRUSTUM_BOX,
+		EAC_FRUSTUM_SPHERE
+	};
+
+	//! Names for culling type
+	const c8* const AutomaticCullingNames[] =
+	{
+		"false",
+		"box",					// camera box against node box
+		"frustum_box",			// camera frustum against node box
+		"frustum_sphere",		// camera frustum against node sphere
+		0
+	};
+
+	//! An enumeration for all types of debug data for built-in scene nodes (flags)
+	enum E_DEBUG_SCENE_TYPE 
+	{
+		//! No Debug Data ( Default )
+		EDS_OFF			= 0,
+		//! Show Bounding Boxes of SceneNode
+		EDS_BBOX		= 1,
+		//! Show Vertex Normals
+		EDS_NORMALS		= 2,
+		//! Shows Skeleton/Tags
+		EDS_SKELETON	= 4,
+		//! Overlays Mesh Wireframe
+		EDS_MESH_WIRE_OVERLAY	= 8,
+		//! Temporary use transparency Material Type 
+		EDS_HALF_TRANSPARENCY	= 16,
+		//! Show Bounding Boxes of all MeshBuffers
+		EDS_BBOX_BUFFERS		= 32,
+		EDS_FULL		= EDS_BBOX | EDS_NORMALS | EDS_SKELETON | EDS_MESH_WIRE_OVERLAY
+	};
+
+
 
 } // end namespace scene
 } // end namespace irr

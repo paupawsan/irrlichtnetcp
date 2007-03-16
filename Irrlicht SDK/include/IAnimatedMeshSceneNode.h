@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -7,6 +7,7 @@
 
 #include "ISceneNode.h"
 #include "IAnimatedMeshMD2.h"
+#include "IAnimatedMeshMD3.h"
 #include "IShadowVolumeSceneNode.h"
 
 namespace irr
@@ -64,7 +65,7 @@ namespace scene
 
 		//! Sets the speed with witch the animation is played.
 		//! \param framesPerSecond: Frames per second played.
-		virtual void setAnimationSpeed(s32 framesPerSecond) = 0;
+		virtual void setAnimationSpeed(f32 framesPerSecond) = 0;
 
 		//! Creates shadow volume scene node as child of this node
 		//! and returns a pointer to it.  The shadow can be rendered using the ZPass
@@ -143,7 +144,7 @@ namespace scene
 		//! Starts a default MD2 animation.
 		//! With this method it is easily possible to start a Run, Attack,
 		//! Die or whatever animation, if the mesh contained in this scene
-		//! node is a md2 mesh. Otherwise, nothing happenes.
+		//! node is an md2 mesh. Otherwise, nothing happens.
 		//! \param anim: An MD2 animation type, which should be played, for
 		//! example EMAT_STAND for the standing animation.
 		//! \return Returns true if successful, and false if not, for example
@@ -153,18 +154,22 @@ namespace scene
 		//! Starts a special MD2 animation.
 		//! With this method it is easily possible to start a Run, Attack,
 		//! Die or whatever animation, if the mesh contained in this scene
-		//! node is a md2 mesh. Otherwise, nothing happenes. This method uses
+		//! node is an md2 mesh. Otherwise, nothing happens. This method uses
 		//! a character string to identify the animation. If the animation is a
 		//! standard md2 animation, you might want to start this animation
-		//! with the EMD2_ANIMATION_TYPE enumeraition instead.
+		//! with the EMD2_ANIMATION_TYPE enumeration instead.
 		//! \param animationName: Name of the animation which should be played.
-        //! \return Returns true if successful, and false if not, for example
-		//! if the mesh in the scene node is not a md2 mesh, or no animation
+		//! \return Returns true if successful, and false if not, for example
+		//! if the mesh in the scene node is not an md2 mesh, or no animation
 		//! with this name could be found.
 		virtual bool setMD2Animation(const c8* animationName) = 0;
 
 		//! Returns the current displayed frame number.
 		virtual s32 getFrameNr() = 0;
+		//! Returns the current start frame number.
+		virtual s32 getStartFrame() = 0;
+		//! Returns the current end frame number.
+		virtual s32 getEndFrame() = 0;
 
 		//! Sets looping mode which is on by default. If set to false,
 		//! animations will not be played looped.
@@ -189,6 +194,10 @@ namespace scene
 
 		//! Returns the current mesh
 		virtual IAnimatedMesh* getMesh(void) = 0;
+
+		// returns the absolute transformation for a special MD3 Tag if the mesh is a md3 mesh,
+		// or the absolutetransformation if it's a normal scenenode
+		virtual const SMD3QuaterionTag& getAbsoluteTransformation( const core::stringc & tagname) = 0;
 
 	};
 

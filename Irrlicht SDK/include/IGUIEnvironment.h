@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -11,21 +11,28 @@
 #include "irrTypes.h"
 #include "IGUIWindow.h"
 #include "IGUISkin.h"
+#include "IFileSystem.h"
 
 namespace irr
 {
-
+	namespace io
+	{
+		class IXMLWriter;
+		class IReadFile;
+		class IWriteFile;
+	} // end namespace io
 	namespace video
 	{
 		class IVideoDriver;
 		class ITexture;
-	}
+	} // end namespace video
 
 namespace gui
 {
 
 class IGUIElement;
 class IGUIFont;
+class IGUISpriteBank;
 class IGUIScrollBar;
 class IGUIImage;
 class IGUIMeshViewer;
@@ -41,6 +48,7 @@ class IGUITab;
 class IGUIContextMenu;
 class IGUIComboBox;
 class IGUIToolBar;
+class IGUIElementFactory;
 
 //! GUI Environment. Used as factory and manager of all other GUI elements.
 class IGUIEnvironment : public virtual IUnknown
@@ -56,6 +64,9 @@ public:
 	//! Sets the focus to an element.
 	virtual void setFocus(IGUIElement* element) = 0;
 
+	//! Returns the element with the focus
+	virtual IGUIElement* getFocus() = 0;
+
 	//! Removes the focus from an element.
 	virtual void removeFocus(IGUIElement* element) = 0;
 
@@ -64,6 +75,12 @@ public:
 
 	//! Returns the current video driver.
 	virtual video::IVideoDriver* getVideoDriver() = 0;
+
+	//! Returns the file system.
+	virtual io::IFileSystem* getFileSystem() = 0;
+
+	//! removes all elements from the environment.
+	virtual void clear() = 0;
 
 	//! Posts an input event to the environment. 
 	/** Usually you do not have to
@@ -108,6 +125,16 @@ public:
 	//! Returns the default built-in font.
 	virtual IGUIFont* getBuiltInFont() = 0;
 
+	//! Returns pointer to the sprite bank with the specified file name. 
+	/** Loads the bank if it was not loaded before. Returns 0 if it could not be loaded.
+	\return
+	returns a pointer to the sprite bank.
+	This pointer should not be dropped. See IUnknown::drop() for more information. */
+	virtual IGUISpriteBank* getSpriteBank(const c8* filename) = 0;
+
+	//! adds an empty sprite bank to the manager
+	virtual IGUISpriteBank* addEmptySpriteBank(const c8 *name) = 0;
+
 	//! Returns the root gui element. 
 	/** This is the first gui element, parent of all other
 	gui elements. You'll never need to use this method, unless you are not creating 
@@ -120,7 +147,7 @@ public:
 	 Returns a pointer to the created button. Returns 0 if an error occured.
 	 This pointer should not be dropped. See IUnknown::drop() for more information. */
 	virtual IGUIButton* addButton(const core::rect<s32>& rectangle,
-		IGUIElement* parent=0, s32 id=-1, const wchar_t* text=0) = 0;
+		IGUIElement* parent=0, s32 id=-1, const wchar_t* text=0, const wchar_t* tooltiptext = 0) = 0;
 
 	//! Adds an empty window element. 
 	/** \param modal: Defines if the dialog is modal. This means, that all other
@@ -131,6 +158,13 @@ public:
 	This pointer should not be dropped. See IUnknown::drop() for more information. */
 	virtual IGUIWindow* addWindow(const core::rect<s32>& rectangle, bool modal = false, 
 		const wchar_t* text=0, IGUIElement* parent=0, s32 id=-1) = 0;
+
+	//! Adds a modal screen. This control stops its parent's members from being 
+	//! able to recieve input until its last child is removed, it then deletes its self.
+	/** \return
+	Returns a pointer to the created window. Returns 0 if an error occured.
+	This pointer should not be dropped. See IUnknown::drop() for more information. */
+	virtual IGUIElement* addModalScreen(IGUIElement* parent) = 0;
 
 	//! Adds a message box.
 	/** \param caption: Text to be displayed the title of the message box.
@@ -221,7 +255,7 @@ public:
 	 \param text is the text to be displayed. Can be altered after creation with SetText().
 	 \param rectangle is the position of the static text.
 	 \param border has to be set to true if the static text should have a 3d border.
-	 \param wordWrap specifyes, if the text should be wrapped into multiple lines.
+	 \param wordWrap specifies, if the text should be wrapped into multiple lines.
 	 \param parent is the parent item of the element. E.g. a window. Set it to 0 to place the fader directly in the environment.
 	 \param id is a s32 to identify the static text element.
 	 \param fillBackground specifies if the background will be filled. Default: false.
@@ -307,6 +341,50 @@ public:
 	 \param id is a s32 to identify the combo box. */
 	virtual IGUIComboBox* addComboBox(const core::rect<s32>& rectangle,
 		IGUIElement* parent=0, s32 id=-1) = 0;
+
+	//! Returns the default element factory which can create all built in elements
+	virtual IGUIElementFactory* getDefaultGUIElementFactory() = 0;
+
+	//! Adds an element factory to the gui environment.
+	/** Use this to extend the gui environment with new element types which it should be
+	able to create automaticly, for example when loading data from xml files. */
+	virtual void registerGUIElementFactory(IGUIElementFactory* factoryToAdd) = 0;
+
+	//! Returns amount of registered scene node factories.
+	virtual s32 getRegisteredGUIElementFactoryCount() = 0;
+
+	//! Returns a scene node factory by index
+	virtual IGUIElementFactory* getGUIElementFactory(s32 index) = 0;
+
+	//! Adds a GUI Element by its name
+	virtual IGUIElement* addGUIElement(const c8* elementName, IGUIElement* parent=0) = 0;
+
+	//! Saves the current gui into a file.
+	//! \param filename: Name of the file.
+	virtual bool saveGUI(const c8* filename)=0;
+
+	//! Saves the current gui into a file.
+	virtual bool saveGUI(io::IWriteFile* file)=0;
+
+	//! Loads the gui. Note that the current gui is not cleared before.
+	//! \param filename: Name of the file .
+	virtual bool loadGUI(const c8* filename)=0;
+
+	//! Loads the gui. Note that the current gui is not cleared before.
+	virtual bool loadGUI(io::IReadFile* file)=0;	
+
+	//! Writes attributes of the gui environment
+	virtual void serializeAttributes(io::IAttributes* out, io::SAttributeReadWriteOptions* options=0)=0;
+
+	//! Reads attributes of the gui environment
+	virtual void deserializeAttributes(io::IAttributes* in, io::SAttributeReadWriteOptions* options=0)=0;
+
+	//! writes an element
+	virtual void writeGUIElement(io::IXMLWriter* writer, IGUIElement* node) =0;
+
+	//! reads an element
+	virtual void readGUIElement(io::IXMLReader* reader, IGUIElement* parent) =0;
+
 };
 
 

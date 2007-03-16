@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -22,7 +22,7 @@ namespace scene
 {
 	//! A scene node for displaying terrain using the geo mip map algorithm.
 	/** The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and 
-	 * the GeoMipMapSceneNode developed by Spinz. They made their code available for Irrlicht 
+	 * the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht 
 	 * and allowed it to be  distributed under this licence. I only modified some parts.
 	 * A lot of thanks go to them. 
 	 *
@@ -62,7 +62,7 @@ namespace scene
 		virtual const core::aabbox3d<f32>& getBoundingBox (s32 patchX, s32 patchZ) const = 0;
 
 		//! Returns the number of indices currently in the meshbuffer for this scene node.
-		virtual s32 getIndexCount() = 0;
+		virtual u32 getIndexCount() = 0;
 
 		//! Returns pointer to the mesh
 		virtual IMesh* getMesh() = 0;

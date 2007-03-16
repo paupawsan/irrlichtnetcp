@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -44,7 +44,7 @@ public:
 	//! {
 	//! 	video::IVideoDriver* driver = services->getVideoDriver();
 	//! 
-	//! 	float time = (float)os::Timer::getTime()/100000.0f;
+	//! 	f32 time = (f32)os::Timer::getTime()/100000.0f;
 	//! 	services->setVertexShaderConstant("fTime", &time, 1);
 	//! 
 	//! 	core::matrix4 worldViewProj(driver->getTransform(video::ETS_PROJECTION));

@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -29,9 +29,13 @@ public:
 		const core::vector3df& position = core::vector3df(0,0,0))
 		: ISceneNode(parent, mgr, id, position) {}
 
+	//! Sets the light data associated with this ILightSceneNode
+	virtual void setLightData(const video::SLight& light) = 0;
+
 	//! Gets the light data associated with this ILightSceneNode
 	//! \return Returns the light data.
 	virtual video::SLight& getLightData() = 0;
+
 };
 
 } // end namespace scene

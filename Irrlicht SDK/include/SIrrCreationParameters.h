@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -14,7 +14,7 @@ namespace irr
 		//! Constructs a SIrrlichtCreationParameters structure with default values.
 		SIrrlichtCreationParameters()
 		{
-			DriverType = video::EDT_SOFTWARE2;
+			DriverType = video::EDT_BURNINGSVIDEO;
 			WindowSize = core::dimension2d<s32>(800, 600);
 			Bits = 16;
 			Fullscreen = false;
@@ -134,7 +134,7 @@ namespace irr
 	};
 
 
-} // end namespace
+} // end namespace irr
 
 #endif
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -74,6 +74,9 @@ namespace irr
 			//! A gui element has lost its focus.
 			EGET_ELEMENT_FOCUS_LOST = 0,
 
+			//! A gui element has got the focus.
+			EGET_ELEMENT_FOCUSED,
+
 			//! A gui element was hovered.
 			EGET_ELEMENT_HOVERED,
 
@@ -95,7 +98,7 @@ namespace irr
 			//! An item in the listbox was selected, which was already selected.
 			EGET_LISTBOX_SELECTED_AGAIN, 
 
-			//! A file has been selected in the file open dialog
+			//! A file has been selected in the file dialog
 			EGET_FILE_SELECTED,
 
 			//! A file open dialog has been closed without choosing a file
@@ -216,7 +219,7 @@ public:
 };
 
 
-} // end namespace
+} // end namespace irr
 
 #endif
 

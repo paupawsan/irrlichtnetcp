@@ -329,7 +329,6 @@ namespace IrrlichtNETCP.Extensions
             sky.Material.MaterialTypeParam = 0.01f;
 
             sun = smgr.AddBillboardSceneNode(this, new Dimension2Df(150, 150), -1);
-            sun.AutomaticCulling = true;
             sun.GetMaterial(0).Lighting = false;
             sun.GetMaterial(0).Texture1 = suntex;
             sun.GetMaterial(0).MaterialTypeParam = 0.01f;
@@ -394,10 +393,10 @@ namespace IrrlichtNETCP.Extensions
             : base(parent, mgr, id)
         {
             smgr = mgr;
-            AutomaticCulling = false;
+            AutomaticCulling = CullingType.Off;
             material = new Material();
             material.Lighting = false;
-            material.ZBuffer = false;
+            material.ZBuffer = 0;
             material.BilinearFilter = true;
             material.Texture1 = tex;
 
@@ -442,12 +441,12 @@ namespace IrrlichtNETCP.Extensions
         }
 
 
-        public override void OnPreRender()
+        public override void OnRegisterSceneNode()
         {
             if (Visible)
                 smgr.RegisterNodeForRendering(this, SceneNodeRenderPass.SkyBox);
 
-            base.OnPreRender();
+            base.OnRegisterSceneNode();
         }
 
         public override void Render()
@@ -489,7 +488,7 @@ namespace IrrlichtNETCP.Extensions
         }
 
 
-        public override int MaterialCount
+        public override uint MaterialCount
         {
             get
             {

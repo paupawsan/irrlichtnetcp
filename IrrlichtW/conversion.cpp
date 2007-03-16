@@ -114,7 +114,7 @@ irr::core::matrix4 MU_MAT4(M_MAT4 val)
     irr::core::matrix4 mat;
     for(int row = 0; row < 4; row++)
         for(int col = 0; col < 4; col++)
-            mat.M[col * 4 + row] = val[col * 4 + row];
+            mat[col * 4 + row] = val[col * 4 + row];
     return mat;
 }
 
@@ -122,7 +122,7 @@ void UM_MAT4(irr::core::matrix4 val, M_MAT4 mat)
 {
     for(int row = 0; row < 4; row++)
         for(int col = 0; col < 4; col++)
-            mat[col * 4 + row] = val.M[col * 4 + row];
+            mat[col * 4 + row] = val[col * 4 + row];
 }
 
 void UM_BOX3D(irr::core::aabbox3d<float> base, M_BOX3D t)

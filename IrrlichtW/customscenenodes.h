@@ -5,8 +5,8 @@ extern "C"
     {
         ADD_ANIMATOR = 0,
         ADD_CHILD,
-        ON_POST_RENDER,
-        ON_PRE_RENDER,
+        ON_ANIMATE,
+        ON_REGISTER_SCENE_NODE,
         REMOVE,
         REMOVE_ALL,
         REMOVE_ANIMATOR,

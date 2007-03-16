@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -61,6 +61,17 @@ while(device->run())
 		irr::SIrrlichtCreationParameters::WindowId for more informations and example code.
 		*/
 		virtual bool run() = 0;
+
+		//! Cause the device to temporarily pause execution and let other processes to run
+		// This should bring down processor usage without major performance loss for Irrlicht
+		virtual void yield() = 0;
+
+		//! Pause execution and let other processes to run for a specified amount of time.
+		/** It may not wait the full given time, as sleep may be interrupted
+		\param timeMs: Time to sleep for in milisecs. 
+		\param pauseTimer: If true, pauses the device timer while sleeping
+		*/
+		virtual void sleep(u32 timeMs, bool pauseTimer=false) = 0;
 
 		//! Provides access to the video driver for drawing 3d and 2d geometry.
 		/** \return Returns a pointer the video driver. */
@@ -152,7 +163,7 @@ while(device->run())
 		virtual void setResizeAble(bool resize=false) = 0;
 	};
 
-} // end namespace
+} // end namespace irr
 
 #endif
 

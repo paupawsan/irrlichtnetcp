@@ -17,14 +17,14 @@ extern "C"
 	EXPORT int MeshBuffer_GetIndexCount(IntPtr meshb);
 	EXPORT void MeshBuffer_GetIndices(IntPtr meshb, unsigned short* indices);
 	EXPORT void MeshBuffer_SetIndices(IntPtr meshb, unsigned short* indices, int count);
-	EXPORT unsigned short MeshBuffer_GetIndex(IntPtr meshb, int nr);
-	EXPORT void MeshBuffer_SetIndex(IntPtr meshb, int nr, unsigned short val);
+	EXPORT unsigned short MeshBuffer_GetIndex(IntPtr meshb, unsigned int nr);
+	EXPORT void MeshBuffer_SetIndex(IntPtr meshb, unsigned int nr, unsigned short val);
 	EXPORT IntPtr MeshBuffer_GetMaterial(IntPtr meshb);
 	EXPORT void MeshBuffer_SetMaterial(IntPtr meshb, IntPtr material);
 	EXPORT int MeshBuffer_GetVertexCount(IntPtr meshb);
 	EXPORT E_VERTEX_TYPE MeshBuffer_GetVertexType(IntPtr meshb);
-	EXPORT IntPtr MeshBuffer_GetVertex(IntPtr meshb, int nr);
-	EXPORT void MeshBuffer_SetVertex(IntPtr meshb, int nr, IntPtr vert);
-	EXPORT IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, int nr);
-	EXPORT void MeshBuffer_SetVertex2T(IntPtr meshb, int nr, IntPtr vert);
+	EXPORT IntPtr MeshBuffer_GetVertex(IntPtr meshb, unsigned int nr);
+	EXPORT void MeshBuffer_SetVertex(IntPtr meshb, unsigned int nr, IntPtr vert);
+	EXPORT IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, unsigned int nr);
+	EXPORT void MeshBuffer_SetVertex2T(IntPtr meshb, unsigned int nr, IntPtr vert);
 }

@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -73,11 +73,17 @@ class quaternion
 		//! Creates a matrix from this quaternion
 		matrix4 getMatrix() const;
 
+		//! Creates a matrix from this quaternion
+		void getMatrix( matrix4 &dest ) const;
+
+		//! Creates a matrix from this quaternion
+		void getMatrix_transposed( matrix4 &dest ) const;
+
 		//! Inverts this quaternion
 		void makeInverse();
 
-		//! Interpolates the quaternion between to quaternions based on time
-		quaternion slerp(quaternion q1, quaternion q2, f32 time);
+		//! set this quaternion to the result of the inpolation between two quaternions based
+		void slerp( quaternion q1, const quaternion q2, f32 interpolate );
 
 		//! axis must be unit length
 		//! The quaternion representing the rotation is
@@ -85,6 +91,9 @@ class quaternion
 		void fromAngleAxis (f32 angle, const vector3df& axis);
 
 		void toEuler(vector3df& euler) const;
+
+		//! set quaternion to identity
+		void makeIdentity();
 
 		f32 X, Y, Z, W;
 };
@@ -274,6 +283,56 @@ inline matrix4 quaternion::getMatrix() const
 }
 
 
+//! Creates a matrix from this quaternion
+inline void quaternion::getMatrix( matrix4 &dest ) const
+{
+	dest[0] = 1.0f - 2.0f*Y*Y - 2.0f*Z*Z;
+	dest[1] = 2.0f*X*Y + 2.0f*Z*W;
+	dest[2] = 2.0f*X*Z - 2.0f*Y*W;
+	dest[3] = 0.0f;
+
+	dest[4] = 2.0f*X*Y - 2.0f*Z*W;
+	dest[5] = 1.0f - 2.0f*X*X - 2.0f*Z*Z;
+	dest[6] = 2.0f*Z*Y + 2.0f*X*W;
+	dest[7] = 0.0f;
+
+	dest[8] = 2.0f*X*Z + 2.0f*Y*W;
+	dest[9] = 2.0f*Z*Y - 2.0f*X*W;
+	dest[10] = 1.0f - 2.0f*X*X - 2.0f*Y*Y;
+	dest[11] = 0.0f;
+
+	dest[12] = 0.f;
+	dest[13] = 0.f;
+	dest[14] = 0.f;
+	dest[15] = 1.f;
+}
+
+//! Creates a matrix from this quaternion
+inline void quaternion::getMatrix_transposed( matrix4 &dest ) const
+{
+	dest[0] = 1.0f - 2.0f*Y*Y - 2.0f*Z*Z;
+	dest[4] = 2.0f*X*Y + 2.0f*Z*W;
+	dest[8] = 2.0f*X*Z - 2.0f*Y*W;
+	dest[12] = 0.0f;
+
+	dest[1] = 2.0f*X*Y - 2.0f*Z*W;
+	dest[5] = 1.0f - 2.0f*X*X - 2.0f*Z*Z;
+	dest[9] = 2.0f*Z*Y + 2.0f*X*W;
+	dest[13] = 0.0f;
+
+	dest[2] = 2.0f*X*Z + 2.0f*Y*W;
+	dest[6] = 2.0f*Z*Y - 2.0f*X*W;
+	dest[10] = 1.0f - 2.0f*X*X - 2.0f*Y*Y;
+	dest[14] = 0.0f;
+
+	dest[3] = 0.f;
+	dest[7] = 0.f;
+	dest[11] = 0.f;
+	dest[15] = 1.f;
+}
+
+
+
 //! Inverts this quaternion
 inline void quaternion::makeInverse()
 {
@@ -288,6 +347,7 @@ inline void quaternion::set(f32 x, f32 y, f32 z, f32 w)
 	Z = z;
 	W = w;
 }
+
 
 //! sets new quaternion based on euler angles
 inline void quaternion::set(f32 x, f32 y, f32 z)
@@ -327,7 +387,8 @@ inline quaternion& quaternion::normalize()
 	if (n == 1)
 		return *this;
 
-	n = 1.0f / sqrtf(n);
+	//n = 1.0f / sqrtf(n);
+	n = reciprocal_squareroot ( n );
 	X *= n;
 	Y *= n;
 	Z *= n;
@@ -337,8 +398,8 @@ inline quaternion& quaternion::normalize()
 }
 
 
-// Interpolates the quaternion between to quaternions based on time
-inline quaternion quaternion::slerp(quaternion q1, quaternion q2, f32 time)
+// set this quaternion to the result of the inpolation between two quaternions based
+inline void quaternion::slerp( quaternion q1, quaternion q2, f32 time)
 {
 	f32 angle = q1.getDotProduct(q2);
 
@@ -374,7 +435,6 @@ inline quaternion quaternion::slerp(quaternion q1, quaternion q2, f32 time)
 	}
 
 	*this = (q1*scale) + (q2*invscale);
-	return *this;
 }
 
 
@@ -425,6 +485,16 @@ inline vector3df quaternion::operator* (const vector3df& v) const
 
 	return v + uv + uuv;
 }
+
+//! set quaterion to identity
+inline void quaternion::makeIdentity()
+{
+	W = 1.f;
+	X = 0.f;
+	Y = 0.f;
+	Z = 0.f;
+}
+
 
 } // end namespace core
 } // end namespace irr

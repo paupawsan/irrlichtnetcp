@@ -88,7 +88,7 @@ namespace IrrlichtNETCP.Extensions
 		
 		public void Update()
 		{
-            if (!Visible || !_scene.ActiveCamera.ViewFrustrum.BoundingBox.IntersectsWithBox(TransformedBoundingBox))
+            if (!Visible || !_scene.ActiveCamera.ViewFrustum.BoundingBox.IntersectsWithBox(TransformedBoundingBox))
 				return;
            foreach(TerrainSceneNode terr in clampList)
            	    if(terr != null)

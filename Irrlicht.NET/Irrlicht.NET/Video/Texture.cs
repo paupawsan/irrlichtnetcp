@@ -17,7 +17,7 @@ namespace IrrlichtNETCP
 		public Dimension2D OriginalSize{ get { int[] dim = new int[2]; Texture_GetOriginalSize(_raw, dim); return Dimension2D.FromUnmanaged(dim); } }
 		public int Pitch { get { return Texture_GetPitch(_raw); } }
         //EDITED KIWSA
-        public virtual Matrix4 Transform
+        /*public virtual Matrix4 Transform
         {
             get
             {
@@ -30,7 +30,8 @@ namespace IrrlichtNETCP
                 Texture_SetTransform(_raw, value.ToUnmanaged());
             }
         }
-        //END EDIT
+        //END EDIT*/
+
         /// <summary>
         /// Call this before any modification/read of the texture via GetPixel/SetPixel
         /// If you try to modify/acces the texture without it, it will still work but really slower 

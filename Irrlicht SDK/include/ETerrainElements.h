@@ -28,10 +28,8 @@ namespace scene
 		ETPS_129 = 129
 	};
 
-}
-}
+} // end namespace scene
+} // end namespace irr
 
 #endif
-
-
 

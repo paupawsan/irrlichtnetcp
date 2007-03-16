@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -32,7 +32,7 @@ namespace video
 		//! bilinear texel filtering and supports more materials than the EDT_SOFTWARE driver.
 		//! This renderer has been written entirely by Thomas Alten, thanks a lot for this huge
 		//! contribution.
-		EDT_SOFTWARE2,
+		EDT_BURNINGSVIDEO,
 
 		//! Direct3D 8 device, only available on Win32 platforms including Win95, Win98, WinNT,
 		//! Win2K, WinXP. Performs hardware accelerated rendering of 3D and 2D primitives.

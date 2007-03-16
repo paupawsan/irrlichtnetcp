@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -45,10 +45,23 @@ public:
 	vector2d<T> operator/(const T v) const { return vector2d<T>(X / v, Y / v);	}
 	vector2d<T>& operator/=(const T v) { X/=v; Y/=v; return *this; }
 
+	bool operator<=(const vector2d<T>&other) const { return X<=other.X && Y<=other.Y; }
+	bool operator>=(const vector2d<T>&other) const { return X>=other.X && Y>=other.Y; }
+
+	bool operator<(const vector2d<T>&other) const { return X<other.X && Y<other.Y; }
+	bool operator>(const vector2d<T>&other) const { return X>other.X && Y>other.Y; }
+
 	bool operator==(const vector2d<T>& other) const { return other.X==X && other.Y==Y; }
 	bool operator!=(const vector2d<T>& other) const { return other.X!=X || other.Y!=Y; }
 
 	// functions
+
+	//! returns if this vector equals the other one, taking floating point rounding errors into account
+	bool equals(const vector2d<T>& other) const
+	{
+		return core::equals(X, other.X) &&
+			   core::equals(Y, other.Y);
+	}
 
 	void set(T nx, T ny) {X=nx; Y=ny; }
 	void set(const vector2d<T>& p) { X=p.X; Y=p.Y;}
@@ -57,23 +70,34 @@ public:
 	//! \return Returns the length of the vector.
 	f64 getLength() const { return sqrt(X*X + Y*Y); }
 
-	//! Returns the dot product of this vector with an other.
+	//! Returns the squared lenth of this vector
+	/** This is useful because it is much faster than getLength(). */
+	T getLengthSQ() const { return X*X + Y*Y; }
+
+	//! Returns the dot product of this vector with another.
 	T dotProduct(const vector2d<T>& other) const
 	{
 		return X*other.X + Y*other.Y;
 	}
 
-	//! Returns distance from an other point. Here, the vector is interpreted as
+	//! Returns distance from another point. Here, the vector is interpreted as
 	//! point in 2 dimensional space.
 	f64 getDistanceFrom(const vector2d<T>& other) const
 	{
 		return vector2d<T>(X - other.X, Y - other.Y).getLength();
 	}
 
+	//! Returns squared distance from another point. Here, the vector is interpreted as
+	//! point in 2 dimensional space.
+	T getDistanceFromSQ(const vector2d<T>& other) const
+	{
+		return vector2d<T>(X - other.X, Y - other.Y).getLengthSQ();
+	}
+
 	//! rotates the point around a center by an amount of degrees.
 	void rotateBy(f64 degrees, const vector2d<T>& center)
 	{
-		degrees *= GRAD_PI2;
+		degrees *= DEGTORAD64;
 		T cs = (T)cos(degrees);
 		T sn = (T)sin(degrees);
 
@@ -89,11 +113,14 @@ public:
 	//! normalizes the vector.
 	vector2d<T>& normalize()
 	{
+		T l = core::reciprocal_squareroot ( X*X + Y*Y );
+/*
 		T l = (T)getLength();
 		if (l == 0)
 			return *this;
 
 		l = (T)1.0 / l;
+*/
 		X *= l;
 		Y *= l;
 		return *this;
@@ -112,14 +139,14 @@ public:
 
 		if ( Y > 0.0)
 			if (X > 0.0)
-				return atan(Y/X) * GRAD_PI;
+				return atan(Y/X) * RADTODEG64;
 			else
-				return 180.0-atan(Y/-X) * GRAD_PI;
+				return 180.0-atan(Y/-X) * RADTODEG64;
 		else
 			if (X > 0.0)
-				return 360.0-atan(-Y/X) * GRAD_PI;
+				return 360.0-atan(-Y/X) * RADTODEG64;
 			else
-				return 180.0+atan(-Y/-X) * GRAD_PI;
+				return 180.0+atan(-Y/-X) * RADTODEG64;
 	} 
 
 	//! Calculates the angle of this vector in grad in the counter trigonometric sense.
@@ -132,7 +159,7 @@ public:
 			return Y < 0.0 ? 90.0 : 270.0;
 
 		f64 tmp = Y / getLength();
-		tmp = atan(sqrt(1 - tmp*tmp) / tmp) * GRAD_PI;
+		tmp = atan(sqrt(1 - tmp*tmp) / tmp) * RADTODEG64;
 
 		if (X>0.0 && Y>0.0)
 			return tmp + 270;
@@ -161,17 +188,45 @@ public:
 		tmp = tmp / sqrt((X*X + Y*Y) * (b.X*b.X + b.Y*b.Y));
 		if (tmp < 0.0) tmp = -tmp;
 
-		return atan(sqrt(1 - tmp*tmp) / tmp) * GRAD_PI;
+		return atan(sqrt(1 - tmp*tmp) / tmp) * RADTODEG64;
 	}
 
+	//! Returns if this vector interpreted as a point is on a line between two other points.
+	/** It is assumed that the point is on the line. */
+	//! \param begin: Beginning vector to compare between.
+	//! \param end: Ending vector to compare between.
+	//! \return True if this vector is between begin and end.  False if not.
+	bool isBetweenPoints(const vector2d<T>& begin, const vector2d<T>& end) const
+	{
+		T f = (end - begin).getLengthSQ();
+		return getDistanceFromSQ(begin) < f && 
+			getDistanceFromSQ(end) < f;
+	}
 
 	//! returns interpolated vector
 	//! \param other: other vector to interpolate between
 	//! \param d: value between 0.0f and 1.0f.
 	vector2d<T> getInterpolated(const vector2d<T>& other, f32 d) const
 	{
-		f32 inv = 1.0f - d;
+		T inv = (T) 1.0 - d;
 		return vector2d<T>(other.X*inv + X*d, other.Y*inv + Y*d);
+	}
+
+	//! Returns interpolated vector. ( quadratic )
+	/** \param other0: other vector to interpolate between
+		\param other1: other vector to interpolate between
+	\param factor: value between 0.0f and 1.0f. */
+	vector2d<T> getInterpolated_quadratic(const vector2d<T>& v2, const vector2d<T>& v3, const T d) const
+	{
+		// this*(1-d)*(1-d) + 2 * v2 * (1-d) + v3 * d * d;
+		const T inv = (T) 1.0 - d;
+		const T mul0 = inv * inv;
+		const T mul1 = (T) 2.0 * d * inv;
+		const T mul2 = d * d;
+
+		return vector2d<T> ( X * mul0 + v2.X * mul1 + v3.X * mul2,
+							 Y * mul0 + v2.Y * mul1 + v3.Y * mul2
+							);
 	}
 
 	//! sets this vector to the interpolated vector between a and b. 

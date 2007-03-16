@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -41,6 +41,7 @@ namespace gui
 		//! Sets the color to fade out to or to fade in from.
 		//! \param color: Color to where it is faded out od from it is faded in.
 		virtual void setColor(video::SColor color) = 0;
+		virtual void setColor(video::SColor source, video::SColor dest) = 0;
 
 		//! Starts the fade in process. In the beginning the whole rect is drawn by
 		//! the set color (black by default) and at the end of the overgiven

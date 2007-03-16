@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -7,7 +7,6 @@
 
 #include "IUnknown.h"
 #include "position2d.h"
-#include "rect.h"
 #include "SColor.h"
 
 namespace irr
@@ -94,7 +93,7 @@ public:
 	virtual u32 getAlphaMask() = 0;
 
 	//! returns pitch of image
-	virtual u32 getPitch() = 0;
+	virtual u32 getPitch() const = 0;
 
 };
 

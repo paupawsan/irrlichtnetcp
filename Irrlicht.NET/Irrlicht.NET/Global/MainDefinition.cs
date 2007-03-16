@@ -71,14 +71,24 @@
  	
  	public enum SceneNodeRenderPass
  	{
- 		LightAndCamera, //Deprecated, use Light or Camera instead
+ 		Camera,
         Light,
-        Camera,
  		SkyBox,
  		Automatic,
  		Solid,
  		Shadow,
  		Transparent,
+        Shader0,
+        Shader1,
+        Shader2,
+        Shader3,
+        Shader4,
+        Shader5,
+        Shader6,
+        Shader7,
+        Shader8,
+        Shader9,
+        Shader10,
  		Count //Do not use
  	}
  	

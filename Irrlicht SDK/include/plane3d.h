@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -118,12 +118,12 @@ class plane3d
 		//! ISREL3D_PLANAR if the point is within the plane.
 		EIntersectionRelation3D classifyPointRelation(const vector3d<T>& point) const
 		{
-			T d = Normal.dotProduct(point) + D;
+			const T d = Normal.dotProduct(point) + D;
 
-			if (d < -ROUNDING_ERROR)
+			if (d < -ROUNDING_ERROR_32)
 				return ISREL3D_FRONT;
 
-			if (d > ROUNDING_ERROR)
+			if (d > ROUNDING_ERROR_32)
 				return ISREL3D_BACK;
 
 			return ISREL3D_PLANAR;
@@ -147,7 +147,7 @@ class plane3d
 		bool existsInterSection(const plane3d<T>& other) const
 		{
 			vector3d<T> cross = other.Normal.crossProduct(Normal);
-			return cross.getLength() > 1e-08f;
+			return cross.getLength() > core::ROUNDING_ERROR_32;
 		}
 
 		//! Intersects this plane with another.
@@ -160,7 +160,7 @@ class plane3d
 			f64 fn11 = other.Normal.getLength();
 			f64 det = fn00*fn11 - fn01*fn01;
 
-			if (fabs(det) < 1e-08f)
+			if (fabs(det) < ROUNDING_ERROR_64 )
 				return false;
 
 			det = 1.0 / det;
@@ -190,7 +190,8 @@ class plane3d
 		//! be visible, and false if it is backfacing.
 		bool isFrontFacing(const vector3d<T>& lookDirection) const
 		{
-			return Normal.dotProduct(lookDirection) <= 0.0f;
+			const f32 d = Normal.dotProduct(lookDirection);
+			return F32_LOWER_EQUAL_0 ( d );
 		}
 
 		//! Returns the distance to a point.  Note that this only

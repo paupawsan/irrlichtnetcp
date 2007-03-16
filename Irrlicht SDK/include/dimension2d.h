@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -44,6 +44,16 @@ namespace core
 				Width = other.Width;
 				Height = other.Height;
 				return *this;
+			}
+
+			dimension2d<T> operator/(T scale) 
+			{
+				return dimension2d<T>(Width/scale, Height/scale);
+			}
+
+			dimension2d<T> operator*(T scale) 
+			{
+				return dimension2d<T>(Width*scale, Height*scale);
 			}
 
 			T Width, Height;

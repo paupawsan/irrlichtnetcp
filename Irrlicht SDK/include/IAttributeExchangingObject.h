@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -55,12 +55,12 @@ public:
 	//! Writes attributes of the object.
 	//! Implement this to expose the attributes of your scene node animator for 
 	//! scripting languages, editors, debuggers or xml serialization purposes.
-	virtual void serializeAttributes(IAttributes* out, io::SAttributeReadWriteOptions* options=0)	{}
+	virtual void serializeAttributes(io::IAttributes* out, io::SAttributeReadWriteOptions* options=0)	{}
 
 	//! Reads attributes of the object.
 	//! Implement this to set the attributes of your scene node animator for 
 	//! scripting languages, editors, debuggers or xml deserialization purposes.
-	virtual void deserializeAttributes(IAttributes* in, SAttributeReadWriteOptions* options=0)	{}
+	virtual void deserializeAttributes(io::IAttributes* in, io::SAttributeReadWriteOptions* options=0)	{}
 
 };
 

@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -88,7 +88,7 @@ public:
 
 
 	//! copy constructor
-	list(const list<T>& other)
+	list(const list<T>& other) : root(0), last(0), size(0)
 	{
 		*this = other;
 	}

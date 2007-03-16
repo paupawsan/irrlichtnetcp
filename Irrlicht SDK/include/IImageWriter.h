@@ -9,7 +9,7 @@ namespace irr
 namespace io
 {
 	class IWriteFile;
-}
+} // end namespace io
 
 namespace video
 {
@@ -34,7 +34,7 @@ public:
 	virtual bool isAWriteableFileExtension(const c8* fileName) = 0;
 
 	//! write image to file
-	virtual bool writeImage(io::IWriteFile *file, IImage *image) = 0;
+	virtual bool writeImage(io::IWriteFile *file, IImage *image, u32 param = 0) = 0;
 };
 
 } // namespace video

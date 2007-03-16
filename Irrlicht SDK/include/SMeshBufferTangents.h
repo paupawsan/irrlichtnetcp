@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -51,7 +51,7 @@ namespace scene
 		} 
 
 		//! returns amount of vertices
-		virtual s32 getVertexCount() const
+		virtual u32 getVertexCount() const
 		{
 			return Vertices.size();
 		}
@@ -69,7 +69,7 @@ namespace scene
 		}
 
 		//! returns amount of indices
-		virtual s32 getIndexCount() const
+		virtual u32 getIndexCount() const
 		{
 			return Indices.size();
 		}
@@ -80,11 +80,12 @@ namespace scene
 			return BoundingBox;
 		}
 
-		//! returns an axis aligned bounding box
-		virtual core::aabbox3d<f32>& getBoundingBox()
+		//! set user axis aligned bounding box
+		virtual void setBoundingBox( const core::aabbox3df& box)
 		{
-			return BoundingBox;
+			BoundingBox = box;
 		}
+
 
 		//! recalculates the bounding box. should be called if the mesh changed.
 		void recalculateBoundingBox()
@@ -104,6 +105,13 @@ namespace scene
 		{
 			return video::EVT_TANGENTS;
 		}
+
+		//! returns the byte size (stride, pitch) of the vertex
+		virtual u32 getVertexPitch() const
+		{
+			return sizeof ( video::S3DVertexTangents );
+		}
+
 
 		video::SMaterial Material; //! material for this meshBuffer.
 		core::array<video::S3DVertexTangents> Vertices; //! Array of vertices

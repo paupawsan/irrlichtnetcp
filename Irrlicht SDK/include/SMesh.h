@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -30,19 +30,34 @@ namespace scene
 		{
 			// drop buffers
 			for (u32 i=0; i<MeshBuffers.size(); ++i)
+			{
 				MeshBuffers[i]->drop();
+			}
 		};
 
 		//! returns amount of mesh buffers.
-		virtual s32 getMeshBufferCount()
+		virtual u32 getMeshBufferCount() const
 		{
 			return MeshBuffers.size();
 		}
 
 		//! returns pointer to a mesh buffer
-		virtual IMeshBuffer* getMeshBuffer(s32 nr)
+		virtual IMeshBuffer* getMeshBuffer(u32 nr) const
 		{
 			return MeshBuffers[nr];
+		}
+
+		//! returns a meshbuffer which fits a material
+		// reverse search
+		virtual IMeshBuffer* getMeshBuffer( const video::SMaterial & material) const
+		{
+			for (s32 i = (s32) MeshBuffers.size(); --i >= 0; )
+			{
+				if ( !(material != MeshBuffers[i]->getMaterial()) )
+					return MeshBuffers[i];
+			}
+
+			return 0;
 		}
 
 		//! returns an axis aligned bounding box
@@ -51,11 +66,10 @@ namespace scene
 			return BoundingBox;
 		}
 
-		//! Returns an axis aligned bounding box of the mesh.
-		//! \return A bounding box of this mesh is returned.
-		virtual core::aabbox3d<f32>& getBoundingBox()
+		//! set user axis aligned bounding box
+		virtual void setBoundingBox( const core::aabbox3df& box)
 		{
-			return BoundingBox;
+			BoundingBox = box;
 		}
 
 		//! recalculates the bounding box
@@ -85,7 +99,7 @@ namespace scene
 		virtual void setMaterialFlag(video::E_MATERIAL_FLAG flag, bool newvalue)
 		{
 			for (u32 i=0; i<MeshBuffers.size(); ++i)
-				MeshBuffers[i]->getMaterial().Flags[flag] = newvalue;
+				MeshBuffers[i]->getMaterial().setFlag(flag, newvalue);
 		}
 
 		core::array<IMeshBuffer*> MeshBuffers;

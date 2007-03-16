@@ -299,8 +299,8 @@ namespace IrrlichtNETCP
 				Material_SetWireframe(_raw, value);
 			}
 		}
-		
-		public bool ZBuffer
+
+        public uint ZBuffer
 		{
 			get
 			{
@@ -389,7 +389,7 @@ namespace IrrlichtNETCP
 		static extern bool Material_GetWireframe(IntPtr material);
 	    		
 	    [DllImport(Native.Dll)]
-		static extern bool Material_GetZBuffer(IntPtr material);
+        static extern uint Material_GetZBuffer(IntPtr material);
 	    
 	    [DllImport(Native.Dll)]
 		static extern bool Material_GetZWriteEnable(IntPtr material);
@@ -455,7 +455,7 @@ namespace IrrlichtNETCP
 		static extern void Material_SetWireframe(IntPtr material, bool val);
 	    
 	    [DllImport(Native.Dll)]
-		static extern void Material_SetZBuffer(IntPtr material, bool val);
+		static extern void Material_SetZBuffer(IntPtr material, uint val);
 	    
 	    [DllImport(Native.Dll)]
 		static extern void Material_SetZWriteEnable(IntPtr material, bool val);

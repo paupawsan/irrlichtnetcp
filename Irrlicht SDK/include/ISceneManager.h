@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -15,6 +15,7 @@
 #include "ETerrainElements.h"
 #include "ESceneNodeTypes.h"
 #include "SceneParameters.h"
+#include "IGUIEnvironment.h"
 
 namespace irr
 {
@@ -26,19 +27,18 @@ namespace io
 	class IReadFile;
 	class IAttributes;
 	class IWriteFile;
-}
+} // end namespace io
 
 namespace gui
 {
 	class IGUIFont;
-}
+	class IGUIFontBitmap;
+} // end namespace gui
 
 namespace video
 {
 	class IVideoDriver;
-}
-
-
+} // end namespace video
 
 namespace scene
 {
@@ -47,9 +47,6 @@ namespace scene
 	specifying when the mode wants to be drawn in relation to the other nodes. */
 	enum E_SCENE_NODE_RENDER_PASS
 	{
-		//! Deprecated. You should use ESNRP_LIGHT or ESNRP_CAMERA instead
-		ESNRP_LIGHT_AND_CAMERA,
-
 		//! Camera pass. The active view is set up here.
 		//! The very first pass.
 		ESNRP_CAMERA,
@@ -82,11 +79,25 @@ namespace scene
 		//! to front and drawn in that order.
 		ESNRP_TRANSPARENT,
 
+		//! Scene Nodes with special support
+		ESNRP_SHADER_0,
+		ESNRP_SHADER_1,
+		ESNRP_SHADER_2,
+		ESNRP_SHADER_3,
+		ESNRP_SHADER_4,
+		ESNRP_SHADER_5,
+		ESNRP_SHADER_6,
+		ESNRP_SHADER_7,
+		ESNRP_SHADER_8,
+		ESNRP_SHADER_9,
+		ESNRP_SHADER_10,
+
 		//! Never used, value specifing how much parameters there are.
 		ESNRP_COUNT
 	};
 
 	class IMesh;
+	class IMeshBuffer;
 	class IAnimatedMesh;
 	class IMeshCache;
 	class ISceneNode;
@@ -109,6 +120,11 @@ namespace scene
 	class ISceneNodeFactory;
 	class ISceneNodeAnimatorFactory;
 	class ISceneUserDataSerializer;
+
+	namespace quake3
+	{
+		class SShader;
+	} // end namespace quake3
 
 	//!	The Scene Manager manages scene nodes, mesh recources, cameras and all the other stuff.
 	/** All Scene nodes can be created only here. There is a always growing list of scene
@@ -294,6 +310,11 @@ namespace scene
 		 This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual video::IVideoDriver* getVideoDriver() = 0;
 
+		//! Returns the active GUIEnvironment
+		/** \return Returns pointer to the GUIEnvironment
+		 This pointer should not be dropped. See IUnknown::drop() for more information. */
+		virtual gui::IGUIEnvironment* getGUIEnvironment() = 0;
+
 		//! Adds a test scene node for test purposes to the scene.
 		/** It is a simple cube of (1,1,1) size.
 		\param size: Size of the cube.
@@ -395,7 +416,7 @@ namespace scene
 		 \return Returns the pointer to the octtree if successful, otherwise 0.
 		 This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual ISceneNode* addOctTreeSceneNode(IAnimatedMesh* mesh, ISceneNode* parent=0,
-			s32 id=-1, s32 minimalPolysPerNode=128, bool alsoAddIfMeshPointerZero=false) = 0;
+			s32 id=-1, s32 minimalPolysPerNode=256, bool alsoAddIfMeshPointerZero=false) = 0;
 
 		//! Adds a scene node for rendering using a octtree to the scene graph.
 		/** This a good method for rendering
@@ -410,7 +431,7 @@ namespace scene
 		 \return Returns the pointer to the octtree if successful, otherwise 0.
 		 This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual ISceneNode* addOctTreeSceneNode(IMesh* mesh, ISceneNode* parent=0,
-			s32 id=-1, s32 minimalPolysPerNode=128, bool alsoAddIfMeshPointerZero=false) = 0;
+			s32 id=-1, s32 minimalPolysPerNode=256, bool alsoAddIfMeshPointerZero=false) = 0;
 
 		//! Adds a camera scene node to the scene graph and sets it as active camera.
 		/** This camera does not react on user input like for example the one created with
@@ -487,7 +508,8 @@ namespace scene
 		 This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual ICameraSceneNode* addCameraSceneNodeFPS(ISceneNode* parent = 0,
 			f32 rotateSpeed = 100.0f, f32 moveSpeed = 500.0f, s32 id=-1,
-			SKeyMap* keyMapArray=0, s32 keyMapSize=0, bool noVerticalMovement=false) = 0;
+			SKeyMap* keyMapArray=0, s32 keyMapSize=0, bool noVerticalMovement=false,
+			f32 jumpSpeed = 0.f) = 0;
 
 		//! Adds a dynamic light scene node to the scene graph.
 		/** The light will cast dynamic light on all
@@ -517,11 +539,14 @@ namespace scene
 		 \param size: Size of the billboard. This size is 2 dimensional because a billboard only has
 		 width and height.
 		 \param id: An id of the node. This id can be used to identify the node.
+		 \param shade_top: vertex color top
+		 \param shade_down: vertex color down
 		 \return Returns pointer to the billboard if successful, otherwise NULL.
 		 This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual IBillboardSceneNode* addBillboardSceneNode(ISceneNode* parent = 0,
 			const core::dimension2d<f32>& size = core::dimension2d<f32>(10.0f, 10.0f),
-			const core::vector3df& position = core::vector3df(0,0,0), s32 id=-1) = 0;
+			const core::vector3df& position = core::vector3df(0,0,0), s32 id=-1,
+			video::SColor shade_top = 0xFFFFFFFF, video::SColor shade_down = 0xFFFFFFFF) = 0;
 
 		//! Adds a skybox scene node to the scene graph.
 		/** A skybox is a big cube with 6 textures on it and
@@ -626,7 +651,7 @@ namespace scene
 			const core::vector3df& rotation = core::vector3df(0.0f,0.0f,0.0f),
 			const core::vector3df& scale = core::vector3df(1.0f,1.0f,1.0f),
 			video::SColor vertexColor = video::SColor(255,255,255,255),
-			s32 maxLOD=5, E_TERRAIN_PATCH_SIZE patchSize=ETPS_17) = 0;
+			s32 maxLOD=5, E_TERRAIN_PATCH_SIZE patchSize=ETPS_17, s32 smoothFactor=0) = 0;
 
 		//! Adds a terrain scene node to the scene graph.
 		/** Just like the other addTerrainSceneNode() method, but takes an IReadFile
@@ -639,7 +664,16 @@ namespace scene
 			const core::vector3df& rotation = core::vector3df(0.0f,0.0f,0.0f),
 			const core::vector3df& scale = core::vector3df(1.0f,1.0f,1.0f),
 			video::SColor vertexColor = video::SColor(255,255,255,255),
-			s32 maxLOD=5, E_TERRAIN_PATCH_SIZE patchSize=ETPS_17) = 0;
+			s32 maxLOD=5, E_TERRAIN_PATCH_SIZE patchSize=ETPS_17, s32 smoothFactor=0) = 0;
+
+		//! Adds a quake3 scene node to the scene graph.
+		/** A Quake3 Scene renders multiple meshes for a specific HighLanguage Shader (Quake3 Style )
+		 \return Returns a pointer to the quake3 scene node if successful, otherwise NULL.
+		 This pointer should not be dropped. See IUnknown::drop() for more information. */
+		virtual ISceneNode* addQuake3SceneNode(IMeshBuffer* meshBuffer, const quake3::SShader * shader,
+												ISceneNode* parent=0, s32 id=-1
+												) = 0;
+
 
 		//! Adds an empty scene node to the scene graph.
 		/** Can be used for doing advanced transformations
@@ -663,6 +697,13 @@ namespace scene
 			video::SColor color=video::SColor(100,255,255,255),
 			ISceneNode* parent = 0,	const core::vector3df& position = core::vector3df(0,0,0),
 			s32 id=-1) = 0;
+
+		//! Adds a text scene node, which uses billboards
+		virtual ITextSceneNode* addBillboardTextSceneNode( gui::IGUIFont* font, const wchar_t* text,
+			ISceneNode* parent = 0,
+			const core::dimension2d<f32>& size = core::dimension2d<f32>(10.0f, 10.0f),
+			const core::vector3df& position = core::vector3df(0,0,0), s32 id=-1,
+			video::SColor shade_top = 0xFFFFFFFF, video::SColor shade_down = 0xFFFFFFFF) = 0;
 
 		//! Adds a Hill Plane mesh to the mesh pool.
 		/** The mesh is generated on the fly
@@ -725,6 +766,13 @@ namespace scene
 			f32 maxHeight=200.0f,
 			const core::dimension2d<s32>& defaultVertexBlockSize = core::dimension2d<s32>(64,64)) = 0;
 
+		//! add a static arrow mesh to the meshpool
+		/** it quite usefull for debuggin purposes. ( showing directions eq )
+		*/
+		virtual IAnimatedMesh* addArrowMesh(const c8* name, u32 tesselationCylinder, u32 tesselationCone, f32 height,
+											f32 cylinderHeight, f32 width0,f32 width1,
+											video::SColor vtxColor0, video::SColor vtxColor1) = 0;
+
 		//! Returns the root scene node.
 		/** This is the scene node wich is parent
 		 of all scene nodes. The root scene node is a special scene node which
@@ -768,13 +816,14 @@ namespace scene
 
 		//! Registers a node for rendering it at a specific time.
 		/** This method should only be used by SceneNodes when they get a
-		 ISceneNode::OnPreRender() call.
+		 ISceneNode::OnRegisterSceneNode() call.
 		 \param node: Node to register for drawing. Usually scene nodes would set 'this'
 		 as parameter here because they want to be drawn.
 		 \param pass: Specifies when the mode wants to be drawn in relation to the other nodes.
 		 For example, if the node is a shadow, it usually wants to be drawn after all other nodes
-		 and will use ESNRP_SHADOW for this. See E_SCENE_NODE_RENDER_PASS for details. */
-		virtual void registerNodeForRendering(ISceneNode* node,
+		 and will use ESNRP_SHADOW for this. See E_SCENE_NODE_RENDER_PASS for details.
+		 \return scene will be rendered ( passed culling ) */
+		virtual u32 registerNodeForRendering(ISceneNode* node,
 			E_SCENE_NODE_RENDER_PASS pass = ESNRP_AUTOMATIC) = 0;
 
 		//! Draws all the scene nodes.
@@ -1102,6 +1151,12 @@ namespace scene
 		Otherwise, simply specify 0 as this parameter.
 		\return Returns true if successful.	*/
 		virtual bool loadScene(io::IReadFile* file, ISceneUserDataSerializer* userDataSerializer=0) = 0;	
+
+		//! Sets ambient color of the scene
+		virtual void setAmbientLight(const video::SColorf &ambientColor) = 0;
+
+		//! Returns ambient color of the scene
+		virtual video::SColorf getAmbientLight() = 0;
 
 	};
 

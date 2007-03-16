@@ -8,10 +8,11 @@ extern "C"
 	EXPORT unsigned int SceneNode_GetChildrenCount(IntPtr scenenode); //Only used by SceneNode.Children on C#
     EXPORT void SceneNode_GetAbsolutePosition(IntPtr scenenode, M_VECT3DF toR);
     EXPORT void SceneNode_GetAbsoluteTransformation(IntPtr scenenode, M_MAT4 toR);
-    EXPORT bool SceneNode_GetAutomaticCulling(IntPtr scenenode);
+    EXPORT E_CULLING_TYPE SceneNode_GetAutomaticCulling(IntPtr scenenode);
+    EXPORT E_DEBUG_SCENE_TYPE SceneNode_GetDebugDataVisible(IntPtr scenenode);
     EXPORT void SceneNode_GetBoundingBox(IntPtr scenenode, M_BOX3D toR);
     EXPORT int SceneNode_GetID(IntPtr scenenode);
-    EXPORT int SceneNode_GetMaterialCount(IntPtr scenenode);
+    EXPORT unsigned int SceneNode_GetMaterialCount(IntPtr scenenode);
     EXPORT IntPtr SceneNode_GetMaterial(IntPtr scenenode, int i);
     EXPORT M_STRING SceneNode_GetName(IntPtr scenenode);
     EXPORT IntPtr SceneNode_GetParent(IntPtr scenenode);
@@ -22,19 +23,18 @@ extern "C"
     EXPORT void SceneNode_GetTransformedBoundingBox(IntPtr scenenode, M_BOX3D toR);
     EXPORT IntPtr SceneNode_GetTriangleSelector(IntPtr scenenode);
     EXPORT ESCENE_NODE_TYPE SceneNode_GetType(IntPtr scenenode);
-    EXPORT bool SceneNode_IsDebugDataVisible(IntPtr scenenode);
     EXPORT bool SceneNode_IsDebugObject(IntPtr scenenode);
     EXPORT bool SceneNode_IsVisible(IntPtr scenenode);
-    EXPORT void SceneNode_OnPostRender(IntPtr scenenode, unsigned int timeMS);
-    EXPORT void SceneNode_OnPreRender(IntPtr scenenode);
+    EXPORT void SceneNode_OnAnimate(IntPtr scenenode, unsigned int timeMS);
+    EXPORT void SceneNode_OnRegisterSceneNode(IntPtr scenenode);
     EXPORT void SceneNode_Remove(IntPtr scenenode);
     EXPORT void SceneNode_RemoveAll(IntPtr scenenode);
     EXPORT void SceneNode_RemoveAnimator(IntPtr scenenode, IntPtr animator);
     EXPORT void SceneNode_RemoveAnimators(IntPtr scenenode);
     EXPORT bool SceneNode_RemoveChild(IntPtr scenenode, IntPtr childscenenode);
     EXPORT void SceneNode_Render(IntPtr scenenode);
-    EXPORT void SceneNode_SetAutomaticCulling(IntPtr scenenode, bool enabled);
-    EXPORT void SceneNode_SetDebugDataVisible(IntPtr scenenode, bool visible);
+    EXPORT void SceneNode_SetAutomaticCulling(IntPtr scenenode, E_CULLING_TYPE enabled);
+    EXPORT void SceneNode_SetDebugDataVisible(IntPtr scenenode, E_DEBUG_SCENE_TYPE visible);
     EXPORT void SceneNode_SetID(IntPtr scenenode, int id);
     EXPORT void SceneNode_SetIsDebugObject(IntPtr scenenode, bool debugObject);
     EXPORT void SceneNode_SetMaterialFlag(IntPtr scenenode, E_MATERIAL_FLAG flag, bool newvalue);

@@ -23,7 +23,7 @@ extern "C"
 	EXPORT bool Material_GetNormalizeNormals(IntPtr material);
 	EXPORT bool Material_GetTrilinearFilter(IntPtr material);
 	EXPORT bool Material_GetWireframe(IntPtr material);
-	EXPORT bool Material_GetZBuffer(IntPtr material);
+	EXPORT unsigned int Material_GetZBuffer(IntPtr material);
 	EXPORT bool Material_GetZWriteEnable(IntPtr material);
 	EXPORT void Material_SetAmbientColor(IntPtr material, M_SCOLOR color);
 	EXPORT void Material_SetDiffuseColor(IntPtr material, M_SCOLOR color);
@@ -45,6 +45,6 @@ extern "C"
 	EXPORT void Material_SetNormalizeNormals(IntPtr material, bool val);
 	EXPORT void Material_SetTrilinearFilter(IntPtr material, bool val);
 	EXPORT void Material_SetWireframe(IntPtr material, bool val);
-	EXPORT void Material_SetZBuffer(IntPtr material, bool val);
+	EXPORT void Material_SetZBuffer(IntPtr material, unsigned int val);
 	EXPORT void Material_SetZWriteEnable(IntPtr material, bool val);
 }

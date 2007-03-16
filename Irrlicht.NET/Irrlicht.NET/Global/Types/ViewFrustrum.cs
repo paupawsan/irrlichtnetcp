@@ -3,9 +3,9 @@ using System.Runtime.InteropServices;
 
 namespace IrrlichtNETCP
 {
-	public class ViewFrustrum : NativeElement
+	public class ViewFrustum : NativeElement
 	{		
-		public ViewFrustrum(IntPtr raw) : base(raw)
+		public ViewFrustum(IntPtr raw) : base(raw)
 		{
 		}
 		

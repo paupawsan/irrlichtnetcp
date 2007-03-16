@@ -12,7 +12,7 @@ namespace irr
 namespace io
 {
 	class IAttributes;
-}
+} // end namespace io
 namespace scene
 {
 	class ISceneNode;
@@ -24,6 +24,8 @@ To be used with ISceneManager::loadScene() and ISceneManager::saveScene() */
 class ISceneUserDataSerializer
 {
 public:
+
+	virtual ~ISceneUserDataSerializer() {}
 
 	//! Called when the scene manager read a scene node while loading a file.
 	/** The userData pointer contains a list of attributes with userData which

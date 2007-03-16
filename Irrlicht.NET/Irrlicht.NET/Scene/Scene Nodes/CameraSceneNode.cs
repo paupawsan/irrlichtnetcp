@@ -33,13 +33,13 @@ namespace IrrlichtNETCP
 			}
 		}
 		
-		public ViewFrustrum ViewFrustrum
+		public ViewFrustum ViewFrustum
 		{
 			get
 			{
-				return (ViewFrustrum)
+				return (ViewFrustum)
 					NativeElement.GetObject(Camera_GetViewFrustrum(_raw),
-											typeof(ViewFrustrum));
+											typeof(ViewFrustum));
 			}
 		}
 		

@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -20,6 +20,9 @@ namespace scene
 
 		//! Quake 2 MD2 model file
 		EAMT_MD2, 
+
+		//! Quake 3 MD3 model file
+		EAMT_MD3, 
 
 		//! Milkshape 3d skeletal animation file
 		EAMT_MS3D,

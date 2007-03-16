@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -119,6 +119,11 @@ class aabbox3d
 			return (MinEdge <= other.MaxEdge && MaxEdge >= other.MinEdge);
 		}
 
+		bool isFullInside(const aabbox3d<T>& other) const
+		{
+			return MinEdge >= other.MinEdge && MaxEdge <= other.MaxEdge;
+		}
+
 		//! Tests if the box intersects with a line
 		//! \param line: Line to test intersection with.
 		//! \return Returns true if there is an intersection and false if not.
@@ -136,7 +141,7 @@ class aabbox3d
 		{
 			const vector3d<T> e = getExtent() * (T)0.5;
 			const vector3d<T> t = getCenter() - linemiddle;
-			float r;
+			T r;
 
 			if ((fabs(t.X) > e.X + halflength * fabs(linevect.X)) || 
 				(fabs(t.Y) > e.Y + halflength * fabs(linevect.Y)) ||
@@ -213,8 +218,8 @@ class aabbox3d
 		//! \param edges: Pointer to array of 8 edges
 		void getEdges(vector3d<T> *edges) const
 		{
-			core::vector3d<T> middle = getCenter();
-			core::vector3d<T> diag = middle - MaxEdge;
+			const core::vector3d<T> middle = getCenter();
+			const core::vector3d<T> diag = middle - MaxEdge;
 
 			/*
 			Edges are stored in this way:
@@ -244,14 +249,7 @@ class aabbox3d
 		//! no space within the min and the max edge.
 		bool isEmpty() const
 		{
-			core::vector3d<T> d = MinEdge - MaxEdge;
-			if (d.X < 0) d.X = -d.X;
-			if (d.Y < 0) d.Y = -d.Y;
-			if (d.Z < 0) d.Z = -d.Z;
-
-			return (d.X < ROUNDING_ERROR && 
-				d.Y < ROUNDING_ERROR && 
-				d.Z < ROUNDING_ERROR);
+			return MinEdge.equals ( MaxEdge );
 		}
 
 		//! repairs the box, if for example MinEdge and MaxEdge are swapped.

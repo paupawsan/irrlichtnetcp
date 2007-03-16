@@ -11,8 +11,6 @@ namespace IrrlichtNETCP.Extensions
         public LensflareSceneNode(SceneNode parent, SceneManager mgr, int id, Vector3D position)
             : base(parent, mgr, id)
         {
-            AutomaticCulling = true;
-
             draw_flare = true;
             ign_geom = false;
             smgr = mgr;
@@ -48,7 +46,7 @@ namespace IrrlichtNETCP.Extensions
 
             material.MaterialType = MaterialType.TransparentAddColor;
 
-            material.ZBuffer = false;
+            material.ZBuffer = 0;
 
             material.ZWriteEnable = false;
 
@@ -71,7 +69,7 @@ namespace IrrlichtNETCP.Extensions
                 return material;
             }
         }
-        public override int MaterialCount
+        public override uint MaterialCount
         {
             get
             {
@@ -83,7 +81,7 @@ namespace IrrlichtNETCP.Extensions
             return Material;
         }
 
-        public override void OnPreRender()
+        public override void OnRegisterSceneNode()
         {
 
             if (Visible)
@@ -113,7 +111,7 @@ namespace IrrlichtNETCP.Extensions
                     if (Rect.From(Position2D.From(0, 0), Position2D.FromUnmanaged(screensize.ToUnmanaged())).IsPointInside(pm))
                     {
                         smgr.RegisterNodeForRendering(this, SceneNodeRenderPass.Transparent);
-                        base.OnPreRender();
+                        base.OnRegisterSceneNode();
 
                     }
                 }

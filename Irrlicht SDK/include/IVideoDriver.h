@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -14,7 +14,6 @@
 #include "position2d.h"
 #include "IReadFile.h"
 #include "SMaterial.h"
-#include "SLight.h"
 #include "IImageLoader.h"
 #include "IImageWriter.h"
 #include "IMeshBuffer.h"
@@ -29,17 +28,18 @@ namespace irr
 namespace io
 {
 	class IAttributes;
-}
+} // end namespace io
 namespace scene
 {
 	class IMeshBuffer;
-}
+} // end namespace scene
 
 namespace video
 {
 	struct S3DVertex;
 	struct S3DVertex2TCoords;
 	struct S3DVertexTangents;
+	struct SLight;
 
 	//! enumeration for querying features of the video driver.
 	enum E_VIDEO_DRIVER_FEATURE
@@ -120,6 +120,14 @@ namespace video
 		ETS_WORLD,
 		//! Projection transformation
 		ETS_PROJECTION,
+		//! Texture transformation
+		ETS_TEXTURE_0,
+		//! Texture transformation
+		ETS_TEXTURE_1,
+		//! Texture transformation
+		ETS_TEXTURE_2,
+		//! Texture transformation
+		ETS_TEXTURE_3,
 		//! Not used
 		ETS_COUNT
 	};
@@ -223,7 +231,7 @@ namespace video
 		/** \param index: Index of the texture, must be smaller than getTextureCount()
 		Please note that this index would change when adding or removing textures
 		*/
-		virtual ITexture* getTextureByIndex(s32 index) = 0;
+		virtual ITexture* getTextureByIndex(u32 index) = 0;
 
 		//! Returns amount of textures currently loaded
 		virtual s32 getTextureCount() = 0;
@@ -360,7 +368,7 @@ namespace video
 		\param triangleCount: amount of Triangles.
 		\param vType: Vertex type, e.g. EVT_STANDARD for S3DVertex.
 		\param pType: Primitive type, e.g. EPT_TRIANGLE_FAN for a triangle fan. */
-		virtual void drawVertexPrimitiveList(const void* vertices, s32 vertexCount, const u16* indexList, s32 triangleCount, E_VERTEX_TYPE vType, scene::E_PRIMITIVE_TYPE pType) = 0;
+		virtual void drawVertexPrimitiveList(const void* vertices, u32 vertexCount, const u16* indexList, u32 triangleCount, E_VERTEX_TYPE vType, scene::E_PRIMITIVE_TYPE pType) = 0;
 
 		//! Draws an indexed triangle list.
 		/** Note that there may be at maximum 65536 vertices, because the
@@ -372,7 +380,7 @@ namespace video
 		\param indexList: Pointer to array of indizes.
 		\param triangleCount: amount of Triangles. Usually amount of indizes / 3. */
 		virtual void drawIndexedTriangleList(const S3DVertex* vertices,
-			s32 vertexCount, const u16* indexList, s32 triangleCount) = 0;
+			u32 vertexCount, const u16* indexList, u32 triangleCount) = 0;
 
 		//! Draws an indexed triangle list.
 		/** Note that there may be at maximum 65536 vertices, because the
@@ -384,7 +392,7 @@ namespace video
 		\param indexList: Pointer to array of indizes.
 		\param triangleCount: amount of Triangles. Usually amount of indizes / 3.*/
 		virtual void drawIndexedTriangleList(const S3DVertex2TCoords* vertices,
-			s32 vertexCount, const u16* indexList, s32 triangleCount) = 0;
+			u32 vertexCount, const u16* indexList, u32 triangleCount) = 0;
 
 		//! Draws an indexed triangle list.
 		/** Note that there may be at maximum 65536 vertices, because the
@@ -396,7 +404,7 @@ namespace video
 		\param indexList: Pointer to array of indizes.
 		\param triangleCount: amount of Triangles. Usually amount of indizes / 3. */
 		virtual void drawIndexedTriangleList(const S3DVertexTangents* vertices,
-			s32 vertexCount, const u16* indexList, s32 triangleCount) = 0;
+			u32 vertexCount, const u16* indexList, u32 triangleCount) = 0;
 
 		//! Draws an indexed triangle fan.
 		/** Note that there may be at maximum 65536 vertices, because the
@@ -410,7 +418,7 @@ namespace video
 		\param indexList: Pointer to array of indizes.
 		\param triangleCount: amount of Triangles. Usually amount of indizes - 2. */
 		virtual void drawIndexedTriangleFan(const S3DVertex* vertices,
-			s32 vertexCount, const u16* indexList, s32 triangleCount) = 0;
+			u32 vertexCount, const u16* indexList, u32 triangleCount) = 0;
 
 		//! Draws an indexed triangle fan.
 		/** Note that there may be at maximum 65536 vertices, because the
@@ -424,7 +432,7 @@ namespace video
 		\param indexList: Pointer to array of indizes.
 		\param triangleCount: amount of Triangles. Usually amount of indizes - 2. */
 		virtual void drawIndexedTriangleFan(const S3DVertex2TCoords* vertices,
-			s32 vertexCount, const u16* indexList, s32 triangleCount) = 0;
+			u32 vertexCount, const u16* indexList, u32 triangleCount) = 0;
 
 		//! Draws a 3d line.
 		/** For some implementations, this method simply calls drawIndexedTriangles with some
@@ -499,6 +507,7 @@ namespace video
 		\param pos: Upper left 2d destination position where the image will be drawn.
 		\param sourceRects: Source rectangles of the image.
 		\param indices: List of indices which choose the actual rectangle used each time.
+		\param kerningWidth: Offset to Position on X
 		\param clipRect: Pointer to rectangle on the screen where the image is clipped to.
 		This pointer can be 0. Then the image is not clipped.
 		\param color: Color with which the image is colored.
@@ -509,6 +518,7 @@ namespace video
 				const core::position2d<s32>& pos,
 				const core::array<core::rect<s32> >& sourceRects,
 				const core::array<s32>& indices,
+				s32 kerningWidth,
 				const core::rect<s32>* clipRect, SColor color,
 				bool useAlphaChannelOfTexture) = 0;
 
@@ -604,7 +614,7 @@ namespace video
 
 		//! Draws a mesh buffer
 		/** \param mb: Buffer to draw; */
-		virtual void drawMeshBuffer(scene::IMeshBuffer* mb) = 0;
+		virtual void drawMeshBuffer( const scene::IMeshBuffer* mb) = 0;
 
 		//! Sets the fog mode.
 		/** These are global values attached to each 3d object
@@ -638,7 +648,7 @@ namespace video
 		//! Returns amount of primitives (mostly triangles) which were drawn in the last frame.
 		/** Together with getFPS() very useful method for statistics.
 		\return Amount of primitives drawn in the last frame. */
-		virtual u32 getPrimitiveCountDrawn() = 0;
+		virtual u32 getPrimitiveCountDrawn( u32 param = 0 ) = 0;
 
 		//! Deletes all dynamic lights which were previously added with addDynamicLight().
 		virtual void deleteAllDynamicLights() = 0;
@@ -655,17 +665,17 @@ namespace video
 
 		//! Returns the maximal amount of dynamic lights the device can handle
 		/** \return Maximal amount of dynamic lights. */
-		virtual s32 getMaximalDynamicLightAmount() = 0;
+		virtual u32 getMaximalDynamicLightAmount() = 0;
 
 		//! Returns current amount of dynamic lights set
 		/** \return Current amount of dynamic lights set */
-		virtual s32 getDynamicLightCount() = 0;
+		virtual u32 getDynamicLightCount() = 0;
 
 		//! Returns light data which was previously set with IVideDriver::addDynamicLight().
 		/** \param idx: Zero based index of the light. Must be greater than 0 and smaller
 		than IVideoDriver()::getDynamicLightCount.
 		\return Light data. */
-		virtual const SLight& getDynamicLight(s32 idx) = 0;
+		virtual const SLight& getDynamicLight(u32 idx) = 0;
 
 		//! Gets name of this video driver.
 		/** \return Returns the name of the video driver. Example: In case of the Direct3D8
@@ -694,7 +704,7 @@ namespace video
 		/** (mostly vertices) which
 		the device is able to render with one drawIndexedTriangleList
 		call. */
-		virtual s32 getMaximalPrimitiveCount() = 0;
+		virtual u32 getMaximalPrimitiveCount() = 0;
 
 		//! Enables or disables a texture creation flag.
 		/** This flag defines how
@@ -738,8 +748,9 @@ namespace video
 		registered for writing the image to disk
 		\param image: Image to write to disk
 		\param filename: name of the file to write
+		\param param: control parameter for the backend ( eq. compression level )
 		\return Returns true on success */
-		virtual bool writeImageToFile(IImage* image, const c8* filename) = 0;
+		virtual bool writeImageToFile(IImage* image, const c8* filename, u32 param = 0) = 0;
 
 		//! Creates a software image from a byte array.
 		/** No hardware texture will
@@ -757,7 +768,8 @@ namespace video
 		See IUnknown::drop() for more information. */
 		virtual IImage* createImageFromData(ECOLOR_FORMAT format,
 			const core::dimension2d<s32>& size, void *data,
-			bool ownForeignMemory=false) = 0;
+			bool ownForeignMemory=false,
+			bool deleteMemory = true) = 0;
 
 		//! Only used by the internal engine.
 		/** Used to notify the driver that
@@ -787,10 +799,10 @@ namespace video
 		//! Returns pointer to material renderer or null if not existing.
 		/** \param idx: Id of the material renderer. Can be a value of the E_MATERIAL_TYPE enum or a
 		value which was returned by addMaterialRenderer(). */
-		virtual IMaterialRenderer* getMaterialRenderer(s32 idx) = 0;
+		virtual IMaterialRenderer* getMaterialRenderer(u32 idx) = 0;
 
 		//! Returns amount of currently available material renderers.
-		virtual s32 getMaterialRendererCount() = 0;
+		virtual u32 getMaterialRendererCount() = 0;
 
 		//! Returns name of the material renderer
 		/** This string can for example be used to test if a specific renderer already has
@@ -798,7 +810,7 @@ namespace video
 		returned name will be also used when serializing Materials.
 		\param idx: Id of the material renderer. Can be a value of the E_MATERIAL_TYPE enum or a
 		value which was returned by addMaterialRenderer(). */
-		virtual const c8* getMaterialRendererName(s32 idx) = 0;
+		virtual const c8* getMaterialRendererName(u32 idx) = 0;
 
 		//! Sets the name of a material renderer.
 		/** Will have no effect on built-in material renderers.
@@ -809,7 +821,7 @@ namespace video
 		//! Creates material attributes list from a material, usable for serialization and more.
 		/** Please note that the videodriver will use the material renderer names from
 		getMaterialRendererName() to write out the material type name, so they should be set before. */
-		virtual io::IAttributes* createAttributesFromMaterial(video::SMaterial& material) = 0;
+		virtual io::IAttributes* createAttributesFromMaterial(const video::SMaterial& material) = 0;
 
 		//! Fills an SMaterial structure from attributes.
 		/** Please note that for setting material types of the material, the video driver

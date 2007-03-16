@@ -55,7 +55,7 @@ void MeshBuffer_GetBoundingBox(IntPtr meshb, M_BOX3D bb)
 
 void MeshBuffer_SetBoundingBox(IntPtr meshb, M_BOX3D bb)
 {
-	GetMBForIntPtr(meshb)->getBoundingBox() = MU_BOX3D(bb);
+	GetMBForIntPtr(meshb)->setBoundingBox(MU_BOX3D(bb));
 }
 
 int MeshBuffer_GetIndexCount(IntPtr meshb)
@@ -86,12 +86,12 @@ void MeshBuffer_SetIndices(IntPtr meshb, unsigned short* indices, int count)
 		}
 }
 
-unsigned short MeshBuffer_GetIndex(IntPtr meshb, int nr)
+unsigned short MeshBuffer_GetIndex(IntPtr meshb, unsigned int nr)
 {
 	return GetMBForIntPtr(meshb)->getIndices()[nr];
 }
 
-void MeshBuffer_SetIndex(IntPtr meshb, int nr, unsigned short val)
+void MeshBuffer_SetIndex(IntPtr meshb, unsigned int nr, unsigned short val)
 {
 	if(GetMBForIntPtr(meshb)->getIndexCount() > nr)
 		GetMBForIntPtr(meshb)->getIndices()[nr] = val;
@@ -135,12 +135,12 @@ E_VERTEX_TYPE MeshBuffer_GetVertexType(IntPtr meshb)
 	return GetMBForIntPtr(meshb)->getVertexType();
 }
 
-IntPtr MeshBuffer_GetVertex(IntPtr meshb, int nr)
+IntPtr MeshBuffer_GetVertex(IntPtr meshb, unsigned int nr)
 {
 	return &(((S3DVertex*)GetMBForIntPtr(meshb)->getVertices())[nr]);
 }
 
-void MeshBuffer_SetVertex(IntPtr meshb, int nr, IntPtr vert)
+void MeshBuffer_SetVertex(IntPtr meshb, unsigned int nr, IntPtr vert)
 {
 	SMeshBuffer *mb = ((SMeshBuffer*)meshb);
 	if(nr >= mb->getVertexCount())
@@ -152,12 +152,12 @@ void MeshBuffer_SetVertex(IntPtr meshb, int nr, IntPtr vert)
 		(((S3DVertex*)(mb->getVertices()))[nr]) = *((S3DVertex*)vert);
 }
 
-IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, int nr)
+IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, unsigned int nr)
 {
 	return &(((S3DVertex2TCoords*)GetMBForIntPtr(meshb)->getVertices())[nr]);
 }
 
-void MeshBuffer_SetVertex2T(IntPtr meshb, int nr, IntPtr vert)
+void MeshBuffer_SetVertex2T(IntPtr meshb, unsigned int nr, IntPtr vert)
 {
 	SMeshBufferLightMap *mb = ((SMeshBufferLightMap*)meshb);
 	if(nr >= mb->getVertexCount())

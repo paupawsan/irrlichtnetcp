@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -12,7 +12,7 @@ namespace irr
 namespace video
 {
 	class ITexture;
-}
+} // end namespace video
 namespace gui
 {
 	class IGUIButton;
@@ -30,7 +30,7 @@ namespace gui
 		~IGUIToolBar() {};
 
 		//! Adds a button to the tool bar
-		virtual IGUIButton* addButton(s32 id=-1, const wchar_t* text=0,
+		virtual IGUIButton* addButton(s32 id=-1, const wchar_t* text=0,const wchar_t* tooltiptext=0,
 			video::ITexture* img=0, video::ITexture* pressedimg=0,
 			bool isPushButton=false, bool useAlphaChannel=false) = 0;
 	};

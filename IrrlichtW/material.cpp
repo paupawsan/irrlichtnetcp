@@ -35,19 +35,19 @@ void Material_GetSpecularColor(IntPtr material, M_SCOLOR color)
 }
 IntPtr Material_GetTexture1(IntPtr material)
 {
-    return GetMatFromIntPtr(material)->Texture1;
+    return GetMatFromIntPtr(material)->Textures[0];
 }
 IntPtr Material_GetTexture2(IntPtr material)
 {
-    return GetMatFromIntPtr(material)->Texture2;
+    return GetMatFromIntPtr(material)->Textures[1];
 }
 IntPtr Material_GetTexture3(IntPtr material)
 {
-    return GetMatFromIntPtr(material)->Texture3;
+    return GetMatFromIntPtr(material)->Textures[2];
 }
 IntPtr Material_GetTexture4(IntPtr material)
 {
-    return GetMatFromIntPtr(material)->Texture4;
+    return GetMatFromIntPtr(material)->Textures[3];
 }
 bool Material_GetAnisotropicFilter(IntPtr material)
 {
@@ -85,9 +85,9 @@ bool Material_GetWireframe(IntPtr material)
 {
     _FIX_BOOL_MARSHAL_BUG(GetMatFromIntPtr(material)->Wireframe);
 }
-bool Material_GetZBuffer(IntPtr material)
+unsigned int Material_GetZBuffer(IntPtr material)
 {
-    _FIX_BOOL_MARSHAL_BUG(GetMatFromIntPtr(material)->ZBuffer);
+    return (GetMatFromIntPtr(material)->ZBuffer);
 }
 bool Material_GetZWriteEnable(IntPtr material)
 {
@@ -123,19 +123,19 @@ void Material_SetSpecularColor(IntPtr material, M_SCOLOR color)
 }
 void Material_SetTexture1(IntPtr material, IntPtr text)
 {
-    GetMatFromIntPtr(material)->Texture1 = (ITexture*)text;
+    GetMatFromIntPtr(material)->Textures[1] = (ITexture*)text;
 }
 void Material_SetTexture2(IntPtr material, IntPtr text)
 {
-    GetMatFromIntPtr(material)->Texture2 = (ITexture*)text;
+    GetMatFromIntPtr(material)->Textures[2] = (ITexture*)text;
 }
 void Material_SetTexture3(IntPtr material, IntPtr text)
 {
-    GetMatFromIntPtr(material)->Texture3 = (ITexture*)text;
+    GetMatFromIntPtr(material)->Textures[2] = (ITexture*)text;
 }
 void Material_SetTexture4(IntPtr material, IntPtr text)
 {
-    GetMatFromIntPtr(material)->Texture4 = (ITexture*)text;
+    GetMatFromIntPtr(material)->Textures[3] = (ITexture*)text;
 }
 void Material_SetAnisotropicFilter(IntPtr material, bool val)
 {
@@ -173,7 +173,7 @@ void Material_SetWireframe(IntPtr material, bool val)
 {
     GetMatFromIntPtr(material)->Wireframe = val;
 }
-void Material_SetZBuffer(IntPtr material, bool val)
+void Material_SetZBuffer(IntPtr material, unsigned int val)
 {
     GetMatFromIntPtr(material)->ZBuffer = val;
 }

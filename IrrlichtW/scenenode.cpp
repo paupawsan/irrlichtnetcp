@@ -25,7 +25,7 @@ void SceneNode_GetAbsoluteTransformation(IntPtr scenenode, M_MAT4 toR)
     return UM_MAT4(GetSceneNodeFromIntPtr(scenenode)->getAbsoluteTransformation(), toR);
 }
 
-bool SceneNode_GetAutomaticCulling(IntPtr scenenode)
+E_CULLING_TYPE SceneNode_GetAutomaticCulling(IntPtr scenenode)
 {
     return GetSceneNodeFromIntPtr(scenenode)->getAutomaticCulling();
 }
@@ -60,7 +60,7 @@ int SceneNode_GetID(IntPtr scenenode)
     return GetSceneNodeFromIntPtr(scenenode)->getID();
 }
 
-int SceneNode_GetMaterialCount(IntPtr scenenode)
+unsigned int SceneNode_GetMaterialCount(IntPtr scenenode)
 {
     return GetSceneNodeFromIntPtr(scenenode)->getMaterialCount();
 }
@@ -115,9 +115,9 @@ ESCENE_NODE_TYPE SceneNode_GetType(IntPtr scenenode)
     return GetSceneNodeFromIntPtr(scenenode)->getType();
 }
 
-bool SceneNode_IsDebugDataVisible(IntPtr scenenode)
+E_DEBUG_SCENE_TYPE SceneNode_GetDebugDataVisible(IntPtr scenenode)
 {
-    _FIX_BOOL_MARSHAL_BUG(GetSceneNodeFromIntPtr(scenenode)->isDebugDataVisible());
+    return (GetSceneNodeFromIntPtr(scenenode)->isDebugDataVisible());
 }
 
 bool SceneNode_IsDebugObject(IntPtr scenenode)
@@ -130,14 +130,14 @@ bool SceneNode_IsVisible(IntPtr scenenode)
 	_FIX_BOOL_MARSHAL_BUG(GetSceneNodeFromIntPtr(scenenode)->isVisible());
 }
 
-void SceneNode_OnPostRender(IntPtr scenenode, unsigned int timeMS)
+void SceneNode_OnAnimate(IntPtr scenenode, unsigned int timeMS)
 {
-    GetSceneNodeFromIntPtr(scenenode)->OnPostRender(timeMS);
+    GetSceneNodeFromIntPtr(scenenode)->OnAnimate(timeMS);
 }
 
-void SceneNode_OnPreRender(IntPtr scenenode)
+void SceneNode_OnRegisterSceneNode(IntPtr scenenode)
 {
-    GetSceneNodeFromIntPtr(scenenode)->OnPreRender();
+    GetSceneNodeFromIntPtr(scenenode)->OnRegisterSceneNode();
 }
 
 void SceneNode_Remove(IntPtr scenenode)
@@ -170,14 +170,14 @@ void SceneNode_Render(IntPtr scenenode)
     GetSceneNodeFromIntPtr(scenenode)->render();
 }
 
-void SceneNode_SetAutomaticCulling(IntPtr scenenode, bool enabled)
+void SceneNode_SetAutomaticCulling(IntPtr scenenode, E_CULLING_TYPE enabled)
 {
     GetSceneNodeFromIntPtr(scenenode)->setAutomaticCulling(enabled);
 }
 
-void SceneNode_SetDebugDataVisible(IntPtr scenenode, bool visible)
+void SceneNode_SetDebugDataVisible(IntPtr scenenode, E_DEBUG_SCENE_TYPE visible)
 {
-    GetSceneNodeFromIntPtr(scenenode)->setDebugDataVisible(visible);
+	GetSceneNodeFromIntPtr(scenenode)->setDebugDataVisible(visible ? EDS_FULL : EDS_OFF);
 }
 
 void SceneNode_SetID(IntPtr scenenode, int id)

@@ -34,7 +34,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public bool AutomaticCulling
+        public CullingType AutomaticCulling
         {
             get
             {
@@ -82,7 +82,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public virtual int MaterialCount
+        public virtual uint MaterialCount
         {
             get
             {
@@ -203,11 +203,11 @@ namespace IrrlichtNETCP
             }
         }
 
-        public bool DebugDataVisible
+        public DebugSceneType DebugDataVisible
         {
             get
             {
-                return SceneNode_IsDebugDataVisible(_raw);
+                return SceneNode_GetDebugDataVisible(_raw);
             }
             set
             {
@@ -263,14 +263,14 @@ namespace IrrlichtNETCP
             base.Dispose();
         }
 
-        public virtual void OnPostRender(uint timeMS)
+        public virtual void OnAnimate(uint timeMS)
         {
-            SceneNode_OnPostRender(_raw, timeMS);
+            SceneNode_OnAnimate(_raw, timeMS);
         }
 
-        public virtual void OnPreRender()
+        public virtual void OnRegisterSceneNode()
         {
-            SceneNode_OnPreRender(_raw);
+            SceneNode_OnRegisterSceneNode(_raw);
         }
 
         public virtual void Remove()
@@ -349,7 +349,10 @@ namespace IrrlichtNETCP
         static extern uint SceneNode_GetChildrenCount(IntPtr scenenode);
 
         [DllImport(Native.Dll)]
-        static extern bool SceneNode_GetAutomaticCulling(IntPtr scenenode);
+        static extern CullingType SceneNode_GetAutomaticCulling(IntPtr scenenode);
+
+        [DllImport(Native.Dll)]
+        static extern DebugSceneType SceneNode_GetDebugDataVisible(IntPtr scenenode);
 
         [DllImport(Native.Dll)]
         static extern void SceneNode_GetBoundingBox(IntPtr scenenode, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
@@ -358,7 +361,7 @@ namespace IrrlichtNETCP
         static extern int SceneNode_GetID(IntPtr scenenode);
 
         [DllImport(Native.Dll)]
-        static extern int SceneNode_GetMaterialCount(IntPtr scenenode);
+        static extern uint SceneNode_GetMaterialCount(IntPtr scenenode);
 
         [DllImport(Native.Dll)]
         static extern IntPtr SceneNode_GetMaterial(IntPtr scenenode, int i);
@@ -391,19 +394,16 @@ namespace IrrlichtNETCP
         static extern SceneNodeType SceneNode_GetType(IntPtr scenenode);
 
         [DllImport(Native.Dll)]
-        static extern bool SceneNode_IsDebugDataVisible(IntPtr scenenode);
-
-        [DllImport(Native.Dll)]
         static extern bool SceneNode_IsDebugObject(IntPtr scenenode);
 
         [DllImport(Native.Dll)]
         static extern bool SceneNode_IsVisible(IntPtr scenenode);
 
         [DllImport(Native.Dll)]
-        static extern void SceneNode_OnPostRender(IntPtr scenenode, uint timeMS);
+        static extern void SceneNode_OnAnimate(IntPtr scenenode, uint timeMS);
 
         [DllImport(Native.Dll)]
-        static extern void SceneNode_OnPreRender(IntPtr scenenode);
+        static extern void SceneNode_OnRegisterSceneNode(IntPtr scenenode);
 
         [DllImport(Native.Dll)]
         static extern void SceneNode_Remove(IntPtr scenenode);
@@ -424,10 +424,10 @@ namespace IrrlichtNETCP
         static extern void SceneNode_Render(IntPtr scenenode);
 
         [DllImport(Native.Dll)]
-        static extern void SceneNode_SetAutomaticCulling(IntPtr scenenode, bool enabled);
+        static extern void SceneNode_SetAutomaticCulling(IntPtr scenenode, CullingType enabled);
 
         [DllImport(Native.Dll)]
-        static extern void SceneNode_SetDebugDataVisible(IntPtr scenenode, bool visible);
+        static extern void SceneNode_SetDebugDataVisible(IntPtr scenenode, DebugSceneType visible);
 
         [DllImport(Native.Dll)]
         static extern void SceneNode_SetID(IntPtr scenenode, int id);
@@ -468,5 +468,25 @@ namespace IrrlichtNETCP
         [DllImport(Native.Dll)]
         static extern void SceneNode_UpdateAbsolutePosition(IntPtr scenenode);
         #endregion
+    }
+
+    public enum DebugSceneType
+    {
+        Off = 0,
+        BoundingBox = 1,
+        Normals = 2,
+        Skeleton = 4,
+        MeshWireOverlay = 8,
+        HalfTransparency = 16,
+        BBoxBuffers = 32,
+        Full = DebugSceneType.BoundingBox | DebugSceneType.Normals | DebugSceneType.Skeleton | DebugSceneType.MeshWireOverlay
+    }
+
+    public enum CullingType
+    {
+        Off = 0,
+        Box,
+        FrustumBox,
+        FrustumSphere
     }
 }

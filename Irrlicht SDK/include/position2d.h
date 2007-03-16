@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -6,6 +6,7 @@
 #define __IRR_POSITION_H_INCLUDED__
 
 #include "irrTypes.h"
+#include "dimension2d.h"
 
 namespace irr
 {
@@ -57,6 +58,20 @@ namespace core
 				return *this;
 			}
 
+			const position2d<T>& operator+=(const dimension2d<T>& other)
+			{
+				X += other.Width;
+				Y += other.Height;
+				return *this;
+			}
+
+			const position2d<T>& operator-=(const dimension2d<T>& other)
+			{
+				X -= other.Width;
+				Y -= other.Height;
+				return *this;
+			}
+
 			position2d<T> operator-(const position2d<T>& other) const
 			{
 				return position2d<T>(X-other.X, Y-other.Y);
@@ -65,6 +80,26 @@ namespace core
 			position2d<T> operator+(const position2d<T>& other) const
 			{
 				return position2d<T>(X+other.X, Y+other.Y);
+			}
+
+			position2d<T> operator*(const position2d<T>& other) const
+			{
+				return position2d<T>(X*other.X, Y*other.Y);
+			}
+
+			position2d<T> operator*(const T& scalar) const
+			{
+				return position2d<T>(X*scalar, Y*scalar);
+			}
+
+			position2d<T> operator+(const dimension2d<T>& other) const
+			{
+				return position2d<T>(X+other.Width, Y+other.Height);
+			}
+
+			position2d<T> operator-(const dimension2d<T>& other) const
+			{
+				return position2d<T>(X-other.Width, Y-other.Height);
 			}
 
 			const position2d<T>& operator=(const position2d<T>& other) 

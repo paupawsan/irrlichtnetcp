@@ -10,6 +10,7 @@ Irrlicht .NET CP 0.8
 -Added Matrix4.InverseRotationDegrees (Radians also).
 -Corrected a huge bug with Colorf. It was using values between 0f and 255f whereas Irrlicht uses values
 between 0f and 1f... You MUST now update all your softwares. (thanks to lester)
+-Added Irrlicht 1.3 compatibility and libraries (refer to Irrlicht change log in the /Irrlicht SDK directory).
 
 =============================================================================
 Irrlicht .NET CP 0.7

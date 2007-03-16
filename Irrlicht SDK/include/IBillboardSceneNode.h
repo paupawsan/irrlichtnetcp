@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -31,6 +31,21 @@ public:
 
 	//! Returns the size of the billboard.
 	virtual const core::dimension2d<f32>& getSize() = 0;
+
+	//! Set the color of all vertices of the billboard
+	//! \param overallColor: the color to set
+	virtual void setColor(const video::SColor & overallColor) = 0;
+
+	//! Set the color of the top and bottom vertices of the billboard
+	//! \param topColor: the color to set the top vertices
+	//! \param bottomColor: the color to set the bottom vertices
+	virtual void setColor(const video::SColor & topColor, const video::SColor & bottomColor) = 0;
+
+	//! Gets the color of the top and bottom vertices of the billboard
+	//! \param[out] topColor: stores the color of the top vertices
+	//! \param[out] bottomColor: stores the color of the bottom vertices
+	virtual void getColor(video::SColor & topColor, video::SColor & bottomColor) = 0;
+
 };
 
 } // end namespace scene

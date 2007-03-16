@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -21,10 +21,10 @@ namespace core
 	{
 	public:
 
-		//! Determinates if the triangle is totally inside a bounding box.
+		//! Determines if the triangle is totally inside a bounding box.
 		//! \param box: Box to check.
 		//! \return Returns true if the triangle is withing the box,
-		//! and false if it is not.
+		//! and false otherwise.
 		bool isTotalInsideBox(const aabbox3d<T>& box) const
 		{
 			return (box.isPointInside(pointA) && 
@@ -98,7 +98,7 @@ namespace core
 			vector3d<T> bminusa = b - a;
 			vector3d<T> cp1 = bminusa.crossProduct(p1 - a);
 			vector3d<T> cp2 = bminusa.crossProduct(p2 - a);
-			return (cp1.dotProduct(cp2) >= 0.0f);
+			return (cp1.dotProduct(cp2) >= core::ROUNDING_ERROR_32);
 		}
 
 
@@ -143,10 +143,10 @@ namespace core
 		bool getIntersectionOfPlaneWithLine(const vector3d<T>& linePoint,
 			const vector3d<T>& lineVect, vector3d<T>& outIntersection) const
 		{
-			vector3d<T> normal = getNormal().normalize();
-			T t2 = normal.dotProduct(lineVect);
+			const vector3d<T> normal = getNormal().normalize();
+			T t2;
             
-			if (t2 == 0.0f)
+			if ( core::iszero ( t2 = normal.dotProduct(lineVect) ) )
 				return false;
 
 			T d = pointA.dotProduct(normal);
@@ -180,6 +180,14 @@ namespace core
 			return plane3d<T>(pointA, pointB, pointC);
 		}
 
+		//! Returns the area of the triangle
+		T getArea() const
+		{
+			return (pointB - pointA).crossProduct(pointC - pointA).getLength() * 0.5;
+
+		}
+
+		//! sets the triangle's points
 		void set(const core::vector3d<T>& a, const core::vector3d<T>& b, const core::vector3d<T>& c)
 		{
 			pointA = a;

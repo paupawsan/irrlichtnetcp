@@ -59,12 +59,12 @@ namespace IrrlichtNETCP
             }
         }
 
-        public ushort GetIndex(int nr)
+        public ushort GetIndex(uint nr)
         {
             return MeshBuffer_GetIndex(_raw, nr);
         }
 
-        public void SetIndex(int nr, ushort val)
+        public void SetIndex(uint nr, ushort val)
         {
             MeshBuffer_SetIndex(_raw, nr, val);
         }
@@ -90,22 +90,22 @@ namespace IrrlichtNETCP
             }
         }
 
-        public Vertex3D GetVertex(int nr)
+        public Vertex3D GetVertex(uint nr)
         {
             return (Vertex3D)NativeElement.GetObject(MeshBuffer_GetVertex(_raw, nr), typeof(Vertex3D));
         }
 
-        public Vertex3DT2 GetVertexT2(int nr)
+        public Vertex3DT2 GetVertexT2(uint nr)
         {
             return (Vertex3DT2)NativeElement.GetObject(MeshBuffer_GetVertex2T(_raw, nr), typeof(Vertex3DT2));
         }
 
-        public void SetVertex(int nr, Vertex3D vert)
+        public void SetVertex(uint nr, Vertex3D vert)
         {
             MeshBuffer_SetVertex(_raw, nr, vert.Raw);
         }
 
-        public void SetVertexT2(int nr, Vertex3DT2 vert)
+        public void SetVertexT2(uint nr, Vertex3DT2 vert)
         {
             MeshBuffer_SetVertex2T(_raw, nr, vert.Raw);
         }
@@ -130,10 +130,10 @@ namespace IrrlichtNETCP
         static extern void MeshBuffer_SetIndices(IntPtr meshb, ushort[] indices, int count);
 
         [DllImport(Native.Dll)]
-        static extern ushort MeshBuffer_GetIndex(IntPtr meshb, int nr);
+        static extern ushort MeshBuffer_GetIndex(IntPtr meshb, uint nr);
 
         [DllImport(Native.Dll)]
-        static extern void MeshBuffer_SetIndex(IntPtr meshb, int nr, ushort val);
+        static extern void MeshBuffer_SetIndex(IntPtr meshb, uint nr, ushort val);
 
         [DllImport(Native.Dll)]
         static extern IntPtr MeshBuffer_GetMaterial(IntPtr meshb);
@@ -148,16 +148,16 @@ namespace IrrlichtNETCP
         static extern VertexType MeshBuffer_GetVertexType(IntPtr meshb);
 
         [DllImport(Native.Dll)]
-        static extern IntPtr MeshBuffer_GetVertex(IntPtr meshb, int nr);
+        static extern IntPtr MeshBuffer_GetVertex(IntPtr meshb, uint nr);
 
         [DllImport(Native.Dll)]
-        static extern void MeshBuffer_SetVertex(IntPtr meshb, int nr, IntPtr vert);
+        static extern void MeshBuffer_SetVertex(IntPtr meshb, uint nr, IntPtr vert);
 
         [DllImport(Native.Dll)]
-        static extern IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, int nr);
+        static extern IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, uint nr);
 
         [DllImport(Native.Dll)]
-        static extern void MeshBuffer_SetVertex2T(IntPtr meshb, int nr, IntPtr vert);
+        static extern void MeshBuffer_SetVertex2T(IntPtr meshb, uint nr, IntPtr vert);
         #endregion
     }
     public enum VertexType

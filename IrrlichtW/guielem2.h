@@ -95,5 +95,5 @@ extern "C"
 	EXPORT int GUITabControl_GetTabCount(IntPtr tabc);
 	EXPORT bool GUITabControl_SetActiveTab(IntPtr tabc, int index);
 
-	EXPORT IntPtr GUIToolBar_AddButton(IntPtr toolbar, int id, M_STRING text, IntPtr img, IntPtr pressedimg, bool isPushButton, bool useAlphaChannel);
+	EXPORT IntPtr GUIToolBar_AddButton(IntPtr toolbar, int id, M_STRING text, M_STRING tooltip, IntPtr img, IntPtr pressedimg, bool isPushButton, bool useAlphaChannel);
 }

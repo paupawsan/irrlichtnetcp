@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -7,13 +7,12 @@
 
 #include "ISceneNode.h"
 #include "IEventReceiver.h"
+#include "SViewFrustum.h"
 
 namespace irr
 {
 namespace scene
 {
-
-	struct SViewFrustrum;
 
 	//! Scene Node which is a (controlable) camera.
 	/** The whole scene will be
@@ -107,10 +106,10 @@ namespace scene
 		/** \param fovy: New field of view in radiants. */
 		virtual void setFOV(f32 fovy) = 0;
 
-		//! Returns the view frustrum. 
+		//! Returns the view frustum. 
 		/** Needed sometimes by bspTree or LOD render nodes.
-		\return Returns the current view frustrum. */
-		virtual const SViewFrustrum* getViewFrustrum() = 0;
+		\return Returns the current view frustum. */
+		virtual const SViewFrustum* getViewFrustum() const = 0;
 
 		//! Disables or enables the camera to get key or mouse inputs.
 		/** If this is set to true, the camera will respond to key inputs
@@ -136,6 +135,7 @@ namespace scene
 		{
 			IsOrthogonal = orthogonal;
 		}
+
 
 	private:
 

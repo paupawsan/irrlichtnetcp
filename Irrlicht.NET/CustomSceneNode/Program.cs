@@ -50,11 +50,11 @@ namespace CustomSceneNode
                 Box.AddInternalPoint(Vertices[i].Position);
         }
 
-        public override void OnPreRender()
+        public override void OnRegisterSceneNode()
         {
             if (Visible)
-                _mgr.RegisterNodeForRendering(this);
-            base.OnPreRender();
+                _mgr.RegisterNodeForRendering(this, SceneNodeRenderPass.Light);
+            base.OnRegisterSceneNode();
         }
 
         ushort[] indices = { 0, 2, 3, 2, 1, 3, 1, 0, 3, 2, 0, 1 };
@@ -73,7 +73,7 @@ namespace CustomSceneNode
             }
         }
 
-        public override int MaterialCount
+        public override uint MaterialCount
         {
             get
             {

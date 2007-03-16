@@ -46,11 +46,11 @@ namespace IrrlichtNETCP.Extensions
             return _material;
         }
 
-        public override int MaterialCount
+        public override uint MaterialCount
         {
             get { return 1; }
         }
-        public override void OnPreRender()
+        public override void OnRegisterSceneNode()
         {
             if (Visible)
             {
@@ -62,13 +62,13 @@ namespace IrrlichtNETCP.Extensions
                         NewMath.Sqr(DrawDistance * 1.5f))
                     {
                         _mgr.RegisterNodeForRendering(this);
-                        base.OnPreRender();
+                        base.OnRegisterSceneNode();
                     }
                 }
             }
         }
 
-        public override void OnPostRender(uint timeMs)
+        public override void OnAnimate(uint timeMs)
         {
             if (lastwindtime < (timeMs - MaxFPS))
             {
@@ -92,7 +92,7 @@ namespace IrrlichtNETCP.Extensions
                 {
                     redrawnextloop = false;
                 }
-                base.OnPostRender(timeMs);
+                base.OnAnimate(timeMs);
             }
         }
 
@@ -116,7 +116,7 @@ namespace IrrlichtNETCP.Extensions
                 ReallocateBuffers();
 
                 Vector3D campos = camera.AbsolutePosition;
-                Box3D cbox = camera.ViewFrustrum.BoundingBox;
+                Box3D cbox = camera.ViewFrustum.BoundingBox;
 
                 Vector3D pos = Position;
                 int drawcount = 0;
@@ -208,7 +208,7 @@ namespace IrrlichtNETCP.Extensions
                 lastdrawcount = drawcount;
             }
 
-            if (DebugDataVisible)
+            if (DebugDataVisible == DebugSceneType.BoundingBox)
             {
                 driver.SetTransform(TransformationState.World, AbsoluteTransformation);
                 Material m = new Material();

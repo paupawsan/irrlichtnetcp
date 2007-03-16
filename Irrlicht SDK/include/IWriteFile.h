@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -45,8 +45,8 @@ namespace io
 	//! Internal function, please do not use.
 	IWriteFile* createWriteFile(const c8* fileName, bool append);
 
-} // end namespace irr
 } // end namespace io
+} // end namespace irr
 
 #endif
 

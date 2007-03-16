@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine" and the "irrXML" project.
 // For conditions of distribution and use, see copyright notice in irrlicht.h and irrXML.h
 
@@ -72,7 +72,7 @@ public:
 		data = allocator.allocate(new_size); //new T[new_size];
 		allocated = new_size;
 
-        // copy old data
+		// copy old data
 		s32 end = used < new_size ? used : new_size;
 		
 		for (s32 i=0; i<end; ++i)
@@ -80,8 +80,8 @@ public:
 			// data[i] = old_data[i];
 			allocator.construct(&data[i], old_data[i]);
 		}
-		
-        // destruct old data
+
+		// destruct old data
 		for (u32 j=0; j<used; ++j)
 			allocator.destruct(&old_data[j]);
 
@@ -91,8 +91,8 @@ public:
 		allocator.deallocate(old_data); //delete [] old_data;
 	}
 
-	//! Adds an element at back of array. If the array is to small to
-	//! add this new element, the array is made bigger.
+	//! Adds an element at back of array. If the array is too small to
+	//! add this new element it is made bigger.
 	//! \param element: Element to add at the back of the array.
 	void push_back(const T& element)
 	{
@@ -107,14 +107,13 @@ public:
 			reallocate(used * 2 +1); // increase data block
 
 			allocator.construct(&data[used++], e); // data[used++] = e;  // push_back
-
-			is_sorted = false;
-			return;
 		}
-
-		//data[used++] = element;
-		// instead of using this here, we copy it the safe way:
-		allocator.construct(&data[used++], element);
+		else
+		{
+			//data[used++] = element;
+			// instead of using this here, we copy it the safe way:
+			allocator.construct(&data[used++], element);
+		}
 
 		is_sorted = false;
 	}
@@ -127,9 +126,9 @@ public:
 	void push_front(const T& element)
 	{
 		if (used + 1 > allocated)
-			reallocate(used * 2 +1);
+			reallocate(used +1);
 
-		for (int i=(int)used; i>0; --i)
+		for (u32 i=used; i>0; --i)
 		{
 			//data[i] = data[i-1];
 			allocator.construct(&data[i], data[i-1]);
@@ -153,9 +152,9 @@ public:
 		_IRR_DEBUG_BREAK_IF(index>used) // access violation
 
 		if (used + 1 > allocated)
-			reallocate(used * 2 +1);
+			reallocate(used +1);
 
-		for (u32 i=used++; i>index; i--)
+		for (u32 i=used++; i>index; --i)
 			allocator.construct(&data[i], data[i-1]); // data[i] = data[i-1];
 
 		allocator.construct(&data[index], element); // data[index] = element;
@@ -247,6 +246,23 @@ public:
 			allocator.construct(&data[i], other.data[i]); // data[i] = other.data[i];
 	}
 
+	// equality operator
+	bool operator == (const array<T>& other) const
+	{
+		if (used != other.used)
+			return false;
+
+		for (u32 i=0; i<other.used; ++i)
+			if (data[i] != other[i])
+				return false;
+		return true;
+	}
+
+	// inequality operator
+	bool operator != (const array<T>& other) const
+	{
+		return !(*this==other);
+	}
 
 	//! Direct access operator
 	T& operator [](u32 index)
@@ -350,25 +366,32 @@ public:
 	//! otherwise -1 is returned.
 	s32 binary_search(const T& element)
 	{
+		sort();
+		return binary_search(element, 0, used-1);
+	}
+
+	//! Performs a binary search for an element, returns -1 if not found.
+	//! The array must be sorted prior
+	//! \param element: Element to search for.
+	//! \return Returns position of the searched element if it was found,
+	//! otherwise -1 is returned.
+	s32 binary_search_const(const T& element) const
+	{
 		return binary_search(element, 0, used-1);
 	}
 
 
 
 	//! Performs a binary search for an element, returns -1 if not found.
-	//! The array will be sorted before the binary search if it is not
-	//! already sorted.
 	//! \param element: Element to search for.
 	//! \param left: First left index
 	//! \param right: Last right index.
 	//! \return Returns position of the searched element if it was found,
 	//! otherwise -1 is returned.
-	s32 binary_search(const T& element, s32 left, s32 right)
+	s32 binary_search(const T& element, s32 left, s32 right) const
 	{
 		if (!used)
 			return -1;
-
-		sort();
 
 		s32 m;
 
@@ -419,7 +442,7 @@ public:
 	{
 		for (s32 i=used-1; i>=0; --i)
 			if (data[i] == element)
-				return (s32)i;
+				return i;
 
 		return -1;
 	}
