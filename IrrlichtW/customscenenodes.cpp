@@ -81,9 +81,9 @@ class CustomSceneNode : public ISceneNode
 	{
 		return ((ISceneNode*)c_intptr(GET_PARENT, 0, 0));
 	}
-    virtual SMaterial& getMaterial(int id)
+    virtual SMaterial& getMaterial(unsigned int id)
     {
-        return *((SMaterial*)c_intptr(GET_MATERIAL, 0, id));
+        return *((SMaterial*)c_intptr(GET_MATERIAL, 0, (int)id));
     }
     virtual ITriangleSelector* getTriangleSelector()
     {
