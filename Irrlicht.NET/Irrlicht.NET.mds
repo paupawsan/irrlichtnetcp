@@ -17,8 +17,7 @@
       <Entry build="True" name="Irrlicht.Extensions" configuration="Release" />
     </Configuration>
   </Configurations>
-  <DeployTargets />
-  <StartMode startupentry="Example" single="True">
+  <StartMode startupentry="GUIExample" single="True">
     <Execute type="None" entry="Irrlicht.NET" />
     <Execute type="None" entry="Example" />
     <Execute type="None" entry="GUIExample" />

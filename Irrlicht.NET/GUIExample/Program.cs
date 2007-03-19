@@ -95,7 +95,8 @@ namespace GUIExample
                         if (ev.Caller.ID == (int)GUIItems.DontClickMe)
                         {
                         	//We just add a stupid message box... with a stupid text
-                            guienv.AddMessageBox("Why have you clicked ?", "I told you not to do this !\nI need now to hack your computer !\nYahahahahahahahaha !\nDo you agree ?",
+						
+							guienv.AddMessageBox("Why have you clicked ?", "I told you not to do this !\nI need now to hack your computer !\nYahahahahahahahaha !\nDo you agree ?",
                                                  true, MessageBoxFlag.Yes | MessageBoxFlag.No, null, (int)GUIItems.StupidMessageBox);
                             return true;
                         }

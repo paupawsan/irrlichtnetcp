@@ -41,8 +41,7 @@ namespace IrrlichtNETCP.Extensions
             counter_time = 0.0f;
             uvX = 0.0f;
             time_int_step = 0.0f;
-
-
+		
         }
 
         public double DateToJulian(ushort y, ushort m, ushort d, ushort h, ushort min)
@@ -107,7 +106,15 @@ namespace IrrlichtNETCP.Extensions
 
             return angle;
         }
-
+        
+        public SceneNode Sun
+        {
+        	get
+        	{
+        		return sun;
+        	}
+        }
+        
         public double Speed
         {
             get
@@ -120,7 +127,7 @@ namespace IrrlichtNETCP.Extensions
             }
         }
 
-        public Texture skyTexture
+        public Texture SkyTexture
         {
             set
             {
@@ -129,7 +136,7 @@ namespace IrrlichtNETCP.Extensions
             }
         }
 
-        public Texture starsTexture
+        public Texture StarsTexture
         {
             set
             {
@@ -142,7 +149,7 @@ namespace IrrlichtNETCP.Extensions
             }
         }
 
-        public Texture sunTexture
+        public Texture SunTexture
         {
             set
             {
@@ -150,12 +157,19 @@ namespace IrrlichtNETCP.Extensions
             }
         }
 
-        public Texture lensTexture
+        public Texture LensTexture
         {
             set
             {
                 lens.SetMaterialTexture(0, value);
             }
+        }
+        
+        public SceneNode CreateLensflare(Texture tex)
+        {
+            lens = new LensflareSceneNode(sun, smgr, -1, new Vector3D(0, 0, 0));
+            lens.Material.Texture1 = tex;
+            return lens;
         }
 
         public void prep_interpolation(double Jdate, double time)
@@ -319,7 +333,7 @@ namespace IrrlichtNETCP.Extensions
         public Colorf AmbientLight;
 
 
-        public void createSkyPalette()
+        public void CreateSkyPalette()
         {
 
             smgr.AddSkyBoxSceneNode(this, stars, -1);
@@ -333,10 +347,7 @@ namespace IrrlichtNETCP.Extensions
             sun.GetMaterial(0).Texture1 = suntex;
             sun.GetMaterial(0).MaterialTypeParam = 0.01f;
             sun.GetMaterial(0).MaterialType = MaterialType.TransparentAlphaChannel;
-
-            lens = new LensflareSceneNode(sun, smgr, -1, new Vector3D(0, 0, 0));
-            lens.Material.Texture1 = driver.GetTexture("flares.jpg");
-
+         
         }
 
         public LensflareSceneNode Lens
@@ -472,13 +483,7 @@ namespace IrrlichtNETCP.Extensions
 
         }
 
-        public Box3D BBox
-        {
-            get
-            {
-                return box;
-            }
-        }
+
         public override Box3D BoundingBox
         {
             get
@@ -532,7 +537,6 @@ namespace IrrlichtNETCP.Extensions
         int vert;
         int face;
         float uvX;
-
         SceneManager smgr;
 
     }

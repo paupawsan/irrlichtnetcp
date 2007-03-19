@@ -177,6 +177,7 @@ namespace IrrlichtNETCP
 	public enum GUIEventType
 	{
 		ElementFocusLost,
+		ElementFocused,
 		ElementHovered,
 		ElementLeft,
 		ButtonClicked,

@@ -32,3 +32,5 @@ List of scene nodes :
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=146
 -LensFlareSceneNode by Lester 
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=146
+-PerlinSimplexNoise and a terrain scene node by cube3
+ http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=169
