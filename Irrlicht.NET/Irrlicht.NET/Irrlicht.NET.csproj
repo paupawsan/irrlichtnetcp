@@ -57,6 +57,7 @@
     <Compile Include="Global\Types\Triangle3D.cs" />
     <Compile Include="Global\Types\Vector2D.cs" />
     <Compile Include="Global\Types\Vector3D.cs" />
+    <Compile Include="Global\Quaternion.cs" />
     <Compile Include="Global\Types\ViewFrustrum.cs" />
     <Compile Include="Gui\CursorControl.cs" />
     <Compile Include="Gui\GUIButton.cs" />
