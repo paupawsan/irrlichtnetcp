@@ -24,6 +24,7 @@ extern "C"
     EXPORT IntPtr SceneManager_AddSkyDomeSceneNode(IntPtr scenemanager, IntPtr texture, unsigned int  horiRes, unsigned int  vertRes, double  texturePercentage, double  spherePercentage, IntPtr parent);
     EXPORT IntPtr SceneManager_AddSphereSceneNode(IntPtr scenemanager, float radius, int polycount, IntPtr parent);
     EXPORT IntPtr SceneManager_AddTextSceneNode(IntPtr scenemanager, IntPtr font, M_STRING text, M_SCOLOR color, IntPtr parent);
+    EXPORT IntPtr SceneManager_AddTextSceneNode2(IntPtr scenemanager, IntPtr font, M_STRING text, IntPtr parent, M_DIM2DF size, M_VECT3DF pos, int ID, M_SCOLOR shade_top, M_SCOLOR shade_down);
     EXPORT IntPtr SceneManager_AddWaterSurfaceSceneNode(IntPtr scenemanager, IntPtr mesh, float waveHeight, float waveSpeed, float waveLength, IntPtr parent, int ID);
     EXPORT void SceneManager_AddToDeletionQueue(IntPtr scenemanager, IntPtr node);
     EXPORT IntPtr SceneManager_CreateCollisionResponseAnimator(IntPtr scenemanager, IntPtr world, IntPtr sceneNode,M_VECT3DF ellipsoidRadius, M_VECT3DF gravityPerSecond,M_VECT3DF ellipsoidTranslation, float slidingValue);

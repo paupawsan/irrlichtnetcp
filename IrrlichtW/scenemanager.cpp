@@ -116,6 +116,12 @@ IntPtr SceneManager_AddTextSceneNode(IntPtr scenemanager, IntPtr font, M_STRING 
     return GetSceneFromIntPtr(scenemanager)->addTextSceneNode((IGUIFont*) font, MU_WCHAR(text), MU_SCOLOR(color), (ISceneNode*) parent);
 }
 
+IntPtr SceneManager_AddTextSceneNode2(IntPtr scenemanager, IntPtr font, M_STRING text, IntPtr parent,  M_DIM2DF size, M_VECT3DF pos, int ID,
+                                                                                                            M_SCOLOR shade_top, M_SCOLOR shade_down)
+{
+    return GetSceneFromIntPtr(scenemanager)->addBillboardTextSceneNode((IGUIFont *)font, MU_WCHAR(text), (ISceneNode *)parent, MU_DIM2DF(size), MU_VECT3DF(pos), ID, MU_SCOLOR(shade_top), MU_SCOLOR(shade_down));
+}
+
 IntPtr SceneManager_AddWaterSurfaceSceneNode(IntPtr scenemanager, IntPtr mesh, float waveHeight, float waveSpeed, float waveLength, IntPtr parent, int ID)
 {
     return GetSceneFromIntPtr(scenemanager)->addWaterSurfaceSceneNode((IMesh*)mesh, waveHeight, waveSpeed, waveLength, (ISceneNode*)parent, ID);

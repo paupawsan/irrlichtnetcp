@@ -390,6 +390,27 @@ namespace IrrlichtNETCP
 				NativeElement.GetObject(SceneManager_AddTextSceneNode(_raw, font.Raw, text, color.ToUnmanaged(), par),
 										typeof(TextSceneNode));
 		}
+		
+		/// <summary>
+		/// Adds 3d TextSceneNode2. to view a Text in real 3D Space
+   		/// in fact it is a combination of Billboard & TextSceneNode
+		/// </summary>
+		/// <returns>The Node</returns>
+		/// <param name="font">Font</param>
+		/// <param name="text">Text (can be changed later)</param>
+		/// <param name="color">Color</param>
+		/// <param name="parent">Its parent</param>
+		public TextSceneNode AddBillboardTextSceneNode(GUIFont font, string text, SceneNode parent, Dimension2Df size,
+										Vector3D position, int id, Color shade_top, Color shade_down)
+		{
+			IntPtr par = IntPtr.Zero;
+			if(parent != null)
+				par = parent.Raw;
+			return (TextSceneNode)
+				NativeElement.GetObject(SceneManager_AddTextSceneNode2(_raw, font.Raw, text, par, size.ToUnmanaged(), position.ToUnmanaged(),
+																id, shade_top.ToUnmanaged(), shade_down.ToUnmanaged()),
+										typeof(TextSceneNode));
+		}		
 
         /// <summary>
         /// Registers a node for rendering it at a specific time. 
@@ -836,6 +857,9 @@ namespace IrrlichtNETCP
 
 	    [DllImport(Native.Dll)]
 	    static extern IntPtr SceneManager_AddTextSceneNode(IntPtr scenemanager, IntPtr font, string text, int[] color, IntPtr parent);
+	    
+	    [DllImport(Native.Dll)]
+	    static extern IntPtr SceneManager_AddTextSceneNode2(IntPtr scenemanager, IntPtr font, string text, IntPtr parent, float[] size, float[] pos, int ID, int[] shade_top, int[] shade_down);	    
 	    
 	    [DllImport(Native.Dll)]
 	    static extern void SceneManager_AddToDeletionQueue(IntPtr scenemanager, IntPtr node);
