@@ -858,15 +858,9 @@ namespace IrrlichtNETCP
 
 	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddTextSceneNode(IntPtr scenemanager, IntPtr font, string text, int[] color, IntPtr parent);
-<<<<<<< .mine
 	    
-	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+	    [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddTextSceneNode2(IntPtr scenemanager, IntPtr font, string text, IntPtr parent, float[] size, float[] pos, int ID, int[] shade_top, int[] shade_down);	    
-=======
-	    
-	    [DllImport(Native.Dll)]
-	    static extern IntPtr SceneManager_AddTextSceneNode2(IntPtr scenemanager, IntPtr font, string text, IntPtr parent, float[] size, float[] pos, int ID, int[] shade_top, int[] shade_down);	    
->>>>>>> .r75
 	    
 	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void SceneManager_AddToDeletionQueue(IntPtr scenemanager, IntPtr node);
