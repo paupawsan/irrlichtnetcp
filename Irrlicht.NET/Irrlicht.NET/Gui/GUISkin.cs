@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {	
@@ -90,28 +91,28 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiSkin_GetColor(IntPtr gskin, GuiDefaultColor which, [MarshalAs(UnmanagedType.LPArray)] int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern string GuiSkin_GetDefaultText(IntPtr gskin, GuiDefaultText which);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiSkin_GetFont(IntPtr gskin);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GuiSkin_GetSize(IntPtr gskin, GuiDefaultSize which);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiSkin_SetColor(IntPtr gskin, GuiDefaultColor which, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiSkin_SetDefaultText(IntPtr gskin, GuiDefaultText which, string text);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiSkin_SetFont(IntPtr gskin, IntPtr font);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiSkin_SetSize(IntPtr gskin, GuiDefaultSize which, int size);
         #endregion
     }

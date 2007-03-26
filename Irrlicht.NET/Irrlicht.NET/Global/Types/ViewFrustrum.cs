@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -67,25 +68,25 @@ namespace IrrlichtNETCP
 		}
 		
 		#region Native Invokes
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void VF_GetBoundingBox(IntPtr vf, [MarshalAs(UnmanagedType.LPArray)] float[] box);
 	    
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VF_GetFarLeftUp(IntPtr vf, [MarshalAs(UnmanagedType.LPArray)] float[] pf);
 	    
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VF_GetFarLeftDown(IntPtr vf, [MarshalAs(UnmanagedType.LPArray)] float[] pf);
 	    
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VF_GetFarRightDown(IntPtr vf, [MarshalAs(UnmanagedType.LPArray)] float[] pf);
 	    
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VF_GetFarRightUp(IntPtr vf, [MarshalAs(UnmanagedType.LPArray)] float[] pf);
 	    
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VF_RecalculateBoundingBox(IntPtr v);
 	    
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VF_Transform(IntPtr vf, [MarshalAs(UnmanagedType.LPArray)] float[] mat);
         #endregion
 	}

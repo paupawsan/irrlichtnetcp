@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -76,22 +77,22 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr MaterialRendererServices_GetVideoDriver(IntPtr mrs);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MaterialRendererServices_SetBasicRenderStates(IntPtr mrs, IntPtr material, IntPtr lastmaterial, bool resetAllRenderStates);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MaterialRendererServices_SetPixelShaderConstant(IntPtr mrs, float[] data, int startRegister, int constantAmount);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MaterialRendererServices_SetPixelShaderConstantA(IntPtr mrs, string name, float[] floats, int count);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MaterialRendererServices_SetVertexShaderConstant(IntPtr mrs, float[] data, int startRegister, int constantAmount);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MaterialRendererServices_SetVertexShaderConstantA(IntPtr mrs, string name, float[] floats, int count);
         #endregion
     }

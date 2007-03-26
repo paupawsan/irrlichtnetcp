@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -31,13 +32,13 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GUIMeshViewer_GetMaterial(IntPtr meshv);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIMeshViewer_SetMaterial(IntPtr meshv, IntPtr mat);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIMeshViewer_SetMesh(IntPtr meshv, IntPtr animatedmesh);
         #endregion
     }

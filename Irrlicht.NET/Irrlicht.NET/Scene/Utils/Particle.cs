@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -108,49 +109,49 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SParticle_Create();
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void SParticle_GetPos(IntPtr particle, [MarshalAs(UnmanagedType.LPArray)] float[] vect);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_SetPos(IntPtr particle, float[] vect);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_GetVect(IntPtr particle, [MarshalAs(UnmanagedType.LPArray)] float[] vect);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_SetVect(IntPtr particle, float[] vect);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_GetStartVect(IntPtr particle, [MarshalAs(UnmanagedType.LPArray)] float[] vect);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_SetStartVect(IntPtr particle, float[] vect);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_GetColor(IntPtr particle, [MarshalAs(UnmanagedType.LPArray)] int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_SetColor(IntPtr particle, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_GetStartColor(IntPtr particle, [MarshalAs(UnmanagedType.LPArray)] int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_SetStartColor(IntPtr particle, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern uint SParticle_GetStartTime(IntPtr particle);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_SetStartTime(IntPtr particle, uint time);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern uint SParticle_GetEndTime(IntPtr particle);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SParticle_SetEndTime(IntPtr particle, uint time);
         #endregion
     }

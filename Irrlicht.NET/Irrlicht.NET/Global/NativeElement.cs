@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -51,8 +52,9 @@ namespace IrrlichtNETCP
 		protected IntPtr _raw = IntPtr.Zero;
 		public IntPtr Raw { get { return _raw; } }
 		public bool Null() { return _raw == IntPtr.Zero; }
-
-        [System.Runtime.InteropServices.DllImport(Native.Dll)]
+		
+		/// TODO: Make sure that SuppressUnmanagedCodeAttribute works
+        [System.Runtime.InteropServices.DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Pointer_SafeRelease(IntPtr pointer);
 		#endregion
 	}

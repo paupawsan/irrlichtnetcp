@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -24,10 +25,10 @@ namespace IrrlichtNETCP
 		}
 		
 		#region Native Invokes
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void BillboardSceneNode_GetSize(IntPtr billboard, [MarshalAs(UnmanagedType.LPArray)] float[] dim);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void BillboardSceneNode_SetSize(IntPtr billboard, float[] size);
 		#endregion
 	}

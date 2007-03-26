@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -19,7 +20,7 @@ namespace IrrlichtNETCP
 		}
 		
 		#region Native Code
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void ShadowVolume_SetMeshToRenderFrom(IntPtr shadow, IntPtr mesh);
 		#endregion
 	}

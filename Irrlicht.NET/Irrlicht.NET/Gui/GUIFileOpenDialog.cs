@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {	
@@ -25,7 +26,7 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern string GUIFileOpenDialog_GetFilename(IntPtr dialog);
         #endregion
     }	

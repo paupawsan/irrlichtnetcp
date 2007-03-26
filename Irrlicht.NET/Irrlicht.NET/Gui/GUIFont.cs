@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -32,13 +33,13 @@ namespace IrrlichtNETCP
         }
 
         #region 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIFont_Draw(IntPtr font, string text, int[] pos, int[] color, bool hcenter, bool vcenter, int[] clip);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern int GUIFont_GetCharacterFromPos(IntPtr font, string text, int pixel_x);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIFont_GetDimension(IntPtr font, string text, [MarshalAs(UnmanagedType.LPArray)] int[] dim);
         #endregion
     }

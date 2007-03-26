@@ -2,6 +2,7 @@ using IrrlichtNETCP;
 using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -240,73 +241,73 @@ namespace IrrlichtNETCP
 		}
 		
 		#region .NET Wrapper Native Code
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr CreateDevice(DriverType type, int[] dim, int bits, bool full, bool stencil, bool vsync, bool antialias);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr CreateDeviceA(DriverType type, int[] dim, int bits, bool full, bool stencil, bool vsync, bool antialias, int handle);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr Device_GetSceneManager(IntPtr raw);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Device_GetVideoDriver(IntPtr raw);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Device_GetGUIEnvironment(IntPtr raw);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Device_GetFileSystem(IntPtr raw);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Device_GetCursorControl(IntPtr raw);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Device_GetLogger(IntPtr device);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Device_SetWindowCaption(IntPtr raw, string caption);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr Device_GetVideoModeList(IntPtr device);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Device_Run(IntPtr raw);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Device_Drop(IntPtr raw);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Device_Close(IntPtr raw);
 
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr Device_GetTimer(IntPtr device);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Device_SetResizeable(IntPtr device, bool resizeable);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern string Device_GetVersion(IntPtr device);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Device_IsWindowActive(IntPtr device);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Device_SetCallback(IntPtr device, NativeEvent callback);		
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern int VideoModeList_GetDesktopDepth(IntPtr videomodelist);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoModeList_GetDesktopResolution(IntPtr videomodelist, [MarshalAs(UnmanagedType.LPArray)] int[] res);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern int VideoModeList_GetVideoModeCount(IntPtr videomodelist);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern int VideoModeList_GetVideoModeDepth(IntPtr videomodelist, int mode);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoModeList_GetVideoModeResolution(IntPtr videomodelist, int mode, [MarshalAs(UnmanagedType.LPArray)] int[] res);
 		#endregion
 	}
@@ -349,16 +350,16 @@ namespace IrrlichtNETCP
 		}
 		
 		#region Native Invokes
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern LogLevel Logger_GetLogLevel(IntPtr logger);
 	    
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Logger_Log(IntPtr logger, string text, LogLevel lev);
 	    
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Logger_LogA(IntPtr logger, string text, string hint, LogLevel lev);
 	    
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Logger_SetLogLevel(IntPtr logger, LogLevel level);
 		#endregion
 	}

@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -223,97 +224,97 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr GuiEnv_AddButton(IntPtr guienv, int[] rectangle, IntPtr parent, int id, string text);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddCheckBox(IntPtr guienv, bool ischecked, int[] rectangle, IntPtr parent, int id, string text);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddComboBox(IntPtr guienv, int[] rectangle, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddContextMenu(IntPtr guienv, int[] rectangle, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddEditBox(IntPtr guienv, string text, int[] rectangle, bool border, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddFileOpenDialog(IntPtr guienv, string title, bool model, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddImage(IntPtr guienv, int[] rectangle, IntPtr parent, int id, string text);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddImageA(IntPtr guienv, IntPtr image, int[] pos, bool useAlphaChannel, IntPtr parent, int id, string text);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddInOutFader(IntPtr guienv, int[] rectangle, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddListBox(IntPtr guienv, int[] rectangle, IntPtr parent, int id, bool drawBackground);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddMenu(IntPtr guienv, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddMeshViewer(IntPtr guienv, int[] rectangle, IntPtr parent, int id, string text);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddMessageBox(IntPtr guienv, string caption, string text, bool modal, MessageBoxFlag flags, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddScrollBar(IntPtr guienv, bool horizontal, int[] rectangle, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddStaticText(IntPtr guienv, string text, int[] rectangle, bool border, bool wordWrap, IntPtr parent, int id, bool fillBack);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddTab(IntPtr guienv, int[] rectangle, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddTabControl(IntPtr guienv, int[] rectangle, IntPtr parent, bool fillbackGround, bool border, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddToolBar(IntPtr guienv, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_AddWindow(IntPtr guienv, int[] rectangle, bool modal, string text, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_CreateSkin(IntPtr guienv, GUISkinTypes type);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiEnv_DrawAll(IntPtr guienv);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_GetFont(IntPtr guienv, string filename);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_GetBuiltInFont(IntPtr guienv);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_GetRootGUIElement(IntPtr guienv);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_GetSkin(IntPtr guienv);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_GetVideoDriver(IntPtr guienv);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool GuiEnv_HasFocus(IntPtr guienv, IntPtr element);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool GuiEnv_PostEventFromUser(IntPtr guienv, IntPtr ev);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiEnv_RemoveFocus(IntPtr guienv, IntPtr element);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiEnv_SetFocus(IntPtr guienv, IntPtr element);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiEnv_SetSkin(IntPtr guienv, IntPtr skin);
         #endregion
     }

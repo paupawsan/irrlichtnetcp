@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -83,25 +84,25 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool SceneCollisionManager_GetCollisionPoint(IntPtr SCM, float[] ray, IntPtr selector, [MarshalAs(UnmanagedType.LPArray)] float[] collisionpoint, [MarshalAs(UnmanagedType.LPArray)] float[] outtriangle);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneCollisionManager_GetCollisionResultPoint(IntPtr SCM, IntPtr selector, float[] ellipsoidPosition, float[] ellipsoidRadius, float[] ellipsoidDirectionAndSpeed, [MarshalAs(UnmanagedType.LPArray)] float[] outTriangle, ref bool outFalling, float slidingSpeed, float[] gravity, [MarshalAs(UnmanagedType.LPArray)] float[] outCol);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneCollisionManager_GetRayFromScreenCoordinates(IntPtr SCM, int[] pos, IntPtr camera, [MarshalAs(UnmanagedType.LPArray)] float[] outRay);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneCollisionManager_GetSceneNodeFromCameraBB(IntPtr SCM, IntPtr camera, int idBitMask, bool noDebug);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneCollisionManager_GetSceneNodeFromRayBB(IntPtr SCM, float[] ray, int idBitMask, bool noDebug);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneCollisionManager_GetSceneNodeFromScreenCoordinatesBB(IntPtr SCM, int[] pos, int idBitMask, bool noDebug);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneCollisionManager_GetScreenCoordinatesFrom3DPosition(IntPtr SCM, float[] pos, IntPtr camera, [MarshalAs(UnmanagedType.LPArray)] int[] sc);
         #endregion
     }	

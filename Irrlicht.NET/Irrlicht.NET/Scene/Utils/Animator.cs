@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using IrrlichtNETCP;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -40,7 +41,7 @@ namespace IrrlichtNETCP
 			}
 			
 			#region Native Methods
-			[DllImport(Native.Dll)]
+			 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 			static extern IntPtr IAnimator_Create(OnNativeAffectAnimator callback);
 			#endregion
 		}

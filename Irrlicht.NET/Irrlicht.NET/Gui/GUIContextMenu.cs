@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {	
@@ -89,43 +90,43 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GUIContextMenu_AddItem(IntPtr menu, string text, int commandID, bool enabled, bool hasSubMenu);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIContextMenu_AddSeparator(IntPtr menu);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GUIContextMenu_GetItemCommandID(IntPtr menu, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GUIContextMenu_GetItemCount(IntPtr menu);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern string GUIContextMenu_GetItemText(IntPtr menu, int index);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GUIContextMenu_GetSelectedItem(IntPtr menu);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GUIContextMenu_GetSubMenu(IntPtr menu, int index);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool GUIContextMenu_IsItemEnabled(IntPtr menu, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIContextMenu_RemoveAllItems(IntPtr menu);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIContextMenu_RemoveItem(IntPtr menu, int item);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIContextMenu_SetItemCommandID(IntPtr menu, int index, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIContextMenu_SetItemEnabled(IntPtr menu, int index, bool enabled);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIContextMenu_SetItemText(IntPtr menu, int index, string text);
         #endregion
     }	

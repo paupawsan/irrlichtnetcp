@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -118,34 +119,34 @@ namespace IrrlichtNETCP
 
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr MeshManipulator_CreateMeshWithTangents(IntPtr mm, IntPtr mesh);        
         
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr MeshManipulator_CreateMeshUniquePrimitives(IntPtr mm, IntPtr mesh);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshManipulator_MakePlanarTextureMapping(IntPtr mm, IntPtr mesh, float resolution);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void MeshManipulator_FlipSurfaces(IntPtr mm, IntPtr mesh);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshManipulator_RecalculateNormals(IntPtr mm, IntPtr mesh, bool smooth);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void MeshManipulator_ScaleMesh(IntPtr mm, IntPtr mesh, float[] scale);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshManipulator_SetVertexColorAlpha(IntPtr mm, IntPtr mesh, int alpha);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void MeshManipulator_SetVertexColors(IntPtr mm, IntPtr mesh, int[] alpha);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int MeshManipulator_GetPolyCount(IntPtr mm, IntPtr mesh);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern int MeshManipulator_GetPolyCountA(IntPtr mm, IntPtr amesh);
         #endregion
     }

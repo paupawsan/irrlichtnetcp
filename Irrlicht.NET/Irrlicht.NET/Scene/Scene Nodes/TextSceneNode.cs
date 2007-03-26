@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -27,10 +28,10 @@ namespace IrrlichtNETCP
 		}
 		
 		#region Native Invokes
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void TextSceneNode_SetText(IntPtr text, string ctext);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void TextSceneNode_SetTextColor(IntPtr text, int[] color);
 		#endregion
 	}

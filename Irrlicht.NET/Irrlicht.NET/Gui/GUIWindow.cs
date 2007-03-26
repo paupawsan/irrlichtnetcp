@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -35,13 +36,13 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes (this is the last time I write it for today... I must go to bed now it is late !)
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GUIWindow_GetCloseButton(IntPtr window);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GUIWindow_GetMaximizeButton(IntPtr window);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GUIWindow_GetMinimizeButton(IntPtr window);
         #endregion
     }

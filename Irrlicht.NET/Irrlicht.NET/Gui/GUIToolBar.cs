@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {	
@@ -17,7 +18,7 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes (you must be tired now... Actually I am... This must be the... hundreth time I write "region Native Invokes")
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GUIToolBar_AddButton(IntPtr toolbar, int id, string text, string tooltip, IntPtr img, IntPtr pressedimg, bool isPushButton, bool useAlphaChannel);
         #endregion
     }	

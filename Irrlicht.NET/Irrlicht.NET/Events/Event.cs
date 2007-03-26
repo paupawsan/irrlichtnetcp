@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -112,43 +113,43 @@ namespace IrrlichtNETCP
 			}
 		}
 		#region Native Invokes		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Event_Create();
 
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern EventType Event_GetType(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern MouseInputEvent Event_GetMouseInputEvent(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern GUIEventType Event_GetGUIEventType(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern float Event_GetMouseWheelDelta(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Event_GetMousePosition(IntPtr ev, [MarshalAs(UnmanagedType.LPArray)] int[] pos);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern KeyCode Event_GetKey(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Event_GetKeyPressedDown(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Event_GetKeyShift(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Event_GetKeyControl(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern char Event_GetKeyChar(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern string Event_GetLogString(IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr Event_GetCaller(IntPtr ev);
 		#endregion
 	}

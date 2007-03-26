@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -111,52 +112,52 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr MeshBuffer_Create(int type);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshBuffer_GetBoundingBox(IntPtr meshb, [MarshalAs(UnmanagedType.LPArray)] float[] bb);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshBuffer_SetBoundingBox(IntPtr meshb, float[] bb);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int MeshBuffer_GetIndexCount(IntPtr meshb);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshBuffer_GetIndices(IntPtr meshb, [MarshalAs(UnmanagedType.LPArray)] ushort[] indices);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshBuffer_SetIndices(IntPtr meshb, ushort[] indices, int count);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern ushort MeshBuffer_GetIndex(IntPtr meshb, uint nr);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshBuffer_SetIndex(IntPtr meshb, uint nr, ushort val);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr MeshBuffer_GetMaterial(IntPtr meshb);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshBuffer_SetMaterial(IntPtr meshb, IntPtr material);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int MeshBuffer_GetVertexCount(IntPtr meshb);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern VertexType MeshBuffer_GetVertexType(IntPtr meshb);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr MeshBuffer_GetVertex(IntPtr meshb, uint nr);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshBuffer_SetVertex(IntPtr meshb, uint nr, IntPtr vert);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, uint nr);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MeshBuffer_SetVertex2T(IntPtr meshb, uint nr, IntPtr vert);
         #endregion
     }

@@ -1,6 +1,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -79,31 +80,31 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Vertices_CreateVertex();
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_GetColor(IntPtr vertex, [MarshalAs(UnmanagedType.LPArray)] int[] color, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_GetNormal(IntPtr vertex, [MarshalAs(UnmanagedType.LPArray)] float[] normal, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_GetPos(IntPtr vertex, [MarshalAs(UnmanagedType.LPArray)] float[] pos, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_GetTCoords(IntPtr vertex, [MarshalAs(UnmanagedType.LPArray)] float[] tcoords, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_SetColor(IntPtr vertex, int[] color, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_SetNormal(IntPtr vertex, float[] normal, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_SetPos(IntPtr vertex, float[] pos, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_SetTCoords(IntPtr vertex, float[] tcoords, bool vertor2t);
         #endregion
     }
@@ -200,37 +201,37 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Vertices_CreateVertex2TCoords();
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_GetColor(IntPtr vertex, [MarshalAs(UnmanagedType.LPArray)] int[] color, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_GetNormal(IntPtr vertex, [MarshalAs(UnmanagedType.LPArray)] float[] normal, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_GetPos(IntPtr vertex, [MarshalAs(UnmanagedType.LPArray)] float[] pos, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_GetTCoords(IntPtr vertex, [MarshalAs(UnmanagedType.LPArray)] float[] tcoords, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_GetTCoords2(IntPtr vertex, [MarshalAs(UnmanagedType.LPArray)] float[] tcoords);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_SetColor(IntPtr vertex, int[] color, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_SetNormal(IntPtr vertex, float[] normal, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_SetPos(IntPtr vertex, float[] pos, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_SetTCoords(IntPtr vertex, float[] tcoords, bool vertor2t);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Vertices_SetTCoords2(IntPtr vertex, float[] tcoords);
 
         #endregion

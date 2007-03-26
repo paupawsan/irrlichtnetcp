@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -149,67 +150,67 @@ namespace IrrlichtNETCP
 		}
 		
 		#region .NET Wrapper Native Code
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern float Camera_GetAspectRation(IntPtr camera);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern float Camera_GetFarValue(IntPtr camera);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern float Camera_GetFOV(IntPtr camera);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern float Camera_GetNearValue(IntPtr camera);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Camera_GetProjectionMatrix(IntPtr camera, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Camera_GetTarget(IntPtr camera, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Camera_GetUpVector(IntPtr camera, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Camera_GetViewMatrix(IntPtr camera, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
     	static extern IntPtr Camera_GetViewFrustrum(IntPtr camera);
     
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Camera_IsInputReceiverEnabled(IntPtr camera);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Camera_IsOrthogonal(IntPtr camera);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Camera_OnEvent(IntPtr camera, IntPtr ev);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetAspectRatio(IntPtr camera, float aspect);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetFarValue(IntPtr camera, float far);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetFOV(IntPtr camera, float FOV);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetInputReceiverEnabled(IntPtr camera, bool enabled);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetIsOrthogonal(IntPtr camera, bool orthogonal);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetNearValue(IntPtr camera, float near);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetProjectionMatrix(IntPtr camera, float[] projection);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetTarget(IntPtr camera, float[] target);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetUpVector(IntPtr camera, float[] upvector);
 		#endregion
 	}

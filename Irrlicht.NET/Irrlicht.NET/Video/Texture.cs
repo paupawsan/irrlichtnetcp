@@ -3,6 +3,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -343,38 +344,38 @@ namespace IrrlichtNETCP
 
         #region .NET Wrapper Native Code
         IntPtr _lockresult = IntPtr.Zero;
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern ColorFormat Texture_GetColorFormat(IntPtr raw);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern DriverType Texture_GetDriverType(IntPtr raw);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Texture_GetOriginalSize(IntPtr raw, [MarshalAs(UnmanagedType.LPArray)] int[] toR);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern int Texture_GetPitch(IntPtr raw);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Texture_RegenerateMipMapLevels(IntPtr raw);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Texture_GetTransform(IntPtr texture, [MarshalAs(UnmanagedType.LPArray)] float[] TxT);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Texture_SetTransform(IntPtr texture, float[] TxT);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Texture_Lock(IntPtr texture);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void Texture_UnLock(IntPtr texture);
 
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void LockResult_GetPixel(IntPtr lockr, IntPtr texture, int x, int y, [MarshalAs(UnmanagedType.LPArray)] int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void LockResult_SetPixel(IntPtr lockr, IntPtr texture, int x, int y, int[] color);
 		#endregion
 	}

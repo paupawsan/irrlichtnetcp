@@ -3,6 +3,7 @@ using System.Collections;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -104,16 +105,16 @@ namespace IrrlichtNETCP
 
         #region Native Invokes	
         //For now it is disabled and replaced by a workaround (see above)
-        //[DllImport(Native.Dll)]
+        // [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         //static extern int GPU_AddHighLevelShaderMaterial(IntPtr gpu, string program, string ventrypoint, VertexShaderType vsCompileTarget, string pixelShaderProgram, string psEntryPoint, PixelShaderType psCompileTarget, OnNativeSCSD callback, MaterialType baseMat, int userData);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GPU_AddHighLevelShaderMaterialFromFiles(IntPtr gpu, string file, string ventrypoint, VertexShaderType vsCompileTarget, string psfile, string psEntryPoint, PixelShaderType psCompileTarget, OnNativeSCSD callback, MaterialType baseMat, int userData);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GPU_AddShaderMaterial(IntPtr gpu, string vsprogram, string psprogram, OnNativeSCSD callback, MaterialType baseMat, int userData);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GPU_AddShaderMaterialFromFiles(IntPtr gpu, string vsprogram, string psprogram, OnNativeSCSD callback, MaterialType baseMat, int userData);
         #endregion
     }

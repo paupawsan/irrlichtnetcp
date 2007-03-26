@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -43,13 +44,13 @@ namespace IrrlichtNETCP
         }
 
         #region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MetaTriangleSelector_AddTriangleSelector(IntPtr mts, IntPtr toadd);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void MetaTriangleSelector_RemoveAllTriangleSelectors(IntPtr mts);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void MetaTriangleSelector_RemoveTriangleSelector(IntPtr mts, IntPtr toadd);
         #endregion
 	}

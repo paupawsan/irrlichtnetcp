@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {	
@@ -325,139 +326,139 @@ namespace IrrlichtNETCP
 		}
 		
 		#region Native Invokes
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Material_Create();
 
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_GetAmbientColor(IntPtr material, [MarshalAs(UnmanagedType.LPArray)] int[] color);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_GetDiffuseColor(IntPtr material, [MarshalAs(UnmanagedType.LPArray)] int[] color);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_GetEmissiveColor(IntPtr material, [MarshalAs(UnmanagedType.LPArray)] int[] color);
 		
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern MaterialType Material_GetMaterialType(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern float Material_GetMaterialTypeParam(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern float Material_GetShininess(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_GetSpecularColor(IntPtr material, [MarshalAs(UnmanagedType.LPArray)] int[] color);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr Material_GetTexture1(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Material_GetTexture2(IntPtr material);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Material_GetTexture3(IntPtr material);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Material_GetTexture4(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetAnisotropicFilter(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetBackfaceCulling(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetBilinearFilter(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetFogEnable(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetGouraudShading(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetLighting(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetNormalizeNormals(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetTrilinearFilter(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetWireframe(IntPtr material);
 	    		
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern uint Material_GetZBuffer(IntPtr material);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool Material_GetZWriteEnable(IntPtr material);
 	    		
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetAmbientColor(IntPtr material, int[] color);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetDiffuseColor(IntPtr material, int[] color);
 	    		
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetEmissiveColor(IntPtr material, int[] color);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetMaterialType(IntPtr material, MaterialType val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetMaterialTypeParam(IntPtr material, float val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetShininess(IntPtr material, float val);
 	    		
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetSpecularColor(IntPtr material, int[] color);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetTexture1(IntPtr material, IntPtr text);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Material_SetTexture2(IntPtr material, IntPtr text);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Material_SetTexture3(IntPtr material, IntPtr text);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void Material_SetTexture4(IntPtr material, IntPtr text);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetAnisotropicFilter(IntPtr material, bool val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetBackfaceCulling(IntPtr material, bool val);
 	    		
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetBilinearFilter(IntPtr material, bool val);
 	    		
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetFogEnable(IntPtr material, bool val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetGouraudShading(IntPtr material, bool val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetLighting(IntPtr material, bool val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetNormalizeNormals(IntPtr material, bool val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetTrilinearFilter(IntPtr material, bool val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetWireframe(IntPtr material, bool val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetZBuffer(IntPtr material, uint val);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetZWriteEnable(IntPtr material, bool val);
 		#endregion
 	}

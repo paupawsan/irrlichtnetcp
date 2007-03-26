@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -330,142 +331,142 @@ namespace IrrlichtNETCP
 
 
         #region .NET Wrapper Native Code
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_AddAnimator(IntPtr scenenode, IntPtr animator);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_AddChild(IntPtr scenenode, IntPtr childnode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_GetAbsolutePosition(IntPtr scenenode, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_GetAbsoluteTransformation(IntPtr scenenode, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_GetChildren(IntPtr scenenode, [MarshalAs(UnmanagedType.LPArray)] IntPtr[] list);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern uint SceneNode_GetChildrenCount(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern CullingType SceneNode_GetAutomaticCulling(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern DebugSceneType SceneNode_GetDebugDataVisible(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_GetBoundingBox(IntPtr scenenode, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int SceneNode_GetID(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern uint SceneNode_GetMaterialCount(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneNode_GetMaterial(IntPtr scenenode, int i);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneNode_GetParent(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern string SceneNode_GetName(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_GetPosition(IntPtr scenenode, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_GetRelativeTransformation(IntPtr scenenode, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_GetRotation(IntPtr scenenode, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_GetScale(IntPtr scenenode, [MarshalAs(UnmanagedType.LPArray)] float[] toR);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_GetTransformedBoundingBox(IntPtr scenenode, float[] toR);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneNode_GetTriangleSelector(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern SceneNodeType SceneNode_GetType(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool SceneNode_IsDebugObject(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool SceneNode_IsVisible(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_OnAnimate(IntPtr scenenode, uint timeMS);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_OnRegisterSceneNode(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_Remove(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_RemoveAll(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_RemoveAnimator(IntPtr scenenode, IntPtr animator);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_RemoveAnimators(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool SceneNode_RemoveChild(IntPtr scenenode, IntPtr childscenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_Render(IntPtr scenenode);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetAutomaticCulling(IntPtr scenenode, CullingType enabled);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetDebugDataVisible(IntPtr scenenode, DebugSceneType visible);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetID(IntPtr scenenode, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetIsDebugObject(IntPtr scenenode, bool debugObject);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetMaterialFlag(IntPtr scenenode, MaterialFlag flag, bool newvalue);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetMaterialTexture(IntPtr scenenode, int layer, IntPtr texture);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetMaterialType(IntPtr scenenode, MaterialType newtype);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetName(IntPtr scenenode, string name);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetParent(IntPtr scenenode, IntPtr parent);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetPosition(IntPtr scenenode, float[] pos);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetRotation(IntPtr scenenode, float[] rot);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetScale(IntPtr scenenode, float[] scale);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetTriangleSelector(IntPtr scenenode, IntPtr triangleselector);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_SetVisible(IntPtr scenenode, bool visible);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneNode_UpdateAbsolutePosition(IntPtr scenenode);
         #endregion
     }

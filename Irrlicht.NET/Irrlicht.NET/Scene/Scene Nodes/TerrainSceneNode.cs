@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -129,40 +130,40 @@ namespace IrrlichtNETCP
 		}
 		
 		#region Native Invokes
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void TerrainSceneNode_GetBoundingBox(IntPtr terrain, int patchX, int patchZ, [MarshalAs(UnmanagedType.LPArray)] float[] box);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void TerrainSceneNode_GetBoundingBoxA(IntPtr terrain, [MarshalAs(UnmanagedType.LPArray)] float[] box);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern int TerrainSceneNode_GetIndexCount(IntPtr terrain);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr TerrainSceneNode_GetMesh(IntPtr terrain);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void TerrainSceneNode_GetTerrainCenter(IntPtr terrain, [MarshalAs(UnmanagedType.LPArray)] float[] center);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern float TerrainSceneNode_GetHeight(IntPtr terrain, float x, float z);
 
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void TerrainSceneNode_OverrideLODDistance(IntPtr terrain, int lod, double newDistance);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void TerrainSceneNode_ScaleTexture(IntPtr terrain, float scale, float scale2);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void TerrainSceneNode_SetCameraMovementDelta(IntPtr terrain, float delta);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void TerrainSceneNode_SetCameraRotationDelta(IntPtr terrain, float delta);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void TerrainSceneNode_SetDynamicSelectorUpdate(IntPtr terrain, bool bVal);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void TerrainSceneNode_SetLODOfPatch(IntPtr terrain, int patchX, int patchZ, int LOD);
 		#endregion
 	}

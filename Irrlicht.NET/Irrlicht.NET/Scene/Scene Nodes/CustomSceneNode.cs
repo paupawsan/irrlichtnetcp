@@ -1,6 +1,8 @@
 using System;
 using System.Text;
 using System.Runtime.InteropServices;
+using System.Security;
+
 namespace IrrlichtNETCP.Inheritable
 {
     //I know this is not an interface but for naming purpose, I must name it ISceneNode...
@@ -354,22 +356,22 @@ namespace IrrlichtNETCP.Inheritable
         #endregion
 
         #region Native Code
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void CSN_PVOID_METHODS(IntPtr csn, CSN_VOID_METHOD method, IntPtr arg1, int arg2, uint arg3, float[] arg4);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int CSN_PINT_METHODS(IntPtr csn, CSN_INT_METHOD method, IntPtr arg1, int arg2);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr CSN_PINTPTR_METHODS(IntPtr csn, CSN_INTPTR_METHOD method, IntPtr arg1, int arg2);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void CSN_PFLOAT_METHODS(IntPtr csn, CSN_FLOAT_METHOD method, [MarshalAs(UnmanagedType.LPArray)] float[] arg1);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr CSN_CREATE(IntPtr parent, IntPtr mgr, int id, CSN_CALLBACK_VOID _void, CSN_CALLBACK_INT _int, CSN_CALLBACK_INTPTR _intptr, CSN_CALLBACK_FLOAT _float);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void CSN_SET_TEMP_FLOATS(IntPtr csn, float[] temp);
 
         private float[] GetFloats(CSN_FLOAT_METHOD method)

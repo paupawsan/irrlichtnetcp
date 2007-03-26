@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -148,37 +149,37 @@ namespace IrrlichtNETCP
 		}
 	
 		#region Native Invokes
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr AnimatedMeshSceneNode_AddShadowVolumeSceneNode(IntPtr node, int ID, bool zfail, float infinity);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern int AnimatedMeshSceneNode_GetFrameNr(IntPtr node);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr AnimatedMeshSceneNode_GetMS3DJointNode(IntPtr node, string jointName);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr AnimatedMeshSceneNode_GetXJointNode(IntPtr node, string jointName);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void AnimatedMeshSceneNode_SetAnimationEndCallback(IntPtr node, NativeAnimationEndDelegate callback);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void AnimatedMeshSceneNode_SetAnimationSpeed(IntPtr node, int framePS);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void AnimatedMeshSceneNode_SetCurrentFrame(IntPtr node, int cf);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void AnimatedMeshSceneNode_SetFrameLoop(IntPtr node, int start, int end);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void AnimatedMeshSceneNode_SetLoopMode(IntPtr node, bool animationLooped);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void AnimatedMeshSceneNode_SetMD2Animation(IntPtr node, string animationname);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void AnimatedMeshSceneNode_SetMD2AnimationA(IntPtr node, MD2Animation anim);
 		#endregion
 	}

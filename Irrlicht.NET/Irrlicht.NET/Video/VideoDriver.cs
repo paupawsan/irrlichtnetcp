@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -533,154 +534,154 @@ namespace IrrlichtNETCP
         }
 		
 		#region .NET Wrapper Native Code
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool VideoDriver_BeginScene(IntPtr raw, bool back, bool z, int[] color);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void VideoDriver_EndScene(IntPtr raw);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr VideoDriver_AddTexture(IntPtr raw, int[] size, string name, ColorFormat fmt);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr VideoDriver_GetTexture(IntPtr raw, string name);
 		
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern int VideoDriver_GetFPS(IntPtr raw);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void VideoDriver_MakeColorKeyTexture(IntPtr videodriver, IntPtr texture, int[] colorKeyPixelPos);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_MakeColorKeyTextureA(IntPtr videodriver, IntPtr texture, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_MakeNormalMapTexture(IntPtr videodriver, IntPtr texture, float amplitude);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_ClearZBuffer(IntPtr videodriver);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr VideoDriver_CreateImageFromFile(IntPtr videodriver, string filename);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr VideoDriver_CreateRenderTargetTexture(IntPtr videodriver, int[] size);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw2DImage(IntPtr videodriver, IntPtr texture, int[] destPos, int[] sourceRect, int[] clipRect, int[] color, bool useAlphaChannelOfTexture);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw2DImageA(IntPtr videodriver, IntPtr texture, int[] destPos);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw2DImageB(IntPtr videodriver, IntPtr texture, int[] destPos, int[] sourceRect, int[] color, bool useAlphaChannelOfTexture);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw2DImageC(IntPtr videodriver, IntPtr texture, int[] destPos, int[] sourceRect, int[] clipRect, int[] color1, int[] color2, int[] color3, int[] color4, bool useAlphaChannelOfTexture);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw2DImageD(IntPtr videodriver, IntPtr texture, int[] destPos, int[] sourceRect, int[] color1, int[] color2, int[] color3, int[] color4, bool useAlphaChannelOfTexture);
 	
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw2DLine(IntPtr videodriver, int[] start, int[] end, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DrawMeshBuffer(IntPtr videodriver, IntPtr meshbuffer);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw2DPolygon(IntPtr videodriver, int[] center, float radius, int[] color, int vertexCount);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw2DRectangle(IntPtr videodriver, int[] pos, int[] colorLeftUp, int[] colorRightUp, int[] colorLeftDown, int[] colorRightDown);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw3DBox(IntPtr videodriver, float[] box, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw3DLine(IntPtr videodriver, float[] start, float[] end, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_Draw3DTriangle(IntPtr videodriver, float[] tri, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_GetScreenSize(IntPtr videodriver, [MarshalAs(UnmanagedType.LPArray)] int[] size);
 		
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DrawIndexedTriangleList(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DrawIndexedTriangleListA(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DrawIndexedTriangleFanA(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DrawIndexedTriangleFan(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DrawVertexPrimitiveList(IntPtr videodriver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount, VertexType vType, PrimitiveType pType);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern DriverType VideoDriver_GetDriverType(IntPtr videodriver);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool VideoDriver_GetTextureCreationFlag(IntPtr videodriver, TextureCreationFlag flag);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_GetViewPort(IntPtr videodriver, [MarshalAs(UnmanagedType.LPArray)] int[] viewport);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_GetTransform(IntPtr videodriver, TransformationState state, [MarshalAs(UnmanagedType.LPArray)] float[] mat);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_SetTransform(IntPtr videodriver, TransformationState state, float[] mat);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool VideoDriver_QueryFeature(IntPtr videodriver, VideoDriverFeature feat);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_RemoveAllTextures(IntPtr videodriver);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_RemoveTexture(IntPtr videodriver, IntPtr texture);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_SetAmbientLight(IntPtr videodriver, int[] ambient);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_SetFog(IntPtr videodriver, int[] color, bool linear, float start, float end, float density, bool pixel, bool range);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_SetMaterial(IntPtr videodriver, IntPtr material);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_SetRenderTarget(IntPtr videodriver, IntPtr texture, bool cBB, bool cZB, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_SetTextureFlag(IntPtr videodriver, TextureCreationFlag flag, bool enabled);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_SetViewPort(IntPtr videodriver, int[] viewport);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr VideoDriver_GetGPUProgrammingServices(IntPtr videodriver);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DeleteAllDynamicLights(IntPtr videodriver);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr VideoDriver_CreateScreenshot(IntPtr videodriver);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_WriteImageToFile(IntPtr videodriver, IntPtr image, string filename);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int VideoDriver_GetTextureCount(IntPtr videodriver);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr VideoDriver_GetTextureByIndex(IntPtr videodriver, int index);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int VideoDriver_GetPrimitiveCountDrawn(IntPtr videodriver);
         #endregion
 	}

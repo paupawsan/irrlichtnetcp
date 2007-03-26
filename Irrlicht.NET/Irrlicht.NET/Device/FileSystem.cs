@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -55,32 +56,32 @@ namespace IrrlichtNETCP
 			}
 		}
 		#region Native Invoke
-		[DllImport(Native.Dll)]
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void FileSystem_AddZipFileArchive(IntPtr system,string filename, bool ignoreCase, bool ignorePaths);
 		
-		[DllImport(Native.Dll)]
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool FileSystem_ChangeWorkingDirectory(IntPtr system, string workingdirectory);
 		
-		[DllImport(Native.Dll)]
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr FileSystem_GetFileList(IntPtr system);
 		
-		[DllImport(Native.Dll)]
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool FileSystem_ExistsFile(IntPtr system, string filename);
 		
-		[DllImport(Native.Dll)]
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern string FileSystem_GetWorkingDirectory(IntPtr system);
 		
 		
-		[DllImport(Native.Dll)]
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern int FileList_GetFileCount(IntPtr list);
 		
-		[DllImport(Native.Dll)]
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern string FileList_GetFileName(IntPtr list, int index);
 		
-		[DllImport(Native.Dll)]
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern string FileList_GetFullFileName(IntPtr list, int index);
 		
-		[DllImport(Native.Dll)]
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool FileList_IsDirectory(IntPtr list, int index);
 		#endregion
 	}

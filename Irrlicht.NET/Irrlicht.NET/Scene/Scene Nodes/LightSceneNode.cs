@@ -1,5 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -38,10 +39,10 @@ namespace IrrlichtNETCP
 		}
 		
 		#region Native Invokes
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void LightSceneNode_GetLight(IntPtr light, [MarshalAs(UnmanagedType.LPArray)] float[] ambient, [MarshalAs(UnmanagedType.LPArray)] float[] diffuse, [MarshalAs(UnmanagedType.LPArray)] float[] specular, [MarshalAs(UnmanagedType.LPArray)] float[] pos, ref float radius, ref bool castshadows, ref LightType type);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void LightSceneNode_SetLight(IntPtr light, float[] ambient, float[] diffuse, float[] specular, float[] pos, float radius, bool castshadows, LightType type);
 	    #endregion
 	}

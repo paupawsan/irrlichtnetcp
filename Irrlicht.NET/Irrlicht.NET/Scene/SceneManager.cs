@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Runtime.InteropServices;
+using System.Security;
 
 namespace IrrlichtNETCP
 {
@@ -795,163 +796,169 @@ namespace IrrlichtNETCP
 		//Please DO NOT change any of these name, they're copy-pasted from the C/C++
 		//source code AND NEEDS TO BE.
 		#region .NET Wrapper Native Code
-		[DllImport(Native.Dll)]
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddAnimatedMeshSceneNode(IntPtr scenemanager, IntPtr mesh, IntPtr parent, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddBillboardSceneNode(IntPtr scenemanager, IntPtr parent, float[] size, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddCameraSceneNode(IntPtr scenemanager, IntPtr parent);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddCameraSceneNodeFPS(IntPtr scenemanager, IntPtr parent, float rotateS, float moveS, int id, bool novertical); //TODO: Keymapping
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddCameraSceneNodeFPSA(IntPtr scenemanager, IntPtr parent, float rotateS, float moveS, int id, bool novertical, int[] actionsmap, int[] keymap, int keymapsize);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddCameraSceneNodeMaya(IntPtr scenemanager, IntPtr parent, float rotateS, float zoomS, float transS, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddDummyTransformationSceneNode(IntPtr scenemanager, IntPtr parent, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddEmptySceneNode(IntPtr scenemanager, IntPtr parent, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddHillPlaneMesh(IntPtr scenemanager, string name, float[] tileSize, int[] tileCount, float hillHeight, float[] countHills, float[] textureRepeatCount);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddLightSceneNode(IntPtr scenemanager, IntPtr parent, float[] position, float[] color, float radius, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddMeshSceneNode(IntPtr scenemanager, IntPtr mesh, IntPtr parent, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddOctTreeSceneNode(IntPtr scenemanager, IntPtr mesh, IntPtr parent, int id, int minimalPolysPerNode);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddOctTreeSceneNodeA(IntPtr scenemanager, IntPtr animatedmesh, IntPtr parent, int id, int minimalPolysPerNode);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddParticleSystemSceneNode(IntPtr scenemanager, bool defaultEmitter, IntPtr parent, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddSkyBoxSceneNode(IntPtr scenemanager, IntPtr top, IntPtr bottom, IntPtr lef, IntPtr right, IntPtr front, IntPtr back, IntPtr parent, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddTerrainMesh(IntPtr scenemanager, string meshname, IntPtr texture, IntPtr heightmap, int[] stretchSize, float maxHeight, int[] defaultVertexBlockSize);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddTerrainSceneNode(IntPtr scenemanager, string heightMap, IntPtr parent, int id, float[] position, float[] rotation, float[] scale, int[] vertexColor,int maxLOD, TerrainPatchSize patchSize);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneManager_AddCubeSceneNode(IntPtr scenemanager, float size, IntPtr parent, int id);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneManager_AddSkyDomeSceneNode(IntPtr scenemanager, IntPtr texture, uint horiRes, uint vertRes, double texturePercentage, double spherePercentage, IntPtr parent);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneManager_AddSphereSceneNode(IntPtr scenemanager, float radius, int polycount, IntPtr parent);
 
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_AddTextSceneNode(IntPtr scenemanager, IntPtr font, string text, int[] color, IntPtr parent);
+<<<<<<< .mine
+	    
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+	    static extern IntPtr SceneManager_AddTextSceneNode2(IntPtr scenemanager, IntPtr font, string text, IntPtr parent, float[] size, float[] pos, int ID, int[] shade_top, int[] shade_down);	    
+=======
 	    
 	    [DllImport(Native.Dll)]
 	    static extern IntPtr SceneManager_AddTextSceneNode2(IntPtr scenemanager, IntPtr font, string text, IntPtr parent, float[] size, float[] pos, int ID, int[] shade_top, int[] shade_down);	    
+>>>>>>> .r75
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void SceneManager_AddToDeletionQueue(IntPtr scenemanager, IntPtr node);
 
-        [DllImport(Native.Dll)]
+	    [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void SceneManager_RegisterNodeForRendering(IntPtr scenemanager, IntPtr node, SceneNodeRenderPass pass);
 
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr SceneManager_AddWaterSurfaceSceneNode(IntPtr scenemanager, IntPtr mesh, float waveHeight, float waveSpeed, float waveLength, IntPtr parent, int ID);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateCollisionResponseAnimator(IntPtr scenemanager, IntPtr world, IntPtr sceneNode,float[] ellipsoidRadius, float[] gravityPerSecond,float[] ellipsoidTranslation, float slidingValue);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateDeleteAnimator(IntPtr scenemanager, uint timeMS);
 
-        [DllImport(Native.Dll)]
-        static extern IntPtr SceneManager_CreateTextureAnimator(IntPtr scenemanager, IntPtr[] textures, int arraysize, int time, bool loop);
+             [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+	    static extern IntPtr SceneManager_CreateTextureAnimator(IntPtr scenemanager, IntPtr[] textures, int arraysize, int time, bool loop);
 
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateFlyCircleAnimator(IntPtr scenemanager, float[] center, float radius, float speed);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateFlyStraightAnimator(IntPtr scenemanager, float[] startPoint, float[] endPoint, uint time, bool loop);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateMetaTriangleSelector(IntPtr scenemanager);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateOctTreeTriangleSelector(IntPtr scenemanager, IntPtr mesh, IntPtr node, int minimalPolysPerNode);
 	    	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneManager_CreateFollowSplineAnimator(IntPtr scenemanager, int starttime, float[] Xs, float[] Ys, float[] Zs, int arraysize, float speed, float tightness);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateRotationAnimator(IntPtr scenemanager, float[] rotation);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateTerrainTriangleSelector(IntPtr scenemanager, IntPtr node, int LOD);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateTriangleSelector(IntPtr scenemanager, IntPtr mesh, IntPtr node);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_CreateTriangleSelectorFromBoundingBox(IntPtr scenemanager, IntPtr node);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void SceneManager_DrawAll(IntPtr scenemanager);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_GetActiveCamera(IntPtr scenemanager);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_GetMesh(IntPtr scenemanager, string meshname);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr SceneManager_GetMeshManipulator(IntPtr scenemanager);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_GetSceneCollisionManager(IntPtr scenemanager);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_GetSceneNodeFromID(IntPtr scenemanager, int id);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_GetSceneNodeFromName(IntPtr scenemanager, string name);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_GetRootSceneNode(IntPtr scenemanager);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern SceneNodeRenderPass SceneManager_GetSceneNodeRenderPass(IntPtr scenemanager);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneManager_GetShadowColor(IntPtr scenemanager, [MarshalAs(UnmanagedType.LPArray)] int[] toR);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_GetVideoDriver(IntPtr scenemanager);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void SceneManager_SetActiveCamera(IntPtr scenemanager, IntPtr camerascenenode);
 	    
-	    [DllImport(Native.Dll)]
+	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern void SceneManager_SetShadowColor(IntPtr scenemanager, int[] color);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneManager_SaveScene(IntPtr scenemanager, string filename);
 
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneManager_LoadScene(IntPtr scenemanager, string filename);
         
-        [DllImport(Native.Dll)]
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneManager_Clear(IntPtr scenemanager);
 		#endregion
 	}
