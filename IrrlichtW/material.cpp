@@ -121,21 +121,9 @@ void Material_SetSpecularColor(IntPtr material, M_SCOLOR color)
 {
     GetMatFromIntPtr(material)->SpecularColor = MU_SCOLOR(color);
 }
-void Material_SetTexture1(IntPtr material, IntPtr text)
+void Material_SetTexture(IntPtr material, int num, IntPtr text)
 {
-    GetMatFromIntPtr(material)->Textures[1] = (ITexture*)text;
-}
-void Material_SetTexture2(IntPtr material, IntPtr text)
-{
-    GetMatFromIntPtr(material)->Textures[2] = (ITexture*)text;
-}
-void Material_SetTexture3(IntPtr material, IntPtr text)
-{
-    GetMatFromIntPtr(material)->Textures[2] = (ITexture*)text;
-}
-void Material_SetTexture4(IntPtr material, IntPtr text)
-{
-    GetMatFromIntPtr(material)->Textures[3] = (ITexture*)text;
+    GetMatFromIntPtr(material)->Textures[num] = (ITexture*)text;
 }
 void Material_SetAnisotropicFilter(IntPtr material, bool val)
 {

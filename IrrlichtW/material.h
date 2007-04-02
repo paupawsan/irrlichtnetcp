@@ -32,10 +32,7 @@ extern "C"
 	EXPORT void Material_SetMaterialTypeParam(IntPtr material, float val);
 	EXPORT void Material_SetShininess(IntPtr material, float val);
 	EXPORT void Material_SetSpecularColor(IntPtr material, M_SCOLOR color);
-	EXPORT void Material_SetTexture1(IntPtr material, IntPtr text);
-	EXPORT void Material_SetTexture2(IntPtr material, IntPtr text);
-	EXPORT void Material_SetTexture3(IntPtr material, IntPtr text);
-	EXPORT void Material_SetTexture4(IntPtr material, IntPtr text);
+	EXPORT void Material_SetTexture(IntPtr material, int num, IntPtr text);
 	EXPORT void Material_SetAnisotropicFilter(IntPtr material, bool val);
 	EXPORT void Material_SetBackfaceCulling(IntPtr material, bool val);
 	EXPORT void Material_SetBilinearFilter(IntPtr material, bool val);

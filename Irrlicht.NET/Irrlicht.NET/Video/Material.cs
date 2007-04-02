@@ -142,9 +142,9 @@ namespace IrrlichtNETCP
 			set
 			{
                 if (value != null)
-                    Material_SetTexture1(_raw, value.Raw);
+                    Material_SetTexture(_raw, 0, value.Raw);
                 else
-                    Material_SetTexture1(_raw, IntPtr.Zero);
+                    Material_SetTexture(_raw, 0, IntPtr.Zero);
 			}
 		}
 		
@@ -157,10 +157,10 @@ namespace IrrlichtNETCP
 			set
             {
                 if (value != null)
-                    Material_SetTexture2(_raw, value.Raw);
+                    Material_SetTexture(_raw, 1, value.Raw);
                 else
-                    Material_SetTexture2(_raw, IntPtr.Zero);
-			}
+                    Material_SetTexture(_raw, 1, IntPtr.Zero);
+			} 
         }
 
         public Texture Texture3
@@ -172,9 +172,9 @@ namespace IrrlichtNETCP
             set
             {
                 if (value != null)
-                    Material_SetTexture3(_raw, value.Raw);
+                    Material_SetTexture(_raw, 2, value.Raw);
                 else
-                    Material_SetTexture3(_raw, IntPtr.Zero);
+                    Material_SetTexture(_raw, 2, IntPtr.Zero);
             }
         }
 
@@ -187,9 +187,9 @@ namespace IrrlichtNETCP
             set
             {
                 if (value != null)
-                    Material_SetTexture4(_raw, value.Raw);
+                    Material_SetTexture(_raw, 3, value.Raw);
                 else
-                    Material_SetTexture4(_raw, IntPtr.Zero);
+                    Material_SetTexture(_raw, 3, IntPtr.Zero);
             }
         }
 		
@@ -417,18 +417,9 @@ namespace IrrlichtNETCP
 		static extern void Material_SetSpecularColor(IntPtr material, int[] color);
 	    
 	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-		static extern void Material_SetTexture1(IntPtr material, IntPtr text);
-	    
-	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern void Material_SetTexture2(IntPtr material, IntPtr text);
-
-         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern void Material_SetTexture3(IntPtr material, IntPtr text);
-
-         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern void Material_SetTexture4(IntPtr material, IntPtr text);
-	    
-	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void Material_SetTexture(IntPtr material, int num, IntPtr text);
+		
+  	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Material_SetAnisotropicFilter(IntPtr material, bool val);
 	    
 	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]

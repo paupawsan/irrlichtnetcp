@@ -43,6 +43,13 @@ namespace IrrlichtNETCP.Extensions
             time_int_step = 0.0f;
 		
         }
+        
+        public void SetStartTime(ushort y, ushort m, ushort d, ushort h, ushort min)
+        {
+            J = DateToJulian(y, m, d, h, min);
+            J1 = J;
+        }
+        
 
         public double DateToJulian(ushort y, ushort m, ushort d, ushort h, ushort min)
         {
@@ -93,7 +100,8 @@ namespace IrrlichtNETCP.Extensions
             Ndate[3] = (ushort)h;
             Ndate[4] = (ushort)min;
         }
-
+        
+        
         double round360(double angle)
         {
             if (angle > 360)
