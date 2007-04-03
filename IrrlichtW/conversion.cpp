@@ -25,41 +25,24 @@ bool fixmarshal(bool val)
 
 wchar_t *MU_WCHAR(const M_STRING base)
 {
-    size_t size = mbstowcs(NULL, base, 0);
-    wchar_t *tor = new wchar_t[size + 1];
+	std::string ret(base);
+	size_t size = ret.length();
+	wchar_t *tor = new wchar_t[size + 1];
     for(unsigned int i = 0; i < size; i++)
-        tor[i] = base[i];
-    tor[size] = '\0';
-    return tor;
+		tor[i] = base[i];
+	tor[size] = '\0';
+	return tor;
 }
 
 M_STRING UM_STRING(const wchar_t* base)
 {
-	if(!base)
-		return "";
-    size_t size = wcstombs(NULL, base, 0);
-	if(size == 0)
-		return "";
-    M_STRING tor = new char[size + 1];
-    for(unsigned int i = 0; i < size; i++)
-        tor[i] = (char)base[i];
-    tor[size] = '\0';
-    return tor;
+	irr::core::stringc tempryc = base;
+    return const_cast<M_STRING>(tempryc.c_str());
 }
 
 M_STRING UM_STRING(const M_STRING base)
 {
-    // Bug found by Copland, to be tested, it seems that a C-style cast is enough (and needed on Windows ?) because mbstowcs is deprecated.
-    #ifdef _MSC_VER
-    return (M_STRING)base;
-    #else
-    size_t size = mbstowcs(NULL, base, 0);
-    M_STRING tor = new char[size + 1];
-    for(unsigned int i = 0; i < size; i++)
-        tor[i] = base[i];
-    tor[size] = '\0';
-    return tor;
-    #endif
+	return const_cast<M_STRING>(base);
 }
 
 void UM_DIM2DS(irr::core::dimension2d<int> base, M_DIM2DS t)

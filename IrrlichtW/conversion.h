@@ -8,6 +8,8 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <wchar.h>
+#include <string> 
 #include "../Irrlicht SDK/include/irrlicht.h"
 
 #ifdef WIN32

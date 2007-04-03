@@ -4,6 +4,9 @@
         <name>Irrlicht.NET</name>
     </assembly>
     <members>
+        <member name="M:IrrlichtNETCP.NativeElement.Pointer_SafeRelease(System.IntPtr)">
+            TODO: Make sure that SuppressUnmanagedCodeAttribute works
+        </member>
         <member name="F:IrrlichtNETCP.IrrlichtDevice.MainNativeEvent">
             <summary>
             Notice that the callback MUST BE KEPT ALIVE not to be collected by the GC
@@ -658,6 +661,7 @@
             <param name="color">Color</param>
             <param name="parent">Its parent</param>
         </member>
+        <!-- Commentaire XML incorrect ignoré pour le membre "M:IrrlichtNETCP.SceneManager.AddBillboardTextSceneNode(IrrlichtNETCP.GUIFont,System.String,IrrlichtNETCP.SceneNode,IrrlichtNETCP.Dimension2Df,IrrlichtNETCP.Vector3D,System.Int32,IrrlichtNETCP.Color,IrrlichtNETCP.Color)" -->
         <member name="M:IrrlichtNETCP.SceneManager.RegisterNodeForRendering(IrrlichtNETCP.SceneNode,IrrlichtNETCP.SceneNodeRenderPass)">
             <summary>
             Registers a node for rendering it at a specific time. 
@@ -854,6 +858,13 @@
             Gets the root scene node. And empty node with position = rotation = (0, 0, 0) and scale = (1, 1, 1)
             Moreover, all node that do not have any parent is a child from the the root scene node.
             </summary>
+        </member>
+        <member name="M:IrrlichtNETCP.Quaternion.toEuler(IrrlichtNETCP.Vector3D@)">
+            <summary>
+            Returns an Euler Angles vector. Angles in radiants
+            </summary>
+            <param name="euler">vector to put the result into</param>
+            <returns></returns>
         </member>
         <member name="M:IrrlichtNETCP.Box3D.AddInternalPoint(System.Single,System.Single,System.Single)">
             <summary>
