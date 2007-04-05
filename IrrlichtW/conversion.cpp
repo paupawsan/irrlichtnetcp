@@ -25,19 +25,18 @@ bool fixmarshal(bool val)
 
 wchar_t *MU_WCHAR(const M_STRING base)
 {
-	std::string ret(base);
-	size_t size = ret.length();
-	wchar_t *tor = new wchar_t[size + 1];
-    for(unsigned int i = 0; i < size; i++)
-		tor[i] = base[i];
-	tor[size] = '\0';
-	return tor;
+	std::string b(base);
+	wchar_t *str = new wchar_t[b.length() * sizeof(wchar_t)];
+	mbstowcs(str, b.c_str(), b.length()); 
+	return str;
 }
 
 M_STRING UM_STRING(const wchar_t* base)
 {
-	irr::core::stringc tempryc = base;
-    return const_cast<M_STRING>(tempryc.c_str());
+	std::wstring b(base);
+	char *str = new char[( b.length() )];
+	wcstombs (str, b.c_str(), b.length()); 
+	return str;
 }
 
 M_STRING UM_STRING(const M_STRING base)

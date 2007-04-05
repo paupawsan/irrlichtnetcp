@@ -65,7 +65,7 @@ void AnimatedMeshSceneNode_SetAnimationEndCallback(IntPtr node, ANIMATIONENDCALL
 
 void AnimatedMeshSceneNode_SetAnimationSpeed(IntPtr node, int framePS)
 {
-    GetNodeFromIntPtr(node)->setAnimationSpeed(framePS);
+    GetNodeFromIntPtr(node)->setAnimationSpeed((float)framePS);
 }
 
 void AnimatedMeshSceneNode_SetCurrentFrame(IntPtr node, int cf)
