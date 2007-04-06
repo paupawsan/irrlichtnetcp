@@ -1,5 +1,5 @@
 #include "conversion.h"
-
+#include <iostream>
 void Pointer_SafeRelease(IntPtr pointer)
 {
     #ifdef WIN32
@@ -26,16 +26,18 @@ bool fixmarshal(bool val)
 wchar_t *MU_WCHAR(const M_STRING base)
 {
 	std::string b(base);
-	wchar_t *str = new wchar_t[b.length() * sizeof(wchar_t)];
-	mbstowcs(str, b.c_str(), b.length()); 
+	wchar_t *str = new wchar_t[b.length()+1];
+	size_t size = mbstowcs(str, b.c_str(), b.length());
+	str[size] = '\0';
 	return str;
 }
 
 M_STRING UM_STRING(const wchar_t* base)
 {
+
 	std::wstring b(base);
-	char *str = new char[( b.length() )];
-	wcstombs (str, b.c_str(), b.length()); 
+	M_STRING str = new char[b.length()];
+	size_t size = wcstombs (str, b.c_str(), b.length());
 	return str;
 }
 
