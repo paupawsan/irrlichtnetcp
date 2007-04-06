@@ -37,7 +37,7 @@ M_STRING UM_STRING(const wchar_t* base)
 
 	std::wstring b(base);
 	M_STRING str = new char[b.length()];
-	size_t size = wcstombs (str, b.c_str(), b.length());
+	wcstombs (str, b.c_str(), b.length());
 	return str;
 }
 
