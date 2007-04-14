@@ -1,5 +1,5 @@
 <Project name="Irrlicht.NET" fileversion="2.0" language="C#" clr-version="Net_2_0" ctype="DotNetProject">
-  <Configurations active="Debug">
+  <Configurations active="Release">
     <Configuration name="Debug" ctype="DotNetProjectConfiguration">
       <Output directory="../../bin/Debug" assembly="Irrlicht.NET" />
       <Build debugmode="True" target="Library" />
@@ -13,6 +13,7 @@
       <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="True" generateoverflowchecks="True" mainclass="" generatexmldocumentation="True" ctype="CSharpCompilerParameters" />
     </Configuration>
   </Configurations>
+  <DeployTargets />
   <Contents>
     <File name="./Device/FileSystem.cs" subtype="Code" buildaction="Compile" />
     <File name="./Device/IrrlichtDevice.cs" subtype="Code" buildaction="Compile" />

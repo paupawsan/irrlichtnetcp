@@ -34,3 +34,5 @@ List of scene nodes :
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=146
 -PerlinSimplexNoise and a terrain scene node by cube3
  http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=169
+-new RotateAnimator with a custom angles feature
+ http://irrlichtnetcp.sourceforge.net/phpBB2/viewtopic.php?t=283
