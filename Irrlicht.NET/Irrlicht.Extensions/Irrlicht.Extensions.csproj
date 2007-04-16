@@ -40,6 +40,7 @@
     <Compile Include="PerlinNoise.cs" />
     <Compile Include="GrassPatchSceneNode.cs" />
     <Compile Include="LensflareSceneNode.cs" />
+    <Compile Include="RotateAnimator.cs" />
     <Compile Include="WaterSceneNode.cs" />
     <Compile Include="WindGenerator.cs" />
   </ItemGroup>
