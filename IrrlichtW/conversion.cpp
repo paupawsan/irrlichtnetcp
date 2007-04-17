@@ -33,7 +33,7 @@ wchar_t *MU_WCHAR(const M_STRING base)
 #else
 	size_t size = mbstowcs(str, b.c_str(), b.length());
 #endif
-	str[size] = '\0';
+	str[b.length()] = '\0';
 	return str;
 }
 
