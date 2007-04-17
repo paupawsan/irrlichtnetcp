@@ -12,7 +12,7 @@ namespace IrrlichtNETCP.Extensions
 
     public class P3DSimplexNoiseTerrain : ISceneNode
     {
-    
+
 
         int _numVertsPerRow;
         int _numVertsPerCol;
@@ -30,7 +30,6 @@ namespace IrrlichtNETCP.Extensions
         SceneManager _mgr;
         VideoDriver _driver;
         public Material Material;
-        public Vertex3D[] v;
 
         Box3D Box3D;
 
@@ -39,11 +38,11 @@ namespace IrrlichtNETCP.Extensions
             get
             {
                 float[] ret = new float[NumVertices * 3];
-                for (int i = 0; i < NumVertices; i++)
+                for (uint i = 0; i < NumVertices; i++)
                 {
-                    ret[(i * 3)] = v[i].Position.X;
-                    ret[(i * 3) + 1] = v[i].Position.Y;
-                    ret[(i * 3) + 2] = v[i].Position.Z;
+                    ret[(i * 3)] = _buffer.GetVertex(i).Position.X;
+                    ret[(i * 3) + 1] = _buffer.GetVertex(i).Position.Y;
+                    ret[(i * 3) + 2] = _buffer.GetVertex(i).Position.Z;
                 }
                 return ret;
             }
@@ -78,14 +77,12 @@ namespace IrrlichtNETCP.Extensions
             int endX = _width / 2;
             int endZ = -_depth / 2;
 
-            Box3D = new Box3D(new Vector3D(startX, - _heightScale, startZ), new Vector3D(endX, _heightScale, endZ));
+            Box3D = new Box3D(new Vector3D(startX, -_heightScale, startZ), new Vector3D(endX, _heightScale, endZ));
 
             float uCoordIncrementSize = 1.0f;
             float vCoordIncrementSize = 1.0f;
 
-            v = new Vertex3D[NumVertices];
-
-
+            _heights = new float[NumVertices];
 
             int i = 0;
             for (int z = startZ; z >= endZ; z -= _cellSpacing)
@@ -100,41 +97,44 @@ namespace IrrlichtNETCP.Extensions
                     height = PerlinSimplexNoise.noise(x * 0.0001f, z * 0.0001f) * _heightScale;
                     // detail noise.
                     height += PerlinSimplexNoise.noise(x * 0.001f, z * 0.001f) * _heightScale / 10;
-                    v[index] = new Vertex3D(
+                    Vertex3D v = new Vertex3D(
                         new Vector3D(x, height, z),
                         new Vector3D(0, 1, 0),
                         Color.Black,
                         new Vector2D(j * uCoordIncrementSize, i * vCoordIncrementSize)
                         );
+                    _buffer.SetVertex((uint)index, v);
                     j++;
                 }
                 i++;
             }
 
-            int baseIndex = 0;
+            uint baseIndex = 0;
 
-            for (int k = 0; k < _numCellsPerRow; k++)
+            for (uint k = 0; k < _numCellsPerRow; k++)
             {
-                for (int j = 0; j < _numCellsPerCol; j++)
+                for (uint j = 0; j < _numCellsPerCol; j++)
                 {
-                    _indices[baseIndex + 0] = (ushort)(k * _numVertsPerRow + j);
-                    _indices[baseIndex + 1] = (ushort)(k * _numVertsPerRow + j + 1);
-                    _indices[baseIndex + 2] = (ushort)((k + 1) * _numVertsPerRow + j);
-                    _indices[baseIndex + 3] = (ushort)((k + 1) * _numVertsPerRow + j);
-                    _indices[baseIndex + 4] = (ushort)(k * _numVertsPerRow + j + 1);
-                    _indices[baseIndex + 5] = (ushort)((k + 1) * _numVertsPerRow + j + 1);
+                    _buffer.SetIndex(baseIndex + 0, (ushort)(k * _numVertsPerRow + j));
+                    _buffer.SetIndex(baseIndex + 1, (ushort)(k * _numVertsPerRow + j + 1));
+                    _buffer.SetIndex(baseIndex + 2, (ushort)((k + 1) * _numVertsPerRow + j));
+                    _buffer.SetIndex(baseIndex + 3, (ushort)((k + 1) * _numVertsPerRow + j));
+                    _buffer.SetIndex(baseIndex + 4, (ushort)(k * _numVertsPerRow + j + 1));
+                    _buffer.SetIndex(baseIndex + 5, (ushort)((k + 1) * _numVertsPerRow + j + 1));
 
                     baseIndex += 6;
                 }
             }
         }
+        MeshBuffer _buffer = new MeshBuffer(VertexType.Standard);
+        float[] _heights;
 
-		public override void OnRegisterSceneNode ()
-		{
+        public override void OnRegisterSceneNode()
+        {
             if (Visible)
                 _mgr.RegisterNodeForRendering(this);
             base.OnRegisterSceneNode();
-		}
+        }
 
 
         public override Box3D BoundingBox
@@ -145,11 +145,24 @@ namespace IrrlichtNETCP.Extensions
             }
         }
 
+        public override uint MaterialCount
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        public override Material GetMaterial(int i)
+        {
+            return Material;
+        }
+
         public override void Render()
         {
             _driver.SetMaterial(Material);
             _driver.SetTransform(TransformationState.World, AbsoluteTransformation);
-            _driver.DrawIndexedTriangleList(v, v.Length, _indices, _numTriangles);
+            _driver.DrawMeshBuffer(_buffer);
         }
     }
 }

@@ -27,17 +27,27 @@ wchar_t *MU_WCHAR(const M_STRING base)
 {
 	std::string b(base);
 	wchar_t *str = new wchar_t[b.length()+1];
+	size_t size;
+#ifdef _MSC_VER
+	 mbstowcs_s(&size, str, b.length() + 1, b.c_str(), b.length());
+#else
 	size_t size = mbstowcs(str, b.c_str(), b.length());
+#endif
 	str[size] = '\0';
 	return str;
 }
 
 M_STRING UM_STRING(const wchar_t* base)
 {
-
 	std::wstring b(base);
-	M_STRING str = new char[b.length()];
-	wcstombs (str, b.c_str(), b.length());
+	M_STRING str = new char[b.length() + 1];
+	size_t size;
+#ifdef _MSC_VER
+	wcstombs_s(&size, str, b.length() + 1, b.c_str(), b.length());
+#else
+	size = wcstombs(str, b.c_str(), b.length());
+#endif
+	str[size] = '\0';
 	return str;
 }
 

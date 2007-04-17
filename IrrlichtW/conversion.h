@@ -1,10 +1,7 @@
 #ifndef CONVERSION_H
 #define CONVERSION_H
 
-//Disable warnings for Windows' standards char and wchar functions
-#define _CRT_SECURE_NO_DEPRECATE
 #include <stdlib.h>
-#undef _CRT_SECURE_NO_DEPRECATE
 
 #include <stdio.h>
 #include <iostream>
