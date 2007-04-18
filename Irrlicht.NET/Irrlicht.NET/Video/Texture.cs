@@ -134,36 +134,46 @@ namespace IrrlichtNETCP
                     fmt = System.Drawing.Imaging.ImageFormat.Bmp;
                     break;
             }
+            DOTNETImage.Save(name, fmt);
+        }
 
-            System.Drawing.Bitmap img = new System.Drawing.Bitmap(OriginalSize.Width, OriginalSize.Height);
-
-            int w = img.Width;
-            int h = img.Height;
-
-            BitmapData bmpData = img.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
-            int stride = bmpData.Stride;       
-            System.IntPtr Scan0 = bmpData.Scan0;
-            Color[,] retrieve = Retrieve();
-            unsafe
+        /// <summary>
+        /// Retrieves the System.Drawing.Bitmap from the texture to use it with .NET.
+        /// </summary>
+        public System.Drawing.Bitmap DOTNETImage
+        {
+            get
             {
-                byte* p = (byte*)(void*)Scan0;
-                int offset = stride - w * 4;
-                for (int y = 0; y < h; ++y)
-                {
-                    for (int x = 0; x < w; ++x)
-                    {
-                        p[0] = (byte)retrieve[x, y].B;
-                        p[1] = (byte)retrieve[x, y].G;
-                        p[2] = (byte)retrieve[x, y].R;
-                        p[3] = (byte)retrieve[x, y].A;
+                System.Drawing.Bitmap img = new System.Drawing.Bitmap(OriginalSize.Width, OriginalSize.Height);
 
-                        p += 4;
+                int w = img.Width;
+                int h = img.Height;
+
+                BitmapData bmpData = img.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+                int stride = bmpData.Stride;
+                System.IntPtr Scan0 = bmpData.Scan0;
+                Color[,] retrieve = Retrieve();
+                unsafe
+                {
+                    byte* p = (byte*)(void*)Scan0;
+                    int offset = stride - w * 4;
+                    for (int y = 0; y < h; ++y)
+                    {
+                        for (int x = 0; x < w; ++x)
+                        {
+                            p[0] = (byte)retrieve[x, y].B;
+                            p[1] = (byte)retrieve[x, y].G;
+                            p[2] = (byte)retrieve[x, y].R;
+                            p[3] = (byte)retrieve[x, y].A;
+
+                            p += 4;
+                        }
+                        p += offset;
                     }
-                    p += offset;
                 }
+                img.UnlockBits(bmpData);
+                return img;
             }
-            img.UnlockBits(bmpData);
-            img.Save(name, fmt);
         }
 
         public void RegenerateMipMapLevels()

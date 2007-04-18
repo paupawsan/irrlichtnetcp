@@ -442,6 +442,11 @@
             </summary>
             <returns>A two-dimension array with all pixels [x,y]</returns>
         </member>
+        <member name="P:IrrlichtNETCP.Texture.DOTNETImage">
+            <summary>
+            Retrieves the System.Drawing.Bitmap from the texture to use it with .NET.
+            </summary>
+        </member>
         <member name="M:IrrlichtNETCP.Color.ToBCL">
             <summary>
             Gets an standard .NET color from the current Irrlicht color.
