@@ -42,5 +42,10 @@ namespace IrrlichtNETCP
 		{
 			return (a + ROUNDING_ERROR > b) && (a - ROUNDING_ERROR < b);
 		}
+
+        public static bool IsZero(float a)
+        {
+            return Math.Abs(a) < ROUNDING_ERROR;
+        }
 	}	
 }
