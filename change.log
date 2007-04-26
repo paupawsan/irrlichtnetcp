@@ -14,6 +14,8 @@ between 0f and 1f... You MUST now update all your softwares. (thanks to lester)
 -Added new BillboardTextSceneNode ( a composition of a TextSceneNode and a billboard)
 -Added a Quaternion implementation (thanks to zitzu)
 
+-Added GuiElement.ToolTipText, thanks to Delight on the forum.
+
 =============================================================================
 Irrlicht .NET CP 0.7
 =============================================================================

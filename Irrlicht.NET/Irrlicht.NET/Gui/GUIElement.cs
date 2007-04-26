@@ -31,6 +31,25 @@ namespace IrrlichtNETCP
                                                        typeof(GUIElement));
         }
 
+        public string ToolTipText
+        {
+            get
+            {
+                try
+                {
+                    return GuiElem_GetToolTipText(_raw);
+                }
+                catch (Exception)
+                {
+                    return "";
+                }
+            }
+            set
+            {
+                GuiElem_SetToolTipText(_raw, value);
+            }
+        }
+
         public GUIElement GetElementFromPoint(Position2D point)
         {
             return (GUIElement)NativeElement.GetObject(GuiElem_GetElementFromPoint(_raw, point.ToUnmanaged()),
@@ -204,6 +223,12 @@ namespace IrrlichtNETCP
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiElem_GetRelativePosition(IntPtr elem, int[] pos);
+
+        [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern void GuiElem_SetToolTipText(IntPtr elem, string text);
+
+        [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern string GuiElem_GetToolTipText(IntPtr elem);
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern string GuiElem_GetText(IntPtr elem);

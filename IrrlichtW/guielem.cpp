@@ -20,6 +20,16 @@ void GuiElem_Draw(IntPtr elem)
 	GetElem(elem)->draw();
 }
 
+M_STRING GuiElem_GetToolTipText(IntPtr elem)
+{
+	return UM_STRING(GetElem(elem)->getText());
+}
+
+void GuiElem_SetToolTipText( IntPtr elem, M_STRING text )
+{
+	GetElem(elem)->setToolTipText(MU_WCHAR(text));
+}
+
 void GuiElem_GetAbsolutePosition(IntPtr elem, M_RECT pos)
 {
 	UM_RECT(GetElem(elem)->getAbsolutePosition(), pos);

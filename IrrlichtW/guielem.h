@@ -21,7 +21,9 @@ extern "C"
 	EXPORT bool GuiElem_OnEvent(IntPtr elem, IntPtr ev);
 	EXPORT void GuiElem_Remove(IntPtr elem);
 	EXPORT void GuiElem_RemoveChild(IntPtr elem, IntPtr child);
-	EXPORT void GuiElem_SetEnabled(IntPtr elem, bool enabled);
+	EXPORT void GuiElem_SetEnabled(IntPtr elem, bool enabled);	
+	EXPORT M_STRING GuiElem_GetToolTipText(IntPtr elem);
+	EXPORT void GuiElem_SetToolTipText( IntPtr elem, M_STRING text );
 	EXPORT void GuiElem_SetID(IntPtr elem, int id);
 	EXPORT void GuiElem_SetRelativePosition(IntPtr elem, M_RECT pos);
 	EXPORT void GuiElem_SetText(IntPtr elem, M_STRING text);
