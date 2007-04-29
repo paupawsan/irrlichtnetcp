@@ -2,16 +2,9 @@
 #include <iostream>
 void Pointer_SafeRelease(IntPtr pointer)
 {
-    #ifdef WIN32
-    if(!pointer)
-        return;
-    irr::IUnknown* i = ( irr::IUnknown*)pointer;
-    if(i)
-    {
-        i->drop();
-        return;
-    }
-    delete pointer;
+    #if WIN32
+    if(pointer)
+        delete pointer;    
 	#endif
 }
 
