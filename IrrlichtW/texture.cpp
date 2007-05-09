@@ -24,6 +24,12 @@ s32 Texture_GetPitch(IntPtr texture)
 {
     return GetTextureFromPtr(texture)->getPitch();
 }
+
+const M_STRING Texture_GetName(IntPtr texture)
+{
+   return ((ITexture*)texture)->getName().c_str();
+} 
+
 /*
 //TODO:Reimplement it ?
 //EDIT kiwsa

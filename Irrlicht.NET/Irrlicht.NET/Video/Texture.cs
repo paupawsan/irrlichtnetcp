@@ -17,6 +17,7 @@ namespace IrrlichtNETCP
 		public DriverType DriverType { get { return Texture_GetDriverType(_raw); } }
 		public Dimension2D OriginalSize{ get { int[] dim = new int[2]; Texture_GetOriginalSize(_raw, dim); return Dimension2D.FromUnmanaged(dim); } }
 		public int Pitch { get { return Texture_GetPitch(_raw); } }
+        public string Name { get { return Texture_GetName(_raw); } }
         //EDITED KIWSA
         /*public virtual Matrix4 Transform
         {
@@ -365,6 +366,9 @@ namespace IrrlichtNETCP
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern int Texture_GetPitch(IntPtr raw);
+
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern string Texture_GetName(IntPtr raw);
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Texture_RegenerateMipMapLevels(IntPtr raw);

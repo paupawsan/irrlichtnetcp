@@ -13,8 +13,8 @@ between 0f and 1f... You MUST now update all your softwares. (thanks to lester)
 -Added Irrlicht 1.3 compatibility and libraries (refer to Irrlicht change log in the /Irrlicht SDK directory).
 -Added new BillboardTextSceneNode ( a composition of a TextSceneNode and a billboard)
 -Added a Quaternion implementation (thanks to zitzu)
-
 -Added GuiElement.ToolTipText, thanks to Delight on the forum.
+-Added Texture.Name, thanks to zitzu !
 
 =============================================================================
 Irrlicht .NET CP 0.7
