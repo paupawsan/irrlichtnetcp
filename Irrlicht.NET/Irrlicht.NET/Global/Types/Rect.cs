@@ -12,6 +12,12 @@ namespace IrrlichtNETCP
 			Set(upperLeft, lowerRight);
 		}
 		
+		public Rect(int x1, int y1, int x2, int y2)
+		{
+			UpperLeftCorner = new Position2D(x1,y1);
+			LowerRightCorner = new Position2D(x2,y2);
+		}
+		
 		public Rect(Position2D pos, Dimension2D size)
 		{
 			UpperLeftCorner = new Position2D();
@@ -38,8 +44,8 @@ namespace IrrlichtNETCP
 		/// <returns> Returns true if the position is within the rectangle, false if not.</returns>
 		public bool IsPointInside(Position2D pos)
 		{
-			return UpperLeftCorner.X <= pos.X && UpperLeftCorner.Y <= pos.Y &&
-				LowerRightCorner.X >= pos.X && LowerRightCorner.Y >= pos.Y;
+			return UpperLeftCorner.X < pos.X && UpperLeftCorner.Y < pos.Y &&
+				LowerRightCorner.X > pos.X && LowerRightCorner.Y > pos.Y;
 		}
 		
 		/// <summary>

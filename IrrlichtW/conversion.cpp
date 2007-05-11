@@ -24,7 +24,7 @@ wchar_t *MU_WCHAR(const M_STRING base)
 #ifdef _MSC_VER
 	 mbstowcs_s(&size, str, b.length() + 1, b.c_str(), b.length());
 #else
-	size_t size = mbstowcs(str, b.c_str(), b.length());
+	size = mbstowcs(str, b.c_str(), b.length());
 #endif
 	str[b.length()] = '\0';
 	return str;
