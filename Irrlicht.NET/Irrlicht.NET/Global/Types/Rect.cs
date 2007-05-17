@@ -44,7 +44,7 @@ namespace IrrlichtNETCP
 		/// <returns> Returns true if the position is within the rectangle, false if not.</returns>
 		public bool IsPointInside(Position2D pos)
 		{
-			return UpperLeftCorner.X < pos.X && UpperLeftCorner.Y < pos.Y &&
+			return UpperLeftCorner.X <= pos.X && UpperLeftCorner.Y <= pos.Y &&
 				LowerRightCorner.X > pos.X && LowerRightCorner.Y > pos.Y;
 		}
 		

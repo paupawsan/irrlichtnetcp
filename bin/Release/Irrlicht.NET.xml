@@ -944,6 +944,14 @@
             <param name="fmt">Pixel format</param>
             <returns>The created texture</returns>
         </member>
+        <member name="M:IrrlichtNETCP.VideoDriver.AddTexture(System.String,IrrlichtNETCP.Image)">
+            <summary>
+            Creates an texture from the Image
+            </summary>
+            <param name="name">Name of the texture on the texture pool</param>
+            <param name="img">The image from what the texture to be created</param>
+            <returns>The created texture</returns>
+        </member>
         <member name="M:IrrlichtNETCP.VideoDriver.GetTexture(System.String)">
             <summary>
             Retrieves the texture
