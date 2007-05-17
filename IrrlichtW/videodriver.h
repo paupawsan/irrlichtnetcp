@@ -13,6 +13,7 @@ extern "C"
 	EXPORT void VideoDriver_MakeNormalMapTexture(IntPtr videodriver, IntPtr texture, float amplitude);
 	EXPORT void VideoDriver_ClearZBuffer(IntPtr videodriver);
 	EXPORT IntPtr VideoDriver_CreateImageFromFile(IntPtr videodriver, M_STRING filename);
+	EXPORT IntPtr VideoDriver_AddTextureFromImage(IntPtr videodriver, c8 *name, IntPtr image); 
 	EXPORT IntPtr VideoDriver_CreateRenderTargetTexture(IntPtr videodriver, M_DIM2DS size);
 	EXPORT void VideoDriver_Draw2DImage(IntPtr videodriver, IntPtr texture, M_POS2DS destPos, M_RECT sourceRect, M_RECT clipRect, M_SCOLOR color, bool useAlphaChannelOfTexture);
 	EXPORT void VideoDriver_Draw2DImageA(IntPtr videodriver, IntPtr texture, M_POS2DS destPos);

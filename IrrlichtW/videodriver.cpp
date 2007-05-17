@@ -20,6 +20,11 @@ IntPtr VideoDriver_AddTexture(IntPtr videodriver, M_DIM2DS size, c8* name, ECOLO
     return GetVideoFromIntPtr(videodriver)->addTexture(MU_DIM2DS(size), name, fmt);
 }
 
+IntPtr VideoDriver_AddTextureFromImage(IntPtr videodriver, c8* name, IntPtr image)
+{
+   return GetVideoFromIntPtr(videodriver)->addTexture( name, (IImage*)image);
+} 
+
 IntPtr VideoDriver_GetGPUProgrammingServices(IntPtr videodriver)
 {
     return GetVideoFromIntPtr(videodriver)->getGPUProgrammingServices();

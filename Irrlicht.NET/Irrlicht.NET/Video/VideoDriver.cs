@@ -50,6 +50,19 @@ namespace IrrlichtNETCP
 				NativeElement.GetObject(VideoDriver_CreateImageFromFile(_raw, filename),
 				                        typeof(Image));
 		}
+
+        /// <summary>
+        /// Creates an texture from the Image
+        /// </summary>
+        /// <param name="name">Name of the texture on the texture pool</param>
+        /// <param name="img">The image from what the texture to be created</param>
+        /// <returns>The created texture</returns>
+        public Texture AddTexture(string name, Image img)
+        {
+            return (Texture)
+                NativeElement.GetObject(VideoDriver_AddTextureFromImage(_raw, name, img.Raw),
+                                        typeof(Texture));
+        } 
 		
         /// <summary>
         /// Retrieves the texture
@@ -563,6 +576,9 @@ namespace IrrlichtNETCP
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr VideoDriver_CreateImageFromFile(IntPtr videodriver, string filename);
+
+        [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern IntPtr VideoDriver_AddTextureFromImage(IntPtr raw, string name, IntPtr image); 
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr VideoDriver_CreateRenderTargetTexture(IntPtr videodriver, int[] size);
