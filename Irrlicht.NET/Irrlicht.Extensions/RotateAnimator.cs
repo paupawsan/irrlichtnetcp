@@ -3,11 +3,9 @@ using System;
 using IrrlichtNETCP;
 using IrrlichtNETCP.Inheritable;
 
-namespace Irrlicht.Extensions
+namespace IrrlichtNETCP.Extensions
 {
-	
-	
-public class RotationAnimator : IAnimator
+    public class RotationAnimator : IAnimator
     {
         Vector3D m_rotationStart;
         Vector3D m_rotationEnd;
@@ -41,5 +39,5 @@ public class RotationAnimator : IAnimator
                 this.Null();
             }
         }
-    } 
+    }
 }
