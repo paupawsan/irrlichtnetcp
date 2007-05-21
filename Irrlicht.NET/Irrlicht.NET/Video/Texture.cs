@@ -46,6 +46,17 @@ namespace IrrlichtNETCP
             return _lockresult;
         }
 
+        public void SafeCopyInto(Texture tex)
+        {
+            Color[,] col = Retrieve();
+            ModifyPixel del = delegate(int x, int y, out Color result)
+            {
+                result = col[x, y];
+                return true;
+            };
+            tex.Modify(del);
+        }
+
         /// <summary>
         /// You must always call this after each lock.
         /// </summary>
@@ -150,7 +161,7 @@ namespace IrrlichtNETCP
                 int w = img.Width;
                 int h = img.Height;
 
-                BitmapData bmpData = img.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
+                BitmapData bmpData = img.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.WriteOnly, PixelFormat.Format32bppArgb);
                 int stride = bmpData.Stride;
                 System.IntPtr Scan0 = bmpData.Scan0;
                 Color[,] retrieve = Retrieve();
@@ -174,6 +185,27 @@ namespace IrrlichtNETCP
                 }
                 img.UnlockBits(bmpData);
                 return img;
+            }
+            set
+            {
+                int w = Math.Min(value.Width, OriginalSize.Width);
+                int h = Math.Min(value.Height, OriginalSize.Height);
+
+                BitmapData bmpData = value.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
+                int stride = bmpData.Stride;
+                System.IntPtr Scan0 = bmpData.Scan0;
+                unsafe
+                {
+                    byte* p = (byte*)(void*)Scan0;
+                    ModifyPixel del = delegate(int x, int y, out Color result)
+                    {
+                        int ind = y * stride + (x * 4);
+                        result = new Color(p[ind + 3], p[ind + 2], p[ind + 1], p[ind + 0]);
+                        return true;
+                    };
+                    this.Modify(del);
+                }
+                value.UnlockBits(bmpData);
             }
         }
 

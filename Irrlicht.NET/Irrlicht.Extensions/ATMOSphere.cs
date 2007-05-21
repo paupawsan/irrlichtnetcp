@@ -396,7 +396,7 @@ namespace IrrlichtNETCP.Extensions
 
         Texture[] stars;
         Texture suntex;
-        int skyid;
+        int skyid = 0;
         float uvX;
         Texture dangus;
         double rad;
