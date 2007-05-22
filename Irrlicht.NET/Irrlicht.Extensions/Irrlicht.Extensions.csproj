@@ -41,6 +41,7 @@
     <Compile Include="GrassPatchSceneNode.cs" />
     <Compile Include="LensflareSceneNode.cs" />
     <Compile Include="RotateAnimator.cs" />
+    <Compile Include="TTFont.cs" />
     <Compile Include="WaterSceneNode.cs" />
     <Compile Include="WindGenerator.cs" />
   </ItemGroup>
