@@ -247,8 +247,8 @@ namespace IrrlichtNETCP
             IntPtr lockresult = Lock();
             int* directacces = (int*)(void*)lockresult;
             int pitch = Pitch / 4;
-            for (int x = 0; x < w; ++x)
-                for (int y = 0; y < h; ++y)
+            for (int y = 0; y < h; ++y)
+                for (int x = 0; x < w; ++x)
                 {
                     Color col;
                     if (callback(x, y, out col))
@@ -264,8 +264,8 @@ namespace IrrlichtNETCP
             IntPtr lockresult = Lock();
             short* directacces = (short*)(void*)lockresult;
             int pitch = Pitch / 2;
-            for (int x = 0; x < w; ++x)
-                for (int y = 0; y < h; ++y)
+            for (int y = 0; y < h; ++y)
+                for (int x = 0; x < w; ++x)
                 {
                     Color col;
                     if (callback(x, y, out col))
@@ -284,8 +284,8 @@ namespace IrrlichtNETCP
             IntPtr lockresult = Lock();
             short* directacces = (short*)(void*)lockresult;
             int pitch = Pitch / 2;
-            for (int x = 0; x < w; ++x)
-                for (int y = 0; y < h; ++y)
+            for (int y = 0; y < h; ++y)
+                for (int x = 0; x < w; ++x)
                 {
                     Color col;
                     if (callback(x, y, out col))
