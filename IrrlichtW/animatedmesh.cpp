@@ -93,3 +93,8 @@ void AnimatedMeshSceneNode_SetMD2AnimationA(IntPtr node, EMD2_ANIMATION_TYPE ani
     GetNodeFromIntPtr(node)->setMD2Animation(anim);
 }
 
+IntPtr AnimatedMeshSceneNode_GetMesh(IntPtr node)
+{
+    return (IntPtr)GetNodeFromIntPtr(node)->getMesh();
+}
+

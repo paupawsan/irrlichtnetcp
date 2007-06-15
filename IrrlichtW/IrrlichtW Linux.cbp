@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_project_file>
-	<FileVersion major="1" minor="5" />
+	<FileVersion major="1" minor="6" />
 	<Project>
 		<Option title="IrrlichtW" />
 		<Option pch_mode="0" />
-		<Option default_target="" />
 		<Option compiler="gcc" />
-		<Option virtualFolders="" />
 		<Build>
 			<Target title="Release">
-				<Option output="../bin/Release/IrrlichtW.so" prefix_auto="0" extension_auto="0" />
+				<Option output="../bin/Release/libIrrlichtW.so" prefix_auto="0" extension_auto="0" />
 				<Option working_dir="../bin/Release" />
 				<Option object_output="obj/Release/" />
 				<Option type="3" />
@@ -27,7 +25,8 @@
 		<Compiler>
 			<Add option="-Os" />
 			<Add option="-Wall" />
-			<Add directory="/home/deusxl/Projects/irrlicht-1.0/include" />
+			<Add directory="../Irrlicht SDK/include" />
+			<Add directory="/usr/include/freetype2" />
 		</Compiler>
 		<Linker>
 			<Add option="-s" />
@@ -35,204 +34,55 @@
 			<Add library="GLU" />
 			<Add library="Xxf86vm" />
 			<Add library="../Irrlicht SDK/lib/Linux/libIrrlicht.a" />
-			<Add directory="/home/deusxl/Projects/irrlicht-1.0/lib/Linux" />
+			<Add library="freetype" />
+			<Add directory="../Irrlicht SDK/lib/Linux" />
+			<Add directory="/usr/lib" />
 		</Linker>
-		<Unit filename="animatedhmesh.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="animatedmesh.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="camera.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="camera.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="conversion.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="conversion.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="customscenenodes.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="customscenenodes.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="device.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="device.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="event.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="event.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="gpu.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="gpu.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="guielem.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="guielem.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="guielem2.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="guielem2.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="guienv.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="guienv.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="main.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="material.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="material.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="mesh.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="mesh.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="meshmanipulator.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="meshmanipulator.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="particlescenenode.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="particlescenenode.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="scenemanager.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="scenemanager.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="scenenode.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="scenenode.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="texture.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="texture.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="vertices.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="vertices.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="videodriver.cpp">
-			<Option compilerVar="CPP" />
-			<Option target="Release" />
-		</Unit>
-		<Unit filename="videodriver.h">
-			<Option compilerVar="CPP" />
-			<Option compile="0" />
-			<Option link="0" />
-			<Option target="Release" />
-		</Unit>
-		<Extensions />
+		<Unit filename="animatedhmesh.h" />
+		<Unit filename="animatedmesh.cpp" />
+		<Unit filename="camera.cpp" />
+		<Unit filename="camera.h" />
+		<Unit filename="conversion.cpp" />
+		<Unit filename="conversion.h" />
+		<Unit filename="customfont.cpp" />
+		<Unit filename="customfont.h" />
+		<Unit filename="customscenenodes.cpp" />
+		<Unit filename="customscenenodes.h" />
+		<Unit filename="device.cpp" />
+		<Unit filename="device.h" />
+		<Unit filename="event.cpp" />
+		<Unit filename="event.h" />
+		<Unit filename="gpu.cpp" />
+		<Unit filename="gpu.h" />
+		<Unit filename="guielem.cpp" />
+		<Unit filename="guielem.h" />
+		<Unit filename="guielem2.cpp" />
+		<Unit filename="guielem2.h" />
+		<Unit filename="guienv.cpp" />
+		<Unit filename="guienv.h" />
+		<Unit filename="main.h" />
+		<Unit filename="material.cpp" />
+		<Unit filename="material.h" />
+		<Unit filename="mesh.cpp" />
+		<Unit filename="mesh.h" />
+		<Unit filename="meshmanipulator.cpp" />
+		<Unit filename="meshmanipulator.h" />
+		<Unit filename="particlescenenode.cpp" />
+		<Unit filename="particlescenenode.h" />
+		<Unit filename="scenemanager.cpp" />
+		<Unit filename="scenemanager.h" />
+		<Unit filename="scenenode.cpp" />
+		<Unit filename="scenenode.h" />
+		<Unit filename="texture.cpp" />
+		<Unit filename="texture.h" />
+		<Unit filename="vertices.cpp" />
+		<Unit filename="vertices.h" />
+		<Unit filename="videodriver.cpp" />
+		<Unit filename="videodriver.h" />
+		<Extensions>
+			<code_completion>
+				<search_path add="../Irrlicht SDK/include" />
+			</code_completion>
+		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

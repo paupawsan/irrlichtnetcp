@@ -18,4 +18,5 @@ extern "C"
     EXPORT void AnimatedMeshSceneNode_SetLoopMode(IntPtr node, bool animationLooped);
     EXPORT void AnimatedMeshSceneNode_SetMD2Animation(IntPtr node, M_STRING animationname);
     EXPORT void AnimatedMeshSceneNode_SetMD2AnimationA(IntPtr node, EMD2_ANIMATION_TYPE anim);
+    EXPORT IntPtr AnimatedMeshSceneNode_GetMesh(IntPtr node);
 }

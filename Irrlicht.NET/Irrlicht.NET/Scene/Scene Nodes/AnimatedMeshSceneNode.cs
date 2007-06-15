@@ -82,6 +82,17 @@ namespace IrrlichtNETCP
 			}
 		}
 		
+		public AnimatedMesh AnimatedMesh
+		{
+			get
+			{
+				return (AnimatedMesh)
+					NativeElement.GetObject(AnimatedMeshSceneNode_GetMesh(_raw),
+											typeof(AnimatedMesh));
+			}
+		}
+		
+		
         /// <summary>
         /// Adds a shadow to the node
         /// </summary>
@@ -181,6 +192,10 @@ namespace IrrlichtNETCP
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void AnimatedMeshSceneNode_SetMD2AnimationA(IntPtr node, MD2Animation anim);
+		 
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern IntPtr AnimatedMeshSceneNode_GetMesh(IntPtr node);
+		
 		#endregion
 	}
 	
