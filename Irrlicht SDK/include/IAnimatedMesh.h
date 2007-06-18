@@ -6,13 +6,14 @@
 #define __I_ANIMATED_MESH_H_INCLUDED__
 
 #include "IUnknown.h"
-#include "IMesh.h"
-#include "matrix4.h"
+#include "aabbox3d.h"
 
 namespace irr
 {
 namespace scene
 {
+	class IMesh;
+
 	enum E_ANIMATED_MESH_TYPE
 	{
 		//! Unknown animated mesh type.
@@ -58,7 +59,6 @@ namespace scene
 
 		//! Blitz Basic .b3d file, the file format by Mark Sibly
 		EAMT_B3D
-
 	};
 
 	//! Interface for an animated mesh.

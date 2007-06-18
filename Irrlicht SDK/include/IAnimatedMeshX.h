@@ -7,6 +7,7 @@
 
 #include "IAnimatedMesh.h"
 #include "irrArray.h"
+#include "matrix4.h"
 
 namespace irr
 {

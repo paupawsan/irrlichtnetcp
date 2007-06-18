@@ -6,6 +6,7 @@
 #define __I_ANIMATED_MESH_MS3D_H_INCLUDED__
 
 #include "IAnimatedMesh.h"
+#include "matrix4.h"
 
 namespace irr
 {

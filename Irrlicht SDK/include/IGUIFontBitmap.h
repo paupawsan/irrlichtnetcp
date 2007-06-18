@@ -1,4 +1,4 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
@@ -6,12 +6,12 @@
 #define __I_GUI_FONT_BITMAP_H_INCLUDED__
 
 #include "IGUIFont.h"
-#include "IGUISpriteBank.h"
 
 namespace irr
 {
 namespace gui
 {
+	class IGUISpriteBank;
 
 //! Font interface.
 class IGUIFontBitmap : public IGUIFont
@@ -22,7 +22,7 @@ public:
 	virtual ~IGUIFontBitmap() {};
 
 	//! Returns the type of this font
-	virtual EGUI_FONT_TYPE getType() { return EGFT_BITMAP; }
+	virtual EGUI_FONT_TYPE getType() const { return EGFT_BITMAP; }
 
 	//! returns the parsed Symbol Information
 	virtual IGUISpriteBank* getSpriteBank() = 0;

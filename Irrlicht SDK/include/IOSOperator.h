@@ -11,8 +11,6 @@ namespace irr
 {
 
 //! The Operating system operator provides operation system specific methods and informations.
-/** Currently only 3 methods are supported. But it will be extended with more functionality
-soon. */
 class IOSOperator : public virtual IUnknown
 {
 public:
@@ -31,7 +29,7 @@ public:
 	virtual c8* getTextFromClipboard() = 0;	
 
 	//! gets the processor speed in megahertz
-	//! \param Mhz:
+	//! \param MHz: The integer variable to store the speed in.
 	//! \return Returns true if successful, false if not
 	virtual bool getProcessorSpeedMHz(irr::u32* MHz) = 0;
 

@@ -5,7 +5,7 @@ extern "C"
     typedef bool (STDCALL EVENTCALLBACK)(IntPtr);
  
     EXPORT IntPtr CreateDevice(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias);
-    EXPORT IntPtr CreateDeviceA(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias, int handle);
+    EXPORT IntPtr CreateDeviceA(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias, IntPtr handle);
     EXPORT void Device_SetWindowCaption(IntPtr device, M_STRING caption);
     EXPORT IntPtr Device_GetSceneManager(IntPtr device);
     EXPORT IntPtr Device_GetVideoDriver(IntPtr device);

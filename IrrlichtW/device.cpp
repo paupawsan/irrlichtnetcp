@@ -45,7 +45,7 @@ IntPtr CreateDevice(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool 
     return createDeviceEx(params);
 }
 
-IntPtr CreateDeviceA(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias, int handle)
+IntPtr CreateDeviceA(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias, IntPtr handle)
 {
     SIrrlichtCreationParameters params;
     params.AntiAlias = antialias;

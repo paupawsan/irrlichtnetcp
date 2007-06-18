@@ -37,7 +37,7 @@ namespace gui
 
 		//! Sets another color for the text.
 		/** If set, the static text does not use the EGDC_BUTTON_TEXT color defined
-         in the skin, but the set color instead. You don't need to call 
+		 in the skin, but the set color instead. You don't need to call 
 		 IGUIStaticText::enableOverrrideColor(true) after this, this is done
 		 by this function.
 		 If you set a color, and you want the text displayed with the color
@@ -58,6 +58,12 @@ namespace gui
 		//! Checks if an override color is enabled
 		//! \return true if the override color is enabled, false otherwise
 		virtual bool isOverrideColorEnabled(void) = 0;
+
+		//! Sets another color for the background.
+		virtual void setBackgroundColor(video::SColor color) = 0;
+
+		//! Sets whether to draw the background
+		virtual void setDrawBackground(bool draw) = 0;
 
 		//! Enables or disables word wrap for using the static text as multiline text control.
 		/** \param enable: If set to true, words going over one line are 

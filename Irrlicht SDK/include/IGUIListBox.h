@@ -6,7 +6,6 @@
 #define __I_GUI_LIST_BOX_BAR_H_INCLUDED__
 
 #include "IGUIElement.h"
-#include "irrTypes.h"
 
 namespace irr
 {
@@ -45,6 +44,9 @@ namespace gui
 
 		//! Removes an item from the list
 		virtual void removeItem(s32 index) = 0;
+
+		//! Returns the icon of an item
+		virtual s32 getIcon(s32 id) const = 0;
 
 		//! Sets the sprite bank which should be used to draw list icons. This font is set to the sprite bank of
 		//! the built-in-font by default. A sprite can be displayed in front of every list item.

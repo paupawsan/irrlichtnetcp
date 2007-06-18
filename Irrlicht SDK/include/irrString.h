@@ -50,12 +50,13 @@ public:
 	}
 
 
+
 	//! Constructs a string from a float
-	string(double number)
+	string(const double number)
 	: array(0), allocated(0), used(0)
 	{
 		c8 tmpbuf[255];
-		sprintf(tmpbuf,"%0.6f",number);
+		snprintf(tmpbuf, 255, "%0.6f", number);
 		*this = tmpbuf;
 	}
 
@@ -703,30 +704,68 @@ public:
 	}
 
 
-	void operator += (T c)
+	string<T>& operator += (T c)
 	{
 		append(c);
+		return *this;
 	}
 
-	void operator += (const T* const c)
+
+	string<T>& operator += (const T* const c)
 	{
 		append(c);
+		return *this;
 	}
 
-	void operator += (const string<T>& other)
+
+	string<T>& operator += (const string<T>& other)
 	{
 		append(other);
+		return *this;
 	}
 
-	void operator += (int i)
+
+	string<T>& operator += (const int i)
 	{
 		append(string<T>(i));
+		return *this;
 	}
 
-	void operator += (double i)
+
+	string<T>& operator += (const unsigned int i)
 	{
 		append(string<T>(i));
+		return *this;
 	}
+
+
+	string<T>& operator += (const long i)
+	{
+		append(string<T>(i));
+		return *this;
+	}
+
+
+	string<T>& operator += (const unsigned long& i)
+	{
+		append(string<T>(i));
+		return *this;
+	}
+
+
+	string<T>& operator += (const double i)
+	{
+		append(string<T>(i));
+		return *this;
+	}
+
+
+	string<T>& operator += (const float i)
+	{
+		append(string<T>(i));
+		return *this;
+	}
+
 
 	//! replaces all characters of a special type with another one
 	void replace(T toReplace, T replaceWith)

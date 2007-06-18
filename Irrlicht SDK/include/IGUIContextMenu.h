@@ -24,7 +24,7 @@ namespace gui
 		//! destructor
 		~IGUIContextMenu() {};
 
-		//! Returns amount of menu items
+		//! Get amount of menu items
 		virtual s32 getItemCount() const = 0;
 
 		//! Adds a menu item.
@@ -36,6 +36,7 @@ namespace gui
 		 \param enabled: Specifies if the menu item should be enabled.
 		 \param hasSubMenu: Set this to true if there should be a submenu
 		 at this item. You can acess this submenu via getSubMenu().
+		 \param checked: Specifies if the menu item should be initially checked.
 		 \return Returns the index of the new item */
 		virtual s32 addItem(const wchar_t* text, s32 commandId=-1, bool enabled=true,
 			bool hasSubMenu=false,
@@ -45,7 +46,7 @@ namespace gui
 		//! Adds a separator item to the menu
 		virtual void addSeparator() = 0;
 
-		//! Returns text of the menu item.
+		//! Get text of the menu item.
 		/** \param idx: Zero based index of the menu item */
 		virtual const wchar_t* getItemText(s32 idx) = 0;
 
@@ -54,7 +55,7 @@ namespace gui
 		 \param text: New text of the item. */
 		virtual void setItemText(s32 idx, const wchar_t* text) = 0;
 
-		//! Returns if a menu item is enabled
+		//! Check if a menu item is enabled
 		/** \param idx: Zero based index of the menu item */
 		virtual bool isItemEnabled(s32 idx) = 0;
 
@@ -68,6 +69,9 @@ namespace gui
 		 \param enabled: True if it is enabled, otherwise false. */
 		virtual void setItemChecked(s32 idx, bool enabled) = 0;
 
+		//! Check if a menu item is checked
+		/** \param idx: Zero based index of the menu item */
+		virtual bool isItemChecked(s32 idx) = 0;
 
 		//! Removes a menu item
 		/** \param idx: Zero based index of the menu item */
@@ -76,11 +80,11 @@ namespace gui
 		//! Removes all menu items
 		virtual void removeAllItems() = 0;
 
-		//! Returns the selected item in the menu
+		//! Get the selected item in the menu
 		/** \return Index of the selected item, -1 if none selected. */
 		virtual s32 getSelectedItem() = 0;
 
-		//! Returns command id of a menu item
+		//! Get the command id of a menu item
 		/** \param idx: Zero based index of the menu item */
 		virtual s32 getItemCommandId(s32 idx) = 0;
 
@@ -90,9 +94,10 @@ namespace gui
 		 set to whatever you want. */
 		virtual void setItemCommandId(s32 idx, s32 id) = 0;
 
-		//! \return Returns a pointer to the submenu of an item. 
+		//! Get a pointer to the submenu of an item. 
 		/** 0 is returned if there is no submenu
-		 \param idx: Zero based index of the menu item */
+		 \param idx: Zero based index of the menu item
+		 \return Returns a pointer to the submenu of an item. */
 		virtual IGUIContextMenu* getSubMenu(s32 idx) = 0;
 	};
 

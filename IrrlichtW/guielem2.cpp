@@ -1,9 +1,9 @@
 #include "guielem2.h"
 
-
+bool useAlphaChannel = false;
 bool GUIButton_GetUseAlphaChannel(IntPtr button)
 {
-	_FIX_BOOL_MARSHAL_BUG(((IGUIButton*)button)->getUseAlphaChannel());
+	_FIX_BOOL_MARSHAL_BUG(useAlphaChannel);
 }
 
 bool GUIButton_IsPressed(IntPtr button)
@@ -49,6 +49,7 @@ void GUIButton_SetPressedImageA(IntPtr button, IntPtr image)
 void GUIButton_SetUseAlphaChannel(IntPtr button, bool use)
 {
 	((IGUIButton*)button)->setUseAlphaChannel(use);
+	useAlphaChannel = use;
 }
 
 

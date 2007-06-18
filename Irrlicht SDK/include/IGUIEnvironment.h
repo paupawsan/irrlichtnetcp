@@ -2,24 +2,25 @@
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
-#ifndef __I_GUI_ENVIRNMENT_H_INCLUDED__
-#define __I_GUI_ENVIRNMENT_H_INCLUDED__
+#ifndef __I_GUI_ENVIRONMENT_H_INCLUDED__
+#define __I_GUI_ENVIRONMENT_H_INCLUDED__
 
-#include "rect.h"
 #include "IUnknown.h"
-#include "IEventReceiver.h"
-#include "irrTypes.h"
 #include "IGUIWindow.h"
 #include "IGUISkin.h"
-#include "IFileSystem.h"
+#include "rect.h"
 
 namespace irr
 {
+	class IOSOperator;
+	class IEventReceiver;
+
 	namespace io
 	{
 		class IXMLWriter;
 		class IReadFile;
 		class IWriteFile;
+		class IFileSystem;
 	} // end namespace io
 	namespace video
 	{
@@ -78,6 +79,9 @@ public:
 
 	//! Returns the file system.
 	virtual io::IFileSystem* getFileSystem() = 0;
+
+	//! returns a pointer to the OS operator
+	virtual IOSOperator* getOSOperator() = 0;
 
 	//! removes all elements from the environment.
 	virtual void clear() = 0;
@@ -361,17 +365,23 @@ public:
 
 	//! Saves the current gui into a file.
 	//! \param filename: Name of the file.
-	virtual bool saveGUI(const c8* filename)=0;
+	//! \param start: The GUIElement to start with. Root if 0.
+	virtual bool saveGUI(const c8* filename, IGUIElement* start=0) = 0;
 
 	//! Saves the current gui into a file.
-	virtual bool saveGUI(io::IWriteFile* file)=0;
+	//! \param file: The file to write to.
+	//! \param start: The GUIElement to start with. Root if 0.
+	virtual bool saveGUI(io::IWriteFile* file, IGUIElement* start=0) = 0;
 
 	//! Loads the gui. Note that the current gui is not cleared before.
 	//! \param filename: Name of the file .
-	virtual bool loadGUI(const c8* filename)=0;
+	//! \param parent: Parent for the loaded GUI, root if 0.
+	virtual bool loadGUI(const c8* filename, IGUIElement* parent=0) = 0;
 
 	//! Loads the gui. Note that the current gui is not cleared before.
-	virtual bool loadGUI(io::IReadFile* file)=0;	
+	//! \param file: The file to load from.
+	//! \param parent: Parent for the loaded GUI, root if 0.
+	virtual bool loadGUI(io::IReadFile* file, IGUIElement* parent=0) = 0;	
 
 	//! Writes attributes of the gui environment
 	virtual void serializeAttributes(io::IAttributes* out, io::SAttributeReadWriteOptions* options=0)=0;

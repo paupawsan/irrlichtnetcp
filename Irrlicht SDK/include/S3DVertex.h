@@ -67,6 +67,11 @@ struct S3DVertex
 		return (Pos != other.Pos || Normal != other.Normal ||
 			Color != other.Color || TCoords != other.TCoords);
 	}
+
+	E_VERTEX_TYPE getType() const
+	{
+		return EVT_STANDARD;
+	}
 };
 
 
@@ -102,6 +107,10 @@ struct S3DVertex2TCoords
 		SColor color, const core::vector2d<f32>& tcoords)
 		: Pos(pos), Normal(normal), Color(color), TCoords(tcoords), TCoords2(tcoords) {}
 
+	//! constructor from S3DVertex
+	S3DVertex2TCoords(S3DVertex& o)
+		: Pos(o.Pos), Normal(o.Normal), Color(o.Color), TCoords(o.TCoords) {}
+
 	//! Position
 	core::vector3df Pos;
 
@@ -117,6 +126,7 @@ struct S3DVertex2TCoords
 	//! Second set of texture coordinates
 	core::vector2d<f32> TCoords2;
 
+	//! Equality operator
 	bool operator == (const S3DVertex2TCoords& other) const
 	{
 		return (Pos == other.Pos && Normal == other.Normal &&
@@ -124,6 +134,7 @@ struct S3DVertex2TCoords
 			TCoords2 == other.TCoords2);
 	}
 
+	//! Inequality operator
 	bool operator != (const S3DVertex2TCoords& other) const
 	{
 		return (Pos != other.Pos || Normal != other.Normal ||
@@ -131,6 +142,10 @@ struct S3DVertex2TCoords
 			TCoords2 != other.TCoords2);
 	}
 
+	E_VERTEX_TYPE getType() const
+	{
+		return EVT_2TCOORDS;
+	}
 };
 
 
@@ -181,6 +196,11 @@ struct S3DVertexTangents
 		return (Pos != other.Pos || Normal != other.Normal ||
 			Color != other.Color || TCoords != other.TCoords ||
 			Tangent != other.Tangent || Binormal != other.Binormal);
+	}
+
+	E_VERTEX_TYPE getType() const
+	{
+		return EVT_TANGENTS;
 	}
 };
 

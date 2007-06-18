@@ -7,12 +7,12 @@
 
 #include "ISceneNode.h"
 #include "IEventReceiver.h"
-#include "SViewFrustum.h"
 
 namespace irr
 {
 namespace scene
 {
+	struct SViewFrustum;
 
 	//! Scene Node which is a (controlable) camera.
 	/** The whole scene will be

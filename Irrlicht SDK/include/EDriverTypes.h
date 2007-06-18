@@ -34,15 +34,15 @@ namespace video
 		//! contribution.
 		EDT_BURNINGSVIDEO,
 
-		//! Direct3D 8 device, only available on Win32 platforms including Win95, Win98, WinNT,
-		//! Win2K, WinXP. Performs hardware accelerated rendering of 3D and 2D primitives.
+		//! Direct3D 8 device, only available on Win32 platforms.
+		//! Performs hardware accelerated rendering of 3D and 2D primitives.
 		EDT_DIRECT3D8, 
 
-		//! Direct3D 9 device, only available on Win32 platforms including Win95, Win98, WinNT,
-		//! Win2K, WinXP. Performs hardware accelerated rendering of 3D and 2D primitives.
+		//! Direct3D 9 device, only available on Win32 platforms.
+		//! Performs hardware accelerated rendering of 3D and 2D primitives.
 		EDT_DIRECT3D9,
 
-		//! OpenGL device, available on all Win32 platforms and on Linux.
+		//! OpenGL device, available on most platforms.
 		//! Performs hardware accelerated rendering of 3D and 2D primitives.
 		EDT_OPENGL    
 	};

@@ -92,6 +92,18 @@ namespace core
 			return *this;
 		}
 
+		// compares size of rectangles
+		bool operator < (const rect<T>& other) const
+		{
+			return getArea() < other.getArea();
+		}
+
+		//! Returns size of rectangle
+		T getArea() const
+		{
+			return getWidth() * getHeight();
+		}
+
 		//! Returns if a 2d point is within this rectangle.
 		//! \param pos: Position to test if it lies within this rectangle.
 		//! \return Returns true if the position is within the rectangle, false if not.
@@ -130,6 +142,44 @@ namespace core
 				UpperLeftCorner.Y = LowerRightCorner.Y;
 			if (UpperLeftCorner.X > LowerRightCorner.X)
 				UpperLeftCorner.X = LowerRightCorner.X;
+		}
+
+		//! Moves this rectangle to fit inside another one.
+		//! \return: returns true on success, false if not possible
+		bool constrainTo(const rect<T>& other) 
+		{
+			if (other.getWidth() < getWidth() || other.getHeight() < getHeight())
+				return false;
+
+			T diff = other.LowerRightCorner.X - LowerRightCorner.X;
+			if (diff < 0)
+			{
+				LowerRightCorner.X += diff;
+				UpperLeftCorner.X  += diff;
+			}
+
+			diff = other.LowerRightCorner.Y - LowerRightCorner.Y;
+			if (diff < 0)
+			{
+				LowerRightCorner.Y += diff;
+				UpperLeftCorner.Y  += diff;
+			}
+
+			diff = UpperLeftCorner.X - other.UpperLeftCorner.X;
+			if (diff < 0)
+			{
+				UpperLeftCorner.X  -= diff;
+				LowerRightCorner.X -= diff;
+			}
+
+			diff = UpperLeftCorner.Y - other.UpperLeftCorner.Y;
+			if (diff < 0)
+			{
+				UpperLeftCorner.Y  -= diff;
+				LowerRightCorner.Y -= diff;
+			}
+
+			return true;
 		}
 
 		//! Returns width of rectangle.
@@ -173,7 +223,7 @@ namespace core
 			T xd = LowerRightCorner.X - UpperLeftCorner.X;
 			T yd = LowerRightCorner.Y - UpperLeftCorner.Y;
 
-			return !(xd < 0 || yd < 0 || (xd == 0 && yd == 0));
+			return !(xd <= 0 || yd <= 0 || (xd == 0 && yd == 0));
 		}
 
 		//! Returns the center of the rectangle

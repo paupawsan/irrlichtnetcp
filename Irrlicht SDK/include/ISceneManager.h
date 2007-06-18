@@ -5,21 +5,19 @@
 #ifndef __I_SCENE_MANAGER_H_INCLUDED__
 #define __I_SCENE_MANAGER_H_INCLUDED__
 
-#include "irrArray.h"
 #include "IUnknown.h"
+#include "irrArray.h"
 #include "vector3d.h"
 #include "dimension2d.h"
 #include "SColor.h"
-#include "SMaterial.h"
-#include "IEventReceiver.h"
 #include "ETerrainElements.h"
 #include "ESceneNodeTypes.h"
 #include "SceneParameters.h"
-#include "IGUIEnvironment.h"
 
 namespace irr
 {
 	struct SKeyMap;
+	struct SEvent;
 
 namespace io
 {
@@ -33,11 +31,15 @@ namespace gui
 {
 	class IGUIFont;
 	class IGUIFontBitmap;
+	class IGUIEnvironment;
 } // end namespace gui
 
 namespace video
 {
 	class IVideoDriver;
+	class SMaterial;
+	class IImage;
+	class ITexture;
 } // end namespace video
 
 namespace scene
@@ -356,6 +358,7 @@ namespace scene
 		scene node will be placed.
 		\param rotation: Initital rotation of the scene node.
 		\param scale: Initial scale of the scene node.
+		\param alsoAddIfMeshPointerZero: Add the scene node even if a 0 pointer is passed.
 		\return Returns pointer to the created scene node.
 		This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual IAnimatedMeshSceneNode* addAnimatedMeshSceneNode(IAnimatedMesh* mesh, ISceneNode* parent=0, s32 id=-1,
@@ -372,6 +375,7 @@ namespace scene
 		scene node will be placed.
 		\param rotation: Initital rotation of the scene node.
 		\param scale: Initial scale of the scene node.
+		\param alsoAddIfMeshPointerZero: Add the scene node even if a 0 pointer is passed.
 		\return Returns pointer to the created scene node.
 		This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual IMeshSceneNode* addMeshSceneNode(IMesh* mesh, ISceneNode* parent=0, s32 id=-1,
@@ -411,9 +415,10 @@ namespace scene
 		 \param parent: Parent node of the octtree node.
 		 \param id: id of the node. This id can be used to identify the node.
 		 \param minimalPolysPerNode: Specifies the minimal polygons contained a octree node.
-		 If a node gets less polys the this value, it will not be splitted into
+		 If a node gets less polys than this value it will not be split into
 		 smaller nodes.
-		 \return Returns the pointer to the octtree if successful, otherwise 0.
+		\param alsoAddIfMeshPointerZero: Add the scene node even if a 0 pointer is passed.
+		 \return Returns the pointer to the OctTree if successful, otherwise 0.
 		 This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual ISceneNode* addOctTreeSceneNode(IAnimatedMesh* mesh, ISceneNode* parent=0,
 			s32 id=-1, s32 minimalPolysPerNode=256, bool alsoAddIfMeshPointerZero=false) = 0;
@@ -426,8 +431,9 @@ namespace scene
 		 \param parent: Parent node of the octtree node.
 		 \param id: id of the node. This id can be used to identify the node.
 		 \param minimalPolysPerNode: Specifies the minimal polygons contained a octree node.
-		 If a node gets less polys the this value, it will not be splitted into
+		 If a node gets less polys than this value it will not be split into
 		 smaller nodes.
+		\param alsoAddIfMeshPointerZero: Add the scene node even if a 0 pointer is passed.
 		 \return Returns the pointer to the octtree if successful, otherwise 0.
 		 This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual ISceneNode* addOctTreeSceneNode(IMesh* mesh, ISceneNode* parent=0,
@@ -454,7 +460,7 @@ namespace scene
 		 \param parent: Parent scene node of the camera. Can be null.
 		 \param rotateSpeed: Rotation speed of the camera.
 		 \param zoomSpeed: Zoom speed of the camera.
-		 \param tranlationSpeed: TranslationSpeed of the camera.
+		 \param translationSpeed: TranslationSpeed of the camera.
 		 \param id: id of the camera. This id can be used to identify the camera.
 		 \return Returns a pointer to the interface of the camera if successful, otherwise 0.
 		 This pointer should not be dropped. See IUnknown::drop() for more information. */
@@ -493,7 +499,7 @@ namespace scene
 		 \param parent: Parent scene node of the camera. Can be null.
 		 \param rotateSpeed: Speed with wich the camera is rotated. This can be done
 		 only with the mouse.
-		 \param movespeed: Speed with which the camera is moved. Movement is done with
+		 \param moveSpeed: Speed with which the camera is moved. Movement is done with
 		 the cursor keys.
 		 \param id: id of the camera. This id can be used to identify the camera.
 		 \param keyMapArray: Optional pointer to an array of a keymap, specifying what
@@ -504,6 +510,7 @@ namespace scene
 		 \param noVerticalMovement: Setting this to true makes the camera only move within a
 		 horizontal plane, and disables vertical movement as known from most ego shooters. Default
 		 is 'false', with which it is possible to fly around in space, if no gravity is there.
+		 \param jumpSpeed: Speed with which the camera is moved when jumping.
 		 \return Returns a pointer to the interface of the camera if successful, otherwise 0.
 		 This pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual ICameraSceneNode* addCameraSceneNodeFPS(ISceneNode* parent = 0,
@@ -605,19 +612,21 @@ namespace scene
 			const core::vector3df& scale = core::vector3df(1.0f, 1.0f, 1.0f)) = 0;
 
 		//! Adds a terrain scene node to the scene graph.
-		/** This node
-		 implements is a simple terrain renderer which uses
+		/** This node implements is a simple terrain renderer which uses
 		 a technique known as geo mip mapping
 		 for reducing the detail of triangle blocks which are far away.
-		 The code for the TerrainSceneNode is based on the terrain renderer by Soconne and
-	     the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht
-	     and allowed it to be  distributed under this licence. I only modified some parts.
-	     A lot of thanks go to them.
+		 The code for the TerrainSceneNode is based on the terrain
+		 renderer by Soconne and the GeoMipMapSceneNode developed by
+		 Spintz. They made their code available for Irrlicht and allowed
+		 it to be distributed under this licence. I only modified some
+		 parts. A lot of thanks go to them.
 
-		 This scene node is capable of very quickly loading
-		 terrains and updating the indices at runtime to enable viewing very large terrains.  It uses a
-		 CLOD (Continuous Level of Detail) algorithm which updates the indices for each patch based on
-		 a LOD (Level of Detail) which is determined based on a patch's distance from the camera.
+		 This scene node is capable of loading terrains and updating
+		 the indices at runtime to enable viewing very large terrains
+		 very quickly. It uses a CLOD (Continuous Level of Detail)
+		 algorithm which updates the indices for each patch based on
+		 a LOD (Level of Detail) which is determined based on a patch's
+		 distance from the camera.
 
 		 The patch size of the terrain must always be a size of ( 2^N+1, i.e. 8+1(9), 16+1(17), etc. ).
 		 The MaxLOD available is directly dependent on the patch size of the terrain.  LOD 0 contains all
@@ -628,12 +637,14 @@ namespace scene
 		 2^8 ( 256 ) vertices, which is not possible with a patch size of 17.  The maximum LOD for a patch
 		 size of 17 is 2^4 ( 16 ).  So, with a MaxLOD of 5, you'll have LOD 0 ( full detail ), LOD 1 ( every
 		 2 vertices ), LOD 2 ( every 4 vertices ), LOD 3 ( every 8 vertices ) and LOD 4 ( every 16 vertices ).
-		 \param heightMapFile: The location of the file on disk, to read vertex data from. This should
+		 \param heightMapFileName: The name of the file on disk, to read vertex data from. This should
 		 be a gray scale bitmap.
+		 \param parent: Parent of the scene node. Can be 0 if no parent.
+		 \param id: Id of the node. This id can be used to identify the scene node.
 		 \param position: The absolute position of this node.
 		 \param rotation: The absolute rotation of this node. ( NOT YET IMPLEMENTED )
-		 \param scale: The scale factor for the terrain.  If you're using a heightmap of size 128x128 and would like
-		 your terrain to be 12800x12800 in game units, then use a scale factor of ( core::vector ( 100.0f, 100.0f, 100.0f ).
+		 \param scale: The scale factor for the terrain.  If you're using a heightmap of size 129x129 and would like
+		 your terrain to be 12900x12900 in game units, then use a scale factor of ( core::vector ( 100.0f, 100.0f, 100.0f ).
 		 If you use a Y scaling factor of 0.0f, then your terrain will be flat.
 		 \param vertexColor: The default color of all the vertices. If no texture is associated
 		 with the scene node, then all vertices will be this color. Defaults to white.
@@ -641,6 +652,8 @@ namespace scene
 		 know what you are doing, this might lead to strange behaviour.
 		 \param patchSize: patch size of the terrain. Only change if you
 		 know what you are doing, this might lead to strange behaviour.
+		 \param smoothFactor: The number of times the vertices are smoothed.
+		 \param addAlsoIfHeightmapEmpty: Add terrain node even with empty heightmap.
 		 \return Returns pointer to the created scene node. Can be null if the
 		 terrain could not be created, for example because the heightmap could not be loaded.
 		 The returned pointer should not be dropped. See IUnknown::drop() for more information. */
@@ -651,12 +664,33 @@ namespace scene
 			const core::vector3df& rotation = core::vector3df(0.0f,0.0f,0.0f),
 			const core::vector3df& scale = core::vector3df(1.0f,1.0f,1.0f),
 			video::SColor vertexColor = video::SColor(255,255,255,255),
-			s32 maxLOD=5, E_TERRAIN_PATCH_SIZE patchSize=ETPS_17, s32 smoothFactor=0) = 0;
+			s32 maxLOD=5, E_TERRAIN_PATCH_SIZE patchSize=ETPS_17, s32 smoothFactor=0,
+			bool addAlsoIfHeightmapEmpty = false) = 0;
 
 		//! Adds a terrain scene node to the scene graph.
 		/** Just like the other addTerrainSceneNode() method, but takes an IReadFile
 		 pointer as parameter for the heightmap. For more informations take a look
-		 add the other overload. */
+		 at the other function.
+		 \param heightMapFile: The file handle to read vertex data from. This should
+		 be a gray scale bitmap.
+		 \param parent: Parent of the scene node. Can be 0 if no parent.
+		 \param id: Id of the node. This id can be used to identify the scene node.
+		 \param position: The absolute position of this node.
+		 \param rotation: The absolute rotation of this node. ( NOT YET IMPLEMENTED )
+		 \param scale: The scale factor for the terrain.  If you're using a heightmap of size 129x129 and would like
+		 your terrain to be 12900x12900 in game units, then use a scale factor of ( core::vector ( 100.0f, 100.0f, 100.0f ).
+		 If you use a Y scaling factor of 0.0f, then your terrain will be flat.
+		 \param vertexColor: The default color of all the vertices. If no texture is associated
+		 with the scene node, then all vertices will be this color. Defaults to white.
+		 \param maxLOD: The maximum LOD (level of detail) for the node. Only change if you
+		 know what you are doing, this might lead to strange behaviour.
+		 \param patchSize: patch size of the terrain. Only change if you
+		 know what you are doing, this might lead to strange behaviour.
+		 \param smoothFactor: The number of times the vertices are smoothed.
+		 \param addAlsoIfHeightmapEmpty: Add terrain node even with empty heightmap.
+		 \return Returns pointer to the created scene node. Can be null if the
+		 terrain could not be created, for example because the heightmap could not be loaded.
+		 The returned pointer should not be dropped. See IUnknown::drop() for more information. */
 		virtual ITerrainSceneNode* addTerrainSceneNode(
 			io::IReadFile* heightMapFile,
 			ISceneNode* parent=0, s32 id=-1,
@@ -664,7 +698,8 @@ namespace scene
 			const core::vector3df& rotation = core::vector3df(0.0f,0.0f,0.0f),
 			const core::vector3df& scale = core::vector3df(1.0f,1.0f,1.0f),
 			video::SColor vertexColor = video::SColor(255,255,255,255),
-			s32 maxLOD=5, E_TERRAIN_PATCH_SIZE patchSize=ETPS_17, s32 smoothFactor=0) = 0;
+			s32 maxLOD=5, E_TERRAIN_PATCH_SIZE patchSize=ETPS_17, s32 smoothFactor=0,
+			bool addAlsoIfHeightmapEmpty = false) = 0;
 
 		//! Adds a quake3 scene node to the scene graph.
 		/** A Quake3 Scene renders multiple meshes for a specific HighLanguage Shader (Quake3 Style )
@@ -756,6 +791,7 @@ namespace scene
 		 heightmap to increase rendering speed.
 		 \param stretchSize: Parameter defining how big a is pixel on the heightmap.
 		 \param maxHeight: Defines how height a white pixel on the heighmap is.
+		 \param defaultVertexBlockSize: Defines the initial dimension between vertices.
 		 \return Returns null if the creation failed. The reason could be that you
 		 specified some invalid parameters, that a mesh with that name already
 		 exists, or that a texture could not be found. If successful, a pointer to the mesh is returned.
@@ -791,12 +827,30 @@ namespace scene
 		virtual ISceneNode* getSceneNodeFromId(s32 id, ISceneNode* start=0) = 0;
 
 		//! Returns the first scene node with the specified name.
-		/**\param start: Scene node to start from. All children of this scene
+		/** \param name: The name to search for
+		 \param start: Scene node to start from. All children of this scene
 		 node are searched. If null is specified, the root scene node is
 		 taken.
 		 \return Returns pointer to the first scene node with this id,
 		 and null if no scene node could be found. */
 		virtual ISceneNode* getSceneNodeFromName(const c8* name, ISceneNode* start=0) = 0;
+
+		//! Returns the first scene node with the specified type.
+		/** \param type: The type to search for
+		 \param start: Scene node to start from. All children of this scene
+		 node are searched. If null is specified, the root scene node is
+		 taken.
+		 \return Returns pointer to the first scene node with this type,
+		 and null if no scene node could be found. */
+		virtual ISceneNode* getSceneNodeFromType(scene::ESCENE_NODE_TYPE type, ISceneNode* start=0) = 0;
+
+		//! returns scene nodes by type.
+		/** \param type: Type of scene node to find.
+		\param outNodes: array to be filled with results.
+		\param start: Scene node to start from. All children of this scene
+		node are searched. If null is specified, the root scene node is
+		taken. */
+		virtual void getSceneNodesFromType(ESCENE_NODE_TYPE type, core::array<scene::ISceneNode*>& outNodes, ISceneNode* start=0) = 0;
 
 		//! Returns the current active camera.
 		/** \return The active camera is returned. Note that this can be NULL, if there
@@ -845,6 +899,7 @@ namespace scene
 		/** \param center: Center of the circle.
 		 \param radius: Radius of the circle.
 		 \param speed: Specifies the speed of the flight.
+		 \param direction: Specifies the upvector used for alignment of the mesh.
 		 \return Returns the animator. Attach it to a scene node with ISceneNode::addAnimator()
 		 and the animator will animate it.
 		 If you no longer need the animator, you should call ISceneNodeAnimator::drop().
@@ -1004,8 +1059,8 @@ namespace scene
 		virtual IMetaTriangleSelector* createMetaTriangleSelector() = 0;
 
 		//! Creates a triangle selector which can select triangles from a terrain scene node.
-		/** \param: Pointer to the created terrain scene node
-		 \param: Level of detail, 0 for highest detail. */
+		/** \param node: Pointer to the created terrain scene node
+		 \param LOD: Level of detail, 0 for highest detail. */
 		virtual ITriangleSelector* createTerrainTriangleSelector(
 			ITerrainSceneNode* node, s32 LOD=0) = 0;
 
@@ -1092,6 +1147,9 @@ namespace scene
 		//! Returns a typename from a scene node type or null if not found
 		virtual const c8* getSceneNodeTypeName(ESCENE_NODE_TYPE type) = 0;
 
+		//! Adds a scene node to the scene by name
+		virtual ISceneNode* addSceneNode(const char* sceneNodeTypeName, ISceneNode* parent) = 0;
+
 		//! Creates a new scene manager.
 		/** This can be used to easily draw and/or store two independent scenes at the same time.
 		The mesh cache will be shared between all existing scene managers, which means if you load
@@ -1104,7 +1162,7 @@ namespace scene
 		doesn't get the event. Otherwise, all input will go automaticly to the main scene manager.
 		If you no longer need the new scene manager, you should call ISceneManager::drop().
 		See IUnknown::drop() for more information. */
-		virtual ISceneManager* createNewSceneManager() = 0;
+		virtual ISceneManager* createNewSceneManager(bool cloneContent=false) = 0;
 
 		//! Saves the current scene into a file.
 		/** Scene nodes with the option isDebugObject set to true are not being saved.

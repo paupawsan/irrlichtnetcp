@@ -6,11 +6,8 @@
 #define __I_GUI_FONT_H_INCLUDED__
 
 #include "IUnknown.h"
-#include "rect.h"
-#include "irrTypes.h"
 #include "SColor.h"
-#include "irrArray.h"
-#include "ITexture.h"
+#include "rect.h"
 
 namespace irr
 {
@@ -70,7 +67,7 @@ public:
 	virtual s32 getCharacterFromPos(const wchar_t* text, s32 pixel_x) = 0;
 
 	//! Returns the type of this font
-	virtual EGUI_FONT_TYPE getType() { return EGFT_CUSTOM; }
+	virtual EGUI_FONT_TYPE getType() const { return EGFT_CUSTOM; }
 
 	//! Sets global kerning for the font.
 	virtual void setKerningWidth (s32 kerning) = 0;

@@ -6,13 +6,16 @@
 #define __I_MESH_LOADER_H_INCLUDED__
 
 #include "IUnknown.h"
-#include "IReadFile.h"
-#include "IAnimatedMesh.h"
 
 namespace irr
 {
+namespace io
+{
+	class IReadFile;
+} // end namespace io
 namespace scene
 {
+	class IAnimatedMesh;
 
 //!	Class which is able to load an animated mesh from a file.
 /** If you want the Irrlicht Engine be able to load meshes of 

@@ -24,8 +24,14 @@ namespace gui
 		//! destructor
 		~IGUIScrollBar() {};
 
-		//! sets the maximum value of the scrollbar. must be > 0
+		//! gets the maximum value of the scrollbar.
+		virtual s32 getMax() = 0;
+
+		//! sets the maximum value of the scrollbar.
 		virtual void setMax(s32 max) = 0;
+
+		//! gets the small step value
+		virtual s32 getSmallStep() = 0;
 
 		//! sets the small step value
 		virtual void setSmallStep(s32 step) = 0;

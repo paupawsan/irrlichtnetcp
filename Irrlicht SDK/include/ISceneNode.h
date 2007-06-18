@@ -7,6 +7,8 @@
 
 #include "IUnknown.h"
 #include "ESceneNodeTypes.h"
+#include "ECullingTypes.h"
+#include "EDebugSceneTypes.h"
 #include "ISceneManager.h"
 #include "ISceneNodeAnimator.h"
 #include "ITriangleSelector.h"
@@ -437,9 +439,8 @@ namespace scene
 		/** Automatic culling is enabled by default. Note that not
 		all SceneNodes support culling (the billboard scene node for example)
 		and that some nodes always cull their geometry because it is their
-		only reason for existance, for example the OctreeSceneNode.
-		\param enabled: If true, automatic culling is enabled.
-		If false, it is disabled. */
+		only reason for existence, for example the OctreeSceneNode.
+		\param state: The culling state to be used. */
 		void setAutomaticCulling( E_CULLING_TYPE state)
 		{
 			AutomaticCullingState = state;
@@ -576,12 +577,14 @@ namespace scene
 		{
 			out->addString	("Name", Name.c_str());
 			out->addInt	("Id", ID );
-			out->addVector3d("Position", RelativeTranslation );
-			out->addVector3d("Rotation", RelativeRotation );
-			out->addVector3d("Scale", RelativeScale );
+
+			out->addVector3d("Position", getPosition() );
+			out->addVector3d("Rotation", getRotation() );
+			out->addVector3d("Scale", getScale() );
+
 			out->addBool	("Visible", IsVisible );
 			out->addEnum	("AutomaticCulling", AutomaticCullingState, AutomaticCullingNames);
-			out->addInt		("DebugDataVisible", DebugDataVisible );
+			out->addInt	("DebugDataVisible", DebugDataVisible );
 			out->addBool	("IsDebugObject", IsDebugObject );
 		}
 
@@ -592,9 +595,11 @@ namespace scene
 		{
 			Name = in->getAttributeAsString("Name");
 			ID = in->getAttributeAsInt("Id");
-			RelativeTranslation = in->getAttributeAsVector3d("Position");
-			RelativeRotation = in->getAttributeAsVector3d("Rotation");
-			RelativeScale = in->getAttributeAsVector3d("Scale");
+
+			setPosition(in->getAttributeAsVector3d("Position"));
+			setRotation(in->getAttributeAsVector3d("Rotation"));
+			setScale(in->getAttributeAsVector3d("Scale"));
+
 			IsVisible = in->getAttributeAsBool("Visible");
 			AutomaticCullingState = (scene::E_CULLING_TYPE ) in->getAttributeAsEnumeration("AutomaticCulling", scene::AutomaticCullingNames);
 
@@ -604,7 +609,53 @@ namespace scene
 			updateAbsolutePosition();
 		}
 
+		//! Creates a clone of this scene node and its children.
+		virtual ISceneNode* clone(ISceneNode* newParent=0, ISceneManager* newManager=0) 
+		{ 
+			return 0; // to be implemented by derived classes
+		}
+
 	protected:
+
+		//! this method can be used by clone() implementations of derived classes
+		void cloneMembers(ISceneNode* toCopyFrom, ISceneManager* newManager)
+		{
+			Name = toCopyFrom->Name;
+			AbsoluteTransformation = toCopyFrom->AbsoluteTransformation;
+			RelativeTranslation = toCopyFrom->RelativeTranslation;
+			RelativeRotation = toCopyFrom->RelativeRotation;
+			RelativeScale = toCopyFrom->RelativeScale;			
+			ID = toCopyFrom->ID;
+			setTriangleSelector(toCopyFrom->TriangleSelector);
+			AutomaticCullingState = toCopyFrom->AutomaticCullingState;
+			DebugDataVisible = toCopyFrom->DebugDataVisible;
+			IsVisible = toCopyFrom->IsVisible;
+			IsDebugObject = toCopyFrom->IsDebugObject;
+
+			if (newManager)
+				SceneManager = newManager;
+			else
+				SceneManager = toCopyFrom->SceneManager;
+
+			// clone children
+
+			core::list<ISceneNode*>::Iterator it = toCopyFrom->Children.begin();
+			for (; it != toCopyFrom->Children.end(); ++it)
+				(*it)->clone(this, newManager);
+
+			// clone animators
+
+			core::list<ISceneNodeAnimator*>::Iterator ait = toCopyFrom->Animators.begin();
+			for (; ait != toCopyFrom->Animators.end(); ++ait)
+			{
+				ISceneNodeAnimator* anim = (*ait)->createClone(this, SceneManager);
+				if (anim)
+				{
+					addAnimator(anim);
+					anim->drop();
+				}
+			}
+		}
 
 		//! name of the scene node.
 		core::stringc Name;

@@ -21,11 +21,11 @@ private:
 	//! List element node with pointer to previous and next element in the list.
 	struct SKListNode
 	{
-		SKListNode() : next(0), prev(0) {};
+		SKListNode() : Next(0), Prev(0) {};
 
-		SKListNode* next;
-		SKListNode* prev;
-		T element;
+		SKListNode* Next;
+		SKListNode* Prev;
+		T Element;
 	};
 
 public:
@@ -35,21 +35,21 @@ public:
 	{
 	public:
 
-		Iterator() : current(0) {};
+		Iterator() : Current(0) {};
 
-		Iterator& operator ++() { current = current->next; return *this; };
-		Iterator& operator --() { current = current->prev; return *this; };
-		Iterator operator ++(s32) { Iterator tmp = *this; current = current->next; return tmp; };
-		Iterator operator --(s32) { Iterator tmp = *this; current = current->prev; return tmp; };
+		Iterator& operator ++() { Current = Current->Next; return *this; };
+		Iterator& operator --() { Current = Current->Prev; return *this; };
+		Iterator operator ++(s32) { Iterator tmp = *this; Current = Current->Next; return tmp; };
+		Iterator operator --(s32) { Iterator tmp = *this; Current = Current->Prev; return tmp; };
 
 		Iterator operator+(s32 num) const
 		{
 			Iterator tmp = *this;
 
 			if (num >= 0)
-				while (num-- && tmp.current != 0) ++tmp;
+				while (num-- && tmp.Current != 0) ++tmp;
 			else
-				while (num++ && tmp.current != 0) --tmp;
+				while (num++ && tmp.Current != 0) --tmp;
 
 			return tmp;
 		}
@@ -57,9 +57,9 @@ public:
 		Iterator& operator+=(s32 num)
 		{
 			if (num >= 0)
-				while (num-- && this->current != 0) ++(*this);
+				while (num-- && this->Current != 0) ++(*this);
 			else
-				while (num++ && this->current != 0) --(*this);
+				while (num++ && this->Current != 0) --(*this);
 
 			return *this;
 		}
@@ -67,28 +67,28 @@ public:
 		Iterator operator-(s32 num) const  { return (*this)+(-num);          }
 		Iterator operator-=(s32 num) const { (*this)+=(-num);  return *this; }
 
-		bool operator ==(const Iterator& other) const { return current == other.current; };
-		bool operator !=(const Iterator& other) const { return current != other.current; };
+		bool operator ==(const Iterator& other) const { return Current == other.Current; };
+		bool operator !=(const Iterator& other) const { return Current != other.Current; };
 
-		T& operator *() { return current->element; };
+		T& operator *() { return Current->Element; };
 
 	private:
 
-		Iterator(SKListNode* begin) : current(begin) {};
+		Iterator(SKListNode* begin) : Current(begin) {};
 
 		friend class list<T>;
 
-		SKListNode* current;
+		SKListNode* Current;
 	};
 
 
 	//! constructor
 	list()
-		: root(0), last(0), size(0) {}
+		: Root(0), Last(0), Size(0) {}
 
 
 	//! copy constructor
-	list(const list<T>& other) : root(0), last(0), size(0)
+	list(const list<T>& other) : Root(0), Last(0), Size(0)
 	{
 		*this = other;
 	}
@@ -107,11 +107,11 @@ public:
 	{ 
 		clear();
  
-		SKListNode* node = other.root; 
+		SKListNode* node = other.Root; 
 		while(node) 
 		{ 
-			push_back(node->element); 
-			node = node->next; 
+			push_back(node->Element); 
+			node = node->Next; 
 		} 
 	} 
 
@@ -121,7 +121,7 @@ public:
 	//! \return Returns amount of elements in the list.
 	u32 getSize() const
 	{
-		return size;
+		return Size;
 	}
 
 
@@ -130,17 +130,17 @@ public:
 	//! iterators of this list will be invalid.
 	void clear()
 	{
-		SKListNode* node = root;
+		SKListNode* node = Root;
 		while(node)
 		{
-			SKListNode* next = node->next;
+			SKListNode* next = node->Next;
 			delete node;
 			node = next;
 		}
 
-		root = 0;
-		last = 0;
-		size = 0;
+		Root = 0;
+		Last = 0;
+		Size = 0;
 	}
 
 
@@ -149,7 +149,7 @@ public:
 	//! \return Returns true if the list is empty and false if not.
 	bool empty() const
 	{
-		return root == 0;
+		return (Root == 0);
 	}
 
 
@@ -159,19 +159,19 @@ public:
 	void push_back(const T& element)
 	{
 		SKListNode* node = new SKListNode;
-		node->element = element;
+		node->Element = element;
 
-		++size;
+		++Size;
 
-		if (root == 0)
-			root = node;
+		if (Root == 0)
+			Root = node;
 
-		node->prev = last;
+		node->Prev = Last;
 
-		if (last != 0)
-			last->next = node;
+		if (Last != 0)
+			Last->Next = node;
 
-		last = node;
+		Last = node;
 	}
 
 
@@ -180,20 +180,20 @@ public:
 	void push_front(const T& element)
 	{
 		SKListNode* node = new SKListNode;
-		node->element = element;
+		node->Element = element;
 
-		++size;
+		++Size;
 
-		if (root == 0)
+		if (Root == 0)
 		{
-			last = node;
-			root = node;
+			Last = node;
+			Root = node;
 		}
 		else
 		{
-			node->next = root;
-			root->prev = node;
-			root = node;
+			node->Next = Root;
+			Root->Prev = node;
+			Root = node;
 		}
 	}
 
@@ -202,7 +202,7 @@ public:
 	//! \return Returns a list iterator pointing to the begin of the list.
 	Iterator begin() const
 	{
-		return Iterator(root);
+		return Iterator(Root);
 	}
 
 
@@ -218,88 +218,88 @@ public:
 	//! \return Returns a list iterator pointing to the end of the list.
 	Iterator getLast() const
 	{
-		return Iterator(last);
+		return Iterator(Last);
 	}
 
 
 	//! Inserts an element after an element.
 	//! \param it: Iterator pointing to element after which the new element
 	//! should be inserted.
-	//! \param element: The new element to be insterted into the list.
+	//! \param element: The new element to be inserted into the list.
 	void insert_after(Iterator& it, const T& element)
 	{
 		SKListNode* node = new SKListNode;
-		node->element = element;
+		node->Element = element;
 
-		node->next = it.current->next;
+		node->Next = it.Current->Next;
 
-		if (it.current->next)
-			it.current->next->prev = node;
+		if (it.Current->Next)
+			it.Current->Next->Prev = node;
 
-		node->prev = it.current;
-		it.current->next = node;
-		++size;
+		node->Prev = it.Current;
+		it.Current->Next = node;
+		++Size;
 
-		if (it.current == last)
-			last = node;
+		if (it.Current == Last)
+			Last = node;
 	}
 
 
 	//! Inserts an element before an element.
 	//! \param it: Iterator pointing to element before which the new element
 	//! should be inserted.
-	//! \param element: The new element to be insterted into the list.
+	//! \param element: The new element to be inserted into the list.
 	void insert_before(Iterator& it, const T& element)
 	{
 		SKListNode* node = new SKListNode;
-		node->element = element;
+		node->Element = element;
 
-		node->prev = it.current->prev;
+		node->Prev = it.Current->Prev;
 
-		if (it.current->prev)
-			it.current->prev->next = node;
+		if (it.Current->Prev)
+			it.Current->Prev->Next = node;
 
-		node->next = it.current;
-		it.current->prev = node;
-		++size;
+		node->Next = it.Current;
+		it.Current->Prev = node;
+		++Size;
 
-		if (it.current == root)
-			root = node;
+		if (it.Current == Root)
+			Root = node;
 	}
 
 
 	//! Erases an element
-	//! \param it: Iterator pointing to the element which should be erased.
+	//! \param it: Iterator pointing to the element which shall be erased.
 	//! \return Returns iterator pointing to next element.
 	Iterator erase(Iterator& it)
 	{
 		Iterator returnIterator(it);
 		++returnIterator;
 
-		if (it.current == root)
-			root = it.current->next;
+		if (it.Current == Root)
+			Root = it.Current->Next;
 
-		if (it.current == last)
-			last = it.current->prev;
+		if (it.Current == Last)
+			Last = it.Current->Prev;
 
-		if (it.current->next)
-			it.current->next->prev = it.current->prev;
+		if (it.Current->Next)
+			it.Current->Next->Prev = it.Current->Prev;
 
-		if (it.current->prev)
-			it.current->prev->next = it.current->next;
+		if (it.Current->Prev)
+			it.Current->Prev->Next = it.Current->Next;
 
-		delete it.current;
-		it.current = 0;
-		--size;
+		delete it.Current;
+		it.Current = 0;
+		--Size;
 
 		return returnIterator;
 	}
 
 private:
 
-	SKListNode* root;
-	SKListNode* last;
-	u32 size;
+	SKListNode* Root;
+	SKListNode* Last;
+	u32 Size;
 
 };
 

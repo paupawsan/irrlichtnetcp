@@ -346,7 +346,7 @@ namespace io
 		data and it is of type EXN_TEXT or EXN_UNKNOWN. */
 		virtual const char_type* getNodeData() const = 0;
 
-		//! Returns if an element is an empty element, like <foo />
+		//! Returns if an element is an empty element, like &lt;foo />
 		virtual bool isEmptyElement() const = 0;
 
 		//! Returns format of the source xml file. 

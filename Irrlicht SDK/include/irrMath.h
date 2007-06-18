@@ -9,7 +9,7 @@
 #include "irrTypes.h"
 #include <math.h>
 
-#ifdef __sun__
+#if defined(_IRR_SOLARIS_PLATFORM_) || defined(__BORLANDC__) || defined (__BCPLUSPLUS__)
 	#define sqrtf(X) sqrt(X)
 	#define sinf(X) sin(X)
 	#define cosf(X) cos(X)
@@ -38,16 +38,22 @@ namespace core
 	//! Constant for PI.
 	const f32 PI			= 3.14159265359f;
 
+	//! Constant for reciprocal of PI.
+	const f32 RECIPROCAL_PI		= 1.0f/PI;
+
 	//! Constant for 64bit PI.
 	const f64 PI64			= 3.1415926535897932384626433832795028841971693993751;
+
+	//! Constant for 64bit reciprocal of PI.
+	const f64 RECIPROCAL_PI64	= 1.0/PI64;
 
 	//! 32bit Constant for converting from degrees to radians
 	const f32 DEGTORAD   = PI / 180.0f;
 
-	//! 32bit constant for converting from radians to degrees
+	//! 32bit constant for converting from radians to degrees (formally known as GRAD_PI)
 	const f32 RADTODEG   = 180.0f / PI;
 
-	//! 64bit constant for converting from degrees to radians
+	//! 64bit constant for converting from degrees to radians (formally known as GRAD_PI2)
 	const f64 DEGTORAD64 = PI64 / 180.0;
 
 	//! 64bit constant for converting from radians to degrees
@@ -60,11 +66,25 @@ namespace core
 		return a < b ? a : b;
 	}
 
+	//! returns minimum of three values. Own implementation to get rid of the STL (VS6 problems)
+	template<class T>
+	inline const T min_(const T a, const T b, const T c)
+	{
+		return a < b ? min_(a, c) : min_(b, c);
+	}
+
 	//! returns maximum of two values. Own implementation to get rid of the STL (VS6 problems)
 	template<class T>
 	inline T max_(const T a, const T b)
 	{
 		return a < b ? b : a;
+	}
+
+	//! returns minimum of three values. Own implementation to get rid of the STL (VS6 problems)
+	template<class T>
+	inline const T max_(const T a, const T b, const T c)
+	{
+		return a < b ? max_(b, c) : max_(a, c);
 	}
 
 	//! returns abs of two values. Own implementation to get rid of STL (VS6 problems)
@@ -134,14 +154,14 @@ namespace core
 		in general: number = (sign ? -1:1) * 2^(exponent) * 1.(mantissa bits)
 	*/
 
-	#define F32_AS_S32(f)			(*((s32 *) &(f)))
-	#define F32_AS_U32(f)			(*((u32 *) &(f)))
+	#define F32_AS_S32(f)		(*((s32 *) &(f)))
+	#define F32_AS_U32(f)		(*((u32 *) &(f)))
 	#define F32_AS_U32_POINTER(f)	( ((u32 *) &(f)))
 
-	#define F32_VALUE_0			0x00000000
-	#define F32_VALUE_1			0x3f800000	
-	#define F32_SIGN_BIT			0x80000000U
-	#define F32_EXPON_MANTISSA		0x7FFFFFFFU
+	#define F32_VALUE_0		0x00000000
+	#define F32_VALUE_1		0x3f800000	
+	#define F32_SIGN_BIT		0x80000000U
+	#define F32_EXPON_MANTISSA	0x7FFFFFFFU
 
 	//! code is taken from IceFPU
 	//! Integer representation of a floating-point value.
@@ -157,12 +177,12 @@ namespace core
 	#define IEEE_255_0			0x437f0000						//!<	integer representation of 255.0
 
 	
-	#define	F32_LOWER_0(f)			(F32_AS_U32(f) >  F32_SIGN_BIT)
+	#define	F32_LOWER_0(f)		(F32_AS_U32(f) >  F32_SIGN_BIT)
 	#define	F32_LOWER_EQUAL_0(f)	(F32_AS_S32(f) <= F32_VALUE_0)
-	#define	F32_GREATER_0(f)		(F32_AS_S32(f) >  F32_VALUE_0)
+	#define	F32_GREATER_0(f)	(F32_AS_S32(f) >  F32_VALUE_0)
 	#define	F32_GREATER_EQUAL_0(f)	(F32_AS_U32(f) <= F32_SIGN_BIT)
-	#define	F32_EQUAL_1(f)			(F32_AS_U32(f) == F32_VALUE_1)
-	#define	F32_EQUAL_0(f)			( (F32_AS_U32(f) & F32_EXPON_MANTISSA ) == F32_VALUE_0)
+	#define	F32_EQUAL_1(f)		(F32_AS_U32(f) == F32_VALUE_1)
+	#define	F32_EQUAL_0(f)		( (F32_AS_U32(f) & F32_EXPON_MANTISSA ) == F32_VALUE_0)
 
 	// only same sign
 	#define	F32_A_GREATER_B(a,b)	(F32_AS_S32((a)) >  F32_AS_S32((b)))

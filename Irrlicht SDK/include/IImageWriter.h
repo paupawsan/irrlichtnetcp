@@ -1,7 +1,6 @@
 #ifndef _I_IMAGE_WRITER_H_INCLUDED__
 #define _I_IMAGE_WRITER_H_INCLUDED__
 
-#include "irrTypes.h"
 #include "IUnknown.h"
 
 namespace irr

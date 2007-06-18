@@ -6,11 +6,14 @@
 #define __I_SURFACE_LOADER_H_INCLUDED__
 
 #include "IUnknown.h"
-#include "IReadFile.h"
 #include "IImage.h"
 
 namespace irr
 {
+namespace io
+{
+	class IReadFile;
+} // end namespace io
 namespace video
 {
 

@@ -6,12 +6,14 @@
 #define __I_MESH_H_INCLUDED__
 
 #include "IUnknown.h"
-#include "IMeshBuffer.h"
+#include "SMaterial.h"
 
 namespace irr
 {
 namespace scene
 {
+	class IMeshBuffer;
+
 	//! Class for accessing a mesh with multiple mesh buffers.
 	/** An IMesh is nothing more than a collection of some mesh buffers (IMeshBuffer).
 	SMesh is a simple implementation of an IMesh.

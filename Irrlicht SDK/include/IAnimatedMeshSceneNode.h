@@ -84,7 +84,7 @@ namespace scene
 		virtual IShadowVolumeSceneNode* addShadowVolumeSceneNode(s32 id=-1,
 			bool zfailmethod=true, f32 infinity=10000.0f) = 0;
 
-		//! Returns a pointer to a child node, wich has the same transformation as
+		//! Returns a pointer to a child node, which has the same transformation as
 		//! the corresponding joint, if the mesh in this scene node is a ms3d mesh.
 		//! Otherwise 0 is returned. With this method it is possible to
 		//! attach scene nodes to joints more easily. In this way, it is
@@ -122,7 +122,7 @@ namespace scene
 		//! ms3d mesh or the name of the joint could not be found.
 		virtual ISceneNode* getXJointNode(const c8* jointName) = 0;
 
-		//! Returns a pointer to a child node, wich has the same transformation as
+		//! Returns a pointer to a child node, which has the same transformation as
 		//! the corresponding joint, if the mesh in this scene node is a b3d mesh.
 		//! Otherwise 0 is returned. With this method it is possible to
 		//! attach scene nodes to joints more easily. In this way, it is
@@ -165,11 +165,11 @@ namespace scene
 		virtual bool setMD2Animation(const c8* animationName) = 0;
 
 		//! Returns the current displayed frame number.
-		virtual s32 getFrameNr() = 0;
+		virtual s32 getFrameNr() const = 0;
 		//! Returns the current start frame number.
-		virtual s32 getStartFrame() = 0;
+		virtual s32 getStartFrame() const = 0;
 		//! Returns the current end frame number.
-		virtual s32 getEndFrame() = 0;
+		virtual s32 getEndFrame() const = 0;
 
 		//! Sets looping mode which is on by default. If set to false,
 		//! animations will not be played looped.
@@ -197,7 +197,7 @@ namespace scene
 
 		// returns the absolute transformation for a special MD3 Tag if the mesh is a md3 mesh,
 		// or the absolutetransformation if it's a normal scenenode
-		virtual const SMD3QuaterionTag& getAbsoluteTransformation( const core::stringc & tagname) = 0;
+		virtual const SMD3QuaterionTag& getMD3TagTransformation( const core::stringc & tagname) = 0;
 
 	};
 

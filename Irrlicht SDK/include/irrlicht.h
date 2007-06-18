@@ -49,11 +49,13 @@
 #include "IAnimatedMeshX.h"
 #include "IAnimatedMeshB3d.h"
 #include "IAnimatedMeshSceneNode.h"
+#include "IBillboardSceneNode.h"
 #include "ICameraSceneNode.h"
 #include "IDummyTransformationSceneNode.h"
 #include "IEventReceiver.h"
 #include "IFileList.h"
 #include "IFileSystem.h"
+#include "IGPUProgrammingServices.h"
 #include "IGUIButton.h"
 #include "IGUICheckBox.h"
 #include "IGUIContextMenu.h"
@@ -78,6 +80,8 @@
 #include "IImage.h"
 #include "ILightSceneNode.h"
 #include "ILogger.h"
+#include "IMaterialRenderer.h"
+#include "IMaterialRendererServices.h"
 #include "IMesh.h"
 #include "IMeshBuffer.h"
 #include "IMeshCache.h"
@@ -90,13 +94,10 @@
 #include "irrString.h"
 #include "ISceneManager.h"
 #include "ISceneNode.h"
-#include "IAttributes.h"
 #include "ISceneUserDataSerializer.h"
 #include "ITriangleSelector.h"
 #include "ISceneNodeAnimator.h"
 #include "ISceneCollisionManager.h"
-#include "IMaterialRenderer.h"
-#include "IMaterialRendererServices.h"
 #include "ISceneNodeFactory.h"
 #include "ISceneNodeAnimatorFactory.h"
 #include "ISceneNodeAnimatorCollisionResponse.h"
@@ -106,7 +107,6 @@
 #include "ITextSceneNode.h"
 #include "IParticleEmitter.h"
 #include "IParticleAffector.h"
-#include "IBillboardSceneNode.h"
 #include "ITexture.h"
 #include "IUnknown.h"
 #include "IVideoDriver.h"
@@ -128,6 +128,7 @@
 #include "rect.h"
 #include "S3DVertex.h"
 #include "SAnimatedMesh.h"
+#include "SExposedVideoData.h"
 #include "SKeyMap.h"
 #include "SMaterial.h"
 #include "SMesh.h"
@@ -138,7 +139,7 @@
 #include "irrTypes.h"
 #include "coreutil.h"
 
-/*! \mainpage Irrlicht Engine 1.3 API documentation
+/*! \mainpage Irrlicht Engine 1.3.1 API documentation
  *
  * <div align="center"><img src="logobig.png" ></div>
  *
@@ -149,7 +150,7 @@
  * the Irrlicht Engine. If you are looking for a tutorial on how to start, you'll
  * find some on the homepage of the Irrlicht Engine at 
  * <A HREF="http://irrlicht.sourceforge.net" >irrlicht.sourceforge.net</A> 
- * or inside the SDK in the directory \examples.
+ * or inside the SDK in the examples directory.
  *
  * The Irrlicht Engine is intended to be an easy-to-use 3d engine, so
  * this documentation is an important part of it. If you have any questions or
@@ -271,16 +272,16 @@ namespace irr
 	\param receiver: A user created event receiver.
 	\param sdk_version_do_not_use: Don't use or change this parameter. Always set it to
 	IRRLICHT_SDK_VERSION, which is done by default. This is needed for sdk version checks.
-	\return Returns pointer to the created IrrlichtDevice or null if the 
+	\return Returns pointer to the created IrrlichtDevice or null if the
 	device could not be created.
 	*/
 	IRRLICHT_API IrrlichtDevice* IRRCALLCONV createDevice(
-		video::E_DRIVER_TYPE deviceType = video::EDT_SOFTWARE, 
-		const core::dimension2d<s32>& windowSize = core::dimension2d<s32>(640,480),
+		video::E_DRIVER_TYPE deviceType = video::EDT_SOFTWARE,
+		const core::dimension2d<s32>& windowSize = (core::dimension2d<s32>(640,480)), // paranthese are necessary for some compilers
 		u32 bits = 16,
 		bool fullscreen = false,
-		bool stencilbuffer=false,
-		bool vsync=false,
+		bool stencilbuffer = false,
+		bool vsync = false,
 		IEventReceiver* receiver = 0,
 		const c8* sdk_version_do_not_use = IRRLICHT_SDK_VERSION);
 

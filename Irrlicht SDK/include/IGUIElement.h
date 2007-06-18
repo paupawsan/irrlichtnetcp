@@ -5,14 +5,13 @@
 #ifndef __I_GUI_ELEMENT_H_INCLUDED__
 #define __I_GUI_ELEMENT_H_INCLUDED__
 
-#include "IUnknown.h"
+#include "IAttributeExchangingObject.h"
 #include "irrList.h"
 #include "rect.h"
 #include "irrString.h"
 #include "IEventReceiver.h"
 #include "EGUIElementTypes.h"
 #include "IAttributes.h"
-#include "IAttributeExchangingObject.h"
 
 namespace irr
 {
@@ -104,9 +103,9 @@ public:
 	{
 		if (Parent)
 		{
-			core::rect<s32> r2(Parent->getAbsolutePosition());
-		
-			core::dimension2df d((f32)r2.getSize().Width, (f32)r2.getSize().Height);
+			const core::rect<s32>& r2 = Parent->getAbsolutePosition();
+
+			core::dimension2df d((f32)(r2.getSize().Width), (f32)(r2.getSize().Height));
 
 			if (AlignLeft   == EGUIA_SCALE)
 				ScaleRect.UpperLeftCorner.X = (f32)r.UpperLeftCorner.X / d.Width;
@@ -128,9 +127,7 @@ public:
 		if (!Parent)
 			return;
 		
-		core::rect<s32> r2(Parent->getAbsolutePosition());
-		
-		core::dimension2di d(r2.getSize());
+		const core::dimension2di& d = Parent->getAbsolutePosition().getSize();
 		
 		DesiredRect = core::rect<s32>( 
 						(s32)((f32)d.Width  * r.UpperLeftCorner.X),
@@ -371,8 +368,9 @@ public:
 		{
 			child->grab();
 			child->remove();  // remove from old parent
+			child->LastParentRect = getAbsolutePosition();
 			child->Parent = this;
-			Children.push_back(child);						
+			Children.push_back(child);			
 		}
 	}
 
@@ -582,7 +580,7 @@ public:
 	later for serializing and deserializing.
 	If you wrote your own GUIElements, you need to set the type for your element as first parameter
 	in the constructor of IGUIElement. For own (=unknown) elements, simply use EGUIET_ELEMENT as type */
-	EGUI_ELEMENT_TYPE getType()
+	EGUI_ELEMENT_TYPE getType() const
 	{
 		return Type;
 	}
@@ -590,7 +588,7 @@ public:
 	//! Returns the type name of the gui element. 
 	/** This is needed serializing elements. For serializing your own elements, override this function 
 	and return your own type name which is created by your IGUIElementFactory */
-	virtual const c8* getTypeName()
+	virtual const c8* getTypeName() const
 	{
 		return GUIElementTypeNames[Type];
 	}

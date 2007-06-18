@@ -13,7 +13,7 @@ namespace irr
 namespace core
 {
 
-const float fast_atof_table[] =	{
+const float fast_atof_table[16] =	{  // we write [16] here instead of [] to work around a swig bug
 										0.f,
 										0.1f,
 										0.01f,
@@ -86,8 +86,14 @@ inline const char* fast_atof_move( const char* c, float& out)
 		{
 			++c;
 			//float exp = (float)strtol(c, &t, 10);
+			bool einv = (*c=='-');
+			if (einv)
+				c++;
+
 			float exp = (float)strtol10(c, t);
-			
+			if (einv)
+				exp *= -1.0f;
+
 			f *= (float)pow(10.0f, exp);
 			c = t;
 		}

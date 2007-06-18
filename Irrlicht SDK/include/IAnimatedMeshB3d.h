@@ -1,17 +1,21 @@
-// Copyright (C) 2002-2006 Nikolaus Gebhardt
+// Copyright (C) 2002-2007 Nikolaus Gebhardt
 // This file is part of the "Irrlicht Engine".
 // For conditions of distribution and use, see copyright notice in irrlicht.h
 
 #ifndef __I_ANIMATED_MESH_B3D_H_INCLUDED__
 #define __I_ANIMATED_MESH_B3D_H_INCLUDED__
 
-#include "ISceneNode.h"
 #include "IAnimatedMesh.h"
+#include "irrArray.h"
+#include "matrix4.h"
 
 namespace irr
 {
 namespace scene
 {
+	class ISceneNode;
+	class ISceneManager;
+
 	//! Interface for using some special functions of B3d meshes
 	/** Please note that the B3d Mesh's frame numbers are scaled by 100 */
 	class IAnimatedMeshB3d : public IAnimatedMesh

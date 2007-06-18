@@ -28,7 +28,7 @@ class Affector : public IParticleAffector
 		delete[] intptrarr;
     }
 
-	E_PARTICLE_AFFECTOR_TYPE getType()
+	E_PARTICLE_AFFECTOR_TYPE getType() const
 	{
 		return EPAT_NONE;
 	}
@@ -98,7 +98,7 @@ class Emitter : public IParticleEmitter
             Particles.push_back(*(SParticle*)part[i]);
     }
 
-	E_PARTICLE_EMITTER_TYPE getType()
+	E_PARTICLE_EMITTER_TYPE getType() const
 	{
 		return EPET_POINT;
 	}

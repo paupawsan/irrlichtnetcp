@@ -28,6 +28,9 @@ class quaternion
 		//! Constructor which converts euler angles to a quaternion
 		quaternion(f32 x, f32 y, f32 z);
 
+		//! Constructor which converts euler angles to a quaternion
+		quaternion(const vector3df& vec);
+
 		//! Constructor which converts a matrix to a quaternion
 		quaternion(const matrix4& mat);
 
@@ -82,13 +85,16 @@ class quaternion
 		//! Inverts this quaternion
 		void makeInverse();
 
-		//! set this quaternion to the result of the inpolation between two quaternions based
-		void slerp( quaternion q1, const quaternion q2, f32 interpolate );
+		//! set this quaternion to the result of the interpolation between two quaternions
+		void slerp( quaternion q1, quaternion q2, f32 interpolate );
 
 		//! axis must be unit length
 		//! The quaternion representing the rotation is
 		//!  q = cos(A/2)+sin(A/2)*(x*i+y*j+z*k)
 		void fromAngleAxis (f32 angle, const vector3df& axis);
+
+		//! Fills an angle (radians) around an axis (unit vector)
+		void toAngleAxis (f32 &angle, vector3df& axis) const;
 
 		void toEuler(vector3df& euler) const;
 
@@ -115,6 +121,13 @@ inline quaternion::quaternion(f32 x, f32 y, f32 z, f32 w)
 inline quaternion::quaternion(f32 x, f32 y, f32 z)
 {
 	set(x,y,z);
+}
+
+
+//! Constructor which converts euler angles to a quaternion
+inline quaternion::quaternion(const vector3df& vec)
+{
+	set(vec.X,vec.Y,vec.Z);
 }
 
 
@@ -398,7 +411,7 @@ inline quaternion& quaternion::normalize()
 }
 
 
-// set this quaternion to the result of the inpolation between two quaternions based
+// set this quaternion to the result of the interpolation between two quaternions
 inline void quaternion::slerp( quaternion q1, quaternion q2, f32 time)
 {
 	f32 angle = q1.getDotProduct(q2);
@@ -429,7 +442,7 @@ inline void quaternion::slerp( quaternion q1, quaternion q2, f32 time)
 	}
 	else
 	{
-		q2 = quaternion(-q1.Y, q1.X, -q1.W, q1.Z);
+		q2.set(-q1.Y, q1.X, -q1.W, q1.Z);
 		scale = (f32)sin(PI * (0.5f - time));
 		invscale = (f32)sin(PI * time);
 	}
@@ -453,6 +466,26 @@ inline void quaternion::fromAngleAxis(f32 angle, const vector3df& axis)
 	X = fSin*axis.X;
 	Y = fSin*axis.Y;
 	Z = fSin*axis.Z;
+}
+
+inline void quaternion::toAngleAxis(f32 &angle, core::vector3df &axis) const
+{
+	f32 scale = sqrt (X*X + Y*Y + Z*Z);
+
+	if (core::equals(scale,0.0f) || W > 1.0f)
+	{
+		angle = 0.0f;
+		axis.X = 0.0f;
+		axis.Y = 1.0f;
+		axis.Z = 0.0f;
+	}
+	else
+	{
+		angle = 2.0f * acos(W);
+		axis.X = X / scale;
+		axis.Y = Y / scale;
+		axis.Z = Z / scale;
+	}
 }
 
 inline void quaternion::toEuler(vector3df& euler) const

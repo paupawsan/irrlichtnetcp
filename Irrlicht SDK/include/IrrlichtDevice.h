@@ -5,23 +5,33 @@
 #ifndef __I_IRRLICHT_DEVICE_H_INCLUDED__
 #define __I_IRRLICHT_DEVICE_H_INCLUDED__
 
-#include "irrTypes.h"
 #include "IUnknown.h"
 #include "dimension2d.h"
-#include "IFileSystem.h"
 #include "IVideoDriver.h"
 #include "EDriverTypes.h"
-#include "IGUIEnvironment.h"
 #include "IEventReceiver.h"
-#include "ISceneManager.h"
 #include "ICursorControl.h"
 #include "IVideoModeList.h"
 #include "ITimer.h"
-#include "ILogger.h"
 #include "IOSOperator.h"
 
 namespace irr
 {
+	class ILogger;
+	class IEventReceiver;
+
+	namespace io {
+		class IFileSystem;
+	} // end namespace io
+
+	namespace gui {
+		class IGUIEnvironment;
+	} // end namespace gui
+
+	namespace scene {
+		class ISceneManager;
+	} // end namespace scene
+
 	//! The Irrlicht device. You can create it with createDevice() or createDeviceEx(). 
 	/** This is the most important class of the Irrlicht Engine. You can access everything
 	in the engine if you have a pointer to an instance of this class. 
@@ -157,6 +167,10 @@ while(device->run())
 		events to the engine. Internally, this method only delegates the events further to the 
 		scene manager and the GUI environment. */
 		virtual void postEventFromUser(SEvent event) = 0;
+
+		//! Sets the input receiving scene manager. 
+		/** If set to null, the main scene manager (returned by GetSceneManager()) will receive the input */
+		virtual void setInputReceivingSceneManager(scene::ISceneManager* sceneManager) = 0;
 
 		//! Sets if the window should be resizeable in windowed mode.
 		/** The default is false. This method only works in windowed mode. */

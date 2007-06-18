@@ -7,7 +7,6 @@
 
 #include "IAttributeExchangingObject.h"
 #include "SColor.h"
-#include "IGUISkin.h"
 #include "rect.h"
 
 namespace irr
@@ -82,8 +81,10 @@ namespace gui
 		EGDC_INACTIVE_BORDER,
 		//! Inactive window caption.
 		EGDC_INACTIVE_CAPTION,
-		//! Tool tip color
+		//! Tool tip text color
 		EGDC_TOOLTIP,
+		//! Tool tip background color
+		EGDC_TOOLTIP_BACKGROUND,
 		//! Scrollbar gray area
 		EGDC_SCROLLBAR,
 		//! Window background
@@ -117,6 +118,7 @@ namespace gui
 		"InactiveBorder",
 		"InactiveCaption",
 		"ToolTip",
+		"ToolTipBackground",
 		"ScrollBar",
 		"Window",
 		"WindowSymbol",
@@ -269,6 +271,34 @@ namespace gui
 		0
 	};
 
+	// Customizable fonts
+	enum EGUI_DEFAULT_FONT
+	{
+		//! For static text, edit boxes, lists and most other places
+		EGDF_DEFAULT=0,
+		//! Font for buttons
+		EGDF_BUTTON,
+		//! Font for window title bars
+		EGDF_WINDOW,
+		//! Font for menu items
+		EGDF_MENU,
+		//! Font for tooltips
+		EGDF_TOOLTIP,
+		//! this value is not used, it only specifies the amount of default fonts
+		//! available.
+		EGDF_COUNT
+	};
+
+	const c8* const GUISkinFontNames[] =
+	{
+		"defaultFont",
+		"buttonFont",
+		"windowFont",
+		"menuFont",
+		"tooltipFont",
+		0
+	};
+
 	//! A skin modifies the look of the GUI elements.
 	class IGUISkin : public virtual io::IAttributeExchangingObject
 	{
@@ -300,10 +330,10 @@ namespace gui
 		virtual void setSize(EGUI_DEFAULT_SIZE which, s32 size) = 0;
 
 		//! returns the default font
-		virtual IGUIFont* getFont() = 0;
+		virtual IGUIFont* getFont(EGUI_DEFAULT_FONT which=EGDF_DEFAULT) = 0;
 
 		//! sets a default font
-		virtual void setFont(IGUIFont* font) = 0;
+		virtual void setFont(IGUIFont* font, EGUI_DEFAULT_FONT which=EGDF_DEFAULT) = 0;
 
 		//! returns the sprite bank
 		virtual IGUISpriteBank* getSpriteBank() = 0;
@@ -427,7 +457,7 @@ namespace gui
 			const core::rect<s32>& rect, const core::rect<s32>* clip=0) = 0;
 
 		//! draws an icon, usually from the skin's sprite bank
-		/**	\param parent: Pointer to the element which wishes to draw this icon. 
+		/** \param element: Pointer to the element which wishes to draw this icon. 
 		This parameter is usually not used by IGUISkin, but can be used for example 
 		by more complex implementations to find out how to draw the part exactly. 
 		\param icon: Specifies the icon to be drawn.
@@ -441,7 +471,7 @@ namespace gui
 			bool loop=false, const core::rect<s32>* clip=0) = 0;
 
 		//! get the type of this skin
-		virtual EGUI_SKIN_TYPE getType() { return EGST_UNKNOWN; };
+		virtual EGUI_SKIN_TYPE getType() const { return EGST_UNKNOWN; };
 
 	};
 

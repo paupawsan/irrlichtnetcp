@@ -5,12 +5,14 @@
 #ifndef __I_GUI_WINDOW_H_INCLUDED__
 #define __I_GUI_WINDOW_H_INCLUDED__
 
-#include "IGUIButton.h"
+#include "IGUIElement.h"
 
 namespace irr
 {
 namespace gui
 {
+	class IGUIButton;
+
 	//! enumeration for message box layout flags
 	enum EMESSAGE_BOX_FLAG
 	{

@@ -13,13 +13,14 @@
 #include "ETerrainElements.h"
 #include "ISceneNode.h"
 #include "SMeshBufferLightMap.h"
-#include "IMesh.h"
 #include "irrArray.h"
 
 namespace irr
 {
 namespace scene
 {
+	class IMesh;
+
 	//! A scene node for displaying terrain using the geo mip map algorithm.
 	/** The code for the TerrainSceneNode is based on the Terrain renderer by Soconne and 
 	 * the GeoMipMapSceneNode developed by Spintz. They made their code available for Irrlicht 

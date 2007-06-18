@@ -12,7 +12,6 @@
 #include "line2d.h"
 #include "line3d.h"
 #include "triangle3d.h"
-#include "quaternion.h"
 #include "position2d.h"
 #include "rect.h"
 #include "matrix4.h"
@@ -107,6 +106,9 @@ enum E_ATTRIBUTE_TYPE
 	// texture reference attribute
 	EAT_TEXTURE,
 
+	// user pointer void*
+	EAT_USER_POINTER,
+
 	// known attribute type count
 	EAT_COUNT,
 
@@ -153,7 +155,7 @@ public:
 
 	//! Reads attributes from a xml file.
 	//! \param readCurrentElementOnly: If set to true, reading only works if current element has the name 'attributes'.
-	//! If set to false, the first appearing list attributes are read.
+	//! If set to false, the first appearing list of attributes are read.
 	virtual bool read(irr::io::IXMLReader* reader, bool readCurrentElementOnly=false) = 0;
 
 	//! Write these attributes into a xml file
@@ -713,6 +715,30 @@ public:
 
 	//! Sets an attribute as texture reference
 	virtual void setAttribute(s32 index, video::ITexture* texture) = 0;
+
+
+	/*
+
+		User Pointer Attribute
+
+	*/
+
+	//! Adds an attribute as user pointner
+	virtual void addUserPointer(const c8* attributeName, void* userPointer) = 0;
+
+	//! Sets an attribute as user pointer
+	virtual void setAttribute(const c8* attributeName, void* userPointer) = 0;
+
+	//! Gets an attribute as user pointer
+	//! \param attributeName: Name of the attribute to get.
+	virtual void* getAttributeAsUserPointer(const c8* attributeName) = 0;
+
+	//! Gets an attribute as user pointer
+	//! \param index: Index value, must be between 0 and getAttributeCount()-1.
+	virtual void* getAttributeAsUserPointer(s32 index) = 0;
+
+	//! Sets an attribute as user pointer
+	virtual void setAttribute(s32 index, void* userPointer) = 0;
 
 };
 

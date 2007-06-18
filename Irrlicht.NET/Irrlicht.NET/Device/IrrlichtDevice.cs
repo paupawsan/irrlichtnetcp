@@ -26,7 +26,7 @@ namespace IrrlichtNETCP
         public IrrlichtDevice(DriverType type, Dimension2D dim, int bits, bool fullscreen, bool stencil, bool vsync, bool antialias, IntPtr windowHandle)
         {
             Console.WriteLine("Irrlicht.NET CP v" + CPVersion + " running");
-            Initialize(CreateDeviceA(type, dim.ToUnmanaged(), bits, fullscreen, stencil, vsync, antialias, windowHandle.ToInt32()));
+            Initialize(CreateDeviceA(type, dim.ToUnmanaged(), bits, fullscreen, stencil, vsync, antialias, windowHandle));
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
             MainNativeEvent = OnNativeEvent;
             Device_SetCallback(_raw, MainNativeEvent);
@@ -245,7 +245,7 @@ namespace IrrlichtNETCP
 		static extern IntPtr CreateDevice(DriverType type, int[] dim, int bits, bool full, bool stencil, bool vsync, bool antialias);
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern IntPtr CreateDeviceA(DriverType type, int[] dim, int bits, bool full, bool stencil, bool vsync, bool antialias, int handle);
+        static extern IntPtr CreateDeviceA(DriverType type, int[] dim, int bits, bool full, bool stencil, bool vsync, bool antialias, IntPtr handle);
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr Device_GetSceneManager(IntPtr raw);

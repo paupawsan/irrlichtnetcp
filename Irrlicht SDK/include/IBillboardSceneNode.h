@@ -42,8 +42,8 @@ public:
 	virtual void setColor(const video::SColor & topColor, const video::SColor & bottomColor) = 0;
 
 	//! Gets the color of the top and bottom vertices of the billboard
-	//! \param[out] topColor: stores the color of the top vertices
-	//! \param[out] bottomColor: stores the color of the bottom vertices
+	//! \param topColor: stores the color of the top vertices
+	//! \param bottomColor: stores the color of the bottom vertices
 	virtual void getColor(video::SColor & topColor, video::SColor & bottomColor) = 0;
 
 };

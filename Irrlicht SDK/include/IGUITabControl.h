@@ -33,6 +33,13 @@ namespace gui
 
 		//! sets the color of the background, if it should be drawn.
 		virtual void setBackgroundColor(video::SColor c) = 0;
+
+		//! returns true if the tab is drawing its background, false if not
+		virtual bool isDrawingBackground() const = 0;
+
+		//! returns the color of the background
+		virtual video::SColor getBackgroundColor() const = 0;
+
 	};
 
 	//! A standard tab control
@@ -65,7 +72,7 @@ namespace gui
 		virtual bool setActiveTab(s32 idx) = 0;
 
 		//! Brings a tab to front.
-		/** \param idx: pointer to the tab.
+		/** \param tab: pointer to the tab.
 		 \return Returns true if successful. */
 		virtual bool setActiveTab(IGUIElement *tab) = 0;
 

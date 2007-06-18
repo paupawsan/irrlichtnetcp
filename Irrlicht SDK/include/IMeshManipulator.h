@@ -7,9 +7,10 @@
 
 #include "IUnknown.h"
 #include "vector3d.h"
-#include "IMeshBuffer.h"
 #include "aabbox3d.h"
+#include "matrix4.h"
 #include "IAnimatedMesh.h"
+#include "SColor.h"
 
 namespace irr
 {
@@ -17,7 +18,7 @@ namespace scene
 {
 
 	class IMesh;
-	class IAnimatedMesh;
+	class IMeshBuffer;
 	struct SMesh;
 
 	//! An interface for easily manipulate meshes.
@@ -47,11 +48,13 @@ namespace scene
 		virtual void setVertexColors(IMesh* mesh, video::SColor color) const = 0;
 
 		//! Recalculates all normals of the mesh.
-		/** \param mesh: Mesh on which the operation is performed. */
+		/** \param mesh: Mesh on which the operation is performed.
+		    \param smooth: If the normals shall be smoothed. */
 		virtual void recalculateNormals(IMesh* mesh, bool smooth = false) const = 0;
 
 		//! Recalculates all normals of the mesh buffer.
-		/** \param buffer: Mesh buffer on which the operation is performed. */
+		/** \param buffer: Mesh buffer on which the operation is performed.
+		    \param smooth: If the normals shall be smoothed. */
 		virtual void recalculateNormals(IMeshBuffer* buffer, bool smooth = false) const = 0;
 
 		//! Scales the whole mesh.

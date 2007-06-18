@@ -6,12 +6,12 @@
 #define __I_SHADOW_VOLUME_SCENE_NODE_H_INCLUDED__
 
 #include "ISceneNode.h"
-#include "IMesh.h"
 
 namespace irr
 {
 namespace scene
 {
+	class IMesh;
 
 	//! Scene node for rendering a shadow volume into a stencil buffer.
 	class IShadowVolumeSceneNode : public ISceneNode
