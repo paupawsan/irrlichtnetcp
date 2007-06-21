@@ -1,4 +1,4 @@
- using System;
+using System;
  
  namespace IrrlichtNETCP
  {
@@ -96,26 +96,27 @@
  	
  	public enum SceneNodeType
  	{
- 		Cube,
-		Sphere,
- 		Text,
- 		WaterSurface,
- 		Terrain,
- 		SkyBox,
- 		ShadowVolume,
- 		OctTree,
- 		Mesh,
- 		Light,
- 		Empty,
- 		DummyTransformation,
- 		Camera,
- 		CameraMaya,
- 		CameraFPS,
- 		Billboard,
- 		AnimatedMesh,
- 		ParticleSystem,
- 		Count,
- 		Unknown
+ 		Cube = ('c' | 'u' << 8 | 'b' << 16 | 'e' << 24),
+        Sphere = ('s' | 'p' << 8 | 'h' << 16 | 'r' << 24),
+        Text = ('t' | 'e' << 8 | 'x' << 16 | 't' << 24),
+        WaterSurface = ('w' | 'a' << 8 | 't' << 16 | 'r' << 24),
+        Terrain = ('t' | 'e' << 8 | 'r' << 16 | 'r' << 24),
+        SkyBox = ('s' | 'k' << 8 | 'y' << 16 | '_' << 24),
+        ShadowVolume = ('s' | 'h' << 8 | 'd' << 16 | 'w' << 24),
+        OctTree = ('o' | 'c' << 8 | 't' << 16 | 't' << 24),
+        Mesh = ('m' | 'e' << 8 | 's' << 16 | 'h' << 24),
+        Light = ('l' | 'g' << 8 | 'h' << 16 | 't' << 24),
+        Empty = ('e' | 'm' << 8 | 't' << 16 | 'y' << 24),
+        DummyTransformation = ('d' | 'm' << 8 | 'm' << 16 | 'y' << 24),
+        Camera = ('c' | 'a' << 8 | 'm' << 16 | '_' << 24),
+        CameraMaya = ('c' | 'a' << 8 | 'm' << 16 | 'M' << 24),
+        CameraFPS = ('c' | 'a' << 8 | 'm' << 16 | 'F' << 24),
+        Billboard = ('b' | 'i' << 8 | 'l' << 16 | 'l' << 24),
+        AnimatedMesh = ('a' | 'm' << 8 | 's' << 16 | 'h' << 24),
+        ParticleSystem = ('p' | 't' << 8 | 'c' << 16 | 'l' << 24),
+        MD3SceneNode = ('m' | 'd' << 8 | '3' << 16 | '_' << 24),
+        Unknown = ('u' | 'n' << 8 | 'k' << 16 | 'n' << 24),
+        Count
  	}
  	
  	public enum TerrainPatchSize
