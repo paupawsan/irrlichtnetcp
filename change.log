@@ -18,6 +18,7 @@ between 0f and 1f... You MUST now update all your softwares. (thanks to lester)
 -Added Texture.DOTNETImage to load/retrieve a System.Drawing.Bitmap from an Irrlicht texture.
 -Corrected a lot of small stuff and improving .NET code speed.
 -Added Irrlicht 1.3.1 compatibility.
+-Added Mesh constructor and Mesh.AddMeshBuffer (thanks to Alexandre for sending this patch).
 
 =============================================================================
 Irrlicht .NET CP 0.7

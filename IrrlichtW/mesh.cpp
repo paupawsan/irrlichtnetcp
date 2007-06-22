@@ -1,6 +1,13 @@
 #include "mesh.h"
 
-
+IntPtr Mesh_Create(void)
+{
+	return new SMesh();
+}
+void Mesh_AddMeshBuffer(IntPtr mesh, IntPtr meshbuf)
+{
+	((SMesh*)mesh)->addMeshBuffer((IMeshBuffer*)meshbuf);
+}
 void Mesh_GetBoundingBox(IntPtr mesh, M_BOX3D box)
 {
     UM_BOX3D(((IMesh*)mesh)->getBoundingBox(), box);

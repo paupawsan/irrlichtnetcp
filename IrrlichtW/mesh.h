@@ -2,10 +2,12 @@
 
 extern "C"
 {
+	EXPORT IntPtr Mesh_Create(void);
     EXPORT void Mesh_GetBoundingBox(IntPtr mesh, M_BOX3D box);
     EXPORT void Mesh_SetMaterialFlag(IntPtr mesh, E_MATERIAL_FLAG flag, bool newValue);
 	EXPORT int Mesh_GetMeshBufferCount(IntPtr mesh);
 	EXPORT IntPtr Mesh_GetMeshBuffer(IntPtr mesh, int nr);
+	EXPORT void Mesh_AddMeshBuffer(IntPtr mesh, IntPtr meshbuf);
 
     EXPORT void AnimatedMesh_GetBoundingBox(IntPtr mesh, M_BOX3D box);
     EXPORT IntPtr AnimatedMesh_GetMesh(IntPtr mesh, int frame, int detailLevel, int startFrameloop, int endFrameloop);
