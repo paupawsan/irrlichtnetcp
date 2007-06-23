@@ -1,3 +1,4 @@
+#if COMPILE_WITH_FREETYPE || !WIN32
 //
 // C++ Implementation: customfont
 //
@@ -53,3 +54,5 @@
 	{
 		getFace(face)->load(UM_STRING(fontname));
 	}
+
+#endif

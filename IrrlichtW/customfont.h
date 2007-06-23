@@ -1,3 +1,4 @@
+#if COMPILE_WITH_FREETYPE || !WIN32
 //
 // C++ Interface: customfont
 //
@@ -30,4 +31,5 @@ extern "C"
 }
 
 
+#endif
 #endif

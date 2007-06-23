@@ -120,7 +120,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;COMPILE_WITH_FREETYPE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
@@ -146,6 +146,8 @@
 				AdditionalDependencies="&quot;..\Irrlicht SDK\lib\Win32-visualstudio\irrlicht.lib&quot;"
 				OutputFile="..\bin\Release\$(ProjectName).dll"
 				GenerateManifest="true"
+				IgnoreAllDefaultLibraries="false"
+				IgnoreDefaultLibraryNames="libcmt.lib"
 				GenerateDebugInformation="false"
 				SubSystem="2"
 				OptimizeReferences="2"
@@ -196,7 +198,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CGUITTFont.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\conversion.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\customfont.cpp"
 				>
 			</File>
 			<File
@@ -278,7 +288,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\CGUITTFont.h"
+				>
+			</File>
+			<File
 				RelativePath=".\conversion.h"
+				>
+			</File>
+			<File
+				RelativePath=".\customfont.h"
 				>
 			</File>
 			<File

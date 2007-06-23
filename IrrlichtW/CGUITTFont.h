@@ -1,9 +1,12 @@
+#if COMPILE_WITH_FREETYPE || !WIN32
+
 #ifndef __C_GUI_TTFONT_H_INCLUDED__
 #define __C_GUI_TTFONT_H_INCLUDED__
-
+#ifdef WIN32
+#pragma comment(lib, "\"..\\Irrlicht SDK\\lib\\Win32-visualstudio\\freetype2110MT.lib\"")
+#endif
 #include <ft2build.h>
 #include <freetype/freetype.h>
-#include <irrlicht.h>
 // >> Add by uirou for multibyte language start
 #ifdef USE_ICONV
 #include <langinfo.h>
@@ -114,3 +117,5 @@ private:
 
 #endif
 
+
+#endif

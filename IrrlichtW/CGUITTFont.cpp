@@ -1,4 +1,5 @@
-#include "irrlicht.h"
+#if COMPILE_WITH_FREETYPE || !WIN32
+#include "main.h"
 #include "CGUITTFont.h"
 // >> Add by uirou for multibyte language start
 //#include "os.h"
@@ -596,3 +597,5 @@ scene::ISceneNode *CGUITTFont::createBillboard(const wchar_t* text,scene::IScene
 #endif
 } // end namespace gui
 } // end namespace irr
+
+#endif
