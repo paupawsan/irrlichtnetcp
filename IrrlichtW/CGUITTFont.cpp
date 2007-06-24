@@ -553,8 +553,8 @@ scene::ISceneNode *CGUITTFont::createBillboard(const wchar_t* text,scene::IScene
 	textDimension = getDimension(text);
 	core::vector3df offset = core::vector3df(0.0f,0.0f,0.0f);
 
-	offset.X = 0 - (textDimension.Width >> 1);
-	offset.Y = 0 - (textDimension.Height >>1);
+	offset.X = 0 - (f32)(textDimension.Width >> 1);
+	offset.Y = 0 - (f32)(textDimension.Height >>1);
 
 	u32 n;
 	while(*text)
