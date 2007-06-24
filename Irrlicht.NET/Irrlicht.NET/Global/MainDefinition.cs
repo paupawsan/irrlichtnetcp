@@ -50,7 +50,7 @@ using System;
  		ParallaxMapSolid,
  		ParallaxMapTransparentAddColor,
  		ParallaxMapTransparentVertexAlpha,
-		OnTextureBlend,
+		OneTextureBlend,
  	}
  	
  	public enum MaterialFlag

@@ -16,7 +16,7 @@ namespace ShadersAndParticles
             //So please do not change this unless you change the shader !
             IrrlichtDevice device = new IrrlichtDevice(DriverType.OpenGL,
                                                     new Dimension2D(640, 480),
-                                                    32, false, true, true, true);
+                                                    32, false, true, true, false);
             //We set a new working directory
             device.FileSystem.WorkingDirectory = "../../medias";
             device.OnEvent += new OnEventDelegate(device_OnEvent);
@@ -144,8 +144,8 @@ namespace ShadersAndParticles
             //A simple delegate which takes the coords of the pixel and returns the color
             //It is called on each pixel and you can even return false if you don't want to change the pixel.
             //We can now create our mask without speed or compatibility issue !
-            int w = mask.OriginalSize.Width;
-            int h = mask.OriginalSize.Height;
+            int w = mask.OriginalSize.Width / 2;
+            int h = mask.OriginalSize.Height / 2;
             double maxdistance = Math.Sqrt(Math.Pow(w, 2) + Math.Pow(h, 2));
             //We create a delegate to modify each pixel
             ModifyPixel del = delegate(int x, int y, out Color col)
@@ -184,14 +184,16 @@ namespace ShadersAndParticles
             {
                 Driver.BeginScene(true, true, Color.Gray);
 
-                Driver.SetRenderTarget(renderTarget, true, true, Color.TransparentBlue);
-                Scene.ActiveCamera = fixedcam;
-                Scene.DrawAll();
-                Driver.SetRenderTarget(null, true, true, Color.Gray);
+                //Driver.SetRenderTarget(renderTarget, true, true, Color.TransparentBlue);
+                //Scene.ActiveCamera = fixedcam;
+                //Scene.DrawAll();
+                //Driver.SetRenderTarget(null, true, true, Color.Gray);
 
                 Scene.ActiveCamera = fpscam;
                 Scene.DrawAll();
-                Driver.Draw2DImage(renderTarget, new Position2D(0, 0), true);
+                //Ok, seems like Irrlicht 1.3.1 doesn't like drawing render target on OpenGL
+                //I guess we will disable this for now...
+                //Driver.Draw2DImage(renderTarget, new Position2D(0, 0), false);
                 Driver.Draw2DImage(mask, new Rect(new Position2D(), Driver.ScreenSize), new Rect(new Position2D(), mask.OriginalSize), Color.White, true);
 
                 //And finally our logo is painted 
@@ -251,6 +253,7 @@ namespace ShadersAndParticles
     public class PointlessEmitter : IParticleEmitter
     {
         uint lastParticleCreation = 0;
+        Random _rand = new Random();
         //The function called each time we need to emit something.
         //It takes as argument "now" which represent the actual time, 
         //"timeSinceLastCall" which represent... you know what
@@ -284,7 +287,7 @@ namespace ShadersAndParticles
                 Particles[i].StartTime = now;
                 Particles[i].EndTime = now + 10000;
                 //Color is White and again Start Color is the same... For the same reason as Start Vector !
-                Particles[i].Color = Color.White;
+                Particles[i].Color = Color.From(255, _rand.Next(255), _rand.Next(255), _rand.Next(255)); ;
                 Particles[i].StartColor = Particles[0].Color;
             }
         }
