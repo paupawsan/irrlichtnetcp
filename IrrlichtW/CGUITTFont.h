@@ -5,6 +5,10 @@
 #ifdef WIN32
 #pragma comment(lib, "\"..\\Irrlicht SDK\\lib\\Win32-visualstudio\\freetype2110MT.lib\"")
 #endif
+
+//If on Windows you get an error here, add to your IDE's incldue path
+//"%Irrlicht .NET CP SDK directory%"/Irrlicht SDK/include"
+//Or remove from the preprocessor's configuration COMPILE_WITH_FREETYPE
 #include <ft2build.h>
 #include <freetype/freetype.h>
 // >> Add by uirou for multibyte language start
