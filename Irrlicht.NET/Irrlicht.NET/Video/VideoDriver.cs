@@ -29,6 +29,14 @@ namespace IrrlichtNETCP
 		{
 			VideoDriver_EndScene(_raw);
 		}
+
+        /// <summary>
+        /// Ends the scene
+        /// </summary>
+        public void EndScene(IntPtr windowHandle, Rect sourceRect)
+        {
+            VideoDriver_EndSceneA(_raw, windowHandle.ToInt32(), sourceRect.ToUnmanaged());
+        }
 		
         /// <summary>
         /// Creates an empty texture
@@ -552,6 +560,9 @@ namespace IrrlichtNETCP
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void VideoDriver_EndScene(IntPtr raw);
+
+        [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern void VideoDriver_EndSceneA(IntPtr raw, int window, int[] sourceRect); 
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr VideoDriver_AddTexture(IntPtr raw, int[] size, string name, ColorFormat fmt);

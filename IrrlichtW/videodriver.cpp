@@ -15,6 +15,12 @@ void VideoDriver_EndScene(IntPtr videodriver)
     GetVideoFromIntPtr(videodriver)->endScene();
 }
 
+void VideoDriver_EndSceneA(IntPtr videodriver, int windowId, M_RECT viewRect)
+{
+	rect<s32> r = MU_RECT(viewRect);
+    GetVideoFromIntPtr(videodriver)->endScene(windowId, &r);
+}
+
 IntPtr VideoDriver_AddTexture(IntPtr videodriver, M_DIM2DS size, c8* name, ECOLOR_FORMAT fmt)
 {
     return GetVideoFromIntPtr(videodriver)->addTexture(MU_DIM2DS(size), name, fmt);

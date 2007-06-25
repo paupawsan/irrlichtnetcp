@@ -273,6 +273,11 @@
             Ends the scene
             </summary>
         </member>
+        <member name="M:IrrlichtNETCP.VideoDriver.EndScene(System.IntPtr,IrrlichtNETCP.Rect)">
+            <summary>
+            Ends the scene
+            </summary>
+        </member>
         <member name="M:IrrlichtNETCP.VideoDriver.AddTexture(IrrlichtNETCP.Dimension2D,System.String,IrrlichtNETCP.ColorFormat)">
             <summary>
             Creates an empty texture

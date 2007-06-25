@@ -4,6 +4,7 @@ extern "C"
 {
     EXPORT bool VideoDriver_BeginScene(IntPtr videodriver, bool backBuffer, bool zBuffer, M_SCOLOR color);
     EXPORT void VideoDriver_EndScene(IntPtr videodriver);
+	EXPORT void VideoDriver_EndSceneA(IntPtr videodriver, int windowId, M_RECT viewRect); 
     EXPORT IntPtr VideoDriver_AddTexture(IntPtr videodriver, M_DIM2DS size, c8* name, ECOLOR_FORMAT fmt);
     EXPORT IntPtr VideoDriver_GetTexture(IntPtr videodriver, c8 *name);
 	EXPORT IntPtr VideoDriver_GetGPUProgrammingServices(IntPtr videodriver);
