@@ -37,9 +37,6 @@ namespace IrrlichtNETCP.Extensions
             vertices[3].TCoords = Vector2D.From(1.0f, 1.0f);
             vertices[3].Color = Color.White;
 
-            screensize = mgr.VideoDriver.ScreenSize;
-
-
             material = new Material();
 
             material.Lighting = false;
@@ -108,6 +105,7 @@ namespace IrrlichtNETCP.Extensions
                 }
                 if (draw_flare)
                 {
+	            screensize = mgr.VideoDriver.ScreenSize;
                     if (Rect.From(Position2D.From(0, 0), Position2D.FromUnmanaged(screensize.ToUnmanaged())).IsPointInside(pm))
                     {
                         smgr.RegisterNodeForRendering(this, SceneNodeRenderPass.Transparent);
