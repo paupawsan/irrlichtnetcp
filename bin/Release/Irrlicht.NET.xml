@@ -148,13 +148,6 @@
             the points are swapped.
             </summary>
         </member>
-        <member name="M:IrrlichtNETCP.Rect.IsValid">
-            <summary>
-            Returns if the rect is valid to draw. It could be invalid, if
-            The UpperLeftCorner is lower or more right than the LowerRightCorner,
-            or if the area described by the rect is 0.
-            </summary>
-        </member>
         <member name="M:IrrlichtNETCP.Rect.ToBCL">
             <summary>
             Returns a standard .NET Rectangle from the current Irrlicht rectangle
@@ -166,6 +159,13 @@
             Makes an Irrlicht rectangle from the standard .NET rectangle.
             </summary>
             <returns>The Irrlicht rectangle</returns>
+        </member>
+        <member name="P:IrrlichtNETCP.Rect.Valid">
+            <summary>
+            Returns if the rect is valid to draw. It could be invalid, if
+            The UpperLeftCorner is lower or more right than the LowerRightCorner,
+            or if the area described by the rect is 0.
+            </summary>
         </member>
         <member name="M:IrrlichtNETCP.MetaTriangleSelector.AddTriangleSelector(IrrlichtNETCP.TriangleSelector)">
             <summary>

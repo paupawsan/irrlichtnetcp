@@ -123,10 +123,15 @@ namespace IrrlichtNETCP
 		/// The UpperLeftCorner is lower or more right than the LowerRightCorner,
 		/// or if the area described by the rect is 0.
 		/// </summary>
-		public bool IsValid()
-		{
-			return ((LowerRightCorner.X - UpperLeftCorner.X) *
-				(LowerRightCorner.Y - UpperLeftCorner.Y) >= 0);
+		public bool Valid
+        {
+            get
+            {
+                int xd = LowerRightCorner.X - UpperLeftCorner.X;
+                int yd = LowerRightCorner.Y - UpperLeftCorner.Y;
+
+                return !(xd <= 0 || yd <= 0 || (xd == 0 && yd == 0));
+            }
 		}
 		
 		public Position2D Center

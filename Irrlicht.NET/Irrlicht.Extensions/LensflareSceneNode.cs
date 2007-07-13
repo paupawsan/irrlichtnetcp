@@ -105,7 +105,7 @@ namespace IrrlichtNETCP.Extensions
                 }
                 if (draw_flare)
                 {
-	            screensize = mgr.VideoDriver.ScreenSize;
+	            screensize = smgr.VideoDriver.ScreenSize;
                     if (Rect.From(Position2D.From(0, 0), Position2D.FromUnmanaged(screensize.ToUnmanaged())).IsPointInside(pm))
                     {
                         smgr.RegisterNodeForRendering(this, SceneNodeRenderPass.Transparent);
