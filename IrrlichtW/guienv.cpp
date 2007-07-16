@@ -122,6 +122,11 @@ IntPtr GuiEnv_GetFont(IntPtr guienv, M_STRING filename)
 	return GetGui(guienv)->getFont(filename);
 }
 
+void GuiEnv_Clear(IntPtr guienv)
+{
+   GetGui(guienv)->clear();
+}
+
 IntPtr GuiEnv_GetRootGUIElement(IntPtr guienv)
 {
 	return GetGui(guienv)->getRootGUIElement();
@@ -140,6 +145,16 @@ IntPtr GuiEnv_GetVideoDriver(IntPtr guienv)
 bool GuiEnv_HasFocus(IntPtr guienv, IntPtr element)
 {
 	_FIX_BOOL_MARSHAL_BUG(GetGui(guienv)->hasFocus((IGUIElement*)element));
+}
+
+bool GuiEnv_LoadGUI(IntPtr guienv, M_STRING filename)
+{
+   _FIX_BOOL_MARSHAL_BUG(GetGui(guienv)->loadGUI(filename));
+}
+
+bool GuiEnv_SaveGUI(IntPtr guienv, M_STRING filename)
+{
+   _FIX_BOOL_MARSHAL_BUG(GetGui(guienv)->saveGUI(filename));
 }
 
 bool GuiEnv_PostEventFromUser(IntPtr guienv, IntPtr event)

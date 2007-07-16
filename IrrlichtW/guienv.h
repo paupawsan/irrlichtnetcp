@@ -23,11 +23,14 @@ extern "C"
 	EXPORT IntPtr GuiEnv_AddWindow(IntPtr guienv, M_RECT rectangle, bool modal, M_STRING text, IntPtr parent, int id);
 	EXPORT IntPtr GuiEnv_CreateSkin(IntPtr guienv, EGUI_SKIN_TYPE type);
 	EXPORT void GuiEnv_DrawAll(IntPtr guienv);
+	EXPORT void GuiEnv_Clear(IntPtr guienv);
 	EXPORT IntPtr GuiEnv_GetFont(IntPtr guienv, M_STRING filename);
 	EXPORT IntPtr GuiEnv_GetRootGUIElement(IntPtr guienv);
 	EXPORT IntPtr GuiEnv_GetSkin(IntPtr guienv);
 	EXPORT IntPtr GuiEnv_GetVideoDriver(IntPtr guienv);
 	EXPORT bool GuiEnv_HasFocus(IntPtr guienv, IntPtr element);
+	EXPORT bool GuiEnv_LoadGUI(IntPtr guienv, M_STRING filename);
+	EXPORT bool GuiEnv_SaveGUI(IntPtr guienv, M_STRING filename);
 	EXPORT bool GuiEnv_PostEventFromUser(IntPtr guienv, IntPtr event);
 	EXPORT void GuiEnv_RemoveFocus(IntPtr guienv, IntPtr element);
 	EXPORT void GuiEnv_SetFocus(IntPtr guienv, IntPtr element);
