@@ -68,6 +68,7 @@ extern "C"
     EXPORT void TerrainSceneNode_SetCameraRotationDelta(IntPtr terrain, float delta);
     EXPORT void TerrainSceneNode_SetDynamicSelectorUpdate(IntPtr terrain, bool bVal);
     EXPORT void TerrainSceneNode_SetLODOfPatch(IntPtr terrain, int patchX, int patchZ, int LOD);
+    EXPORT void TerrainSceneNode_GetMeshBufferForLOD(IntPtr terrain, IntPtr mb, int lod);
 
     EXPORT void LightSceneNode_GetLight(IntPtr light, M_SCOLORF ambient, M_SCOLORF diffuse, M_SCOLORF specular, M_VECT3DF pos, float *radius, bool *castshadows, E_LIGHT_TYPE* type);
     EXPORT void LightSceneNode_SetLight(IntPtr light, M_SCOLORF ambient, M_SCOLORF diffuse, M_SCOLORF specular, M_VECT3DF pos, float radius, bool castshadows, E_LIGHT_TYPE type);

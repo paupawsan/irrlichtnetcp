@@ -327,6 +327,11 @@ void TerrainSceneNode_SetLODOfPatch(IntPtr terrain, int patchX, int patchZ, int 
     ((ITerrainSceneNode*)terrain)->setLODOfPatch(patchX, patchZ, LOD);
 }
 
+void TerrainSceneNode_GetMeshBufferForLOD(IntPtr terrain, IntPtr mb, int lod)
+{
+    ((ITerrainSceneNode*)terrain)->getMeshBufferForLOD((SMeshBufferLightMap&)mb, lod);
+}
+
 void LightSceneNode_GetLight(IntPtr light, M_SCOLORF ambient, M_SCOLORF diffuse, M_SCOLORF specular, M_VECT3DF pos, float *radius, bool *castshadows, E_LIGHT_TYPE* type)
 {
     SLight slight = ((ILightSceneNode*)light)->getLightData();

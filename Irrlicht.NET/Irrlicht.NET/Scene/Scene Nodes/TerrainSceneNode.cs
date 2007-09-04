@@ -129,9 +129,23 @@ namespace IrrlichtNETCP
 			TerrainSceneNode_SetLODOfPatch(_raw, patchX, patchZ, LOD);
 		}
 		
+		/// <summary>
+		/// Gets the meshbuffer data based on a specified level of detail. 
+		/// </summary>
+		/// <param name="mb">A reference to an MeshBuffer object 
+  		/// <param name="LOD">the level of detail you want the indices from.</param>
+		public void GetMeshBufferForLOD(MeshBuffer mb, int LOD)
+		{
+			TerrainSceneNode_GetMeshBufferForLOD(_raw, mb.Raw, LOD);
+		}
+		
+		
 		#region Native Invokes
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void TerrainSceneNode_GetBoundingBox(IntPtr terrain, int patchX, int patchZ, [MarshalAs(UnmanagedType.LPArray)] float[] box);
+		
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void TerrainSceneNode_GetMeshBufferForLOD(IntPtr terrain, IntPtr mb, int lod);
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void TerrainSceneNode_GetBoundingBoxA(IntPtr terrain, [MarshalAs(UnmanagedType.LPArray)] float[] box);
