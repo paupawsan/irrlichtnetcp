@@ -9,6 +9,8 @@ Irrlicht .NET CP 0.9
 -Added Irrlicht's parameters to VideoDriver.EndScene (thanks to Nikolaus for
 this).
 -Changed Rect.IsValid() to Rect.Valid, and corrected it (thanks to Kimundi).
+-Added GetMeshBufferForLOD to TerrainSceneNode. Also made animatedmesh speci-
+fic functions depending on the mesh type
 
 =============================================================================
 Irrlicht .NET CP 0.8

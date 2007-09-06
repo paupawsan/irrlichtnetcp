@@ -162,6 +162,22 @@ namespace IrrlichtNETCP
             GuiEnv_DrawAll(_raw);
         }
 
+
+        public void Clear()
+        {
+            GuiEnv_Clear(_raw);
+        } 
+
+        public bool LoadGui(string filename)
+        {
+            return GuiEnv_LoadGUI(_raw, filename);
+        }
+
+        public bool SaveGui(string filename)
+        {
+            return GuiEnv_SaveGUI(_raw, filename);
+        }
+ 
         public GUIFont GetFont(string filename)
         {
             return (GUIFont)NativeElement.GetObject(GuiEnv_GetFont(_raw, filename), typeof(GUIFont));
@@ -287,6 +303,10 @@ namespace IrrlichtNETCP
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiEnv_DrawAll(IntPtr guienv);
 
+
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern void GuiEnv_Clear(IntPtr guienv);
+
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr GuiEnv_GetFont(IntPtr guienv, string filename);
         
@@ -304,6 +324,12 @@ namespace IrrlichtNETCP
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool GuiEnv_HasFocus(IntPtr guienv, IntPtr element);
+
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern bool GuiEnv_LoadGUI(IntPtr guienv, string filename);
+
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern bool GuiEnv_SaveGUI(IntPtr guienv, string filename); 
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern bool GuiEnv_PostEventFromUser(IntPtr guienv, IntPtr ev);

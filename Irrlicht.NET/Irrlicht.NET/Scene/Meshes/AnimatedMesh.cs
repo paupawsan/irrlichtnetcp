@@ -38,6 +38,7 @@ namespace IrrlichtNETCP
 			}
 		}
 		
+		
 		#region Native Code
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void AnimatedMesh_GetBoundingBox(IntPtr mesh, [MarshalAs(UnmanagedType.LPArray)] float[] box);
@@ -54,7 +55,8 @@ namespace IrrlichtNETCP
 	{
 		Unknown,
 		MD2,
-		MS2D,
+		MD3,
+		MS3D,
 		OBJ,
 		BSP,
 		T3DS,
@@ -62,6 +64,7 @@ namespace IrrlichtNETCP
 		MY3D,
 		LMTS,
 		CSM,
-		OCT
+		OCT,
+		B3D 
 	}
 }

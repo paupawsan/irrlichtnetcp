@@ -384,6 +384,23 @@ namespace IrrlichtNETCP
             return tor;
         }
         #endregion
+		
+		public Matrix4 Transform
+		{
+			get
+			{
+				float[] mat = new float[16];
+				Texture_GetTransform(_raw, mat);
+				return Matrix4.FromUnmanaged(mat);
+			}
+			
+			set
+			{
+				Matrix4 mat = value;
+				Texture_SetTransform(_raw, mat.ToUnmanaged());
+			}
+		}
+		
 
         #region .NET Wrapper Native Code
         IntPtr _lockresult = IntPtr.Zero;

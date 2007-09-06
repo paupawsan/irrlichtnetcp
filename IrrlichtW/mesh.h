@@ -12,6 +12,28 @@ extern "C"
     EXPORT void AnimatedMesh_GetBoundingBox(IntPtr mesh, M_BOX3D box);
     EXPORT IntPtr AnimatedMesh_GetMesh(IntPtr mesh, int frame, int detailLevel, int startFrameloop, int endFrameloop);
     EXPORT E_ANIMATED_MESH_TYPE AnimatedMesh_GetMeshType(IntPtr mesh);
+    // B3D functions
+    EXPORT void AnimatedMesh_GetMatrixOfJointB3D(IntPtr mesh, M_MAT4 matrix, int jointNumber, int frame);
+    EXPORT void AnimatedMesh_GetLocalMatrixOfJointB3D(IntPtr mesh, M_MAT4 matrix, int jointNumber);
+    EXPORT void AnimatedMesh_GetMatrixOfJointUnanimatedB3D(IntPtr mesh, M_MAT4 matrix, int jointNumber);
+    EXPORT void AnimatedMesh_SetJointAnimationB3D(IntPtr mesh, int jointNumber, bool On);
+    EXPORT int AnimatedMesh_GetJointCountB3D(IntPtr mesh);
+    EXPORT M_STRING AnimatedMesh_GetJointNameB3D(IntPtr mesh, int number);
+    EXPORT int AnimatedMesh_GetJointNumberB3D(IntPtr mesh, M_STRING name);
+    EXPORT void AnimatedMesh_UpdateNormalsWhenAnimatingB3D(IntPtr mesh, bool on);
+    EXPORT void AnimatedMesh_SetInterpolationModeB3D(IntPtr mesh, int mode);
+    EXPORT void AnimatedMesh_SetAnimateModeB3D (IntPtr mesh, s32 mode);
+    EXPORT void AnimatedMesh_convertToTangentsB3D(IntPtr mesh);
+    // MD2 specific
+    EXPORT void AnimatedMesh_GetFrameLoopMD2 (IntPtr mesh, EMD2_ANIMATION_TYPE l, int* outBegin, int* outEnd, int* outFPS);
+    EXPORT void AnimatedMesh_GetFrameLoopMD2a (IntPtr mesh, M_STRING name, int *outBegin, int *outEnd, int *outFPS);
+    EXPORT int AnimationMesh_GetAnimationCountMD2(IntPtr mesh);
+    EXPORT M_STRING AnimationMesh_GetAnimationNameMD2(IntPtr mesh, int nr);
+    // MS3D specific
+    EXPORT void AnimatedMesh_GetMatrixOfJointMS3D(IntPtr mesh, M_MAT4 matrix, int jointNumber, int frame);
+    EXPORT int AnimatedMesh_GetJointCountMS3D(IntPtr mesh);
+    EXPORT M_STRING AnimatedMesh_GetJointNameMS3D(IntPtr mesh, int number);
+    EXPORT int AnimatedMesh_GetJointNumber(IntPtr mesh, M_STRING name);
 
 	EXPORT IntPtr MeshBuffer_Create(int type);
 	EXPORT void MeshBuffer_GetBoundingBox(IntPtr meshb, M_BOX3D bb);

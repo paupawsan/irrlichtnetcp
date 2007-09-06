@@ -394,15 +394,15 @@ namespace IrrlichtNETCP
 		
 		/// <summary>
 		/// Adds 3d TextSceneNode2. to view a Text in real 3D Space
-   		/// in fact it is a combination of Billboard & TextSceneNode
+   		/// in fact it is a combination of Billboard and TextSceneNode
 		/// </summary>
 		/// <returns>The Node</returns>
 		/// <param name="font">Font</param>
 		/// <param name="text">Text (can be changed later)</param>
-		/// <param name="color">Color</param>
+		/// <param name="shade_top">Color of the top shade</param>
+		/// <param name="shade_down">Color of the bottom shade</param>
 		/// <param name="parent">Its parent</param>
-		public TextSceneNode AddBillboardTextSceneNode(GUIFont font, string text, SceneNode parent, Dimension2Df size,
-										Vector3D position, int id, Color shade_top, Color shade_down)
+		public TextSceneNode AddBillboardTextSceneNode(GUIFont font, string text, SceneNode parent, Dimension2Df size,Vector3D position, int id, Color shade_top, Color shade_down)
 		{
 			IntPtr par = IntPtr.Zero;
 			if(parent != null)

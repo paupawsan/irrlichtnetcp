@@ -132,9 +132,9 @@ namespace IrrlichtNETCP
 		/// <summary>
 		/// Gets the meshbuffer data based on a specified level of detail. 
 		/// </summary>
-		/// <param name="mb">A reference to an MeshBuffer object 
+		/// <param name="mb">A reference to an MeshBuffer object</param> 
   		/// <param name="LOD">the level of detail you want the indices from.</param>
-		public void GetMeshBufferForLOD(MeshBuffer mb, int LOD)
+		public void GetMeshBufferForLOD(ref MeshBuffer mb, int LOD)
 		{
 			TerrainSceneNode_GetMeshBufferForLOD(_raw, mb.Raw, LOD);
 		}

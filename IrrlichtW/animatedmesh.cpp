@@ -1,4 +1,4 @@
-#include "animatedhmesh.h"
+#include "animatedmesh.h"
 
 //Shadow Volume Scene Node
 void ShadowVolume_SetMeshToRenderFrom(IntPtr shadow, IntPtr mesh)

@@ -85,6 +85,9 @@
     <File name="./Scene/Scene Nodes/CustomSceneNode.cs" subtype="Code" buildaction="Compile" />
     <File name="./Global/Types/ViewFrustrum.cs" subtype="Code" buildaction="Compile" />
     <File name="./Global/Quaternion.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Scene/Meshes/AnimatedMeshB3D.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Scene/Meshes/AnimatedMeshMD2.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Scene/Meshes/AnimatedMeshMS3D.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

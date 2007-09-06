@@ -75,7 +75,7 @@ namespace GUIExample
                 driver.EndScene();
             }
             //As in the first example, we need to release main resources
-            device.Dispose();
+            device.Close();
         }
         //Our main vars such as the back color or the one which says if we want the "funny effect"
         static Color BackColor = Color.Blue;

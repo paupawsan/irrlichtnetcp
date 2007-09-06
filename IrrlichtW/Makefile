@@ -16,7 +16,8 @@ DEBUG_PATH=../bin/Debug
 RELEASE_PATH=../bin/Release
 
 COMPILER=g++
-FLAGS = -I $(IRR_SDK_INCLUDE_PATH) -I/usr/include -I/usr/include/freetype2
+CFLAGS = -g -O3
+FLAGS = $(CFLAGS) -I $(IRR_SDK_INCLUDE_PATH) -I/usr/include -I/usr/include/freetype2
 LDFLAGS=-L/usr/X11R6/lib -lGLU -lGL -lfreetype -lXxf86vm ../Irrlicht\ SDK/lib/Linux/libIrrlicht.a
 
 IRR_SRC= \

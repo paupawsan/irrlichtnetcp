@@ -41,6 +41,132 @@ E_ANIMATED_MESH_TYPE AnimatedMesh_GetMeshType(IntPtr mesh)
     return ((IAnimatedMesh*)mesh)->getMeshType();
 }
 
+/*
+ * B3D mesh scpecific functions
+ */
+
+void AnimatedMesh_GetMatrixOfJointB3D(IntPtr mesh, M_MAT4 matrix, int jointNumber, int frame)
+{
+    core::matrix4 *mat = ((IAnimatedMeshB3d *)mesh)->getMatrixOfJoint(jointNumber, frame);
+    UM_MAT4(*mat, matrix);
+}
+
+void AnimatedMesh_GetLocalMatrixOfJointB3D(IntPtr mesh, M_MAT4 matrix, int jointNumber)
+{
+    core::matrix4 *mat = ((IAnimatedMeshB3d *)mesh)->getLocalMatrixOfJoint(jointNumber);
+    UM_MAT4(*mat, matrix);
+}
+
+void AnimatedMesh_GetMatrixOfJointUnanimatedB3D(IntPtr mesh, M_MAT4 matrix, int jointNumber)
+{
+    core::matrix4 *mat = ((IAnimatedMeshB3d *)mesh)->getMatrixOfJointUnanimated(jointNumber);
+    UM_MAT4(*mat, matrix);
+}
+
+void AnimatedMesh_SetJointAnimationB3D(IntPtr mesh, int jointNumber, bool On)
+{
+    ((IAnimatedMeshB3d *)mesh)->setJointAnimation(jointNumber, On);
+}
+
+int AnimatedMesh_GetJointCountB3D(IntPtr mesh)
+{
+    return ((IAnimatedMeshB3d *)mesh)->getJointCount();
+}
+
+M_STRING AnimatedMesh_GetJointNameB3D(IntPtr mesh, int number)
+{
+    return UM_STRING(((IAnimatedMeshB3d *)mesh)->getJointName(number));
+}
+
+int AnimatedMesh_GetJointNumberB3D(IntPtr mesh, M_STRING name)
+{
+    return ((IAnimatedMeshB3d *)mesh)->getJointNumber(name);
+}
+
+void AnimatedMesh_UpdateNormalsWhenAnimatingB3D(IntPtr mesh, bool on)
+{
+    ((IAnimatedMeshB3d *)mesh)->updateNormalsWhenAnimating(on);
+}
+
+void AnimatedMesh_SetInterpolationModeB3D(IntPtr mesh, int mode)
+{
+    ((IAnimatedMeshB3d *)mesh)->setInterpolationMode(mode);
+}
+
+void AnimatedMesh_SetAnimateModeB3D (IntPtr mesh, s32 mode)
+{
+    ((IAnimatedMeshB3d *)mesh)->setAnimateMode(mode);
+}
+
+void AnimatedMesh_convertToTangentsB3D(IntPtr mesh)
+{
+    ((IAnimatedMeshB3d *)mesh)->convertToTangents();
+}
+/*
+ * MD2 scpecific routines
+ */
+
+void AnimatedMesh_GetFrameLoopMD2 (IntPtr mesh, EMD2_ANIMATION_TYPE l, int* outBegin, int* outEnd, int* outFPS)
+{
+    int b;
+    int en;
+    int fps;
+    ((IAnimatedMeshMD2 *)mesh)->getFrameLoop(l, b, en, fps);
+    *outBegin = b;
+    *outEnd = en;
+    *outFPS = fps;
+}
+
+void AnimatedMesh_GetFrameLoopMD2a (IntPtr mesh, M_STRING name, int *outBegin, int *outEnd, int *outFPS)
+{
+    int b;
+    int en;
+    int fps;
+    ((IAnimatedMeshMD2 *)mesh)->getFrameLoop(UM_STRING(name), b, en, fps);
+    *outBegin = b;
+    *outEnd = en;
+    *outFPS = fps;
+}
+
+int AnimationMesh_GetAnimationCountMD2(IntPtr mesh)
+{
+    return ((IAnimatedMeshMD2 *)mesh)->getAnimationCount();
+}
+
+M_STRING AnimationMesh_GetAnimationNameMD2(IntPtr mesh, int nr)
+{
+    return UM_STRING(((IAnimatedMeshMD2 *)mesh)->getAnimationName(nr));
+}
+
+
+/*
+ * MS3D specific functions
+ */
+
+void AnimatedMesh_GetMatrixOfJointMS3D(IntPtr mesh, M_MAT4 matrix, int jointNumber, int frame)
+{
+    core::matrix4 *mat = ((IAnimatedMeshMS3D *)mesh)->getMatrixOfJoint(jointNumber, frame);
+    UM_MAT4(*mat, matrix);
+}
+
+int AnimatedMesh_GetJointCountMS3D(IntPtr mesh)
+{
+    return ((IAnimatedMeshMS3D *)mesh)->getJointCount();
+}
+
+M_STRING AnimatedMesh_GetJointNameMS3D(IntPtr mesh, int number)
+{
+    return UM_STRING(((IAnimatedMeshMS3D *)mesh)->getJointName(number));
+}
+
+int AnimatedMesh_GetJointNumber(IntPtr mesh, M_STRING name)
+{
+    return ((IAnimatedMeshMS3D *)mesh)->getJointNumber(name);
+}
+/*
+ *
+ */
+
 IMeshBuffer* GetMBForIntPtr(IntPtr mb)
 {
 	return ((IMeshBuffer*)mb);
@@ -73,7 +199,7 @@ int MeshBuffer_GetIndexCount(IntPtr meshb)
 void MeshBuffer_GetIndices(IntPtr meshb, unsigned short* indices)
 {
 	int count = GetMBForIntPtr(meshb)->getIndexCount();
-	for(int i = 0; i < count; i++)	
+	for(int i = 0; i < count; i++)
 		indices[i] = GetMBForIntPtr(meshb)->getIndices()[i];
 }
 
