@@ -28,7 +28,7 @@ namespace IrrlichtNETCP
 		public void GetFrameLoopMD2(string name, ref int outBegin, ref int outEnd, ref int outFps)
 		{
 			if (this.MeshType != AnimatedMeshType.MD2) return;
-			AnimatedMesh_GetFrameLoopMD2(_raw, name, outBegin, outEnd, outFps);
+			AnimatedMesh_GetFrameLoopMD2a(_raw, name, outBegin, outEnd, outFps);
 		}
 		
 		public int AnimationCount
@@ -54,7 +54,7 @@ namespace IrrlichtNETCP
 		                                                int outFPS);
 		
 		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]		
-		static extern void AnimatedMesh_GetFrameLoopMD2 (IntPtr mesh, string name, 
+		static extern void AnimatedMesh_GetFrameLoopMD2a (IntPtr mesh, string name, 
 		                                                 int outBegin, 
 		                                                 int outEnd, 
 		                                                 int outFPS);

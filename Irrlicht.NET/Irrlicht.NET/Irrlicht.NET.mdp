@@ -13,7 +13,6 @@
       <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="True" generateoverflowchecks="True" mainclass="" generatexmldocumentation="True" ctype="CSharpCompilerParameters" />
     </Configuration>
   </Configurations>
-  <DeployTargets />
   <Contents>
     <File name="./Device/FileSystem.cs" subtype="Code" buildaction="Compile" />
     <File name="./Device/IrrlichtDevice.cs" subtype="Code" buildaction="Compile" />
@@ -84,16 +83,19 @@
     <File name="./Global/Types/Vector2D.cs" subtype="Code" buildaction="Compile" />
     <File name="./Scene/Scene Nodes/CustomSceneNode.cs" subtype="Code" buildaction="Compile" />
     <File name="./Global/Types/ViewFrustrum.cs" subtype="Code" buildaction="Compile" />
-    <File name="./Global/Quaternion.cs" subtype="Code" buildaction="Compile" />
     <File name="./Scene/Meshes/AnimatedMeshB3D.cs" subtype="Code" buildaction="Compile" />
     <File name="./Scene/Meshes/AnimatedMeshMD2.cs" subtype="Code" buildaction="Compile" />
     <File name="./Scene/Meshes/AnimatedMeshMS3D.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Scene/Meshes/AnimatedMeshX.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Global/Types/Line2D.cs" subtype="Code" buildaction="Compile" />
+    <File name="./Global/Types/Quaternion.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
     <ProjectReference type="Gac" localcopy="True" refto="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   </References>
+  <DeployTargets />
   <DeploymentInformation strategy="File">
     <excludeFiles />
   </DeploymentInformation>

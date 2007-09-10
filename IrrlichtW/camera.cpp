@@ -1,4 +1,5 @@
 #include "camera.h"
+#include "CCameraFPSSceneNode.h"
 
 ICameraSceneNode *GetCameraFromIntPtr(IntPtr camera)
 {
@@ -142,5 +143,25 @@ void VF_RecalculateBoundingBox(IntPtr vf)
 void VF_Transform(IntPtr vf, M_MAT4 mat)
 {
     ((SViewFrustum*)vf)->transform(MU_MAT4(mat));
+}
+
+void CameraFPS_SetRotateSpeed(IntPtr camera, float speed)
+{
+    ((CCameraFPSSceneNode *)camera)->setRotateSpeed(speed);
+}
+
+void CameraFPS_SetMoveSpeed(IntPtr camera, float speed)
+{
+    ((CCameraFPSSceneNode *)camera)->setMoveSpeed(speed);
+}
+
+float CameraFPS_GetRotateSpeed(IntPtr camera)
+{
+    return ((CCameraFPSSceneNode *)camera)->getRotateSpeed();
+}
+
+float CameraFPS_GetMoveSpeed(IntPtr camera)
+{
+    return ((CCameraFPSSceneNode *)camera)->getMoveSpeed();
 }
 

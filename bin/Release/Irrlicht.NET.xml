@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/media/disk/irrlichtnetcp-svn/bin/Release/Irrlicht.NET</name>
+        <name>/home/lester/progs/irrlichtnetcp-svn/bin/Release/Irrlicht.NET</name>
     </assembly>
     <members>
         <member name="M:IrrlichtNETCP.FileSystem.AddZipFileArchive(System.String,System.Boolean,System.Boolean)">

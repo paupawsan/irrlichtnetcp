@@ -11,6 +11,10 @@ this).
 -Changed Rect.IsValid() to Rect.Valid, and corrected it (thanks to Kimundi).
 -Added GetMeshBufferForLOD to TerrainSceneNode. Also made animatedmesh speci-
 fic functions depending on the mesh type
+-Added AnimatedMeshX, AnimatedMeshB3D, AnimatedMeshMD2, AnimatedMeshMS3D spe-
+cific routines
+-Added RotateSpeed, MoveSpeed to CameraSceneNode
+-Added Line2D by ... FIXME I can't remember who actually did suggest it.
 
 =============================================================================
 Irrlicht .NET CP 0.8

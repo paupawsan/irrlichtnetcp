@@ -31,4 +31,10 @@ extern "C"
     EXPORT void VF_GetFarRightUp(IntPtr vf, M_VECT3DF pf);
     EXPORT void VF_RecalculateBoundingBox(IntPtr v);
     EXPORT void VF_Transform(IntPtr vf, M_MAT4 mat);
+
+    EXPORT void CameraFPS_SetRotateSpeed(IntPtr camera, float speed);
+    EXPORT void CameraFPS_SetMoveSpeed(IntPtr camera, float speed);
+    EXPORT float CameraFPS_GetRotateSpeed(IntPtr camera);
+    EXPORT float CameraFPS_GetMoveSpeed(IntPtr camera);
+
 }

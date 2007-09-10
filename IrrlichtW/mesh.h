@@ -34,7 +34,16 @@ extern "C"
     EXPORT int AnimatedMesh_GetJointCountMS3D(IntPtr mesh);
     EXPORT M_STRING AnimatedMesh_GetJointNameMS3D(IntPtr mesh, int number);
     EXPORT int AnimatedMesh_GetJointNumber(IntPtr mesh, M_STRING name);
-
+    // X specific
+    EXPORT void AnimatedMesh_GetMatrixOfJointX(IntPtr mesh, M_MAT4 matrix, int jointNumber, int frame);
+    EXPORT int AnimatedMesh_GetJointCountX(IntPtr mesh);
+    EXPORT M_STRING AnimatedMesh_GetJointNameX(IntPtr mesh, int number);
+    EXPORT int AnimatedMesh_GetJointNumberX(IntPtr mesh, M_STRING name);
+    EXPORT int AnimatedMesh_GetAnimationCountX(IntPtr mesh);
+    EXPORT M_STRING AnimatedMesh_GetAnimationNameX(IntPtr mesh, int idx);
+    EXPORT void AnimatedMesh_SetCurrentAnimationX(IntPtr mesh, int idx);
+    EXPORT void AnimatedMesh_SetCurrentAnimationXa(IntPtr mesh, M_STRING name);
+    //
 	EXPORT IntPtr MeshBuffer_Create(int type);
 	EXPORT void MeshBuffer_GetBoundingBox(IntPtr meshb, M_BOX3D bb);
 	EXPORT void MeshBuffer_SetBoundingBox(IntPtr meshb, M_BOX3D bb);

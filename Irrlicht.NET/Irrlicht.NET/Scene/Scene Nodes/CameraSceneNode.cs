@@ -149,6 +149,27 @@ namespace IrrlichtNETCP
 			return Camera_OnEvent(_raw, ev.Raw);
 		}
 		
+		public float RotateSpeed
+		{
+			get {
+				return CameraFPS_GetRotateSpeed(_raw);
+			}
+			set {
+				CameraFPS_SetRotateSpeed(_raw, value);
+			}
+		}
+		
+		public float MoveSpeed
+		{
+			get {
+				return CameraFPS_GetMoveSpeed(_raw);
+			}
+			set {
+				CameraFPS_SetMoveSpeed(_raw, value);
+			}
+		}		
+		
+		
 		#region .NET Wrapper Native Code
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern float Camera_GetAspectRation(IntPtr camera);
@@ -212,6 +233,18 @@ namespace IrrlichtNETCP
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Camera_SetUpVector(IntPtr camera, float[] upvector);
+		
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void CameraFPS_SetRotateSpeed(IntPtr camera, float speed);
+		
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void CameraFPS_SetMoveSpeed(IntPtr camera, float speed);		
+		
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern float CameraFPS_GetRotateSpeed(IntPtr camera);
+		
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern float CameraFPS_GetMoveSpeed(IntPtr camera);
 		#endregion
 	}
 	

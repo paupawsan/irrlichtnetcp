@@ -164,8 +164,54 @@ int AnimatedMesh_GetJointNumber(IntPtr mesh, M_STRING name)
     return ((IAnimatedMeshMS3D *)mesh)->getJointNumber(name);
 }
 /*
+ * X mesh related routines
+ */
+
+void AnimatedMesh_GetMatrixOfJointX(IntPtr mesh, M_MAT4 matrix, int jointNumber, int frame)
+{
+    core::matrix4 *mat = ((IAnimatedMeshX*)mesh)->getMatrixOfJoint(jointNumber, frame);
+    UM_MAT4(*mat, matrix);
+}
+
+int AnimatedMesh_GetJointCountX(IntPtr mesh)
+{
+    return ((IAnimatedMeshX*)mesh)->getJointCount();
+}
+
+M_STRING AnimatedMesh_GetJointNameX(IntPtr mesh, int number)
+{
+    return UM_STRING(((IAnimatedMeshX *)mesh)->getJointName(number));
+}
+
+int AnimatedMesh_GetJointNumberX(IntPtr mesh, M_STRING name)
+{
+    return ((IAnimatedMeshX *)mesh)->getJointNumber(name);
+}
+
+int AnimatedMesh_GetAnimationCountX(IntPtr mesh)
+{
+    return ((IAnimatedMeshX *)mesh)->getAnimationCount();
+}
+
+M_STRING AnimatedMesh_GetAnimationNameX(IntPtr mesh, int idx)
+{
+    return UM_STRING(((IAnimatedMeshX *)mesh)->getAnimationName(idx));
+}
+
+void AnimatedMesh_SetCurrentAnimationX(IntPtr mesh, int idx)
+{
+    ((IAnimatedMeshX *)mesh)->setCurrentAnimation(idx);
+}
+
+void AnimatedMesh_SetCurrentAnimationXa(IntPtr mesh, M_STRING name)
+{
+    ((IAnimatedMeshX *)mesh)->setCurrentAnimation(name);
+}
+
+/*
  *
  */
+
 
 IMeshBuffer* GetMBForIntPtr(IntPtr mb)
 {
