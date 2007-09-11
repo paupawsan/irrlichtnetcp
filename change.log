@@ -14,7 +14,7 @@ fic functions depending on the mesh type
 -Added AnimatedMeshX, AnimatedMeshB3D, AnimatedMeshMD2, AnimatedMeshMS3D spe-
 cific routines
 -Added RotateSpeed, MoveSpeed to CameraSceneNode
--Added Line2D by ... FIXME I can't remember who actually did suggest it.
+-Added Line2D by Kimundi
 
 =============================================================================
 Irrlicht .NET CP 0.8
