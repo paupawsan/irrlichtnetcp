@@ -99,7 +99,7 @@ namespace IrrlichtNETCP
         {
             return new Vector3D(first.X - other.X, first.Y - other.Y, first.Z - other.Z);
         }
-        
+
         public static Vector3D operator -(Vector3D first)
         {
             return new Vector3D(-first.X, -first.Y, -first.Z);
@@ -143,6 +143,23 @@ namespace IrrlichtNETCP
         public static bool operator !=(Vector3D first, Vector3D other)
         {
             return first.X != other.X || first.Y != other.Y || first.Z != other.Z;
+        }
+
+        public static bool operator <=(Vector3D first, Vector3D other)
+        {
+            return first.X <= other.X && first.Y <= other.Y && first.Z <= other.Z;
+        }
+        public static bool operator >=(Vector3D first, Vector3D other)
+        {
+            return first.X >= other.X && first.Y >= other.Y && first.Z >= other.Z;
+        }
+        public static bool operator <(Vector3D first, Vector3D other)
+        {
+            return first.X < other.X && first.Y < other.Y && first.Z < other.Z;
+        }
+        public static bool operator >(Vector3D first, Vector3D other)
+        {
+            return first.X > other.X && first.Y > other.Y && first.Z > other.Z;
         }
 
         public Vector3D Invert()
@@ -195,6 +212,18 @@ namespace IrrlichtNETCP
             return new Vector3D(other.X * inv + X * d,
                             other.Y * inv + Y * d,
                             other.Z * inv + Z * d);
+        }
+        public Vector3D GetInterpolated_Quadratic(Vector3D v2, Vector3D v3, float d)
+        {
+            float inv = 1.0f - d;
+            float mul0 = inv * inv;
+            float mul1 = (float)2.0 * d * inv;
+            float mul2 = d * d;
+
+            return new Vector3D(X * mul0 + v2.X * mul1 + v3.X * mul2,
+                    Y * mul0 + v2.Y * mul1 + v3.Y * mul2,
+                    Z * mul0 + v2.Z * mul1 + v3.Z * mul2);
+
         }
 
         public override bool Equals(object o)

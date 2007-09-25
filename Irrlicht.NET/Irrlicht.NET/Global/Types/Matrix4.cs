@@ -376,7 +376,7 @@ namespace IrrlichtNETCP
 			
 			SetMInsecure(0,2,0);
 			SetMInsecure(1,2,0);
-			SetMInsecure(2,2,1/(zNear-zFar));
+			SetMInsecure(2,2,1/(zFar-zNear));
 			SetMInsecure(3,2,0);
 			
 			SetMInsecure(0,3,0);

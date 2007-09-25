@@ -19,7 +19,7 @@ namespace IrrlichtNETCP
         public Vector2D Normalize()
         {
             float len = Length;
-
+            if (len == 0) return this;
             X /= len;
             Y /= len;
             return this;
@@ -74,7 +74,15 @@ namespace IrrlichtNETCP
         {
             return new Vector2D(first.X - other.X, first.Y - other.Y);
         }
+        public static Vector2D operator *(Vector2D first, Vector2D other)
+        {
+            return new Vector2D(first.X * other.X, first.Y * other.Y);
+        }
 
+        public static Vector2D operator /(Vector2D first, Vector2D other)
+        {
+            return new Vector2D(first.X / other.X, first.Y / other.Y);
+        }
         public static Vector2D operator *(Vector2D first, float other)
         {
             return new Vector2D(first.X * other, first.Y * other);
@@ -83,6 +91,15 @@ namespace IrrlichtNETCP
         public static Vector2D operator /(Vector2D first, float other)
         {
             return new Vector2D(first.X / other, first.Y / other);
+        }
+        public static Vector2D operator *(float first, Vector2D other)
+        {
+            return new Vector2D(first * other.X, first * other.Y);
+        }
+
+        public static Vector2D operator /(float first, Vector2D other)
+        {
+            return new Vector2D(first / other.X, first / other.Y);
         }
 
         public static bool operator ==(Vector2D first, Vector2D other)
@@ -93,6 +110,22 @@ namespace IrrlichtNETCP
         public static bool operator !=(Vector2D first, Vector2D other)
         {
             return first.X != other.X || first.Y != other.Y;
+        }
+        public static bool operator <=(Vector2D first, Vector2D other)
+        {
+            return first.X <= other.X && first.Y <= other.Y;
+        }
+        public static bool operator >=(Vector2D first, Vector2D other)
+        {
+            return first.X >= other.X && first.Y >= other.Y;
+        }
+        public static bool operator <(Vector2D first, Vector2D other)
+        {
+            return first.X < other.X && first.Y < other.Y;
+        }
+        public static bool operator >(Vector2D first, Vector2D other)
+        {
+            return first.X > other.X && first.Y > other.Y;
         }
 
         public override bool Equals(object o)
@@ -201,6 +234,15 @@ namespace IrrlichtNETCP
             return new Vector2D(other.X * inv + X * d,
                             other.Y * inv + Y * d);
         }
+        public Vector2D GetInterpolated_Quadratic(Vector2D v2, Vector2D v3, float d)
+        {
+            float inv = 1.0f - d;
+            float mul0 = inv * inv;
+            float mul1 = 2.0f * d * inv;
+            float mul2 = d * d;
+            return new Vector2D(X * mul0 + v2.X * mul1 + v3.X * mul2,
+                Y * mul0 + v2.Y * mul1 + v3.Y * mul2);
+        }
 
         //! sets this vector to the interpolated vector between a and b.
         public void Interpolate(Vector2D a, Vector2D b, float t)
@@ -218,5 +260,22 @@ namespace IrrlichtNETCP
             vect.Y = y;
             return vect;
         }
+        public static implicit operator Vector2D(Position2D other)
+        {
+            return new Vector2D(other.X, other.Y);
+        }
+        public static implicit operator Vector2D(Position2Df other)
+        {
+            return new Vector2D(other.X, other.Y);
+        }
+        public static implicit operator Vector2D(Dimension2D other)
+        {
+            return new Vector2D(other.Width, other.Height);
+        }
+        public static implicit operator Vector2D(Dimension2Df other)
+        {
+            return new Vector2D(other.Width, other.Height);
+        }
+
     }
 }

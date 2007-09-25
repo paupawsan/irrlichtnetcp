@@ -199,6 +199,7 @@ namespace IrrlichtNETCP
                     byte* p = (byte*)(void*)Scan0;
                     ModifyPixel del = delegate(int x, int y, out Color result)
                     {
+                        if (x >= w || y >= h) { result = Color.Black; return false; }     //<- This Line must be added
                         int ind = y * stride + (x * 4);
                         result = new Color(p[ind + 3], p[ind + 2], p[ind + 1], p[ind + 0]);
                         return true;
@@ -400,6 +401,20 @@ namespace IrrlichtNETCP
 				Texture_SetTransform(_raw, mat.ToUnmanaged());
 			}
 		}
+		
+		
+        public void MakeColorKey(VideoDriver drv)
+        {
+            drv.MakeColorKeyTexture(this, new Position2D(0, 0));
+        }
+        public void MakeColorKey(VideoDriver drv, Position2D colorKeyPixelPos)
+        {
+            drv.MakeColorKeyTexture(this, colorKeyPixelPos);
+        }
+        public void MakeColorKey(VideoDriver drv, Color color)
+        {
+            drv.MakeColorKeyTexture(this, color);
+        }
 		
 
         #region .NET Wrapper Native Code

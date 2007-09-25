@@ -50,12 +50,14 @@ namespace IrrlichtNETCP
         }
 
         /// <summary>
-        /// Gets an standard .NET color from the current Irrlicht color.
+        /// Gets and Sets an standard .NET color from the current Irrlicht color.
         /// </summary>
         /// <returns>The .NET color</returns>
-        public System.Drawing.Color ToBCL()
+        /// <value> The .NET color</value>
+        public System.Drawing.Color dotNETColor
         {
-            return System.Drawing.Color.FromArgb(A, R, G, B);
+            get { return System.Drawing.Color.FromArgb(A, R, G, B); }
+            set { A = value.A; R = value.R; G = value.G; B = value.G; }
         }
 
         /// <summary>
@@ -69,7 +71,7 @@ namespace IrrlichtNETCP
         }
 
         public int[] ToUnmanaged() { return new int[] { A, R, G, B }; }
-        public float[] ToShader() { return new float[] { (float)R / 255f, (float)G / 255f, (float)B / 255f, (float)A / 255f}; }
+        public float[] ToShader() { return new float[] { (float)R / 255f, (float)G / 255f, (float)B / 255f, (float)A / 255f }; }
         public static Color FromUnmanaged(int[] un) { return From(un[0], un[1], un[2], un[3]); }
         public override string ToString()
         {
@@ -95,30 +97,34 @@ namespace IrrlichtNETCP
         public override int GetHashCode()
         {
             return ToString().GetHashCode();
-        } 
-        
-        public uint getLuminance()
-		{
-			return (uint)(0.3f*R + 0.59f*G + 0.11f*B);
-		}
+        }
 
+        public uint getLuminance()
+        {
+            return (uint)(0.3f * R + 0.59f * G + 0.11f * B);
+        }
+
+        public static explicit operator Color(Colorf c)
+        {
+            return new Color((int)(c.A * 255f), (int)(c.R * 255f), (int)(c.G * 255f), (int)(c.B * 255f));
+        }
         #region Premade Colors
-        public static Color Red  =  new Color(255, 255, 0, 0);
-        public static Color Green  =  new Color(255, 0, 255, 0);
-        public static Color Blue  =  new Color(255, 0, 0, 255);
-        public static Color Black  =  new Color(255, 0, 0, 0);
-        public static Color White  =  new Color(255, 255, 255, 255);
-        public static Color Yellow  =  new Color(255, 255, 255, 0);
-        public static Color Purple  =  new Color(255, 255, 0, 255);
-        public static Color Gray  =  new Color(255, 100, 100, 100);
-        public static Color TransparentRed  =  new Color(0, 255, 0, 0);
-        public static Color TransparentGreen  =  new Color(0, 0, 255, 0);
-        public static Color TransparentBlue  =  new Color(0, 0, 0, 255);
-        public static Color TransparentBlack  =  new Color(0, 0, 0, 0);
-        public static Color TransparentWhite  =  new Color(0, 255, 255, 255);
-        public static Color TransparentYellow  =  new Color(0, 255, 255, 0);
-        public static Color TransparentPurple  =  new Color(0, 255, 0, 255);
-        public static Color TransparentGray  =  new Color(0, 100, 100, 100);
+        public static Color Red = new Color(255, 255, 0, 0);
+        public static Color Green = new Color(255, 0, 255, 0);
+        public static Color Blue = new Color(255, 0, 0, 255);
+        public static Color Black = new Color(255, 0, 0, 0);
+        public static Color White = new Color(255, 255, 255, 255);
+        public static Color Yellow = new Color(255, 255, 255, 0);
+        public static Color Purple = new Color(255, 255, 0, 255);
+        public static Color Gray = new Color(255, 100, 100, 100);
+        public static Color TransparentRed = new Color(0, 255, 0, 0);
+        public static Color TransparentGreen = new Color(0, 0, 255, 0);
+        public static Color TransparentBlue = new Color(0, 0, 0, 255);
+        public static Color TransparentBlack = new Color(0, 0, 0, 0);
+        public static Color TransparentWhite = new Color(0, 255, 255, 255);
+        public static Color TransparentYellow = new Color(0, 255, 255, 0);
+        public static Color TransparentPurple = new Color(0, 255, 0, 255);
+        public static Color TransparentGray = new Color(0, 100, 100, 100);
         #endregion
     }
 
@@ -155,9 +161,12 @@ namespace IrrlichtNETCP
         /// Gets an standard .NET color from the current Irrlicht color.
         /// </summary>
         /// <returns>The .NET color</returns>
-        public System.Drawing.Color ToBCL()
+        /// <value>The .NET color</value>
+        public System.Drawing.Color dotNETColor
         {
-            return System.Drawing.Color.FromArgb((int)(A * 255f), (int)(R * 255f), (int)(G * 255f), (int)(B * 255f));
+            get { return System.Drawing.Color.FromArgb((int)(A * 255f), (int)(R * 255f), (int)(G * 255f), (int)(B * 255f)); }
+            set { A = value.A / 255f; R = value.R / 255f; G = value.G / 255f; B = value.G / 255f; }
+
         }
 
         /// <summary>
@@ -196,7 +205,10 @@ namespace IrrlichtNETCP
                 return (uint)(0.3f * R * 255f + 0.59f * G * 255f + 0.11f * B * 255f);
             }
         }
-
+        public static explicit operator Colorf(Color c)
+        {
+            return new Colorf(c.A / 255f, c.R / 255f, c.G / 255f, c.B / 255f);
+        }
         #region Premade Colors
         public static Colorf Red = new Colorf(1.0f, 1.0f, 0.0f, 0.0f);
         public static Colorf Green = new Colorf(1.0f, 0.0f, 1.0f, 0.0f);
@@ -215,5 +227,5 @@ namespace IrrlichtNETCP
         public static Colorf TransparentPurple = new Colorf(0.0f, 1.0f, 0, 1.0f);
         public static Colorf TransparentGray = new Colorf(0.0f, 0.39f, 0.39f, 0.39f);
         #endregion
-    } 
+    }
 }

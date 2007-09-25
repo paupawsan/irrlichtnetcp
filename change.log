@@ -15,6 +15,7 @@ fic functions depending on the mesh type
 cific routines
 -Added RotateSpeed, MoveSpeed to CameraSceneNode
 -Added Line2D by Kimundi
+-Added a couple of improvements to the global types, thanks to Kimundi
 
 =============================================================================
 Irrlicht .NET CP 0.8
