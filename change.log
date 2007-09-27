@@ -6,6 +6,11 @@
 =============================================================================
 Irrlicht .NET CP 0.9
 =============================================================================
+
+
+=============================================================================
+Irrlicht .NET CP 0.8.1 bugfix release
+=============================================================================
 -Added Irrlicht's parameters to VideoDriver.EndScene (thanks to Nikolaus for
 this).
 -Changed Rect.IsValid() to Rect.Valid, and corrected it (thanks to Kimundi).

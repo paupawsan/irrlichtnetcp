@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/home/lester/progs/irrlichtnetcp-svn/bin/Release/Irrlicht.NET</name>
+        <name>/home/admin/lester/irrlichtnetcp-svn/bin/Release/Irrlicht.NET</name>
     </assembly>
     <members>
         <member name="M:IrrlichtNETCP.FileSystem.AddZipFileArchive(System.String,System.Boolean,System.Boolean)">
@@ -117,11 +117,12 @@
             </summary>
             <param name="edges">Aray of 8 edges</param>
         </member>
-        <member name="M:IrrlichtNETCP.Color.ToBCL">
+        <member name="P:IrrlichtNETCP.Color.dotNETColor">
             <summary>
-            Gets an standard .NET color from the current Irrlicht color.
+            Gets and Sets an standard .NET color from the current Irrlicht color.
             </summary>
             <returns>The .NET color</returns>
+            <value> The .NET color</value>
         </member>
         <member name="M:IrrlichtNETCP.Color.FromBCL(System.Drawing.Color)">
             <summary>
@@ -130,11 +131,12 @@
             <param name="bcl">The standard .NET color</param>
             <returns>The Irrlicht color</returns>
         </member>
-        <member name="M:IrrlichtNETCP.Colorf.ToBCL">
+        <member name="P:IrrlichtNETCP.Colorf.dotNETColor">
             <summary>
             Gets an standard .NET color from the current Irrlicht color.
             </summary>
             <returns>The .NET color</returns>
+            <value>The .NET color</value>
         </member>
         <member name="M:IrrlichtNETCP.Colorf.FromBCL(System.Drawing.Color)">
             <summary>
@@ -142,6 +144,18 @@
             </summary>
             <param name="bcl">The standard .NET color</param>
             <returns>The Irrlicht color</returns>
+        </member>
+        <member name="M:IrrlichtNETCP.Dimension2D.#ctor(System.Int32)">
+            <summary>
+            Makes a sqare with Width and Height q
+            </summary>
+            <param name="q">Width and Height will be q</param>
+        </member>
+        <member name="M:IrrlichtNETCP.Dimension2Df.#ctor(System.Single)">
+            <summary>
+            Makes a sqare with Width and Height q
+            </summary>
+            <param name="q">Width and Height will be q</param>
         </member>
         <member name="M:IrrlichtNETCP.Matrix4.MakeIdentity">
             <summary> Set matrix to identity. </summary>
@@ -180,6 +194,11 @@
             or if the area described by the rect is 0.
             </summary>
         </member>
+        <member name="P:IrrlichtNETCP.Rect.ValidRect">
+            <summary>
+            Returns a always Valid Version of the Rect
+            </summary>
+        </member>
         <member name="M:IrrlichtNETCP.Rect.IsPointInside(IrrlichtNETCP.Position2D)">
             <summary>
             Returns if a 2d point is within this rectangle.
@@ -202,12 +221,6 @@
             If the lower right corner of the rect is smaller then the upper left,
             the points are swapped.
             </summary>
-        </member>
-        <member name="M:IrrlichtNETCP.Rect.ToBCL">
-            <summary>
-            Returns a standard .NET Rectangle from the current Irrlicht rectangle
-            </summary>
-            <returns>The standard .NET Rectangle</returns>
         </member>
         <member name="M:IrrlichtNETCP.Rect.FromBCL(System.Drawing.Rectangle)">
             <summary>
