@@ -51,13 +51,14 @@
     <Compile Include="Global\Types\Color.cs" />
     <Compile Include="Global\Types\Dimension2D.cs" />
     <Compile Include="Global\Types\Line3D.cs" />
+    <Compile Include="Global\Types\Line2D.cs" />
     <Compile Include="Global\Types\Matrix4.cs" />
     <Compile Include="Global\Types\Position2D.cs" />
     <Compile Include="Global\Types\Rect.cs" />
     <Compile Include="Global\Types\Triangle3D.cs" />
     <Compile Include="Global\Types\Vector2D.cs" />
     <Compile Include="Global\Types\Vector3D.cs" />
-    <Compile Include="Global\Quaternion.cs" />
+    <Compile Include="Global\Types\Quaternion.cs" />
     <Compile Include="Global\Types\ViewFrustrum.cs" />
     <Compile Include="Gui\CursorControl.cs" />
     <Compile Include="Gui\GUIButton.cs" />
@@ -81,6 +82,10 @@
     <Compile Include="Gui\GUIToolBar.cs" />
     <Compile Include="Gui\GUIWindow.cs" />
     <Compile Include="Scene\Meshes\AnimatedMesh.cs" />
+    <Compile Include="Scene\Meshes\AnimatedMeshB3D.cs" />
+    <Compile Include="Scene\Meshes\AnimatedMeshMD2.cs" />
+    <Compile Include="Scene\Meshes\AnimatedMeshMS3D.cs" />
+    <Compile Include="Scene\Meshes\AnimatedMeshX.cs" />
     <Compile Include="Scene\Meshes\Mesh.cs" />
     <Compile Include="Scene\Meshes\MeshBuffer.cs" />
     <Compile Include="Scene\Meshes\MeshManipulator.cs" />

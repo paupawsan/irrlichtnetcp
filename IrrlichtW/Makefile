@@ -56,13 +56,6 @@ $(IRR_LIB_NAME): $(IRR_SRC_OBJECTS)
 	cp lib$(IRR_LIB_NAME).so $(DEBUG_PATH)/lib$(IRR_LIB_NAME).so
 	cp lib$(IRR_LIB_NAME).so $(RELEASE_PATH)/lib$(IRR_LIB_NAME).so
 	strip $(RELEASE_PATH)/lib$(IRR_LIB_NAME).so
-	#*******************************************************
-	#
-	# Irrlicht .NET CP wrapper's native lib
-	# Copyright (c) 2006 Emmanuel 'DeusXL' Bossiere
-	# Look to the license.txt for details 
-	#
-	#*******************************************************
 
 clean:
 	rm *.o
