@@ -46,7 +46,7 @@ namespace GUIExample
                              null, (int)GUIItems.FunnyEffect, "Funny Effect !");
             //Our logo
             guienv.AddImage(driver.GetTexture("../../medias/NETCPlogo.png"), new Position2D(0, 0), true, null, -1, "");
-
+			
 			//And now the scrollbar
             GUIScrollBar scroll = guienv.AddScrollBar(true, new Rect(new Position2D(200, 220), new Dimension2D(240, 40)), null,
                                 (int)GUIItems.ScrollBar);
@@ -156,7 +156,8 @@ namespace GUIExample
             //The event wasn't handled
             return false;
         }
-    }
+		
+    } 
 
     //Our item list... Our program will be prettier than if we had created
     //hundredth of pointless integers

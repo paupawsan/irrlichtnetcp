@@ -15,6 +15,12 @@ namespace IrrlichtNETCP
 		{
 		}
 
+		/// <summary>
+		/// Copies the current material into the other one
+		/// </summary>
+		/// <param name="dest">
+		/// A material being copied to<see cref="Material"/>
+		/// </param>
         public void CopyTo(Material dest)
         {
             dest.AmbientColor = AmbientColor;
@@ -41,6 +47,9 @@ namespace IrrlichtNETCP
             dest.ZWriteEnable = ZWriteEnable;
         }
 		
+		/// <value>
+		/// Ambient value of the material 
+		/// </value>
 		public Color AmbientColor
 		{
 			get
@@ -55,6 +64,9 @@ namespace IrrlichtNETCP
 			}
 		}
 		
+		/// <value>
+		/// Diffuse value of the material
+		/// </value>
 		public Color DiffuseColor
 		{
 			get
@@ -69,6 +81,9 @@ namespace IrrlichtNETCP
 			}
 		}
 		
+		/// <value>
+		/// Emissive value of the material
+		/// </value>
 		public Color EmissiveColor
 		{
 			get
@@ -83,6 +98,9 @@ namespace IrrlichtNETCP
 			}
 		}
 		
+		/// <value>
+		/// Specular value of the color
+		/// </value>
 		public Color SpecularColor
 		{
 			get

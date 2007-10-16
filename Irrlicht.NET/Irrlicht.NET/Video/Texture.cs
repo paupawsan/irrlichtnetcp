@@ -45,7 +45,13 @@ namespace IrrlichtNETCP
             _lockresult = Texture_Lock(_raw);
             return _lockresult;
         }
-
+		
+		/// <summary>
+		/// Safely copies into the texture
+		/// </summary>
+		/// <param name="tex">
+		/// A texture needed to copy to <see cref="Texture"/>
+		/// </param>
         public void SafeCopyInto(Texture tex)
         {
             Color[,] col = Retrieve();

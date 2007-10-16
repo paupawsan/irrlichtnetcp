@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>/home/admin/lester/irrlichtnetcp-svn/bin/Release/Irrlicht.NET</name>
+        <name>/home/lester/progs/irrlichtnetcp-svn/bin/Release/Irrlicht.NET</name>
     </assembly>
     <members>
         <member name="M:IrrlichtNETCP.FileSystem.AddZipFileArchive(System.String,System.Boolean,System.Boolean)">
@@ -907,6 +907,13 @@
             </summary>
             <returns>Pointer to the lock result. You can use it in an unsafe context or use GetPixel/SetPixel</returns>
         </member>
+        <member name="M:IrrlichtNETCP.Texture.SafeCopyInto(IrrlichtNETCP.Texture)">
+            <summary>
+            Safely copies into the texture
+            </summary>
+            <param name="tex">
+            A texture needed to copy to <see cref="T:IrrlichtNETCP.Texture" /></param>
+        </member>
         <member name="M:IrrlichtNETCP.Texture.Unlock">
             <summary>
             You must always call this after each lock.
@@ -1015,6 +1022,33 @@
             </summary>
             <param name="texture">Input texture that will be modified</param>
             <param name="amplitude">Constant value which by the height information is multiplied</param>
+        </member>
+        <member name="P:IrrlichtNETCP.Material.AmbientColor">
+            <value>
+            Ambient value of the material
+            </value>
+        </member>
+        <member name="P:IrrlichtNETCP.Material.DiffuseColor">
+            <value>
+            Diffuse value of the material
+            </value>
+        </member>
+        <member name="P:IrrlichtNETCP.Material.EmissiveColor">
+            <value>
+            Emissive value of the material
+            </value>
+        </member>
+        <member name="P:IrrlichtNETCP.Material.SpecularColor">
+            <value>
+            Specular value of the color
+            </value>
+        </member>
+        <member name="M:IrrlichtNETCP.Material.CopyTo(IrrlichtNETCP.Material)">
+            <summary>
+            Copies the current material into the other one
+            </summary>
+            <param name="dest">
+            A material being copied to<see cref="T:IrrlichtNETCP.Material" /></param>
         </member>
         <member name="T:IrrlichtNETCP.GPUProgrammingServices.OnNativeSCSD">
             <summary>

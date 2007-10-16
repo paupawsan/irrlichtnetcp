@@ -4,7 +4,7 @@ void Pointer_SafeRelease(IntPtr pointer)
 {
     #if WIN32
     if(pointer)
-        delete pointer;    
+        (IUnknown *)pointer->drop();
 	#endif
 }
 
@@ -33,15 +33,22 @@ wchar_t *MU_WCHAR(const M_STRING base)
 M_STRING UM_STRING(const wchar_t* base)
 {
 	std::wstring b(base);
-	M_STRING str = new char[b.length() + 1];
+	// Damn I'm so dumb !
+	// We should allocate a b.length() * sizeof (wchar_t) bytes
+	// because a wchar_t can be twice bigger than char,
+	// so one character in wchar_t may need two bytes of char
+	// Probably thats why this caused troubles on vista, 
+	// because M$ has finally switched to the full multibyte encoding. Duh!
+	M_STRING str = new char[b.length()*sizeof(wchar_t) + 1];
 	size_t size;
 #ifdef _MSC_VER
-	wcstombs_s(&size, str, b.length() + 1, b.c_str(), b.length());
+    // I don't know the syntax of this function
+    // so I assume it works
+	wcstombs_s(&size, str, b.length()*sizeof(wchar_t), b.c_str(), b.length()*sizeof(wchar_t));
 #else
-	size = wcstombs(str, b.c_str(), b.length());
+	size = wcstombs(str, b.c_str(), b.length()*sizeof(wchar_t));
 #endif
-	str[size] = '\0';
-	return str;
+    return str;
 }
 
 M_STRING UM_STRING(const M_STRING base)
