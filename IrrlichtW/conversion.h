@@ -7,7 +7,7 @@
 #include <iostream>
 #include <wchar.h>
 #include <string> 
-#include "../Irrlicht SDK/include/irrlicht.h"
+#include "irrlicht.h"
 
 #ifdef WIN32
 #define STDCALL __stdcall*

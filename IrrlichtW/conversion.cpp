@@ -1,10 +1,18 @@
 #include "conversion.h"
+#include "IUnknown.h"
+
 #include <iostream>
 void Pointer_SafeRelease(IntPtr pointer)
 {
+	irr::IUnknown* tmpPtr = NULL;
+
     #if WIN32
     if(pointer)
-        (IUnknown *)pointer->drop();
+	{
+		 tmpPtr = (irr::IUnknown*)pointer;
+		 tmpPtr->drop();
+	}
+		
 	#endif
 }
 
