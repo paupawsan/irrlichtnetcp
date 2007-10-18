@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="&quot;F:\Projekte 2007\irrlichtnetcp-svn\Irrlicht SDK\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,11 +64,15 @@
 				IgnoreImportLibrary="true"
 				LinkLibraryDependencies="false"
 				AdditionalDependencies="&quot;..\Irrlicht SDK\lib\Win32-visualstudio\irrlicht.lib&quot;"
-				OutputFile="..\bin\Debug\$(ProjectName).dll"
-				GenerateDebugInformation="false"
+				OutputFile="..\bin\Debug\$(ProjectName)_d.dll"
+				GenerateDebugInformation="true"
+				AssemblyDebug="1"
+				GenerateMapFile="true"
+				MapFileName="$(TargetDir)$(TargetName).map"
+				MapExports="true"
 				SubSystem="2"
-				OptimizeReferences="2"
-				EnableCOMDATFolding="2"
+				OptimizeReferences="1"
+				EnableCOMDATFolding="1"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -120,6 +125,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalIncludeDirectories="&quot;F:\Projekte 2007\freetype-2.3.3\include&quot;;&quot;F:\Projekte 2007\irrlichtnetcp-svn\Irrlicht SDK\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;COMPILE_WITH_FREETYPE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -145,6 +151,7 @@
 				LinkLibraryDependencies="false"
 				AdditionalDependencies="&quot;..\Irrlicht SDK\lib\Win32-visualstudio\irrlicht.lib&quot;"
 				OutputFile="..\bin\Release\$(ProjectName).dll"
+				AdditionalLibraryDirectories="&quot;F:\Projekte 2007\irrlichtnetcp-svn\Irrlicht SDK\lib&quot;;&quot;F:\Projekte 2007\freetype-2.3.3\objs\debug_mt&quot;"
 				GenerateManifest="true"
 				IgnoreAllDefaultLibraries="false"
 				IgnoreDefaultLibraryNames="libcmt.lib"

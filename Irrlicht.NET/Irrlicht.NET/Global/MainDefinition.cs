@@ -4,7 +4,11 @@ using System;
  {
  	public class Native
  	{
+#if DEBUG
+        public const string Dll = @"IrrlichtW_d";
+#else
         public const string Dll = @"IrrlichtW";
+#endif
  	}
  	
  	public enum DriverType

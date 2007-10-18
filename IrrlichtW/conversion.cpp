@@ -24,6 +24,13 @@ bool fixmarshal(bool val)
 }
 #endif
 
+//Converts from irr::core::stringw to managed string --> getToolTipText
+M_STRING IM_STRING(const IRRSTRING base)
+{
+	const wchar_t* b = base.c_str();
+	return UM_STRING(b);
+}
+
 wchar_t *MU_WCHAR(const M_STRING base)
 {
 	std::string b(base);
@@ -52,7 +59,12 @@ M_STRING UM_STRING(const wchar_t* base)
 #ifdef _MSC_VER
     // I don't know the syntax of this function
     // so I assume it works
-	wcstombs_s(&size, str, b.length()*sizeof(wchar_t), b.c_str(), b.length()*sizeof(wchar_t));
+	errno_t errValue;
+	errValue = wcstombs_s(&size, str, (b.length()+1) * sizeof(wchar_t), b.c_str(),sizeof(wchar_t)*b.length());
+	if (errValue == 42) //returned value for char that could not be converted
+		str = "Unknown wide-char!";
+
+	//wcstombs_s(&size, str, b.length()*sizeof(wchar_t), b.c_str(), b.length()*sizeof(wchar_t));
 #else
 	size = wcstombs(str, b.c_str(), b.length()*sizeof(wchar_t));
 #endif

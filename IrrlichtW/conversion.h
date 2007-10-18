@@ -95,4 +95,7 @@ M_STRING UM_STRING(const wchar_t* base);
 wchar_t *MU_WCHAR(const M_STRING base);
 M_STRING UM_STRING(const M_STRING base);
 
+#define IRRSTRING irr::core::stringw
+M_STRING IM_STRING(const IRRSTRING base);
+
 #endif

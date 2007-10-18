@@ -22,7 +22,7 @@ void GuiElem_Draw(IntPtr elem)
 
 M_STRING GuiElem_GetToolTipText(IntPtr elem)
 {
-	return UM_STRING(GetElem(elem)->getText());
+	return IM_STRING(GetElem(elem)->getToolTipText());
 }
 
 void GuiElem_SetToolTipText( IntPtr elem, M_STRING text )
