@@ -98,4 +98,9 @@ M_STRING UM_STRING(const M_STRING base);
 #define IRRSTRING irr::core::stringw
 M_STRING IM_STRING(const IRRSTRING base);
 
+extern "C"
+{
+	EXPORT void freeUMMemory(IntPtr pointer, bool arrayType);
+}
+
 #endif

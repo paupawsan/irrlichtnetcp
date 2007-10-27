@@ -2,6 +2,15 @@
 #include "IUnknown.h"
 
 #include <iostream>
+
+void freeUMMemory(IntPtr pointer, bool arrayType)
+{
+	if (arrayType)
+		delete[] pointer;
+	else
+		delete pointer;
+}
+
 void Pointer_SafeRelease(IntPtr pointer)
 {
 	irr::IUnknown* tmpPtr = NULL;
@@ -54,13 +63,22 @@ M_STRING UM_STRING(const wchar_t* base)
 	// so one character in wchar_t may need two bytes of char
 	// Probably thats why this caused troubles on vista, 
 	// because M$ has finally switched to the full multibyte encoding. Duh!
-	M_STRING str = new char[b.length()*sizeof(wchar_t) + 1];
+#ifdef DEBUG
+	std::cerr << "Size of wchar_t string " << b.length() << std::endl;
+#endif
+	M_STRING str = new char[(b.length()+ 2)*sizeof(wchar_t) ];
 	size_t size;
 #ifdef _MSC_VER
     // I don't know the syntax of this function
     // so I assume it works
 	errno_t errValue;
-	errValue = wcstombs_s(&size, str, (b.length()+1) * sizeof(wchar_t), b.c_str(),sizeof(wchar_t)*b.length());
+	errValue = wcstombs_s(&size, str, (b.length()+1) * sizeof(wchar_t), b.c_str(),sizeof(wchar_t)*(b.length()+1));
+#ifdef DEBUG
+	std::cerr << "Done conversion!" << std::endl;
+	std::cerr << "#converted chars: " << size << std::endl;
+	std::cerr << "converted String: " << str << std::endl;
+	std::cerr << "Error value: " << errValue << std::endl;
+#endif
 	if (errValue == 42) //returned value for char that could not be converted
 		str = "Unknown wide-char!";
 
@@ -68,6 +86,12 @@ M_STRING UM_STRING(const wchar_t* base)
 #else
 	size = wcstombs(str, b.c_str(), b.length()*sizeof(wchar_t));
 #endif
+	str[size] = '\0';
+#ifdef DEBUG
+	std::cerr << " Added null-termination!" << std::endl;	
+	std::cerr << " Final string: " << str << std::endl;
+#endif
+
     return str;
 }
 

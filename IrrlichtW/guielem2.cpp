@@ -1,5 +1,6 @@
 #include "guielem2.h"
 
+
 bool useAlphaChannel = false;
 bool GUIButton_GetUseAlphaChannel(IntPtr button)
 {
@@ -266,7 +267,7 @@ int GUIListBox_GetItemCount(IntPtr listb)
 	return ((IGUIListBox*)listb)->getItemCount();
 }
 
-M_STRING GUIListBox_GetListItem(IntPtr listb, int id)
+IntPtr GUIListBox_GetListItem(IntPtr listb, int id)
 {
 	return UM_STRING(((IGUIListBox*)listb)->getListItem(id));
 }
