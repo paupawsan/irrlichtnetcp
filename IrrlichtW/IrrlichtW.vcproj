@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;E:\projects\irrlichtnetcp-svn\Irrlicht SDK\include&quot;"
+				AdditionalIncludeDirectories="&quot;..\Irrlicht SDK\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -125,6 +125,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				FavorSizeOrSpeed="1"
 				AdditionalIncludeDirectories="&quot;F:\Projekte 2007\freetype-2.3.3\include&quot;;&quot;F:\Projekte 2007\irrlichtnetcp-svn\Irrlicht SDK\include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;COMPILE_WITH_FREETYPE"
 				RuntimeLibrary="2"

@@ -33,31 +33,18 @@ namespace IrrlichtNETCP
             try
             {
                 //New way for string marshalling according to
-                // http://www.mono-project/Interop_With_Native_Libraries
+                //http://www.mono-project/Interop_With_Native_Libraries
                 ptr_value = GUIListBox_GetListItem(_raw, id);
-                value = Marshal.PtrToStringAnsi(ptr_value);
+                
+                //Combined Marshalling and memory release in one method/class (MainDefinition.cs)
+                //for general access in all functions using strings
+                value = Marshal.IntPtrToString(ptr_value);
             }
             catch (Exception e)
             {
-#if _DEBUG
-                System.Diagnostics.Debug.WriteLine("Retrieval from wrapper failed");
-                System.Diagnostics.Debug.WriteLine("Exception: " + e.Message);
-#endif
                 return "Error!";
             }
-            try
-            {
-                //New method used to free memory allocated in C++ wrapper
-                freeUMMemory(ptr_value, true);
-            }
-            catch (Exception e)
-            {
-#if _DEBUG
-                System.Diagnostics.Debug.WriteLine("Freeing of unmanaged memory failed!");
-                System.Diagnostics.Debug.WriteLine("Memory leak caused!");
-                System.Diagnostics.Debug.WriteLine("Exception: " + e.Message);             
-#endif
-            }
+            
             return value;
         }
 

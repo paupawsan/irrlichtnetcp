@@ -131,4 +131,39 @@ using System;
  		TPS65 = 65,
  		TPS129 = 129
  	}
+
+     public class Marshal
+     {
+         public static string IntPtrToString(IntPtr pointer)
+         {
+            string value;
+
+            try
+            {
+                value = Marshal.PtrToStringAnsi(pointer);
+            }
+            catch (Exception e)
+            {
+#if _DEBUG
+                System.Diagnostics.Debug.WriteLine("Retrieval from wrapper failed");
+                System.Diagnostics.Debug.WriteLine("Exception: " + e.Message);
+#endif
+                return "Error!";
+            }
+            try
+            {
+                //New method used to free memory allocated in C++ wrapper
+                freeUMMemory(pointer, true);
+            }
+            catch (Exception e)
+            {
+#if _DEBUG
+                System.Diagnostics.Debug.WriteLine("Freeing of unmanaged memory failed!");
+                System.Diagnostics.Debug.WriteLine("Memory leak caused!");
+                System.Diagnostics.Debug.WriteLine("Exception: " + e.Message);             
+#endif
+            }
+            return value;
+         }
+     }
  }

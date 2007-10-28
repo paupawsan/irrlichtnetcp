@@ -21,6 +21,10 @@ cific routines
 -Added RotateSpeed, MoveSpeed to CameraSceneNode
 -Added Line2D by Kimundi
 -Added a couple of improvements to the global types, thanks to Kimundi
+-Added #if statment for Irrlicht.NET to compile with IrrlichtW_d debug version
+-Fixed bug where retrieval of ToolTipText actually returned getText() in guielem.cpp
+-Added Debug compile profile in IrrlichtW solution
+-Fixed Vista string bug related to memory release of unmanaged allocated memory in IrrlichtW
 
 =============================================================================
 Irrlicht .NET CP 0.8
