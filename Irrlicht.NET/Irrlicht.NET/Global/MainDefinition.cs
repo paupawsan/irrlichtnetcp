@@ -1,4 +1,6 @@
 using System;
+using System.Runtime.InteropServices;
+using System.Security;
  
  namespace IrrlichtNETCP
  {
@@ -132,7 +134,7 @@ using System;
  		TPS129 = 129
  	}
 
-     public class Marshal
+     public class IrrNetMarshal
      {
          public static string IntPtrToString(IntPtr pointer)
          {
@@ -164,6 +166,11 @@ using System;
 #endif
             }
             return value;
-         }
+        }
+
+        #region Native Invokes
+        [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+         static extern void freeUMMemory(IntPtr pointer, bool arrayType);
+#endregion
      }
  }

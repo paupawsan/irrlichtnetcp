@@ -38,9 +38,9 @@ namespace IrrlichtNETCP
                 
                 //Combined Marshalling and memory release in one method/class (MainDefinition.cs)
                 //for general access in all functions using strings
-                value = Marshal.IntPtrToString(ptr_value);
+                value = IrrNetMarshal.IntPtrToString(ptr_value);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return "Error!";
             }
@@ -98,8 +98,7 @@ namespace IrrlichtNETCP
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIListBox_SetSelected(IntPtr listb, int sel);
 
-        [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern void freeUMMemory(IntPtr pointer, bool arrayType);
+       
 
         #endregion
 
