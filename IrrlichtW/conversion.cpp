@@ -15,14 +15,14 @@ void Pointer_SafeRelease(IntPtr pointer)
 {
 	irr::IUnknown* tmpPtr = NULL;
 
-    #if WIN32
+//    #if WIN32
     if(pointer)
 	{
 		 tmpPtr = (irr::IUnknown*)pointer;
 		 tmpPtr->drop();
 	}
-		
-	#endif
+
+//	#endif
 }
 
 #ifdef _MSC_VER
@@ -61,7 +61,7 @@ M_STRING UM_STRING(const wchar_t* base)
 	// We should allocate a b.length() * sizeof (wchar_t) bytes
 	// because a wchar_t can be twice bigger than char,
 	// so one character in wchar_t may need two bytes of char
-	// Probably thats why this caused troubles on vista, 
+	// Probably thats why this caused troubles on vista,
 	// because M$ has finally switched to the full multibyte encoding. Duh!
 #ifdef DEBUG
 	std::cerr << "Size of wchar_t string " << b.length() << std::endl;
@@ -88,7 +88,7 @@ M_STRING UM_STRING(const wchar_t* base)
 #endif
 	str[size] = '\0';
 #ifdef DEBUG
-	std::cerr << " Added null-termination!" << std::endl;	
+	std::cerr << " Added null-termination!" << std::endl;
 	std::cerr << " Final string: " << str << std::endl;
 #endif
 

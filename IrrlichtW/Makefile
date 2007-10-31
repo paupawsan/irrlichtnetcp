@@ -11,11 +11,12 @@ default: all
 IRR_SDK_INCLUDE_PATH=../Irrlicht\ SDK/include
 IRR_SDK_LIB=../Irrlicht\ SDK/lib/Linux
 IRR_LIB_NAME=IrrlichtW
+IRR_LIB_NAME_DEBUG=IrrlichtW-dbg
 
 DEBUG_PATH=../bin/Debug
 RELEASE_PATH=../bin/Release
 
-COMPILER=g++
+COMPILER=$(CC)
 CFLAGS = -g -O3
 FLAGS = $(CFLAGS) -I $(IRR_SDK_INCLUDE_PATH) -I/usr/include -I/usr/include/freetype2
 LDFLAGS=-L/usr/X11R6/lib -lGLU -lGL -lfreetype -lXxf86vm ../Irrlicht\ SDK/lib/Linux/libIrrlicht.a
@@ -53,7 +54,7 @@ all: $(IRR_LIB_NAME)
 
 $(IRR_LIB_NAME): $(IRR_SRC_OBJECTS)
 	$(COMPILER) $(FLAGS) -shared $^ -o lib$@.so $(LDFLAGS)
-	cp lib$(IRR_LIB_NAME).so $(DEBUG_PATH)/lib$(IRR_LIB_NAME).so
+	cp lib$(IRR_LIB_NAME).so $(DEBUG_PATH)/lib$(IRR_LIB_NAME_DEBUG).so
 	cp lib$(IRR_LIB_NAME).so $(RELEASE_PATH)/lib$(IRR_LIB_NAME).so
 	strip $(RELEASE_PATH)/lib$(IRR_LIB_NAME).so
 

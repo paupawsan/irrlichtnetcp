@@ -25,6 +25,10 @@ cific routines
 -Fixed bug where retrieval of ToolTipText actually returned getText() in guielem.cpp
 -Added Debug compile profile in IrrlichtW solution
 -Fixed Vista string bug related to memory release of unmanaged allocated memory in IrrlichtW
+-Changed Device_Drop in method Dispose() to Device_Close due to the memory corruption within glibc
+-Fixed a bug LogEvent.Text management since it caused troubles with double freeing within glibc
+-Improved a NativeElement a bit. Thank to bull for proposition. This will go further to 0.9
+-changed define IrrlichtW_d to IrrlichtW-dbg for more convenience and cleanliness
 
 =============================================================================
 Irrlicht .NET CP 0.8

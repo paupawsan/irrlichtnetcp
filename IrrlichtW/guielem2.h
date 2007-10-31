@@ -15,7 +15,7 @@ extern "C"
 
 	EXPORT bool GUICheckBox_IsChecked(IntPtr checkbox);
 	EXPORT void GUICheckBox_SetChecked(IntPtr checkbox, bool ck);
-	
+
 	EXPORT int GUIComboBox_AddItem(IntPtr combo, M_STRING text);
 	EXPORT void GUIComboBox_Clear(IntPtr combo);
 	EXPORT M_STRING GUIComboBox_GetItem(IntPtr combo, int index);
@@ -62,7 +62,7 @@ extern "C"
 	EXPORT int GUIListBox_AddItemA(IntPtr listb, M_STRING text);
 	EXPORT void GUIListBox_Clear(IntPtr listb);
 	EXPORT int GUIListBox_GetItemCount(IntPtr listb);
-	EXPORT IntPtr GUIListBox_GetListItem(IntPtr listb, int id);
+	EXPORT M_STRING GUIListBox_GetListItem(IntPtr listb, int id);
 
 	EXPORT int GUIListBox_GetSelected(IntPtr listb);
 	EXPORT void GUIListBox_SetIconFont(IntPtr listb, IntPtr font);

@@ -10,6 +10,26 @@ namespace GUIExample
     	//We don't need any scene manager in this example
         static VideoDriver driver;
         static GUIEnvironment guienv;
+		
+
+		static  void testGUI(GUIEnvironment gui)
+        {
+            GUIListBox lstResolution = null;
+            lstResolution = gui.AddListBox(new Rect(10,10,110,220), null, -1, false);
+            lstResolution.AddItem("Dummy1");
+            lstResolution.ToolTipText = "Nothing important!";
+            lstResolution.AddItem("Dummy2");
+            lstResolution.AddItem("Dummy3");
+            lstResolution.AddItem("Dummy4");
+
+            //value is "" always, same with tooltip when evaluated
+            string value = lstResolution.GetListItem(2);
+			
+			Console.WriteLine(value);
+
+           
+        } 
+		
         static void Main(string[] args)
         {
         	//We choosed OpenGL because it is cross-platform and GUI does not need
@@ -51,6 +71,8 @@ namespace GUIExample
             GUIScrollBar scroll = guienv.AddScrollBar(true, new Rect(new Position2D(200, 220), new Dimension2D(240, 40)), null,
                                 (int)GUIItems.ScrollBar);
 
+			testGUI(guienv);
+			
 			//Var for the funny effects
             int toAdd = 1;
             //While the device is running and we don't want him to exit

@@ -235,7 +235,7 @@ namespace IrrlichtNETCP
             try
             {
                 if (_raw != IntPtr.Zero)
-                    Device_Drop(_raw);
+                    Device_Close(_raw);
             }
             catch { }
 		}
