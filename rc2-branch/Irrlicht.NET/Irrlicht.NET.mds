@@ -1,0 +1,41 @@
+<Combine name="Irrlicht.NET" fileversion="2.0" outputpath="./build/bin/">
+  <Configurations active="Release">
+    <Configuration name="Debug" ctype="CombineConfiguration">
+      <Entry build="True" name="Irrlicht.NET" configuration="Debug" />
+      <Entry build="True" name="Example" configuration="Debug" />
+      <Entry build="True" name="GUIExample" configuration="Debug" />
+      <Entry build="True" name="ShadersAndParticles" configuration="Debug" />
+      <Entry build="True" name="CustomSceneNode" configuration="Debug" />
+      <Entry build="True" name="Irrlicht.Extensions" configuration="Debug" />
+      <Entry build="True" name="TerrainExample" configuration="Debug" />
+    </Configuration>
+    <Configuration name="Release" ctype="CombineConfiguration">
+      <Entry build="True" name="Irrlicht.NET" configuration="Release" />
+      <Entry build="True" name="Example" configuration="Release" />
+      <Entry build="True" name="GUIExample" configuration="Release" />
+      <Entry build="True" name="ShadersAndParticles" configuration="Release" />
+      <Entry build="True" name="CustomSceneNode" configuration="Release" />
+      <Entry build="True" name="Irrlicht.Extensions" configuration="Release" />
+      <Entry build="True" name="TerrainExample" configuration="Release" />
+    </Configuration>
+  </Configurations>
+  <StartMode startupentry="GUIExample" single="True">
+    <Execute type="None" entry="Irrlicht.NET" />
+    <Execute type="None" entry="Example" />
+    <Execute type="None" entry="GUIExample" />
+    <Execute type="None" entry="ShadersAndParticles" />
+    <Execute type="None" entry="CustomSceneNode" />
+    <Execute type="None" entry="Irrlicht.Extensions" />
+    <Execute type="None" entry="TerrainExample" />
+  </StartMode>
+  <DeployTargets />
+  <Entries>
+    <Entry filename="./Irrlicht.NET/Irrlicht.NET.mdp" />
+    <Entry filename="./Example/Example.mdp" />
+    <Entry filename="./GUIExample/GUIExample.mdp" />
+    <Entry filename="./ShadersAndParticles/ShadersAndParticles.mdp" />
+    <Entry filename="./CustomSceneNode/CustomSceneNode.mdp" />
+    <Entry filename="./Irrlicht.Extensions/Irrlicht.Extensions.mdp" />
+    <Entry filename="./TerrainExample/TerrainExample.mdp" />
+  </Entries>
+</Combine>
