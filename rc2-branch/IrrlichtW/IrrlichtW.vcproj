@@ -64,7 +64,7 @@
 				IgnoreImportLibrary="true"
 				LinkLibraryDependencies="false"
 				AdditionalDependencies="&quot;..\Irrlicht SDK\lib\Win32-visualstudio\irrlicht.lib&quot;"
-				OutputFile="..\bin\Debug\$(ProjectName)_d.dll"
+				OutputFile="..\bin\Debug\$(ProjectName)d.dll"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				GenerateMapFile="true"

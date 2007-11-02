@@ -25,9 +25,12 @@ s32 Texture_GetPitch(IntPtr texture)
     return GetTextureFromPtr(texture)->getPitch();
 }
 
-const M_STRING Texture_GetName(IntPtr texture)
+//TODO: Check functionality with (char*) cast
+const IntPtr Texture_GetName(IntPtr texture)
 {
-   return ((ITexture*)texture)->getName().c_str();
+   ITexture* tex = (ITexture*)texture;
+
+   return (char*)tex->getName().c_str();
 } 
 
 /*

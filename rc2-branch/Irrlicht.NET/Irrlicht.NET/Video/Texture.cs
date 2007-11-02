@@ -17,7 +17,26 @@ namespace IrrlichtNETCP
 		public DriverType DriverType { get { return Texture_GetDriverType(_raw); } }
 		public Dimension2D OriginalSize{ get { int[] dim = new int[2]; Texture_GetOriginalSize(_raw, dim); return Dimension2D.FromUnmanaged(dim); } }
 		public int Pitch { get { return Texture_GetPitch(_raw); } }
-        public string Name { get { return Texture_GetName(_raw); } }
+        public string Name 
+        { 
+            get 
+            {
+                //IntPtr ptr_value = IntPtr.Zero;
+                //string value;
+                //try
+                //{
+                //    ptr_value = Texture_GetName(_raw);
+                //    value = IrrNetMarshal.IntPtrToString(ptr_value);
+                //}
+                //catch (Exception e)
+                //{
+                //    return "Error!";
+                //}
+
+                //return value;
+                return Texture_GetName(_raw);
+            } 
+        }
         //EDITED KIWSA
         /*public virtual Matrix4 Transform
         {

@@ -7,7 +7,7 @@ using System.Security;
  	public class Native
  	{
 #if DEBUG
-        public const string Dll = @"IrrlichtW_d";
+        public const string Dll = @"IrrlichtWd";
 #else
         public const string Dll = @"IrrlichtW";
 #endif

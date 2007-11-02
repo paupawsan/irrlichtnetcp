@@ -13,7 +13,7 @@ extern "C"
 	EXPORT int GuiElem_GetID(IntPtr elem);
 	EXPORT IntPtr GuiElem_GetParent(IntPtr elem);
 	EXPORT void GuiElem_GetRelativePosition(IntPtr elem, M_RECT pos);
-	EXPORT M_STRING GuiElem_GetText(IntPtr elem);
+	EXPORT IntPtr GuiElem_GetText(IntPtr elem);
 	EXPORT EGUI_ELEMENT_TYPE GuiElem_GetType(IntPtr elem);
 	EXPORT bool GuiElem_IsEnabled(IntPtr elem);
 	EXPORT bool GuiElem_IsVisible(IntPtr elem);

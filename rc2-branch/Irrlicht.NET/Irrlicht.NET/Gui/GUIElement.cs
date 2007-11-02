@@ -155,14 +155,19 @@ namespace IrrlichtNETCP
         {
             get
             {
+                IntPtr ptr_value = IntPtr.Zero;
+                string value;
                 try
                 {
-                    return GuiElem_GetText(_raw);
+                    ptr_value = GuiElem_GetText(_raw);
+                    value = IrrNetMarshal.IntPtrToString(ptr_value);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-                    return "";
+                    return "Error!";
                 }
+
+                return value;
             }
             set
             {
@@ -231,7 +236,7 @@ namespace IrrlichtNETCP
         static extern string GuiElem_GetToolTipText(IntPtr elem);
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern string GuiElem_GetText(IntPtr elem);
+        static extern IntPtr GuiElem_GetText(IntPtr elem);
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern ElementType GuiElem_GetType(IntPtr elem);
