@@ -11,7 +11,7 @@ extern "C"
 	EXPORT void Texture_RegenerateMipMapLevels(IntPtr texture);
 	EXPORT IntPtr Texture_Lock(IntPtr texture);
 	EXPORT void Texture_UnLock(IntPtr texture);
-	EXPORT const IntPtr Texture_GetName(IntPtr texture); 
+	EXPORT IntPtr Texture_GetName(IntPtr texture); 
 
 	EXPORT void LockResult_GetPixel(IntPtr lock, IntPtr texture, int x, int y, M_SCOLOR color);
 	EXPORT void LockResult_SetPixel(IntPtr lock, IntPtr texture, int x, int y, M_SCOLOR color);

@@ -21,20 +21,20 @@ namespace IrrlichtNETCP
         { 
             get 
             {
-                //IntPtr ptr_value = IntPtr.Zero;
-                //string value;
-                //try
-                //{
-                //    ptr_value = Texture_GetName(_raw);
-                //    value = IrrNetMarshal.IntPtrToString(ptr_value);
-                //}
-                //catch (Exception e)
-                //{
-                //    return "Error!";
-                //}
+                IntPtr ptr_value = IntPtr.Zero;
+                string value;
+                try
+                {
+                    ptr_value = Texture_GetName(_raw);
+                    value = IrrNetMarshal.IntPtrToString(ptr_value);
+                }
+                catch (Exception e)
+                {
+                    return "Error!";
+                }
 
-                //return value;
-                return Texture_GetName(_raw);
+                return value;
+                //return Texture_GetName(_raw);
             } 
         }
         //EDITED KIWSA
@@ -457,7 +457,7 @@ namespace IrrlichtNETCP
 		static extern int Texture_GetPitch(IntPtr raw);
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern string Texture_GetName(IntPtr raw);
+        static extern IntPtr Texture_GetName(IntPtr raw);
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Texture_RegenerateMipMapLevels(IntPtr raw);

@@ -26,11 +26,12 @@ s32 Texture_GetPitch(IntPtr texture)
 }
 
 //TODO: Check functionality with (char*) cast
-const IntPtr Texture_GetName(IntPtr texture)
+IntPtr Texture_GetName(IntPtr texture)
 {
-   ITexture* tex = (ITexture*)texture;
-
-   return (char*)tex->getName().c_str();
+   std::string base = ((ITexture*)texture)->getName().c_str();
+   char* texName = new char[base.size()* sizeof(char)];
+   strncpy_s(texName, base.size() * sizeof(char), base.c_str(),_TRUNCATE);
+   return texName;
 } 
 
 /*
