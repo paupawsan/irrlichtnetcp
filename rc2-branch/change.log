@@ -29,6 +29,9 @@ cific routines
 -Fixed a bug LogEvent.Text management since it caused troubles with double freeing within glibc
 -Improved a NativeElement a bit. Thank to bull for proposition. This will go further to 0.9
 -changed define IrrlichtW_d to IrrlichtW-dbg for more convenience and cleanliness
+-Fixed Texture_getName() for evaluation in RC2
+-Fixed GUIElement_getText() for evaluation in RC2
+
 
 =============================================================================
 Irrlicht .NET CP 0.8
