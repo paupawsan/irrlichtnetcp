@@ -1,0 +1,118 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B5F2DCEE-C46A-41F2-B638-F86AA11DA260}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Irrlicht.NET</RootNamespace>
+    <AssemblyName>Irrlicht.NET</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <StartupObject />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DocumentationFile>Irrlicht.NET.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <DocumentationFile>Irrlicht.NET.xml</DocumentationFile>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>1591</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Device\FileSystem.cs" />
+    <Compile Include="Device\IrrlichtDevice.cs" />
+    <Compile Include="Device\Timer.cs" />
+    <Compile Include="Events\Event.cs" />
+    <Compile Include="Global\MainDefinition.cs" />
+    <Compile Include="Global\NativeElement.cs" />
+    <Compile Include="Global\NewMath.cs" />
+    <Compile Include="Global\Types\Box3D.cs" />
+    <Compile Include="Global\Types\Color.cs" />
+    <Compile Include="Global\Types\Dimension2D.cs" />
+    <Compile Include="Global\Types\Line3D.cs" />
+    <Compile Include="Global\Types\Line2D.cs" />
+    <Compile Include="Global\Types\Matrix4.cs" />
+    <Compile Include="Global\Types\Position2D.cs" />
+    <Compile Include="Global\Types\Rect.cs" />
+    <Compile Include="Global\Types\Triangle3D.cs" />
+    <Compile Include="Global\Types\Vector2D.cs" />
+    <Compile Include="Global\Types\Vector3D.cs" />
+    <Compile Include="Global\Types\Quaternion.cs" />
+    <Compile Include="Global\Types\ViewFrustrum.cs" />
+    <Compile Include="Gui\CursorControl.cs" />
+    <Compile Include="Gui\GUIButton.cs" />
+    <Compile Include="Gui\GUICheckBox.cs" />
+    <Compile Include="Gui\GUIComboBox.cs" />
+    <Compile Include="Gui\GUIContextMenu.cs" />
+    <Compile Include="Gui\GUIEditBox.cs" />
+    <Compile Include="Gui\GUIElement.cs" />
+    <Compile Include="Gui\GUIEnvironment.cs" />
+    <Compile Include="Gui\GUIFileOpenDialog.cs" />
+    <Compile Include="Gui\GUIFont.cs" />
+    <Compile Include="Gui\GUIImage.cs" />
+    <Compile Include="Gui\GUIInOutFader.cs" />
+    <Compile Include="Gui\GUIListBox.cs" />
+    <Compile Include="Gui\GUIMeshViewer.cs" />
+    <Compile Include="Gui\GUIScrollBar.cs" />
+    <Compile Include="Gui\GUISkin.cs" />
+    <Compile Include="Gui\GUIStaticText.cs" />
+    <Compile Include="Gui\GUITab.cs" />
+    <Compile Include="Gui\GUITabControl.cs" />
+    <Compile Include="Gui\GUIToolBar.cs" />
+    <Compile Include="Gui\GUIWindow.cs" />
+    <Compile Include="Scene\Meshes\AnimatedMesh.cs" />
+    <Compile Include="Scene\Meshes\SkinnedMesh.cs" />
+    <Compile Include="Scene\Meshes\AnimatedMeshMD2.cs" />
+    <Compile Include="Scene\Meshes\Mesh.cs" />
+    <Compile Include="Scene\Meshes\MeshBuffer.cs" />
+    <Compile Include="Scene\Meshes\MeshManipulator.cs" />
+    <Compile Include="Scene\Scene Nodes\CustomSceneNode.cs" />
+    <Compile Include="Scene\SceneManager.cs" />
+    <Compile Include="Scene\Scene Nodes\AnimatedMeshSceneNode.cs" />
+    <Compile Include="Scene\Scene Nodes\BillboardSceneNode.cs" />
+    <Compile Include="Scene\Scene Nodes\CameraSceneNode.cs" />
+    <Compile Include="Scene\Scene Nodes\LightSceneNode.cs" />
+    <Compile Include="Scene\Scene Nodes\ParticleSystemSceneNode.cs" />
+    <Compile Include="Scene\Scene Nodes\SceneNode.cs" />
+    <Compile Include="Scene\Scene Nodes\BoneSceneNode.cs" />    
+    <Compile Include="Scene\Scene Nodes\ShadowVolumeSceneNode.cs" />
+    <Compile Include="Scene\Scene Nodes\TerrainSceneNode.cs" />
+    <Compile Include="Scene\Scene Nodes\TextSceneNode.cs" />
+    <Compile Include="Scene\Utils\Animator.cs" />
+    <Compile Include="Scene\Utils\Light.cs" />
+    <Compile Include="Scene\Utils\Particle.cs" />
+    <Compile Include="Scene\Utils\ParticleAffector.cs" />
+    <Compile Include="Scene\Utils\ParticleEmitter.cs" />
+    <Compile Include="Scene\Utils\SceneCollisionManager.cs" />
+    <Compile Include="Scene\Utils\TriangleSelector.cs" />
+    <Compile Include="Video\GPUProgrammingServices.cs" />
+    <Compile Include="Video\Image.cs" />
+    <Compile Include="Video\Material.cs" />
+    <Compile Include="Video\MaterialLayer.cs" />    
+    <Compile Include="Video\MaterialRendererServices.cs" />
+    <Compile Include="Video\Texture.cs" />
+    <Compile Include="Video\Vertices.cs" />
+    <Compile Include="Video\VideoDriver.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,37 @@
+﻿<UserCombinePreferences version="1.0" filename="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET.mds">
+  <Files>
+    <File name="GUIExample/Program.cs" line="88" column="1" />
+    <File name="Irrlicht.NET/Events/Event.cs" line="159" column="12" />
+    <File name="Irrlicht.NET/Device/IrrlichtDevice.cs" line="150" column="14" />
+  </Files>
+  <Views>
+    <ViewMemento id="ProjectPad">
+      <Node expanded="True">
+        <Node name="CustomSceneNode" expanded="True" />
+        <Node name="GUIExample" expanded="True" />
+        <Node name="Irrlicht.NET" expanded="True">
+          <Node name="Device" expanded="True" />
+          <Node name="Events" expanded="True">
+            <Node name="Event.cs" selected="True" />
+          </Node>
+        </Node>
+      </Node>
+    </ViewMemento>
+    <ViewMemento id="ClassPad">
+      <Node expanded="True">
+        <Node name="Irrlicht.NET" expanded="True">
+          <Node name="IrrlichtNETCP" expanded="True">
+            <Node name="Event" selected="True" />
+          </Node>
+        </Node>
+      </Node>
+    </ViewMemento>
+    <ViewMemento id="MonoDevelop.NUnit.TestPad">
+      <Node />
+    </ViewMemento>
+  </Views>
+  <Properties>
+    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET/Events/Event.cs" />
+    <Property key="ActiveConfiguration" value="Debug" />
+  </Properties>
+</UserCombinePreferences>
