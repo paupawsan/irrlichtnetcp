@@ -79,7 +79,7 @@ void GuiElem_GetRelativePosition(IntPtr elem, M_RECT pos)
 	UM_RECT(GetElem(elem)->getRelativePosition(), pos);
 }
 
-M_STRING GuiElem_GetText(IntPtr elem)
+IntPtr GuiElem_GetText(IntPtr elem)
 {
 	return UM_STRING(GetElem(elem)->getText());
 }

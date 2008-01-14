@@ -15,6 +15,15 @@ Legend from 0.9 and after:
 Irrlicht .NET CP 0.9
 =============================================================================
 
+January, 13, Lester
+    + added some code from rc2-vista branch by Thoran, such as
+      FreeUUMemory, IrrNetMarshal, conversion.cpp's IM_STRING
+    * IrrNetMarshal renamed to IrrStringMarshal
+    * changed return type of GUIElement_GetText from M_STRING to IntPtr
+
+January, 12, Lester
+    * Fixed GUIEventType enum
+
 January, 10, Lester
     i There was hard period for me, I didn't log changes due to 
       the fragmentary coding
@@ -61,7 +70,7 @@ cific routines
 -Changed Device_Drop in method Dispose() to Device_Close due to the memory corruption within glibc
 -Fixed a bug in LogEvent.Text management since it caused troubles with double freeing within glibc
 -Improved a NativeElement a bit. Thank to bull for proposition. This will go further to 0.9
--changed define IrrlichtW_d to IrrlichtW-dbg for more convenience and cleanliness
+-changed define IrrlichtW_d to IrrlichtWd for more convenience and cleanliness
 -Fixed Texture_getName() for evaluation in RC2
 -Fixed GUIElement_getText() for evaluation in RC2
 

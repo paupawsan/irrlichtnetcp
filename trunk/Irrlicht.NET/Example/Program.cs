@@ -282,7 +282,7 @@ namespace IrrlichtNetExample
             //ALWAYS DISPOSE THE DEVICE AT THE END
             //It is REQUIRED on Linux because if you don't, XWindow will stay at the old video mode
             //And you can't imagine how ugly it is not to get back to the original video mode 
-            device.Dispose();
+            device.Close();
         }
         static bool Exit = false;
 

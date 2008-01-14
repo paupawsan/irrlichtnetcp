@@ -1,37 +1,29 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET.mds">
   <Files>
-    <File name="GUIExample/Program.cs" line="88" column="1" />
-    <File name="Irrlicht.NET/Events/Event.cs" line="159" column="12" />
-    <File name="Irrlicht.NET/Device/IrrlichtDevice.cs" line="150" column="14" />
+    <File name="Добро пожаловать" />
+    <File name="Irrlicht.NET/Global/NativeElement.cs" line="60" column="2" />
+    <File name="Irrlicht.NET/Global/MainDefinition.cs" line="1" column="1" />
+    <File name="Irrlicht.NET/Global/IrrMarshal.cs" line="9" column="3" />
+    <File name="Irrlicht.NET/Gui/GUIElement.cs" line="239" column="29" />
+    <File name="GUIExample/Program.cs" line="59" column="77" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="CustomSceneNode" expanded="True" />
-        <Node name="GUIExample" expanded="True" />
-        <Node name="Irrlicht.NET" expanded="True">
-          <Node name="Device" expanded="True" />
-          <Node name="Events" expanded="True">
-            <Node name="Event.cs" selected="True" />
-          </Node>
+        <Node name="GUIExample" expanded="True">
+          <Node name="Program.cs" selected="True" />
         </Node>
       </Node>
     </ViewMemento>
     <ViewMemento id="ClassPad">
-      <Node expanded="True">
-        <Node name="Irrlicht.NET" expanded="True">
-          <Node name="IrrlichtNETCP" expanded="True">
-            <Node name="Event" selected="True" />
-          </Node>
-        </Node>
-      </Node>
+      <Node expanded="True" />
     </ViewMemento>
     <ViewMemento id="MonoDevelop.NUnit.TestPad">
       <Node />
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET/Events/Event.cs" />
+    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/GUIExample/Program.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

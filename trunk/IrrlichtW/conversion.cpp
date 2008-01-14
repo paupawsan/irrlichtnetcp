@@ -1,11 +1,23 @@
 #include "conversion.h"
 #include <iostream>
+
+void freeUMMemory(IntPtr pointer, bool arrayType)
+{
+	if (arrayType)
+		delete[] pointer;
+	else
+		delete pointer;
+}
+
 void Pointer_SafeRelease(IntPtr pointer)
 {
-    #if WIN32
+	irr::IReferenceCounted* tmpPtr = NULL;
+
     if(pointer)
-        (IUnknown *)pointer->drop();
-	#endif
+	{
+		 tmpPtr = (irr::IReferenceCounted *)pointer;
+		 tmpPtr->drop();
+	}
 }
 
 #ifdef _MSC_VER
@@ -15,6 +27,13 @@ bool fixmarshal(bool val)
 	return val;
 }
 #endif
+
+//Converts from irr::core::stringw to managed string --> getToolTipText
+M_STRING IM_STRING(const IRRSTRING base)
+{
+	const wchar_t* b = base.c_str();
+	return UM_STRING(b);
+}
 
 wchar_t *MU_WCHAR(const M_STRING base)
 {
@@ -30,6 +49,7 @@ wchar_t *MU_WCHAR(const M_STRING base)
 	return str;
 }
 
+
 M_STRING UM_STRING(const wchar_t* base)
 {
 	std::wstring b(base);
@@ -37,17 +57,37 @@ M_STRING UM_STRING(const wchar_t* base)
 	// We should allocate a b.length() * sizeof (wchar_t) bytes
 	// because a wchar_t can be twice bigger than char,
 	// so one character in wchar_t may need two bytes of char
-	// Probably thats why in vista this caused troubles, because M$ has
-	// finally switched to the full multibyte encoding. Duh!
-	M_STRING str = new char[b.length()*sizeof(wchar_t) + 1];
+	// Probably thats why this caused troubles on vista,
+	// because M$ has finally switched to the full multibyte encoding. Duh!
+#ifdef DEBUG
+	std::cerr << "Size of wchar_t string " << b.length() << std::endl;
+#endif
+	M_STRING str = new char[(b.length()+ 2)*sizeof(wchar_t) ];
 	size_t size;
-#ifdef _MSC_VER
+#ifdef _MSC_VER // we are on windows
     // I don't know the syntax of this function
     // so I assume it works
-	wcstombs_s(&size, str, b.length()*sizeof(wchar_t), b.c_str(), b.length()*sizeof(wchar_t));
-#else
+	errno_t errValue;
+	errValue = wcstombs_s(&size, str, (b.length()+1) * sizeof(wchar_t), b.c_str(),sizeof(wchar_t)*(b.length()+1));
+#ifdef DEBUG
+	std::cerr << "Done conversion!" << std::endl;
+	std::cerr << "#converted chars: " << size << std::endl;
+	std::cerr << "converted String: " << str << std::endl;
+	std::cerr << "Error value: " << errValue << std::endl;
+#endif
+	if (errValue == 42) //returned value for char that could not be converted
+		str = "Unknown wide-char!";
+
+	//wcstombs_s(&size, str, b.length()*sizeof(wchar_t), b.c_str(), b.length()*sizeof(wchar_t));
+#else // we are on linux	
 	size = wcstombs(str, b.c_str(), b.length()*sizeof(wchar_t));
 #endif
+	str[size] = '\0';
+#ifdef DEBUG
+	std::cerr << " Added null-termination!" << std::endl;
+	std::cerr << " Final string: " << str << std::endl;
+#endif
+
     return str;
 }
 

@@ -181,6 +181,7 @@ namespace IrrlichtNETCP
 		ElementFocused,
 		ElementHovered,
 		ElementLeft,
+		ElementClosed,
 		ButtonClicked,
 		ScrollBarChanged,
 		CheckBoxChanged,
@@ -195,7 +196,8 @@ namespace IrrlichtNETCP
 		EditBoxEnter,
 		TabChanged,
 		MenuItemSelected,
-		ComboBoxChanged
+		ComboBoxChanged,
+		SpinBoxChanged
 	}
 	
 	public enum KeyCode

@@ -1,4 +1,5 @@
 #include "device.h"
+#include <iostream>
 
 IrrlichtDevice *GetDeviceFromIntPtr(IntPtr object)
 {
@@ -16,7 +17,7 @@ class EventReceiver : public IEventReceiver
 
     virtual bool OnEvent(const SEvent& ev)
     {
-        if(IsCallbackDefined)
+    	if(IsCallbackDefined)
             return _callback((void *)&ev);
         return false;
     }

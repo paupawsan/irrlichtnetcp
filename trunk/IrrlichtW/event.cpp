@@ -58,7 +58,7 @@ char Event_GetKeyChar(IntPtr event)
 
 M_STRING Event_GetLogString(IntPtr event)
 {
-    return UM_STRING(GetEventFromIntPtr(event)->LogEvent.Text);
+    return UM_STRING(MU_WCHAR(GetEventFromIntPtr(event)->LogEvent.Text));
 }
 
 IntPtr Event_GetCaller(IntPtr event)

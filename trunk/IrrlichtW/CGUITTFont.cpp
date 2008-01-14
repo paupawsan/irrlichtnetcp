@@ -560,7 +560,8 @@ scene::ISceneNode *CGUITTFont::createBillboard(const wchar_t* text,scene::IScene
 	u32 n;
 	while(*text)
 	{
-		if (n = getGlyphByChar(*text)){
+		n = getGlyphByChar(*text);
+		if (n){
 			s32 imgw,imgh,texw,texh,offx,offy;
 			video::ITexture *tex;
 			if (AntiAlias){
@@ -581,11 +582,11 @@ scene::ISceneNode *CGUITTFont::createBillboard(const wchar_t* text,scene::IScene
 				tex = Glyphs[n-1].tex16;
 			}
 //			scene::IAxialBillboardSceneNode *bill = scene->addAxialBillboardSceneNode(node,core::vector3df(1,1,1),imgw,core::vector3df(offset.X,offset.Y-offy,0),id);
-//			scene::IBillboardSceneNode *bill = scene->addBillboardSceneNode(node,core::dimension2d<f32>(imgw,imgh),core::vector3df(offset.X,offset.Y-offy,0),id);
-//			bill->setScale(core::vector3df(0.5f,0.5f,0.5f));
-//			bill->setMaterialTexture(0,tex);
-//			bill->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL);
-//			bill->setVisible(true);
+			scene::IBillboardSceneNode *bill = scene->addBillboardSceneNode(node,core::dimension2d<f32>(imgw,imgh),core::vector3df(offset.X,offset.Y-offy,0),id);
+			bill->setScale(core::vector3df(0.5f,0.5f,0.5f));
+			bill->setMaterialTexture(0,tex);
+			bill->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL);
+			bill->setVisible(true);
 		}
 		offset.X += getWidthFromCharacter(*text);
 		++text;
