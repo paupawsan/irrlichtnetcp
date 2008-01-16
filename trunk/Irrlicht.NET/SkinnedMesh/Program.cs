@@ -12,6 +12,7 @@ namespace SkinnedMesh
 	{
 		static IrrlichtDevice device = null;
 		
+		// The bones we want to control
 		static BoneSceneNode bone1, bone2, bone3;
 		
 		public static void Main(string[] args)
