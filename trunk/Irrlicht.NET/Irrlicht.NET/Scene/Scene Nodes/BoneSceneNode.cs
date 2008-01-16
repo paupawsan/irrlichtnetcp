@@ -25,7 +25,7 @@ namespace IrrlichtNETCP
 		Count //Do not use
 	}
 	
-	public class BoneSceneNode : NativeElement
+	public class BoneSceneNode : SceneNode
 	{
 		
 		public BoneSceneNode(IntPtr raw) : base (raw)

@@ -1,4 +1,5 @@
 #include "skinnedmesh.h"
+#include <iostream>
 
 IBoneSceneNode *GetBoneFromIntPtr (IntPtr object)
 {
@@ -61,6 +62,7 @@ void BoneSceneNode_SetPositionHint (IntPtr bone, s32 hint)
 }
 void BoneSceneNode_UAPOAC(IntPtr bone)
 {
+	
     GetBoneFromIntPtr(bone)->updateAbsolutePositionOfAllChildren();
 }
 

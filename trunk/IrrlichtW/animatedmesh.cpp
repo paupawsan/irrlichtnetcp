@@ -60,11 +60,20 @@ IntPtr AnimatedMeshSceneNode_GetJointNode(IntPtr node, u32 jointn)
     return GetNodeFromIntPtr(node)->getJointNode(jointn);
 }
 
-IntPtr AnimatedMeshSceneNode_GetJointNode(IntPtr node, M_STRING name)
+IntPtr AnimatedMeshSceneNode_GetJointNodeA(IntPtr node, M_STRING name)
 {
     return GetNodeFromIntPtr(node)->getJointNode(UM_STRING(name));
 }
 
+void AnimatedMeshSceneNode_SetJointMode(IntPtr node, E_JOINT_UPDATE_ON_RENDER mode)
+{
+	GetNodeFromIntPtr(node)->setJointMode(mode);
+}
+
+void AnimatedMeshSceneNode_AnimateJoints (IntPtr node, bool calc)
+{
+	GetNodeFromIntPtr(node)->animateJoints(calc);
+}
 
 /*
  * This stuff is marked as deprecated. Maybe we should warn users not to use it

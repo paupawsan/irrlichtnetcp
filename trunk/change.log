@@ -15,6 +15,9 @@ Legend from 0.9 and after:
 Irrlicht .NET CP 0.9
 =============================================================================
 
+January, 15, Lester
+    + Added SkinnedMesh example
+
 January, 13, Lester
     + added some code from rc2-vista branch by Thoran, such as
       FreeUUMemory, IrrNetMarshal, conversion.cpp's IM_STRING

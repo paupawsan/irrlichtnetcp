@@ -15,6 +15,11 @@ namespace IrrlichtNETCP
 		{
 		}
 		
+		public void AnimateMesh(float frame, float blend)
+		{
+			SkinnedMesh_AnimateMesh(_raw, frame, blend);
+		}
+		
 #region Native Imports
 		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void SkinnedMesh_AnimateMesh(IntPtr mesh, float frame, float blend);

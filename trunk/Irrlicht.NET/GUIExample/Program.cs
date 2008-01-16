@@ -36,13 +36,13 @@ namespace GUIExample
             guienv.Skin = guienv.CreateSkin(GUISkinTypes.WindowsMetallic);
 			guienv.Skin.SetColor(GuiDefaultColor.ButtonText, Color.White);
 			
-			TTFont font = new TTFont(device.VideoDriver);
+			/*TTFont font = new TTFont(device.VideoDriver);
 			font.Antialias = true;
 			TTFace face = new TTFace();
 			// cool we can have Type1® fonts
 			face.Load("/usr/share/fonts/type1/gsfonts/c059033l.pfb");
 			font.Attach(face, 14);
-			guienv.Skin.Font = font;
+			guienv.Skin.Font = font;*/
 			
 			//Our fader. We set it as first because we don't want him to hide our buttons.
             guienv.AddInOutFader(null, (int)GUIItems.Fader);
@@ -56,7 +56,7 @@ namespace GUIExample
             guienv.AddButton(new Rect(new Position2D(500, 190), new Dimension2D(140, 100)),
                              null, (int)GUIItems.FunnyEffect, "Funny effect !");
 			
-			guienv.AddStaticText ("Потяните за этот скроллбар\nДа, мы умеем юникод :)", new Rect(new Position2D(220, 240), new Dimension2D(240, 30)), 
+			guienv.AddStaticText ("Move this scrollbar and you'll see the miracle !", new Rect(new Position2D(220, 240), new Dimension2D(240, 30)), 
 			                      false, true, null, -1, false);
 			
 			listbox = guienv.AddListBox(new Rect(new Position2D(400, 20), new Dimension2D(220, 150)), null, -1, true);

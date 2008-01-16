@@ -58,7 +58,7 @@ M_STRING UM_STRING(const wchar_t* base)
 	// because a wchar_t can be twice bigger than char,
 	// so one character in wchar_t may need two bytes of char
 	// Probably thats why this caused troubles on vista,
-	// because M$ has finally switched to the full multibyte encoding. Duh!
+	// because M$ has finally switched to the full multibyte encoding.
 #ifdef DEBUG
 	std::cerr << "Size of wchar_t string " << b.length() << std::endl;
 #endif
@@ -81,7 +81,7 @@ M_STRING UM_STRING(const wchar_t* base)
 	//wcstombs_s(&size, str, b.length()*sizeof(wchar_t), b.c_str(), b.length()*sizeof(wchar_t));
 #else // we are on linux	
 	size = wcstombs(str, b.c_str(), b.length()*sizeof(wchar_t));
-#endif
+#endif /*_MSC_VER*/
 	str[size] = '\0';
 #ifdef DEBUG
 	std::cerr << " Added null-termination!" << std::endl;

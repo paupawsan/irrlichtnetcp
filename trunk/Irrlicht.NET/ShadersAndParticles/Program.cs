@@ -209,7 +209,7 @@ namespace ShadersAndParticles
                 	lastfps = fps;
                 }
             }
-            device.Dispose();
+            device.Close();
         }
         static bool Exit = false;
 
@@ -287,7 +287,7 @@ namespace ShadersAndParticles
                 Particles[i].StartTime = now;
                 Particles[i].EndTime = now + 10000;
                 //Color is White and again Start Color is the same... For the same reason as Start Vector !
-                Particles[i].Color = Color.From(255, _rand.Next(255), _rand.Next(255), _rand.Next(255)); ;
+                Particles[i].Color = Color.From(0, _rand.Next(255), _rand.Next(255), _rand.Next(255)); ;
                 Particles[i].StartColor = Particles[0].Color;
             }
         }

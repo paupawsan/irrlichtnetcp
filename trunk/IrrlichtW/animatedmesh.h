@@ -19,4 +19,8 @@ extern "C"
     EXPORT void AnimatedMeshSceneNode_SetMD2Animation(IntPtr node, M_STRING animationname);
     EXPORT void AnimatedMeshSceneNode_SetMD2AnimationA(IntPtr node, EMD2_ANIMATION_TYPE anim);
     EXPORT IntPtr AnimatedMeshSceneNode_GetMesh(IntPtr node);
+    EXPORT IntPtr AnimatedMeshSceneNode_GetJointNode(IntPtr node, u32 jointn);
+    EXPORT IntPtr AnimatedMeshSceneNode_GetJointNodeA(IntPtr node, M_STRING name);
+    EXPORT void AnimatedMeshSceneNode_SetJointMode(IntPtr node, E_JOINT_UPDATE_ON_RENDER mode);
+    EXPORT void AnimatedMeshSceneNode_AnimateJoints (IntPtr node, bool calc);
 }

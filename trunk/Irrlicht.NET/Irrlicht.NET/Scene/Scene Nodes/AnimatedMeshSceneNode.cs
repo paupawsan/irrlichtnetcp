@@ -29,6 +29,14 @@ namespace IrrlichtNETCP
 		Boom,
 		Count // Do not use
 	}
+	
+	public enum JointUpdateOnRenderMode
+	{
+		None,
+		Read,
+		Control,
+		Count // do not use
+	}
 	public delegate void AnimationEnd(AnimatedMeshSceneNode node);
 	public class AnimatedMeshSceneNode : SceneNode
 	{
@@ -171,7 +179,7 @@ namespace IrrlichtNETCP
 		public BoneSceneNode GetJointNode (string name)
 		{
 			return (BoneSceneNode)
-				NativeElement.GetObject(AnimatedMeshSceneNode_GetJointNode(_raw, name), typeof(BoneSceneNode));
+				NativeElement.GetObject(AnimatedMeshSceneNode_GetJointNodeA(_raw, name), typeof(BoneSceneNode));
 		}
 		/// <summary>
 		/// Get Bone depending of the id
@@ -187,6 +195,30 @@ namespace IrrlichtNETCP
 			return (BoneSceneNode)
 				NativeElement.GetObject(AnimatedMeshSceneNode_GetJointNode(_raw, index), typeof(BoneSceneNode));
 		}		
+		
+		/// <value>
+		///  Set how the joints should be updated on render 0-do nothing 
+		/// 1-get joints positions from the mesh (for attached nodes, etc) 
+		/// 2-control joint positions in the mesh (eg. ragdolls, or set the animation from AnimateJoints() )
+		/// </value>
+		public JointUpdateOnRenderMode JointMode
+		{
+			set
+			{
+				AnimatedMeshSceneNode_SetJointMode(_raw, (int)value);
+			}
+		}
+		
+		/// <summary>
+		/// animates the joints in the mesh based on the current frame (also takes in to account transitions)
+		/// </summary>
+		/// <param name="CalculateAbsolutePositions">
+		/// Should positions be calculated according global axis <see cref="System.Boolean"/>
+		/// </param>
+		public void AnimateJoints(bool CalculateAbsolutePositions)
+		{
+			AnimatedMeshSceneNode_AnimateJoints(_raw, CalculateAbsolutePositions);
+		}
 	
 #region Native Invokes
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
@@ -229,7 +261,13 @@ namespace IrrlichtNETCP
 		static extern IntPtr AnimatedMeshSceneNode_GetJointNode(IntPtr node, uint jointn);
 
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-		static extern IntPtr AnimatedMeshSceneNode_GetJointNode(IntPtr node, string name);
+		static extern IntPtr AnimatedMeshSceneNode_GetJointNodeA(IntPtr node, string name);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void AnimatedMeshSceneNode_SetJointMode(IntPtr node, int mode);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void AnimatedMeshSceneNode_AnimateJoints (IntPtr node, bool calc);
 		
 #endregion
 	}
