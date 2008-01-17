@@ -30,19 +30,6 @@ const M_STRING Texture_GetName(IntPtr texture)
    return ((ITexture*)texture)->getName().c_str();
 } 
 
-/*
-//TODO:Reimplement it ?
-//EDIT kiwsa
-void Texture_GetTransform(IntPtr texture,M_MAT4 TxT)
-{
-	return UM_MAT4(GetTextureFromPtr(texture)->getTransformation(),TxT);
-}
-
-void Texture_SetTransform(IntPtr texture,M_MAT4 TxT)
-{
-	GetTextureFromPtr(texture)-> = MU_MAT4(TxT);
-}
-//End Edit Kiwsa*/
 void Texture_RegenerateMipMapLevels(IntPtr texture)
 {
     GetTextureFromPtr(texture)->regenerateMipMapLevels();

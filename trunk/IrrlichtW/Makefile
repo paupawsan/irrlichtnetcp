@@ -43,7 +43,8 @@ IRR_SRC= \
 	CGUITTFont.cpp \
 	customfont.cpp \
 	videodriver.cpp \
-	skinnedmesh.cpp
+	skinnedmesh.cpp \
+	exposedvideo.cpp
 
 IRR_SRC_OBJECTS=$(IRR_SRC:.cpp=.o)
 

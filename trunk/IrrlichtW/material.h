@@ -50,7 +50,8 @@ extern "C"
 	EXPORT void MaterialLayer_SetTrilinearFilter(IntPtr material, bool val);
 	EXPORT void MaterialLayer_SetTexture(IntPtr material, IntPtr texture);
 	EXPORT IntPtr MaterialLayer_GetTexture(IntPtr material);
-	
+	EXPORT void MaterialLayer_GetTransform(IntPtr lyr, M_MAT4 TxT);
+	EXPORT void MaterialLayer_SetTransform(IntPtr lyr, M_MAT4 TxT);	
 	
 	
 }

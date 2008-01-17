@@ -11,9 +11,14 @@ Legend from 0.9 and after:
    |  * Changed                 |
    |  i Info                    |
    +----------------------------+
+   
 =============================================================================
 Irrlicht .NET CP 0.9
 =============================================================================
+
+January, 17, Lester
+    + Added ExposedVideo stub
+    + Added MaterialLayer's texture transform
 
 January, 16, Lester
     * Cleaned Vertex code a lot,
@@ -48,7 +53,6 @@ October, 20th, Lester
     - Removed all AnimatedMesh{X|B3D|MS3D} related functions from IrrlichtW
 
 October, 16th, Lester
-
     + Begining initial support for irrlicht 1.4
     - Removed AnimatedMeshB3D, AnimatedMeshX, AnimatedMeshMS3D. Their functionality will be
       handled by SkinnedMesh

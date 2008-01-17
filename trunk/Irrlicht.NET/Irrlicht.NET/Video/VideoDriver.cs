@@ -325,7 +325,82 @@ namespace IrrlichtNETCP
                 indexList[i] = i;
             DrawVertexPrimitiveList(vertices, indexList, pType);
         }
+		
+		/*
+		 * Tangents
+		 */
+        public void DrawIndexedTriangleFan(Vertex3DTangents[] vertices, int vertexCount, ushort[] indexFan, int triangleCount)
+        {
+            IntPtr[] rawFan = new IntPtr[vertexCount];
+            for (int i = 0; i < vertexCount; i++)
+                rawFan[i] = vertices[i].Raw;
+            VideoDriver_DrawIndexedTriangleFanT(_raw, rawFan, vertexCount, indexFan, triangleCount);
+        }
 
+        public void DrawIndexedTriangleFan(Vertex3DTangents[] vertices, ushort[] indexFan)
+        {
+            DrawIndexedTriangleFan(vertices, vertices.Length, indexFan, vertices.Length / 3);
+        }
+
+        public void DrawIndexedTriangleFan(Vertex3DTangents[] vertices)
+        {
+            ushort[] indexFan = new ushort[vertices.Length];
+            for (ushort i = 0; i < vertices.Length; i++)
+                indexFan[i] = i;
+            DrawIndexedTriangleFan(vertices, indexFan);
+        }
+
+        public void DrawIndexedTriangleList(Vertex3DTangents[] vertices, int vertexCount, ushort[] indexList, int triangleCount)
+        {
+            IntPtr[] rawlist = new IntPtr[vertexCount];
+            for (int i = 0; i < rawlist.Length; i++)
+                rawlist[i] = vertices[i].Raw;
+            VideoDriver_DrawIndexedTriangleListT(_raw, rawlist, vertexCount, indexList, triangleCount);
+        }
+
+        public void DrawIndexedTriangleList(Vertex3DTangents[] vertices, ushort[] indexList)
+        {
+            DrawIndexedTriangleList(vertices, vertices.Length, indexList, vertices.Length / 3);
+        }
+
+        public void DrawIndexedTriangleList(Vertex3DTangents[] vertices)
+        {
+            ushort[] indexList = new ushort[vertices.Length];
+            for (ushort i = 0; i < vertices.Length; i++)
+                indexList[i] = i;
+            DrawIndexedTriangleList(vertices, indexList);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3DTangents[] vertices, int vertexCount, ushort[] indexList, int triangleCount, PrimitiveType pType)
+        {
+            IntPtr[] rawlist = new IntPtr[vertexCount];
+            for (int i = 0; i < rawlist.Length; i++)
+                rawlist[i] = vertices[i].Raw;
+            VideoDriver_DrawVertexPrimitiveList(_raw, rawlist, vertexCount, indexList, triangleCount, VertexType.Tangents, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3DTangents[] vertices, ushort[] indexList, int triangleCount, PrimitiveType pType)
+        {
+            DrawVertexPrimitiveList(vertices, vertices.Length, indexList, triangleCount, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3DTangents[] vertices, ushort[] indexList, PrimitiveType pType)
+        {
+            DrawVertexPrimitiveList(vertices, indexList, vertices.Length / 3, pType);
+        }
+
+        public void DrawVertexPrimitiveList(Vertex3DTangents[] vertices, PrimitiveType pType)
+        {
+            ushort[] indexList = new ushort[vertices.Length];
+            for (ushort i = 0; i < vertices.Length; i++)
+                indexList[i] = i;
+            DrawVertexPrimitiveList(vertices, indexList, pType);
+		}
+		
+		/*
+		 * 
+		 */
+		
         public void DrawVertexPrimitiveList(Vertex3D[] vertices, int vertexCount, ushort[] indexList, int triangleCount, PrimitiveType pType)
         {
             IntPtr[] rawlist = new IntPtr[vertexCount];
@@ -638,10 +713,16 @@ namespace IrrlichtNETCP
         
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DrawIndexedTriangleListA(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);
+		
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern void VideoDriver_DrawIndexedTriangleListT(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);		
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DrawIndexedTriangleFanA(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);
 
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern void VideoDriver_DrawIndexedTriangleFanT(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);		
+		
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void VideoDriver_DrawIndexedTriangleFan(IntPtr driver, IntPtr[] vertices, int vertexCount, ushort[] indexList, int triangleCount);
         

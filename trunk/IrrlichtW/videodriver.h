@@ -33,8 +33,10 @@ extern "C"
 	EXPORT void VideoDriver_SetTransform(IntPtr videodriver, E_TRANSFORMATION_STATE state, M_MAT4 mat);
 	EXPORT void VideoDriver_DrawIndexedTriangleList(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
 	EXPORT void VideoDriver_DrawIndexedTriangleListA(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
+	EXPORT void VideoDriver_DrawIndexedTriangleListT(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);	
 	EXPORT void VideoDriver_DrawIndexedTriangleFan(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
 	EXPORT void VideoDriver_DrawIndexedTriangleFanA(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);
+	EXPORT void VideoDriver_DrawIndexedTriangleFanT(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount);	
 	EXPORT void VideoDriver_DrawVertexPrimitiveList(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount, E_VERTEX_TYPE vType, E_PRIMITIVE_TYPE pType);
 	EXPORT void VideoDriver_DrawMeshBuffer(IntPtr videodriver, IntPtr meshbuffer);
 	EXPORT bool VideoDriver_GetTextureCreationFlag(IntPtr videodriver, E_TEXTURE_CREATION_FLAG flag);

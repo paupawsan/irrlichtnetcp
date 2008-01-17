@@ -386,23 +386,7 @@ namespace IrrlichtNETCP
         }
         #endregion
 		
-		public Matrix4 Transform
-		{
-			get
-			{
-				float[] mat = new float[16];
-				Texture_GetTransform(_raw, mat);
-				return Matrix4.FromUnmanaged(mat);
-			}
-			
-			set
-			{
-				Matrix4 mat = value;
-				Texture_SetTransform(_raw, mat.ToUnmanaged());
-			}
-		}
-		
-		
+
         public void MakeColorKey(VideoDriver drv)
         {
             drv.MakeColorKeyTexture(this, new Position2D(0, 0));
@@ -436,12 +420,6 @@ namespace IrrlichtNETCP
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Texture_RegenerateMipMapLevels(IntPtr raw);
-
-         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern void Texture_GetTransform(IntPtr texture, [MarshalAs(UnmanagedType.LPArray)] float[] TxT);
-
-         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern void Texture_SetTransform(IntPtr texture, float[] TxT);
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Texture_Lock(IntPtr texture);

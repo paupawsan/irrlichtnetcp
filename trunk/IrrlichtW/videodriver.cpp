@@ -171,6 +171,15 @@ void VideoDriver_DrawIndexedTriangleListA(IntPtr videodriver, IntPtr *vertices, 
 	delete[] list;
 }
 
+void VideoDriver_DrawIndexedTriangleListT(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount)
+{
+	 S3DVertexTangents* list = new  S3DVertexTangents[vertexCount];
+	for(int i = 0; i < vertexCount; i++)
+		list[i] = *(( S3DVertexTangents*)vertices[i]);
+	GetVideoFromIntPtr(videodriver)->drawIndexedTriangleList(list, vertexCount, indexList, triangleCount);
+	delete[] list;
+}
+
 void VideoDriver_DrawIndexedTriangleFan(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount)
 {
 	S3DVertex* list = new S3DVertex[vertexCount];
@@ -185,6 +194,15 @@ void VideoDriver_DrawIndexedTriangleFanA(IntPtr videodriver, IntPtr *vertices, i
 	 S3DVertex2TCoords* list = new  S3DVertex2TCoords[vertexCount];
 	for(int i = 0; i < vertexCount; i++)
 		list[i] = *(( S3DVertex2TCoords*)vertices[i]);
+	GetVideoFromIntPtr(videodriver)->drawIndexedTriangleFan(list, vertexCount, indexList, triangleCount);
+	delete[] list;
+}
+
+void VideoDriver_DrawIndexedTriangleFanT(IntPtr videodriver, IntPtr *vertices, int vertexCount, unsigned short *indexList, int triangleCount)
+{
+	 S3DVertexTangents* list = new  S3DVertexTangents[vertexCount];
+	for(int i = 0; i < vertexCount; i++)
+		list[i] = *(( S3DVertexTangents*)vertices[i]);
 	GetVideoFromIntPtr(videodriver)->drawIndexedTriangleFan(list, vertexCount, indexList, triangleCount);
 	delete[] list;
 }

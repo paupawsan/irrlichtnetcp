@@ -71,6 +71,22 @@ namespace IrrlichtNETCP
 			}
 		}
 		
+		public Matrix4 TextureMatrix
+		{
+			get
+			{
+				float[] mat = new float[16];
+				MaterialLayer_GetTransform(_raw, mat);
+				return Matrix4.FromUnmanaged(mat);
+			}
+			
+			set
+			{
+				Matrix4 mat = value;
+				MaterialLayer_SetTransform(_raw, mat.ToUnmanaged());
+			}
+		}		
+		
 #region Native Imports
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr MaterialLayer_Create();		
@@ -98,6 +114,13 @@ namespace IrrlichtNETCP
 		
 		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr MaterialLayer_GetTexture(IntPtr material);		
+		
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern void MaterialLayer_GetTransform(IntPtr texture, [MarshalAs(UnmanagedType.LPArray)] float[] TxT);
+
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+        static extern void MaterialLayer_SetTransform(IntPtr texture, float[] TxT);		
+		
 #endregion
 		
 	}

@@ -198,3 +198,14 @@ IntPtr MaterialLayer_GetTexture(IntPtr material)
 {
     return GetMatLyrFromIntPtr(material)->Texture;
 }
+
+void MaterialLayer_GetTransform(IntPtr lyr, M_MAT4 TxT)
+{
+	return UM_MAT4(GetMatLyrFromIntPtr(lyr)->getTextureMatrix(),TxT);
+}
+
+void MaterialLayer_SetTransform(IntPtr lyr,M_MAT4 TxT)
+{
+	GetMatLyrFromIntPtr(lyr)->setTextureMatrix(MU_MAT4(TxT));
+}
+//End Edit Kiwsa*/
