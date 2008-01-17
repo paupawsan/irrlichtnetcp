@@ -15,6 +15,10 @@ Legend from 0.9 and after:
 Irrlicht .NET CP 0.9
 =============================================================================
 
+January, 16, Lester
+    * Cleaned Vertex code a lot,
+    + Added Vertex3DTangents
+
 January, 15, Lester
     + Added SkinnedMesh example
 

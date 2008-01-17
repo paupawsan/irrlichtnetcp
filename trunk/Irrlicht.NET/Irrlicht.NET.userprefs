@@ -1,42 +1,12 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET.mds">
   <Files>
-    <File name="Irrlicht.NET/Scene/Scene Nodes/AnimatedMeshSceneNode.cs" line="229" column="3" />
-    <File name="Irrlicht.NET/Scene/Scene Nodes/BoneSceneNode.cs" line="18" column="21" />
-    <File name="Irrlicht.NET/Scene/Scene Nodes/CameraSceneNode.cs" line="1" column="1" />
-    <File name="SkinnedMesh/Program.cs" line="167" column="47" />
-    <File name="Irrlicht.NET/Video/Vertices.cs" line="1" column="1" />
-    <File name="Irrlicht.NET/Scene/Meshes/AnimatedMesh.cs" line="65" column="1" />
-    <File name="Irrlicht.NET/Scene/Meshes/SkinnedMesh.cs" line="20" column="48" />
-    <File name="Irrlicht.NET/Scene/Scene Nodes/SceneNode.cs" line="1" column="1" />
-    <File name="Irrlicht.NET/Gui/GUIButton.cs" line="1" column="1" />
-    <File name="TerrainExample/Main.cs" line="1" column="1" />
-    <File name="ShadersAndParticles/Program.cs" line="55" column="13" />
+    <File name="GUIExample/Program.cs" line="130" column="46" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="GUIExample" expanded="True" />
-        <Node name="Irrlicht.NET" expanded="True">
-          <Node name="Device" expanded="True" />
-          <Node name="Events" expanded="True" />
-          <Node name="Global" expanded="True">
-            <Node name="Types" expanded="True" />
-          </Node>
-          <Node name="Gui" expanded="True" />
-          <Node name="Scene" expanded="True">
-            <Node name="Meshes" expanded="True" />
-            <Node name="Scene Nodes" expanded="True" />
-            <Node name="Utils" expanded="True" />
-          </Node>
-          <Node name="Video" expanded="True" />
-        </Node>
-        <Node name="ShadersAndParticles" expanded="True" />
-        <Node name="SkinnedMesh" expanded="True">
-          <Node name="References" expanded="True" />
+        <Node name="GUIExample" expanded="True">
           <Node name="Program.cs" selected="True" />
-        </Node>
-        <Node name="TerrainExample" expanded="True">
-          <Node name="References" expanded="True" />
         </Node>
       </Node>
     </ViewMemento>
@@ -48,7 +18,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/SkinnedMesh/Program.cs" />
+    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/GUIExample/Program.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

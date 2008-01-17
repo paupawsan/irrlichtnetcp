@@ -36,13 +36,13 @@ namespace GUIExample
             guienv.Skin = guienv.CreateSkin(GUISkinTypes.WindowsMetallic);
 			guienv.Skin.SetColor(GuiDefaultColor.ButtonText, Color.White);
 			
-			/*TTFont font = new TTFont(device.VideoDriver);
+			TTFont font = new TTFont(device.VideoDriver);
 			font.Antialias = true;
 			TTFace face = new TTFace();
 			// cool we can have Type1® fonts
 			face.Load("/usr/share/fonts/type1/gsfonts/c059033l.pfb");
 			font.Attach(face, 14);
-			guienv.Skin.Font = font;*/
+			guienv.Skin.Font = font;
 			
 			//Our fader. We set it as first because we don't want him to hide our buttons.
             guienv.AddInOutFader(null, (int)GUIItems.Fader);
