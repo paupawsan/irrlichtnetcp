@@ -11,6 +11,7 @@
 
 #ifdef WIN32
 #define STDCALL __stdcall*
+#define uint unsigned int
 #else
 #define STDCALL *
 #endif

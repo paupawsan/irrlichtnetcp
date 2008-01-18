@@ -64,7 +64,7 @@
 				IgnoreImportLibrary="true"
 				LinkLibraryDependencies="false"
 				AdditionalDependencies="&quot;..\Irrlicht SDK\lib\Win32-visualstudio\irrlicht.lib&quot;"
-				OutputFile="..\bin\Debug\$(ProjectName)_d.dll"
+				OutputFile="..\bin\Debug\$(ProjectName)d.dll"
 				GenerateDebugInformation="true"
 				AssemblyDebug="1"
 				GenerateMapFile="true"
@@ -126,7 +126,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				FavorSizeOrSpeed="1"
-				AdditionalIncludeDirectories="&quot;..\Irrlicht SDK\include&quot;"
+				AdditionalIncludeDirectories="&quot;..\Irrlicht SDK\include&quot;;..\..\vendor"
 				PreprocessorDefinitions="WIN32;NDEBUG;_LIB;COMPILE_WITH_FREETYPE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -254,10 +254,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\skinnedmesh.cpp"
-				>
-			</File>			
-			<File
 				RelativePath=".\meshmanipulator.cpp"
 				>
 			</File>
@@ -271,6 +267,10 @@
 			</File>
 			<File
 				RelativePath=".\scenenode.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\skinnedmesh.cpp"
 				>
 			</File>
 			<File
@@ -352,10 +352,6 @@
 				>
 			</File>
 			<File
-				RelativePath=".\skinnedmesh.h"
-				>
-			</File>			
-			<File
 				RelativePath=".\meshmanipulator.h"
 				>
 			</File>
@@ -369,6 +365,10 @@
 			</File>
 			<File
 				RelativePath=".\scenenode.h"
+				>
+			</File>
+			<File
+				RelativePath=".\skinnedmesh.h"
 				>
 			</File>
 			<File
