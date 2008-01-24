@@ -16,6 +16,9 @@ Legend from 0.9 and after:
 Irrlicht .NET CP 0.9
 =============================================================================
 
+January, 23, Lester
+    + Added MeshManipulator.TransformMesh and MeshManipulator.CreateMeshWith2TCoords
+
 January, 17, Lester
     + Added ExposedVideo stub
     + Added MaterialLayer's texture transform

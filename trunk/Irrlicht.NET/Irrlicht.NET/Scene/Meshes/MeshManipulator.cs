@@ -24,6 +24,22 @@ namespace IrrlichtNETCP
                 NativeElement.GetObject(MeshManipulator_CreateMeshWithTangents(_raw, baseMesh.Raw),
                                         typeof(Mesh));
         }
+		
+		/// <summary>
+		/// Creates a copy of the mesh, which will only consist of Vertex3DT2Coord vertices. 
+		/// </summary>
+		/// <param name="baseMesh">
+		/// A mesh to be created from<see cref="Mesh"/>
+		/// </param>
+		/// <returns>
+		/// A new mesh with 2T coords <see cref="Mesh"/>
+		/// </returns>
+		public Mesh CreateMeshWith2TCoords (Mesh baseMesh)
+		{
+			return (Mesh)
+				NativeElement.GetObject(MeshManipulator_CreateMeshWith2TCoords(_raw, baseMesh.Raw),
+				                        typeof(Mesh));
+		}
         
         /// <summary>
         /// Unweld vertices.
@@ -116,6 +132,21 @@ namespace IrrlichtNETCP
         {
             MeshManipulator_SetVertexColors(_raw, mesh.Raw, color.ToUnmanaged());
         }
+		
+		/// <summary>
+		/// Applies a transformation. 
+		/// </summary>
+		/// <param name="mesh">
+		/// A mesh to be transformed <see cref="Mesh"/>
+		/// </param>
+		/// <param name="mat">
+		/// A transform matrix <see cref="Matrix4"/>
+		/// </param>
+		public void TransformMesh (Mesh mesh, Matrix4 mat)
+		{
+			MeshManipulator_TransformMesh(_raw, mesh.Raw, mat.ToUnmanaged());
+		}
+		
 
 
         #region Native Invokes
@@ -148,6 +179,12 @@ namespace IrrlichtNETCP
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern int MeshManipulator_GetPolyCountA(IntPtr mm, IntPtr amesh);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern IntPtr MeshManipulator_CreateMeshWith2TCoords (IntPtr mm, IntPtr mesh);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void MeshManipulator_TransformMesh (IntPtr mm, IntPtr mesh, float[] mat);		
         #endregion
     }
 }

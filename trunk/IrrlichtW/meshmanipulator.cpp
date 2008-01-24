@@ -10,6 +10,20 @@ IntPtr MeshManipulator_CreateMeshWithTangents(IntPtr mm, IntPtr mesh)
 	return GetMMForIntPtr(mm)->createMeshWithTangents((IMesh*)mesh);
 }
 
+/* Irrlicht 1.4 addings */
+IntPtr MeshManipulator_CreateMeshWith2TCoords (IntPtr mm, IntPtr mesh)
+{
+	return GetMMForIntPtr(mm)->createMeshWith2TCoords((IMesh*)mesh);
+}
+
+void MeshManipulator_TransformMesh (IntPtr mm, IntPtr mesh, M_MAT4 mat)
+{
+	core::matrix4 temp;
+	temp = MU_MAT4(mat);
+	GetMMForIntPtr(mm)->transformMesh((IMesh*)mesh, temp);
+}
+
+
 IntPtr MeshManipulator_CreateMeshUniquePrimitives(IntPtr mm, IntPtr mesh)
 {
     return GetMMForIntPtr(mm)->createMeshUniquePrimitives((IMesh*)mesh);

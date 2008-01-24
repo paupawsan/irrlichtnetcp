@@ -1,12 +1,24 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET.mds">
   <Files>
-    <File name="GUIExample/Program.cs" line="130" column="46" />
+    <File name="Добро пожаловать" />
+    <File name="CustomSceneNode/Program.cs" line="46" column="39" />
+    <File name="Irrlicht.NET/Video/Vertices.cs" line="31" column="42" />
+    <File name="Irrlicht.NET/AssemblyInfo.cs" line="25" column="1" />
+    <File name="Irrlicht.NET/Video/VideoDriver.cs" line="94" column="22" />
+    <File name="Irrlicht.NET/Video/Texture.cs" line="217" column="1" />
+    <File name="Irrlicht.NET/Video/Image.cs" line="1" column="1" />
+    <File name="Irrlicht.NET/Video/MaterialLayer.cs" line="74" column="31" />
+    <File name="Irrlicht.NET/Video/ExposedVideoData.cs" line="18" column="4" />
+    <File name="Irrlicht.NET/Device/IrrlichtDevice.cs" line="6" column="1" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="GUIExample" expanded="True">
-          <Node name="Program.cs" selected="True" />
+        <Node name="GUIExample" expanded="True" />
+        <Node name="Irrlicht.NET" expanded="True">
+          <Node name="Device" expanded="True">
+            <Node name="IrrlichtDevice.cs" selected="True" />
+          </Node>
         </Node>
       </Node>
     </ViewMemento>
@@ -18,7 +30,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/GUIExample/Program.cs" />
+    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET/Device/IrrlichtDevice.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

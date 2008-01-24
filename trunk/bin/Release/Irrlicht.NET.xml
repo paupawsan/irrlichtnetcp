@@ -273,6 +273,15 @@
             <param name="baseMesh">Input mesh</param>
             <returns>Mesh consiting only of S3DVertexTangents vertices.</returns>
         </member>
+        <member name="M:IrrlichtNETCP.MeshManipulator.CreateMeshWith2TCoords(IrrlichtNETCP.Mesh)">
+            <summary>
+            Creates a copy of the mesh, which will only consist of Vertex3DT2Coord vertices.
+            </summary>
+            <param name="baseMesh">
+            A mesh to be created from<see cref="T:IrrlichtNETCP.Mesh" /></param>
+            <returns>
+            A new mesh with 2T coords <see cref="T:IrrlichtNETCP.Mesh" /></returns>
+        </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.CreateMeshUniquePrimitives(IrrlichtNETCP.Mesh)">
             <summary>
             Unweld vertices.
@@ -336,6 +345,15 @@
             </summary>
             <param name="mesh">Mesh on which the operation is performed. </param>
             <param name="color">New color.</param>
+        </member>
+        <member name="M:IrrlichtNETCP.MeshManipulator.TransformMesh(IrrlichtNETCP.Mesh,IrrlichtNETCP.Matrix4)">
+            <summary>
+            Applies a transformation.
+            </summary>
+            <param name="mesh">
+            A mesh to be transformed <see cref="T:IrrlichtNETCP.Mesh" /></param>
+            <param name="mat">
+            A transform matrix <see cref="T:IrrlichtNETCP.Matrix4" /></param>
         </member>
         <member name="F:IrrlichtNETCP.AnimatedMeshSceneNode.MainEventDelegate">
             <summary>
