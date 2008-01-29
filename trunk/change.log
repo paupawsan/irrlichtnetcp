@@ -16,6 +16,9 @@ Legend from 0.9 and after:
 Irrlicht .NET CP 0.9
 =============================================================================
 
+January, 28, Lester
+    + Added missing values to the TransormationState enum
+
 January, 23, Lester
     + Added MeshManipulator.TransformMesh and MeshManipulator.CreateMeshWith2TCoords
 

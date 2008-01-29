@@ -834,7 +834,12 @@ namespace IrrlichtNETCP
     {
         View,
         World,
-        Projection
+        Projection,
+		Texture1,
+		Texture2,
+		Texture3,
+		Texture4,
+		Count // Don't use
     }
 
     public enum PrimitiveType

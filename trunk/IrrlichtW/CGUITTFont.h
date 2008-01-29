@@ -3,7 +3,7 @@
 #ifndef __C_GUI_TTFONT_H_INCLUDED__
 #define __C_GUI_TTFONT_H_INCLUDED__
 #ifdef WIN32
-//#pragma comment(lib, "..\\Irrlicht SDK\\lib\\Win32-visualstudio\\freetype2110MT.lib")
+#pragma comment(lib, "\"..\\Irrlicht SDK\\lib\\Win32-visualstudio\\freetype2110MT.lib\"")
 #endif
 
 //If on Windows you get an error here, add to your IDE's incldue path
