@@ -38,7 +38,7 @@ void SceneNode_GetBoundingBox(IntPtr scenenode, M_BOX3D toR)
 void SceneNode_GetChildren(IntPtr scenenode, IntPtr *list)
 {
 	ISceneNode *node = GetSceneNodeFromIntPtr(scenenode);
-	u32 size = node->getChildren().getSize();
+	//u32 size = node->getChildren().getSize();
 	core::list<ISceneNode*>::ConstIterator it = node->getChildren().begin();
 	int c = 0;
 	for (; it != node->getChildren().end(); ++it)
@@ -332,25 +332,57 @@ void TerrainSceneNode_GetMeshBufferForLOD(IntPtr terrain, IMeshBuffer *mb, int l
     ((ITerrainSceneNode*)terrain)->getMeshBufferForLOD((SMeshBufferLightMap&)*mb, lod);
 }
 
-void LightSceneNode_GetLight(IntPtr light, M_SCOLORF ambient, M_SCOLORF diffuse, M_SCOLORF specular, M_VECT3DF pos, float *radius, bool *castshadows, E_LIGHT_TYPE* type)
+void LightSceneNode_GetLight(IntPtr light, M_SCOLORF ambient, 
+                             M_SCOLORF diffuse, 
+                             M_SCOLORF specular, 
+                             M_VECT3DF pos, 
+                             M_VECT3DF dir, 
+                             M_VECT3DF attenuation,
+                             float *falloff,
+                             float *innercone,
+                             float *outercone,
+                             float *radius, 
+                             bool *castshadows, 
+                             E_LIGHT_TYPE* type)
 {
     SLight slight = ((ILightSceneNode*)light)->getLightData();
     UM_SCOLORF(slight.AmbientColor, ambient);
     UM_SCOLORF(slight.DiffuseColor, diffuse);
     UM_SCOLORF(slight.SpecularColor, specular);
     UM_VECT3DF(slight.Position, pos);
+    UM_VECT3DF(slight.Direction, dir);
+    UM_VECT3DF(slight.Attenuation, attenuation);
+    *falloff = slight.Falloff;
+    *innercone = slight.InnerCone;
+    *outercone = slight.OuterCone;
     *radius = slight.Radius;
     *castshadows = slight.CastShadows;
     *type = slight.Type;
 }
 
-void LightSceneNode_SetLight(IntPtr light, M_SCOLORF ambient, M_SCOLORF diffuse, M_SCOLORF specular, M_VECT3DF pos, float radius, bool castshadows, E_LIGHT_TYPE type)
+void LightSceneNode_SetLight(IntPtr light, M_SCOLORF ambient, 
+                             M_SCOLORF diffuse, 
+                             M_SCOLORF specular, 
+                             M_VECT3DF pos,
+                             M_VECT3DF dir,
+                             M_VECT3DF attenuation,
+                             float falloff,
+                             float innercone,
+                             float outercone,
+                             float radius, 
+                             bool castshadows, 
+                             E_LIGHT_TYPE type)
 {
     SLight slight = ((ILightSceneNode*)light)->getLightData();
     slight.AmbientColor = MU_SCOLORF(ambient);
     slight.DiffuseColor = MU_SCOLORF(diffuse);
     slight.SpecularColor = MU_SCOLORF(specular);
     slight.Position = MU_VECT3DF(pos);
+    slight.Direction = MU_VECT3DF(dir);
+    slight.Attenuation = MU_VECT3DF (attenuation);
+    slight.Falloff = falloff;
+    slight.InnerCone = innercone;
+    slight.OuterCone = outercone;
     slight.Radius = radius;
     slight.CastShadows = castshadows;
     slight.Type = type;

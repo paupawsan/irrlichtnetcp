@@ -16,6 +16,10 @@ Legend from 0.9 and after:
 Irrlicht .NET CP 0.9
 =============================================================================
 
+February, 7, Lester
+    + Added GUIColorSelectDialog and corresponding functions into guienv
+    + Added dirrection, falloff, attenuation, outercone and innercone into the Light struct.
+
 January, 28, Lester
     + Added missing values to the TransormationState enum
 

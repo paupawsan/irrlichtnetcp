@@ -17,6 +17,17 @@ namespace IrrlichtNETCP
             return (GUIButton)NativeElement.GetObject(GuiEnv_AddButton(_raw, rectangle.ToUnmanaged(), par, id, text),
                                                       typeof(GUIButton));
         }
+		
+		public GUIColorSelectDialog AddColorSelectDialog(string title, bool modal, GUIElement parent, int id)
+		{
+			IntPtr par = (parent == null ? IntPtr.Zero : parent.Raw);
+			return (GUIColorSelectDialog)NativeElement.GetObject(GuiEnv_AddColorSelectDialog(_raw,
+			                                                                                 title,
+			                                                                                 modal,
+			                                                                                 par,
+			                                                                                 id),
+			                                                     typeof(GUIColorSelectDialog));
+		}
 
         public GUICheckBox AddCheckBox(bool ischecked, Rect rectangle, GUIElement parent, int id, string text)
         {
@@ -342,6 +353,9 @@ namespace IrrlichtNETCP
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiEnv_SetSkin(IntPtr guienv, IntPtr skin);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern IntPtr GuiEnv_AddColorSelectDialog (IntPtr guienv, string title, bool modal, IntPtr parent, int id);	
         #endregion
     }
 
@@ -356,6 +370,7 @@ namespace IrrlichtNETCP
     public enum GUISkinTypes
     {
         WindowsClassic,
-        WindowsMetallic
+        WindowsMetallic,
+		BurningSkin
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="Gui\GUIComboBox.cs" />
     <Compile Include="Gui\GUIContextMenu.cs" />
     <Compile Include="Gui\GUIEditBox.cs" />
+    <Compile Include="Gui\GUIColorSelectDialog.cs" />    
     <Compile Include="Gui\GUIElement.cs" />
     <Compile Include="Gui\GUIEnvironment.cs" />
     <Compile Include="Gui\GUIFileOpenDialog.cs" />

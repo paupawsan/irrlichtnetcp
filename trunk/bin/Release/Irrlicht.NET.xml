@@ -1254,6 +1254,11 @@
             updates the absolute position based on the relative and the parents position
             </summary>
         </member>
+        <member name="T:IrrlichtNETCP.GUIColorSelectDialog">
+            <summary>
+            Dialog for selecting a color
+            </summary>
+        </member>
         <member name="T:IrrlichtNETCP.OnShaderConstantSetDelegate">
             <summary>
             Delegate called each time the engine wants to define a shader constant.

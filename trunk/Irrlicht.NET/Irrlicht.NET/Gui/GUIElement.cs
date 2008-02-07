@@ -281,23 +281,28 @@ namespace IrrlichtNETCP
 
     public enum ElementType
     {
-        UnknownElement,
         Button,
         CheckBox,
         ComboBox,
         ContextMenu,
+		Menu,
         EditBox,
         FileOpenDialog,
+		ColorSelectDialog,
         InOutFader,
         Image,
         ListBox,
         MeshViewer,
+		MessageBox,
         ModalScreen,
         ScrollBar,
         StaticText,
         Tab,
         TabControl,
         ToolBar,
-        Window
+        Window,
+		SpinBox,
+		Count,
+		Element
     }
 }

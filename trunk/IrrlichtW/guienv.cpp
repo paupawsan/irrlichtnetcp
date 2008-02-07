@@ -107,6 +107,15 @@ IntPtr GuiEnv_AddWindow(IntPtr guienv, M_RECT rectangle, bool modal, M_STRING te
 	return GetGui(guienv)->addWindow(MU_RECT(rectangle), modal, MU_WCHAR(text), (IGUIElement*)parent, id);
 }
 
+/* 
+ * Irrlicht 1.4 addins
+ */
+
+IntPtr GuiEnv_AddColorSelectDialog (IntPtr guienv, M_STRING title, bool modal, IntPtr parent, int id)
+{
+	return GetGui(guienv)->addColorSelectDialog (MU_WCHAR(title), modal, (IGUIElement*)parent, id);
+}
+
 IntPtr GuiEnv_CreateSkin(IntPtr guienv, EGUI_SKIN_TYPE type)
 {
 	return GetGui(guienv)->createSkin(type);

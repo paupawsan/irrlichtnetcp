@@ -21,6 +21,9 @@ extern "C"
 	EXPORT IntPtr GuiEnv_AddTabControl(IntPtr guienv, M_RECT rectangle, IntPtr parent, bool fillbackGround, bool border, int id);
 	EXPORT IntPtr GuiEnv_AddToolBar(IntPtr guienv, IntPtr parent, int id);
 	EXPORT IntPtr GuiEnv_AddWindow(IntPtr guienv, M_RECT rectangle, bool modal, M_STRING text, IntPtr parent, int id);
+	/* 1.4 */
+	EXPORT IntPtr GuiEnv_AddColorSelectDialog (IntPtr guienv, M_STRING title, bool modal, IntPtr parent, int id);
+	
 	EXPORT IntPtr GuiEnv_CreateSkin(IntPtr guienv, EGUI_SKIN_TYPE type);
 	EXPORT void GuiEnv_DrawAll(IntPtr guienv);
 	EXPORT void GuiEnv_Clear(IntPtr guienv);

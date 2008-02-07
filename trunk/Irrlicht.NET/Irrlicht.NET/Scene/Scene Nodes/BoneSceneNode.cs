@@ -61,7 +61,7 @@ namespace IrrlichtNETCP
 		/// <value>
 		/// Returns the name of the bone
 		/// </value>
-		public string Name
+		override public string Name
 		{
 			get
 			{

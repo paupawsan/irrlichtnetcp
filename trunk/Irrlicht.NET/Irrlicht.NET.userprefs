@@ -1,23 +1,19 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET.mds">
   <Files>
     <File name="Добро пожаловать" />
-    <File name="CustomSceneNode/Program.cs" line="46" column="39" />
-    <File name="Irrlicht.NET/Video/Vertices.cs" line="31" column="42" />
-    <File name="Irrlicht.NET/AssemblyInfo.cs" line="25" column="1" />
-    <File name="Irrlicht.NET/Video/VideoDriver.cs" line="94" column="22" />
-    <File name="Irrlicht.NET/Video/Texture.cs" line="217" column="1" />
-    <File name="Irrlicht.NET/Video/Image.cs" line="1" column="1" />
-    <File name="Irrlicht.NET/Video/MaterialLayer.cs" line="74" column="31" />
-    <File name="Irrlicht.NET/Video/ExposedVideoData.cs" line="18" column="4" />
-    <File name="Irrlicht.NET/Device/IrrlichtDevice.cs" line="6" column="1" />
+    <File name="Irrlicht.NET/Gui/GUIEnvironment.cs" line="30" column="4" />
+    <File name="Irrlicht.NET/Gui/GUIElement.cs" line="306" column="10" />
+    <File name="Irrlicht.NET/Gui/GUIColorSelectDialog.cs" line="13" column="34" />
+    <File name="Irrlicht.NET/Gui/GUIContextMenu.cs" line="1" column="1" />
+    <File name="Irrlicht.NET/Gui/GUIEditBox.cs" line="1" column="1" />
+    <File name="Irrlicht.NET/Gui/GUIMeshViewer.cs" line="14" column="33" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
-        <Node name="GUIExample" expanded="True" />
         <Node name="Irrlicht.NET" expanded="True">
-          <Node name="Device" expanded="True">
-            <Node name="IrrlichtDevice.cs" selected="True" />
+          <Node name="Gui" expanded="True">
+            <Node name="GUIEnvironment.cs" selected="True" />
           </Node>
         </Node>
       </Node>
@@ -30,7 +26,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET/Device/IrrlichtDevice.cs" />
+    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET/Gui/GUIEnvironment.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

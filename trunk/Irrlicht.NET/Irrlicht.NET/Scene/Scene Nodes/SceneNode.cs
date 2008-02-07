@@ -108,7 +108,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public string Name
+        public virtual string Name
         {
             get
             {
