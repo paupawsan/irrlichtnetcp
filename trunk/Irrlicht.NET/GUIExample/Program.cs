@@ -39,7 +39,7 @@ namespace GUIExample
 			TTFont font = new TTFont(device.VideoDriver);
 			font.Antialias = true;
 			TTFace face = new TTFace();
-			face.Load("../../medias/LucidaGrande.ttf");
+			face.Load("../../medias/FreeSans.ttf");
 			font.Attach(face, 14);
 			guienv.Skin.Font = font;
 			
