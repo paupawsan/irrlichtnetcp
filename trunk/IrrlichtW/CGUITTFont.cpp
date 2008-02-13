@@ -546,12 +546,16 @@ s32 CGUITTFont::getKerningHeight () const
 }
 // << Add for Ver.1.3 end
 
-scene::ISceneNode *CGUITTFont::createBillboard(const wchar_t* text,scene::ISceneManager *scene,scene::ISceneNode *parent,s32 id){
+scene::ISceneNode *CGUITTFont::createBillboard(const wchar_t* text, core::dimension2d<f32> size, scene::ISceneManager *scene,scene::ISceneNode *parent,s32 id){
 
 	scene::ISceneNode *node = scene->addEmptySceneNode(parent,id);
 
 	core::dimension2d<s32> textDimension;
 	textDimension = getDimension(text);
+	
+	float scalex = size.Width / textDimension.Width;
+	float scaley = size.Height / textDimension.Height;
+	
 	core::vector3df offset = core::vector3df(0.0f,0.0f,0.0f);
 
 	offset.X = 0 - (f32)(textDimension.Width >> 1);
@@ -581,9 +585,10 @@ scene::ISceneNode *CGUITTFont::createBillboard(const wchar_t* text,scene::IScene
 				offy = Glyphs[n-1].size - Glyphs[n-1].top16;
 				tex = Glyphs[n-1].tex16;
 			}
+			
 //			scene::IAxialBillboardSceneNode *bill = scene->addAxialBillboardSceneNode(node,core::vector3df(1,1,1),imgw,core::vector3df(offset.X,offset.Y-offy,0),id);
-			scene::IBillboardSceneNode *bill = scene->addBillboardSceneNode(node,core::dimension2d<f32>(imgw,imgh),core::vector3df(offset.X,offset.Y-offy,0),id);
-			bill->setScale(core::vector3df(0.5f,0.5f,0.5f));
+			scene::IBillboardSceneNode *bill = scene->addBillboardSceneNode(node,core::dimension2d<f32>(imgw*scalex,imgh*scaley),core::vector3df(offset.X*scalex,offset.Y*scaley-offy*scaley,0),id);
+			//bill->setScale(core::vector3df(0.1f,0.1f,0.1f));
 			bill->setMaterialTexture(0,tex);
 			bill->setMaterialType(video::EMT_TRANSPARENT_ALPHA_CHANNEL);
 			bill->setVisible(true);

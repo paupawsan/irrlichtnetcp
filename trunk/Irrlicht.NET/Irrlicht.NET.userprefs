@@ -1,19 +1,23 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET.mds">
   <Files>
-    <File name="Добро пожаловать" />
-    <File name="Irrlicht.NET/Gui/GUIEnvironment.cs" line="30" column="4" />
+    <File name="Irrlicht.NET/Gui/GUIEnvironment.cs" line="14" column="85" />
     <File name="Irrlicht.NET/Gui/GUIElement.cs" line="306" column="10" />
     <File name="Irrlicht.NET/Gui/GUIColorSelectDialog.cs" line="13" column="34" />
     <File name="Irrlicht.NET/Gui/GUIContextMenu.cs" line="1" column="1" />
     <File name="Irrlicht.NET/Gui/GUIEditBox.cs" line="1" column="1" />
-    <File name="Irrlicht.NET/Gui/GUIMeshViewer.cs" line="14" column="33" />
+    <File name="Irrlicht.NET/Gui/GUIMeshViewer.cs" line="35" column="64" />
+    <File name="Irrlicht.NET/Gui/GUISpinBox.cs" line="43" column="42" />
+    <File name="Irrlicht.NET/Gui/GUIListBox.cs" line="80" column="1" />
+    <File name="GUIExample/Program.cs" line="42" column="40" />
+    <File name="Irrlicht.NET/Scene/SceneManager.cs" line="819" column="37" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
+        <Node name="GUIExample" expanded="True" />
         <Node name="Irrlicht.NET" expanded="True">
-          <Node name="Gui" expanded="True">
-            <Node name="GUIEnvironment.cs" selected="True" />
+          <Node name="Scene" expanded="True">
+            <Node name="SceneManager.cs" selected="True" />
           </Node>
         </Node>
       </Node>
@@ -26,7 +30,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET/Gui/GUIEnvironment.cs" />
+    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET/Scene/SceneManager.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>

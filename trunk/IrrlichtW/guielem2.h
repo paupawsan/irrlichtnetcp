@@ -58,14 +58,24 @@ extern "C"
 	EXPORT bool GUIFader_IsReady(IntPtr fader);
 	EXPORT void GUIFader_SetColor(IntPtr fader, M_SCOLOR color);
 
-	EXPORT int GUIListBox_AddItem(IntPtr listb, M_STRING text, M_STRING icon);
+	EXPORT int GUIListBox_AddItem(IntPtr listb, M_STRING text, int icon);
 	EXPORT int GUIListBox_AddItemA(IntPtr listb, M_STRING text);
 	EXPORT void GUIListBox_Clear(IntPtr listb);
 	EXPORT int GUIListBox_GetItemCount(IntPtr listb);
 	EXPORT M_STRING GUIListBox_GetListItem(IntPtr listb, int id);
 	EXPORT int GUIListBox_GetSelected(IntPtr listb);
-	EXPORT void GUIListBox_SetIconFont(IntPtr listb, IntPtr font);
 	EXPORT void GUIListBox_SetSelected(IntPtr listb, int sel);
+	
+	EXPORT float GUISpinBox_GetMax (IntPtr spin);
+	EXPORT float GUISpinBox_GetMin(IntPtr spin);
+	EXPORT float GUISpinBox_GetStepSize (IntPtr spin);
+	EXPORT float GUISpinBox_GetValue (IntPtr spin);
+	EXPORT IntPtr GUISpinBox_GetEditBox (IntPtr spin);
+	EXPORT void GUISpinBox_SetRange (IntPtr spin, int min, int max);
+	EXPORT void GUISpinBox_SetStepSize (IntPtr spin, float step);
+	EXPORT void GUISpinBox_SetValue (IntPtr spin, float value);
+	EXPORT void GUISpinBox_SetDecimalPlaces (IntPtr spin, int places);
+	
 
 	EXPORT IntPtr GUIMeshViewer_GetMaterial(IntPtr meshv);
 	EXPORT void GUIMeshViewer_SetMaterial(IntPtr meshv, IntPtr mat);

@@ -793,6 +793,37 @@ namespace IrrlichtNETCP
 			}
 		}
 		
+		/// <summary>
+		/// Creates a new scene manager. 
+		/// </summary>
+		/// <param name="copycontent">
+		/// Should the content to be copied to the new location, 
+		/// or keeped as a reference <see cref="System.Boolean"/>
+		/// </param>
+		/// <returns>
+		/// A new SceneManager object <see cref="SceneManager"/>
+		/// </returns>
+		public SceneManager CreateNewSceneManager (bool copycontent)
+		{
+			return (SceneManager)NativeElement.GetObject(SceneManager_CreateNewSceneManager(_raw, copycontent),
+			                                             typeof(SceneManager));
+		}
+		
+		/// <summary>
+		/// Posts an input event to the environment. Usefull for new created SceneManagers
+		/// </summary>
+		/// <param name="ev">
+		/// An event struct from the EventReceiver <see cref="Event"/>
+		/// </param>
+		/// <returns>
+		/// A result of the scenemanager's internal routine <see cref="System.Boolean"/>
+		/// </returns>
+		public bool PostEventFromUser (Event ev)
+		{
+			if (ev == null) return false;
+			return SceneManager_PostEventFromUser(_raw, ev.Raw);
+		}
+		
 		//Please DO NOT change any of these name, they're copy-pasted from the C/C++
 		//source code AND NEEDS TO BE.
 		#region .NET Wrapper Native Code
@@ -954,6 +985,12 @@ namespace IrrlichtNETCP
         
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void SceneManager_Clear(IntPtr scenemanager);
+		
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern IntPtr SceneManager_CreateNewSceneManager (IntPtr scenemanager, bool copycontent);
+		
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern bool SceneManager_PostEventFromUser (IntPtr scenemanager, IntPtr eventptr);
 		#endregion
 	}
 	

@@ -68,4 +68,7 @@ extern "C"
 	EXPORT void MetaTriangleSelector_AddTriangleSelector(IntPtr mts, IntPtr toadd);
 	EXPORT void MetaTriangleSelector_RemoveAllTriangleSelectors(IntPtr mts);
 	EXPORT void MetaTriangleSelector_RemoveTriangleSelector(IntPtr mts, IntPtr toadd);
+	EXPORT IntPtr SceneManager_CreateNewSceneManager (IntPtr mgr, bool clone);
+	EXPORT bool SceneManager_PostEventFromUser (IntPtr mgr, IntPtr event);
+	
 }

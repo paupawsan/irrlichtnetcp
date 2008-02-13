@@ -1,4 +1,5 @@
 #include "scenemanager.h"
+#include "CGUITTFont.h"
 
 ISceneManager *GetSceneFromIntPtr(IntPtr object)
 {
@@ -119,7 +120,18 @@ IntPtr SceneManager_AddTextSceneNode(IntPtr scenemanager, IntPtr font, M_STRING 
 IntPtr SceneManager_AddTextSceneNode2(IntPtr scenemanager, IntPtr font, M_STRING text, IntPtr parent,  M_DIM2DF size, M_VECT3DF pos, int ID,
                                                                                                             M_SCOLOR shade_top, M_SCOLOR shade_down)
 {
+	if (((IGUIFont*)font)->getType() == EGFT_BITMAP)
+	{
     return GetSceneFromIntPtr(scenemanager)->addBillboardTextSceneNode((IGUIFont *)font, MU_WCHAR(text), (ISceneNode *)parent, MU_DIM2DF(size), MU_VECT3DF(pos), ID, MU_SCOLOR(shade_top), MU_SCOLOR(shade_down));
+	} else {
+		return ((CGUITTFont*)font)->createBillboard(MU_WCHAR(text),
+		                                            MU_DIM2DF(size),
+		                                            (ISceneManager*)scenemanager,
+		                                            (ISceneNode*)parent,
+		                                            ID
+		                                            );
+		
+	}
 }
 
 IntPtr SceneManager_AddWaterSurfaceSceneNode(IntPtr scenemanager, IntPtr mesh, float waveHeight, float waveSpeed, float waveLength, IntPtr parent, int ID)
@@ -339,4 +351,14 @@ void MetaTriangleSelector_RemoveAllTriangleSelectors(IntPtr mts)
 void MetaTriangleSelector_RemoveTriangleSelector(IntPtr mts, IntPtr toadd)
 {
 	((IMetaTriangleSelector*)mts)->removeTriangleSelector((ITriangleSelector*)toadd);
+}
+
+IntPtr SceneManager_CreateNewSceneManager (IntPtr mgr, bool clone)
+{
+	return GetSceneFromIntPtr(mgr)->createNewSceneManager (clone);
+}
+
+bool SceneManager_PostEventFromUser (IntPtr mgr, IntPtr event)
+{
+	_FIX_BOOL_MARSHAL_BUG(GetSceneFromIntPtr(mgr)->postEventFromUser (*(SEvent*)event));
 }

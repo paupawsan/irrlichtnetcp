@@ -50,11 +50,13 @@ IRR_SRC_OBJECTS=$(IRR_SRC:.cpp=.o)
 .cpp.o: 
 	$(COMPILER) -Os -c $(FLAGS) -o $@ $<
 
+.PHONY:	all clean
+
 all: $(IRR_LIB_NAME)
 
 
 $(IRR_LIB_NAME): $(IRR_SRC_OBJECTS)
-	$(COMPILER) $(FLAGS) -shared $^ -o lib$@.so $(LDFLAGS)
+	$(COMPILER) $(FLAGS) -fPIC -shared $^ -o lib$@.so $(LDFLAGS)
 	cp lib$(IRR_LIB_NAME).so $(DEBUG_PATH)/lib$(IRR_LIB_NAME_DEBUG).so
 	cp lib$(IRR_LIB_NAME).so $(RELEASE_PATH)/lib$(IRR_LIB_NAME).so
 	strip $(RELEASE_PATH)/lib$(IRR_LIB_NAME).so

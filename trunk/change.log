@@ -16,9 +16,19 @@ Legend from 0.9 and after:
 Irrlicht .NET CP 0.9
 =============================================================================
 
+February, 11, Lester
+    + Added CreateNewSceneManager and PostEventFromUser to the SceneManager's code
+    + Added ugly implementation of the TextBillBoardSceneNode for TTFont. 
+	I'm not sure for what one does need it though, but let it be.
+
+February, 10, Lester
+    * changed GUIListBox->AddItem item parameter from string to int
+    - Removed GUIListBox->SetIconFont as an obsolete method
+    + Added GUISpinBox
+
 February, 7, Lester
     + Added GUIColorSelectDialog and corresponding functions into guienv
-    + Added dirrection, falloff, attenuation, outercone and innercone into the Light struct.
+    + Added direction, falloff, attenuation, outercone and innercone into the Light struct.
 
 January, 28, Lester
     + Added missing values to the TransormationState enum

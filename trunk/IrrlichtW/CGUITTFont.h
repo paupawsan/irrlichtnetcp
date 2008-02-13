@@ -100,7 +100,7 @@ public:
 	virtual s32 getKerningHeight() const;
 // << Add for Ver.1.3 end
 
-	scene::ISceneNode *createBillboard(const wchar_t* text,scene::ISceneManager *scene,scene::ISceneNode *parent = 0,s32 id = -1);
+	scene::ISceneNode *createBillboard(const wchar_t* text, core::dimension2d<f32> size, scene::ISceneManager *scene,scene::ISceneNode *parent,s32 id);
 
 	bool AntiAlias;
 	bool TransParency;

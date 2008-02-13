@@ -39,8 +39,7 @@ namespace GUIExample
 			TTFont font = new TTFont(device.VideoDriver);
 			font.Antialias = true;
 			TTFace face = new TTFace();
-			// cool we can have Type1® fonts
-			face.Load("/usr/share/fonts/type1/gsfonts/c059033l.pfb");
+			face.Load("../../medias/LucidaGrande.ttf");
 			font.Attach(face, 14);
 			guienv.Skin.Font = font;
 			
@@ -58,6 +57,9 @@ namespace GUIExample
 			
 			guienv.AddStaticText ("Move this scrollbar and you'll see the miracle !", new Rect(new Position2D(220, 240), new Dimension2D(240, 30)), 
 			                      false, true, null, -1, false);
+			
+			guienv.AddSpinBox ("", new Rect(new Position2D (220, 270), new Dimension2D (120, 30)), null, -1);
+			guienv.AddEditBox ("", new Rect(new Position2D (220, 300), new Dimension2D (120, 30)), true, null, -1);
 			
 			listbox = guienv.AddListBox(new Rect(new Position2D(400, 20), new Dimension2D(220, 150)), null, -1, true);
             //Our logo

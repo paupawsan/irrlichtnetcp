@@ -245,10 +245,9 @@ void GUIFader_SetColor(IntPtr fader, M_SCOLOR color)
 }
 
 
-int GUIListBox_AddItem(IntPtr listb, M_STRING text, M_STRING icon)
+int GUIListBox_AddItem(IntPtr listb, M_STRING text, int icon)
 {
-	//TODO: Change with 1.3
-	return ((IGUIListBox*)listb)->addItem(MU_WCHAR(text)/*, MU_WCHAR(icon)*/);
+	return ((IGUIListBox*)listb)->addItem(MU_WCHAR(text), icon);
 }
 
 int GUIListBox_AddItemA(IntPtr listb, M_STRING text)
@@ -276,11 +275,54 @@ int GUIListBox_GetSelected(IntPtr listb)
 	return ((IGUIListBox*)listb)->getSelected();
 }
 
-void GUIListBox_SetIconFont(IntPtr listb, IntPtr font)
+/* Irrlicht 1.4 adding */
+
+float GUISpinBox_GetMax (IntPtr spin)
 {
-	//TODO: Change with 1.3 version
-	//((IGUIListBox*)listb)->setIconFont((IGUIFont*)font);
+	return ((IGUISpinBox*)spin)->getMax();
 }
+
+float GUISpinBox_GetMin(IntPtr spin)
+{
+	return ((IGUISpinBox*)spin)->getMin();
+}
+
+float GUISpinBox_GetStepSize (IntPtr spin)
+{
+	return ((IGUISpinBox*)spin)->getStepSize();
+}
+
+float GUISpinBox_GetValue (IntPtr spin)
+{
+	return ((IGUISpinBox*)spin)->getValue();
+}
+
+IntPtr GUISpinBox_GetEditBox (IntPtr spin)
+{
+	return (IntPtr)((IGUISpinBox*)spin)->getEditBox();
+}
+
+void GUISpinBox_SetRange (IntPtr spin, int min, int max)
+{
+	((IGUISpinBox*)spin)->setRange(min, max);
+}
+
+void GUISpinBox_SetStepSize (IntPtr spin, float step)
+{
+	((IGUISpinBox*)spin)->setStepSize (step);
+}
+
+void GUISpinBox_SetValue (IntPtr spin, float value)
+{
+	((IGUISpinBox*)spin)->setValue (value);
+}
+
+void GUISpinBox_SetDecimalPlaces (IntPtr spin, int places)
+{
+	((IGUISpinBox*)spin)->setDecimalPlaces (places);
+}
+
+/**/
 
 void GUIListBox_SetSelected(IntPtr listb, int sel)
 {

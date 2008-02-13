@@ -942,6 +942,25 @@
             </summary>
             <param name="filename">File where the scene is going to be saved into.</param>
         </member>
+        <member name="M:IrrlichtNETCP.SceneManager.CreateNewSceneManager(System.Boolean)">
+            <summary>
+            Creates a new scene manager.
+            </summary>
+            <param name="copycontent">
+            Should the content to be copied to the new location,
+            or keeped as a reference <see cref="T:System.Boolean" /></param>
+            <returns>
+            A new SceneManager object <see cref="T:IrrlichtNETCP.SceneManager" /></returns>
+        </member>
+        <member name="M:IrrlichtNETCP.SceneManager.PostEventFromUser(IrrlichtNETCP.Event)">
+            <summary>
+            Posts an input event to the environment. Usefull for new created SceneManagers
+            </summary>
+            <param name="ev">
+            An event struct from the EventReceiver <see cref="T:IrrlichtNETCP.Event" /></param>
+            <returns>
+            A result of the scenemanager's internal routine <see cref="T:System.Boolean" /></returns>
+        </member>
         <member name="P:IrrlichtNETCP.Texture.DOTNETImage">
             <summary>
             Retrieves the System.Drawing.Bitmap from the texture to use it with .NET.
@@ -1258,6 +1277,16 @@
             <summary>
             Dialog for selecting a color
             </summary>
+        </member>
+        <member name="P:IrrlichtNETCP.GUISpinBox.StepSize">
+            <value>
+            Step size by which values are changed when pressing the spinbuttons.
+            </value>
+        </member>
+        <member name="P:IrrlichtNETCP.GUISpinBox.DecimalPlaces">
+            <value>
+            Sets the number of decimal places to display.
+            </value>
         </member>
         <member name="T:IrrlichtNETCP.OnShaderConstantSetDelegate">
             <summary>

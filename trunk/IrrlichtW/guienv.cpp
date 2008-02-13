@@ -108,12 +108,17 @@ IntPtr GuiEnv_AddWindow(IntPtr guienv, M_RECT rectangle, bool modal, M_STRING te
 }
 
 /* 
- * Irrlicht 1.4 addins
+ * Irrlicht 1.4 adding
  */
 
 IntPtr GuiEnv_AddColorSelectDialog (IntPtr guienv, M_STRING title, bool modal, IntPtr parent, int id)
 {
 	return GetGui(guienv)->addColorSelectDialog (MU_WCHAR(title), modal, (IGUIElement*)parent, id);
+}
+
+IntPtr GuiEnv_AddSpinBox (IntPtr guienv, M_STRING text, M_RECT rectangle, IntPtr parent, int id)
+{
+	return GetGui(guienv)->addSpinBox (MU_WCHAR(text), MU_RECT(rectangle), (IGUIElement*)parent, id);
 }
 
 IntPtr GuiEnv_CreateSkin(IntPtr guienv, EGUI_SKIN_TYPE type)

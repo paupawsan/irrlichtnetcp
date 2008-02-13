@@ -11,7 +11,7 @@ namespace IrrlichtNETCP
         {
         }
 
-        public int AddItem(string text, string icon)
+        public int AddItem(string text, int icon)
         {
             return GUIListBox_AddItem(_raw, text, icon);
         }
@@ -38,11 +38,6 @@ namespace IrrlichtNETCP
             }
         }
 
-        public void SetIconFont(GUIFont font)
-        {
-            GUIListBox_SetIconFont(_raw, font.Raw);
-        }
-
         public int ItemCount
         {
             get
@@ -65,7 +60,7 @@ namespace IrrlichtNETCP
 
         #region Native Invokes
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern int GUIListBox_AddItem(IntPtr listb, string text, string icon);
+        static extern int GUIListBox_AddItem(IntPtr listb, string text, int icon);
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GUIListBox_AddItemA(IntPtr listb, string text);
@@ -81,9 +76,6 @@ namespace IrrlichtNETCP
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern int GUIListBox_GetSelected(IntPtr listb);
-
-         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern void GUIListBox_SetIconFont(IntPtr listb, IntPtr font);
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GUIListBox_SetSelected(IntPtr listb, int sel);

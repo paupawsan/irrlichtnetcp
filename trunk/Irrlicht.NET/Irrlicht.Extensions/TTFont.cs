@@ -6,11 +6,10 @@ using System.Runtime.InteropServices;
 namespace IrrlichtNETCP.Extensions
 {
 	
-	public class TTFace : NativeElement
+	public class TTFace : GUIFont
 	{
-		public TTFace()
+		public TTFace() : base (TTFace_Create ()) 
 		{
-			Initialize(TTFace_Create ());
 		}
 		
 		public TTFace(IntPtr raw) : base (raw)

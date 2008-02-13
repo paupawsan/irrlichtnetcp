@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using IrrlichtNETCP;
 using IrrlichtNETCP.Inheritable;
+using IrrlichtNETCP.Extensions;
 
 //This is just a rewrite of http://irrlicht.sourceforge.net/tut003.html so it is not commented
 
@@ -100,10 +101,11 @@ namespace CustomSceneNode
 
             _scene = device.SceneManager;
             _driver = device.VideoDriver;
+			GUIEnvironment guienv = device.GUIEnvironment;
 
             CustomSceneNode myNode = new CustomSceneNode(null, _scene, 666);
-
-            _scene.AddCameraSceneNode(null);
+			
+			_scene.AddCameraSceneNode(null);
             _scene.ActiveCamera.Position = new Vector3D(0, -40, 0);
             _scene.ActiveCamera.Target = new Vector3D();
 
