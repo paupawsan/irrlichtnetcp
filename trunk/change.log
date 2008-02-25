@@ -16,6 +16,12 @@ Legend from 0.9 and after:
 Irrlicht .NET CP 0.9
 =============================================================================
 
+February, 24, Lester
+    + Added MeshCache class
+
+February, 18, Lester
+    * Omg, finally, the annoying bug with events was fixed.
+
 February, 11, Lester
     + Added CreateNewSceneManager and PostEventFromUser to the SceneManager's code
     + Added ugly implementation of the TextBillBoardSceneNode for TTFont. 
@@ -64,6 +70,7 @@ January, 10, Lester
     + Added MaterialLayer
     * Removed AnisotropicFiltering, BilinearFiltering, TrilinearFiltering from
       Material and moved them into MaterialLayer
+    i Forgot almost everything I did to the wrapper! D'oh!
 
 November, 2, Lester
     + Added BoneSceneNode implementation

@@ -17,8 +17,9 @@ class EventReceiver : public IEventReceiver
 
     virtual bool OnEvent(const SEvent& ev)
     {
+    	SEvent temp = ev;
     	if(IsCallbackDefined)
-            return _callback((void *)&ev);
+            return _callback((void *)&temp);
         return false;
     }
 

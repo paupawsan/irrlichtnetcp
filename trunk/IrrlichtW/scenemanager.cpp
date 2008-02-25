@@ -1,9 +1,9 @@
 #include "scenemanager.h"
 #include "CGUITTFont.h"
 
-ISceneManager *GetSceneFromIntPtr(IntPtr object)
+irr::scene::ISceneManager *GetSceneFromIntPtr(IntPtr object)
 {
-    return (ISceneManager*)object;
+    return (irr::scene::ISceneManager*)object;
 }
 
 IntPtr SceneManager_AddAnimatedMeshSceneNode(IntPtr scenemanager, IntPtr mesh, IntPtr parent, int id)
@@ -295,6 +295,14 @@ void SceneManager_SetShadowColor(IntPtr scenemanager, M_SCOLOR color)
  {
 	 GetSceneFromIntPtr(scenemanager)->loadScene(filename);
  }
+ 
+ /* Mesh Cache */
+ 
+IntPtr SceneManager_GetMeshCache (IntPtr scenemanager)
+{
+	return GetSceneFromIntPtr(scenemanager)->getMeshCache();
+}
+ 
 
 bool SceneCollisionManager_GetCollisionPoint(IntPtr SCM, M_LINE3D ray, IntPtr selector, M_VECT3DF collisionpoint, M_TRIANGLE3DF outtriangle)
 {
@@ -308,7 +316,7 @@ bool SceneCollisionManager_GetCollisionPoint(IntPtr SCM, M_LINE3D ray, IntPtr se
 
 void SceneCollisionManager_GetCollisionResultPoint(IntPtr SCM, IntPtr selector, M_VECT3DF ellipsoidPosition, M_VECT3DF ellipsoidRadius, M_VECT3DF ellipsoidDirectionAndSpeed, M_TRIANGLE3DF outTriangle, bool *outFalling, float slidingSpeed, M_VECT3DF gravity, M_VECT3DF outCol)
 {
-	triangle3df outtri;
+	irr::core::triangle3df outtri;
 	UM_VECT3DF(((ISceneCollisionManager*)SCM)->getCollisionResultPosition((ITriangleSelector*)selector, MU_VECT3DF(ellipsoidPosition), MU_VECT3DF(ellipsoidRadius), MU_VECT3DF(ellipsoidDirectionAndSpeed), outtri, *outFalling, slidingSpeed, MU_VECT3DF(gravity)), outCol);
 }
 

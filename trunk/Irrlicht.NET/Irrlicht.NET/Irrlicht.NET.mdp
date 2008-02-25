@@ -4,10 +4,10 @@
       <Output directory="../../bin/Debug" assemblyKeyFile="." assembly="Irrlicht.NET" />
       <Build debugmode="True" target="Library" />
       <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
-      <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="True" generateoverflowchecks="True" mainclass="" definesymbols="MONO" generatexmldocumentation="False" codepage="65001" ctype="CSharpCompilerParameters" />
+      <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="True" generateoverflowchecks="True" mainclass="" definesymbols="DEBUG" generatexmldocumentation="False" codepage="65001" ctype="CSharpCompilerParameters" />
     </Configuration>
     <Configuration name="Release" ctype="DotNetProjectConfiguration">
-      <Output directory="../../bin/Release" assembly="Irrlicht.NET" />
+      <Output directory="../../bin/Release" assemblyKeyFile="." assembly="Irrlicht.NET" />
       <Build debugmode="False" target="Library" />
       <Execution runwithwarnings="True" consolepause="False" runtime="MsNet" clr-version="Net_2_0" />
       <CodeGeneration compiler="Csc" warninglevel="4" optimize="True" unsafecodeallowed="True" generateoverflowchecks="True" mainclass="" generatexmldocumentation="True" ctype="CSharpCompilerParameters" />
@@ -93,6 +93,7 @@
     <File name="Video/ExposedVideoData.cs" subtype="Code" buildaction="Compile" />
     <File name="Gui/GUIColorSelectDialog.cs" subtype="Code" buildaction="Compile" />
     <File name="Gui/GUISpinBox.cs" subtype="Code" buildaction="Compile" />
+    <File name="Scene/Meshes/MeshCache.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

@@ -208,3 +208,97 @@ void MeshBuffer_SetVertex2T(IntPtr meshb, unsigned int nr, IntPtr vert)
 	else
 		(((S3DVertex2TCoords*)(mb->getVertices()))[nr]) = *((S3DVertex2TCoords*)vert);
 }
+
+/*
+ * Mesh Cache
+ */
+
+irr::scene::IMeshCache *GetMeshCacheFromIntPtr(IntPtr ptr)
+{
+	return (irr::scene::IMeshCache *)ptr;
+}
+
+void MeshCache_AddMesh (IntPtr mc, M_STRING filename, IntPtr mesh)
+{
+	GetMeshCacheFromIntPtr(mc)->addMesh(UM_STRING(filename), (IAnimatedMesh*)mesh);
+}
+
+void MeshCache_Clear (IntPtr mc)
+{
+	GetMeshCacheFromIntPtr(mc)->clear();
+}
+
+void MeshCache_ClearUnusedMeshes (IntPtr mc)
+{
+	GetMeshCacheFromIntPtr(mc)->clearUnusedMeshes();
+}
+
+IntPtr MeshCache_GetMeshByFilename (IntPtr mc, M_STRING filename)
+{
+	return GetMeshCacheFromIntPtr(mc)->getMeshByFilename(UM_STRING(filename));
+}
+
+IntPtr MeshCache_GetMeshByIndex (IntPtr mc, irr::u32 index)
+{
+	return GetMeshCacheFromIntPtr(mc)->getMeshByIndex(index);
+}
+
+irr::u32 MeshCache_GetMeshCount (IntPtr mc)
+{
+	return GetMeshCacheFromIntPtr(mc)->getMeshCount();
+}
+
+M_STRING MeshCache_GetMeshFilename (IntPtr mc, IntPtr mesh)
+{
+	return UM_STRING(GetMeshCacheFromIntPtr(mc)->getMeshFilename(static_cast<irr::scene::IMesh*>(mesh)));
+}
+
+M_STRING MeshCache_GetMeshFilenameA (IntPtr mc, IntPtr mesh)
+{
+	return UM_STRING(GetMeshCacheFromIntPtr(mc)->getMeshFilename(static_cast<irr::scene::IAnimatedMesh*>(mesh)));
+}
+
+M_STRING MeshCache_GetMeshFilenameN (IntPtr mc, irr::u32 index)
+{
+	return UM_STRING(GetMeshCacheFromIntPtr(mc)->getMeshFilename(index));
+}
+
+irr::s32 MeshCache_GetMeshIndex (IntPtr mc, IntPtr mesh)
+{
+	return GetMeshCacheFromIntPtr(mc)->getMeshIndex(static_cast<irr::scene::IMesh*>(mesh));
+}
+
+irr::s32 MeshCache_GetMeshIndexA (IntPtr mc, IntPtr mesh)
+{
+	return GetMeshCacheFromIntPtr(mc)->getMeshIndex(static_cast<irr::scene::IAnimatedMesh*>(mesh));
+}
+
+bool MeshCache_IsMeshLoaded (IntPtr mc, M_STRING filename)
+{
+	_FIX_BOOL_MARSHAL_BUG(GetMeshCacheFromIntPtr(mc)->isMeshLoaded(filename));
+}
+
+void MeshCache_RemoveMesh (IntPtr mc, IntPtr mesh)
+{
+	GetMeshCacheFromIntPtr(mc)->removeMesh(static_cast<irr::scene::IMesh*>(mesh));
+}
+
+void MeshCache_RemoveMeshA (IntPtr mc, IntPtr mesh)
+{
+	GetMeshCacheFromIntPtr(mc)->removeMesh(static_cast<irr::scene::IAnimatedMesh*>(mesh));
+}
+
+bool MeshCache_SetMeshFilename (IntPtr mc, IntPtr mesh, M_STRING filename)
+{
+	_FIX_BOOL_MARSHAL_BUG(GetMeshCacheFromIntPtr(mc)->setMeshFilename(static_cast<irr::scene::IMesh*>(mesh), filename));
+}
+
+bool MeshCache_SetMeshFilenameA (IntPtr mc, IntPtr mesh, M_STRING filename)
+{
+	_FIX_BOOL_MARSHAL_BUG(GetMeshCacheFromIntPtr(mc)->setMeshFilename(static_cast<irr::scene::IAnimatedMesh*>(mesh), filename));
+}
+
+bool MeshCache_SetMeshFilenameN (IntPtr mc, irr::u32 index, M_STRING filename)
+{
+	_FIX_BOOL_MARSHAL_BUG(GetMeshCacheFromIntPtr(mc)->setMeshFilename(index, filename));
+}

@@ -824,6 +824,16 @@ namespace IrrlichtNETCP
 			return SceneManager_PostEventFromUser(_raw, ev.Raw);
 		}
 		
+		/// <value>
+		/// Returns an interface to the mesh cache which is shared beween all existing scene managers. 
+		/// </value>
+		public MeshCache MeshCache
+		{
+			get { return (MeshCache)
+				NativeElement.GetObject(SceneManager_GetMeshCache(_raw),
+				                        typeof(MeshCache));}
+		}
+		
 		//Please DO NOT change any of these name, they're copy-pasted from the C/C++
 		//source code AND NEEDS TO BE.
 		#region .NET Wrapper Native Code
@@ -991,6 +1001,9 @@ namespace IrrlichtNETCP
 		
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern bool SceneManager_PostEventFromUser (IntPtr scenemanager, IntPtr eventptr);
+		
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern IntPtr SceneManager_GetMeshCache (IntPtr scenemanager);
 		#endregion
 	}
 	
@@ -1039,6 +1052,7 @@ namespace IrrlichtNETCP
 		MoveForward,
 		MoveBackward,
 		StrafeLeft,
-		StrafeRight
+		StrafeRight,
+		JumpUp
 	}
 }

@@ -1,8 +1,8 @@
 #include "meshmanipulator.h"
 
-IMeshManipulator *GetMMForIntPtr(IntPtr mm)
+irr::scene::IMeshManipulator *GetMMForIntPtr(IntPtr mm)
 {
-	return (IMeshManipulator*)mm;
+	return (irr::scene::IMeshManipulator*)mm;
 }
 
 IntPtr MeshManipulator_CreateMeshWithTangents(IntPtr mm, IntPtr mesh)
@@ -68,3 +68,5 @@ int MeshManipulator_GetPolyCountA(IntPtr mm, IntPtr amesh)
 {
 	return GetMMForIntPtr(mm)->getPolyCount((IAnimatedMesh*)amesh);
 }
+
+

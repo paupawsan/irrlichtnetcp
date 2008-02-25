@@ -39,7 +39,7 @@ namespace GUIExample
 			TTFont font = new TTFont(device.VideoDriver);
 			font.Antialias = true;
 			TTFace face = new TTFace();
-			face.Load("../../medias/FreeSans.ttf");
+			face.Load("../../medias/LucidaGrande.ttf");
 			font.Attach(face, 14);
 			guienv.Skin.Font = font;
 			
@@ -104,6 +104,12 @@ namespace GUIExample
         static bool device_OnEvent(Event ev)
         {
         	//If the event is a GUI one
+			
+			/*if (ev.Type == EventType.KeyInputEvent)
+			{
+				Console.WriteLine("From net "+ev.Key);
+				return false;
+			}*/
             if (ev.Type == EventType.GUIEvent)
             {
 			

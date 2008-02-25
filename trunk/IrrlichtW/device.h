@@ -2,7 +2,7 @@
 
 extern "C"
 {
-    typedef bool (STDCALL EVENTCALLBACK)(IntPtr);
+    typedef bool (STDCALL EVENTCALLBACK)(const IntPtr);
  
     EXPORT IntPtr CreateDevice(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias);
     EXPORT IntPtr CreateDeviceA(E_DRIVER_TYPE type, M_DIM2DS dim, int bits, bool full, bool stencil, bool vsync, bool antialias, IntPtr handle);

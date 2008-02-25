@@ -18,5 +18,5 @@ extern "C"
 
 	EXPORT IntPtr MeshManipulator_CreateMeshWith2TCoords (IntPtr mm, IntPtr mesh);
 	EXPORT void MeshManipulator_TransformMesh (IntPtr mm, IntPtr mesh, M_MAT4 mat);
-	
+
 }

@@ -559,6 +559,11 @@
             Moreover, all node that do not have any parent is a child from the the root scene node.
             </summary>
         </member>
+        <member name="P:IrrlichtNETCP.SceneManager.MeshCache">
+            <value>
+            Returns an interface to the mesh cache which is shared beween all existing scene managers.
+            </value>
+        </member>
         <member name="M:IrrlichtNETCP.SceneManager.AddAnimatedMeshSceneNode(IrrlichtNETCP.AnimatedMesh)">
             <summary>
             Adds a simple animated mesh scene node to the scene

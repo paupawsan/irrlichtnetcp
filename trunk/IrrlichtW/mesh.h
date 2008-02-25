@@ -34,4 +34,25 @@ extern "C"
 	EXPORT void MeshBuffer_SetVertex(IntPtr meshb, unsigned int nr, IntPtr vert);
 	EXPORT IntPtr MeshBuffer_GetVertex2T(IntPtr meshb, unsigned int nr);
 	EXPORT void MeshBuffer_SetVertex2T(IntPtr meshb, unsigned int nr, IntPtr vert);
+
+	/* Mesh Cache */
+	
+	EXPORT void MeshCache_AddMesh (IntPtr mc, M_STRING filename, IntPtr mesh);
+	EXPORT void MeshCache_Clear (IntPtr mc);
+	EXPORT void MeshCache_ClearUnusedMeshes (IntPtr mc);
+	EXPORT IntPtr MeshCache_GetMeshByFilename (IntPtr mc, M_STRING filename);
+	EXPORT IntPtr MeshCache_GetMeshByIndex (IntPtr mc, irr::u32 index);
+	EXPORT irr::u32 MeshCache_GetMeshCount (IntPtr mc);
+	EXPORT M_STRING MeshCache_GetMeshFilename (IntPtr mc, IntPtr mesh);
+	EXPORT M_STRING MeshCache_GetMeshFilenameA (IntPtr mc, IntPtr mesh);
+	EXPORT M_STRING MeshCache_GetMeshFilenameN (IntPtr mc, irr::u32 index);
+	EXPORT irr::s32 MeshCache_GetMeshIndex (IntPtr mc, IntPtr mesh);
+	EXPORT irr::s32 MeshCache_GetMeshIndexA (IntPtr mc, IntPtr mesh);
+	EXPORT bool MeshCache_IsMeshLoaded (IntPtr mc, M_STRING filename);
+	EXPORT void MeshCache_RemoveMesh (IntPtr mc, IntPtr mesh);
+	EXPORT void MeshCache_RemoveMeshA (IntPtr mc, IntPtr mesh);
+	EXPORT bool MeshCache_SetMeshFilename (IntPtr mc, IntPtr mesh, M_STRING filename);
+	EXPORT bool MeshCache_SetMeshFilenameA (IntPtr mc, IntPtr mesh, M_STRING filename);
+	EXPORT bool MeshCache_SetMeshFilenameN (IntPtr mc, irr::u32 index, M_STRING filename);
+	
 }

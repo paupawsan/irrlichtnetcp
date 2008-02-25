@@ -1,4 +1,5 @@
 #include "event.h"
+#include <iostream>
 
 SEvent *GetEventFromIntPtr(IntPtr event)
 {
