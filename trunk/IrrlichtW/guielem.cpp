@@ -1,8 +1,8 @@
 #include "guielem.h"
 
-IGUIElement *GetElem(IntPtr elem)
+irr::gui::IGUIElement *GetElem(IntPtr elem)
 {
-	return (IGUIElement*)elem;
+	return (irr::gui::IGUIElement*)elem;
 }
 
 void GuiElem_AddChild(IntPtr elem, IntPtr child)
@@ -38,7 +38,7 @@ void GuiElem_GetAbsolutePosition(IntPtr elem, M_RECT pos)
 void GuiElem_GetChildren(IntPtr elem, IntPtr *list)
 {
 	IGUIElement *element = GetElem(elem);
-	u32 size = element->getChildren().getSize();
+	//u32 size = element->getChildren().getSize();
 	core::list<IGUIElement*>::ConstIterator it = element->getChildren().begin();
 	int c = 0;
 	for (; it != element->getChildren().end(); ++it)
@@ -147,4 +147,37 @@ void GuiElem_SetVisible(IntPtr elem, bool visible)
 void GuiElem_UpdateAbsolutePosition(IntPtr elem)
 {
 	GetElem(elem)->updateAbsolutePosition();
+}
+
+void GuiElem_OnPostRender (IntPtr elem, u32 timeMs)
+{
+	GetElem(elem)->OnPostRender(timeMs);
+}
+
+void GuiElem_SetAlignment (IntPtr elem, int *align)
+{
+	GetElem(elem)->setAlignment((EGUI_ALIGNMENT)align[0],
+	                            (EGUI_ALIGNMENT)align[1],
+	                            (EGUI_ALIGNMENT)align[2],
+	                            (EGUI_ALIGNMENT)align[3]);
+}
+
+void GuiElem_SetMaxSize (IntPtr elem, M_DIM2DS size)
+{
+	GetElem(elem)->setMaxSize(MU_DIM2DS(size));
+}
+
+void GuiElem_SetMinSize (IntPtr elem, M_DIM2DS size)
+{
+	GetElem(elem)->setMinSize(MU_DIM2DS(size));
+}
+
+void GuiElem_SetNotClipped (IntPtr elem, bool noClip)
+{
+	GetElem(elem)->setNotClipped(noClip);
+}
+
+bool GuiElem_GetNotClipped (IntPtr elem)
+{
+	_FIX_BOOL_MARSHAL_BUG(GetElem(elem)->isNotClipped());
 }

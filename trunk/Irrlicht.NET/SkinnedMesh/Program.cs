@@ -137,7 +137,9 @@ namespace SkinnedMesh
                         lastFPS = fps;
                     }
                 }
-            }			
+            }
+			device.DumpElements();
+			device.Close();
 			
 		}
 

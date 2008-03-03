@@ -265,6 +265,17 @@
             <param name="intersection">Place to store the intersection point, if there is one.</param>
             <returns>Returns true if there was an intersection, false if there was not.</returns>
         </member>
+        <member name="M:IrrlichtNETCP.GUIElement.#ctor">
+            <summary>
+            Use this constructor only if you know,
+            what you're doing! Remember this!
+            </summary>
+        </member>
+        <member name="P:IrrlichtNETCP.GUIElement.Noclip">
+            <value>
+            Is the element clipped by parent's clip rectangle
+            </value>
+        </member>
         <member name="M:IrrlichtNETCP.MeshManipulator.CreateMeshWithTangents(IrrlichtNETCP.Mesh)">
             <summary>
             Creates a copy of the mesh, which will only consist of S3DVertexTangents vertices.

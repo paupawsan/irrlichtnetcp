@@ -44,35 +44,35 @@ extern "C" { EXPORT void Pointer_SafeRelease(IntPtr pointer); }
 //Between Managed and Unmanaged code.
 //PS : UM means Unmanaged => Managed and MU means Managed => Unmanaged
 #define M_DIM2DS int*
-#define MU_DIM2DS(val) dimension2d<s32>(val[0], val[1])
+#define MU_DIM2DS(val) irr::core::dimension2d<s32>(val[0], val[1])
 void UM_DIM2DS(irr::core::dimension2d<int> base, M_DIM2DS t);
 
 #define M_DIM2US int*
-#define MU_DIM2US(val) dimension2d<u32>(val[0], val[1])
+#define MU_DIM2US(val) irr::core::dimension2d<u32>(val[0], val[1])
 void UM_DIM2US(irr::core::dimension2d<uint> base, M_DIM2US t);
 
 #define M_DIM2DF float*
-#define MU_DIM2DF(val) dimension2d<float>(val[0], val[1])
+#define MU_DIM2DF(val) irr::core::dimension2d<float>(val[0], val[1])
 void UM_DIM2DF(irr::core::dimension2d<float> base, M_DIM2DF t);
 
 #define M_POS2DS int*
-#define MU_POS2DS(val) position2d<s32>(val[0], val[1])
+#define MU_POS2DS(val) irr::core::position2d<irr::s32>(val[0], val[1])
 void UM_POS2DS(irr::core::position2d<int> base, M_POS2DS t);
 
 #define M_POS2DF float*
-#define MU_POS2DF(val) position2d<float>(val[0], val[1])
+#define MU_POS2DF(val) irr::core::position2d<float>(val[0], val[1])
 void UM_POS2DF(irr::core::position2d<float> base, M_POS2DF t);
 
 #define M_SCOLOR int*
-#define MU_SCOLOR(val) SColor(val[0], val[1], val[2], val[3])
+#define MU_SCOLOR(val) irr::video::SColor(val[0], val[1], val[2], val[3])
 void UM_SCOLOR(irr::video::SColor color, M_SCOLOR t);
 
 #define M_SCOLORF float*
-#define MU_SCOLORF(val) SColorf(val[0], val[1], val[2], val[3])
+#define MU_SCOLORF(val) irr::video::SColorf(val[0], val[1], val[2], val[3])
 void UM_SCOLORF(irr::video::SColorf color, M_SCOLORF t);
 
 #define M_VECT3DF float*
-#define MU_VECT3DF(val) vector3df(val[0], val[1], val[2])
+#define MU_VECT3DF(val) irr::core::vector3df(val[0], val[1], val[2])
 void UM_VECT3DF(irr::core::vector3df base, M_VECT3DF t);
 
 #define M_MAT4 float*
@@ -80,11 +80,11 @@ irr::core::matrix4 MU_MAT4(M_MAT4 val);
 void UM_MAT4(irr::core::matrix4 val, M_MAT4 t);
 
 #define M_BOX3D float*
-#define MU_BOX3D(val) aabbox3d<float>(val[0], val[1], val[2], val[3], val[4], val[5])
+#define MU_BOX3D(val) irr::core::aabbox3d<float>(val[0], val[1], val[2], val[3], val[4], val[5])
 void UM_BOX3D(irr::core::aabbox3d<float> base, M_BOX3D);
 
 #define M_LINE3D float*
-#define MU_LINE3D(val) line3d<float>(val[0], val[1], val[2], val[3], val[4], val[5])
+#define MU_LINE3D(val) irr::core::line3d<float>(val[0], val[1], val[2], val[3], val[4], val[5])
 void UM_LINE3D(irr::core::line3d<float> base, M_LINE3D);
 
 #define M_TRIANGLE3DF float*
@@ -92,7 +92,7 @@ irr::core::triangle3df MU_TRIANGLE3DF(float*);
 void UM_TRIANGLE3DF (irr::core::triangle3d<float> base, M_TRIANGLE3DF );
 
 #define M_RECT int*
-#define MU_RECT(val) rect<int>(val[0], val[1], val[2], val[3])
+#define MU_RECT(val) irr::core::rect<int>(val[0], val[1], val[2], val[3])
 void UM_RECT(irr::core::rect<int> base, M_RECT);
 
 #define M_STRING char*

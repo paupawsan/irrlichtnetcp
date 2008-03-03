@@ -233,10 +233,7 @@ namespace IrrlichtNETCP
         
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern void Vertices_SetTangent (IntPtr vertex, float[] tangent);				
-		
-         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
-        static extern void Vertices_SetTCoords2(IntPtr vertex, float[] tcoords);
-
+	
         #endregion
     }	
 }

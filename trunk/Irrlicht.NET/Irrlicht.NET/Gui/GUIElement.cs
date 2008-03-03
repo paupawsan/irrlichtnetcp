@@ -9,8 +9,16 @@ namespace IrrlichtNETCP
 		public GUIElement(IntPtr raw) : base(raw)
 		{
         }
+		
+		/// <summary>
+		/// Use this constructor only if you know,
+		/// what you're doing! Remember this!  
+		/// </summary>
+		public GUIElement() : base()
+		{
+		}
 
-        public void AddChild(GUIElement child)
+        public virtual void AddChild(GUIElement child)
         {
             GuiElem_AddChild(_raw, child.Raw);
         }
@@ -20,7 +28,7 @@ namespace IrrlichtNETCP
             return GuiElem_BringToFront(_raw, elem.Raw);
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
             GuiElem_Draw(_raw);
         }
@@ -56,30 +64,35 @@ namespace IrrlichtNETCP
                                                        typeof(GUIElement));
         }
 
-        public void Move(Position2D absolutemovement)
+        public virtual void Move(Position2D absolutemovement)
         {
             GuiElem_Move(_raw, absolutemovement.ToUnmanaged());
         }
 
-        public bool OnEvent(Event customevent)
+        public virtual bool OnEvent(Event customevent)
         {
             return GuiElem_OnEvent(_raw, customevent.Raw);
         }
 
-        public void Remove()
+        public virtual void Remove()
         {
             GuiElem_Remove(_raw);
         }
 
-        public void RemoveChild(GUIElement child)
+        public virtual void RemoveChild(GUIElement child)
         {
             GuiElem_RemoveChild(_raw, child.Raw);
         }
         
-        public void UpdateAbsolutePosition()
+        public virtual void UpdateAbsolutePosition()
         {
         	GuiElem_UpdateAbsolutePosition(_raw);
         }
+		
+		public virtual void OnPostRender (uint timeMs)
+		{
+			GuiElem_OnPostRender(_raw, timeMs);
+		}
 
         public Rect AbsolutePosition
         {
@@ -104,8 +117,21 @@ namespace IrrlichtNETCP
                 return tor;
             }
         }
+		
+		public virtual void SetAlignment (Alignment left, Alignment right, Alignment top,
+		                             Alignment bottom)
+		{
+			int[] tor = new int[4];
+			tor[0] = (int)left;
+			tor[1] = (int)right;
+			tor[2] = (int)top;
+			tor[3] = (int)bottom;
 
-        public bool Enabled
+			GuiElem_SetAlignment(_raw, tor);
+			
+		}
+
+        public virtual bool Enabled
         {
             get
             {
@@ -117,7 +143,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public int ID
+        public virtual int ID
         {
             get
             {
@@ -129,7 +155,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public GUIElement Parent
+        public virtual GUIElement Parent
         {
             get
             {
@@ -151,7 +177,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public string Text
+        public virtual string Text
         {
             get
             {
@@ -175,7 +201,7 @@ namespace IrrlichtNETCP
             }
         }
 
-        public bool Visible
+        public virtual bool Visible
         {
             get
             {
@@ -187,13 +213,35 @@ namespace IrrlichtNETCP
             }
         }
 
-        public ElementType Type
+        public virtual ElementType Type
         {
             get
             {
                 return GuiElem_GetType(_raw);
             }
         }
+		
+		public virtual void SetMaxSize (Dimension2D size)
+		{
+			GuiElem_SetMaxSize(_raw, size.ToUnmanaged());
+		}
+		
+		public virtual void SetMinSize (Dimension2D size)
+		{
+			GuiElem_SetMinSize(_raw, size.ToUnmanaged());
+		}
+		
+		/// <value>
+		/// Is the element clipped by parent's clip rectangle
+		/// </value>
+		public virtual bool Noclip 
+		{
+			get { return GuiElem_GetNotClipped(_raw); }
+			set {
+			GuiElem_SetNotClipped(_raw, value); }
+		}
+		
+		
 
         #region Native Invokes
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
@@ -276,8 +324,34 @@ namespace IrrlichtNETCP
 
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern void GuiElem_UpdateAbsolutePosition(IntPtr elem);
+		
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void GuiElem_OnPostRender (IntPtr elem, uint timeMs);
+
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void GuiElem_SetAlignment (IntPtr elem, int[] align);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]		
+		static extern void GuiElem_SetMaxSize (IntPtr elem, int[] size);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]		
+		static extern void GuiElem_SetMinSize (IntPtr elem, int[] size);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]		
+		static extern void GuiElem_SetNotClipped (IntPtr elem, bool noClip);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]		
+		static extern bool GuiElem_GetNotClipped (IntPtr elem);		
         #endregion
     }
+	
+	public enum Alignment
+	{
+		UpperLeft = 0,
+		LowerRight,
+		Center,
+		Scale
+	}
 
     public enum ElementType
     {

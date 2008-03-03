@@ -101,7 +101,6 @@ namespace CustomSceneNode
 
             _scene = device.SceneManager;
             _driver = device.VideoDriver;
-			GUIEnvironment guienv = device.GUIEnvironment;
 
             CustomSceneNode myNode = new CustomSceneNode(null, _scene, 666);
 			
@@ -124,6 +123,7 @@ namespace CustomSceneNode
                 	lastfps = fps;
                 }
             }
+			device.DumpElements();
             device.Close();
         }
     }

@@ -94,6 +94,7 @@
     <File name="Gui/GUIColorSelectDialog.cs" subtype="Code" buildaction="Compile" />
     <File name="Gui/GUISpinBox.cs" subtype="Code" buildaction="Compile" />
     <File name="Scene/Meshes/MeshCache.cs" subtype="Code" buildaction="Compile" />
+    <File name="Gui/CustomElement.cs" subtype="Code" buildaction="Compile" />
   </Contents>
   <References>
     <ProjectReference type="Gac" localcopy="True" refto="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />

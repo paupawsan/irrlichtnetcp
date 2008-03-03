@@ -241,6 +241,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\customgui.cpp"
+				>
+			</File>			
+			<File
 				RelativePath=".\guielem2.cpp"
 				>
 			</File>
@@ -334,6 +338,10 @@
 				RelativePath=".\guielem.h"
 				>
 			</File>
+			<File
+				RelativePath=".\customgui.h"
+				>
+			</File>			
 			<File
 				RelativePath=".\guielem2.h"
 				>

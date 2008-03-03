@@ -13,8 +13,14 @@ Legend from 0.9 and after:
    +----------------------------+
    
 =============================================================================
-Irrlicht .NET CP 0.9
+Irrlicht .NET CP 0.9 beta
 =============================================================================
+
+March, 2, Lester
+    + added some missing functions to GUIElement
+    + added IGUIElement implementation with inheritance support same as ISceneNode
+    + added DumpElements method to the NativeElement. This is what one may use
+	for debugging
 
 February, 24, Lester
     + Added MeshCache class

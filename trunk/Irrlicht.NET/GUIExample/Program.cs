@@ -2,9 +2,67 @@ using System;
 using System.Text;
 using IrrlichtNETCP;
 using IrrlichtNETCP.Extensions;
+using IrrlichtNETCP.Inheritable;
 
 namespace GUIExample
 {
+	
+
+	/*
+	 * This is a custom gui element implemenation.
+	 * I decided to put it here, 'cause I'm too lazy
+	 * to create a new subproject for test purposes only
+	 */
+	class CustomElement : IGUIElement
+	{
+
+		VideoDriver driver;
+		static GUIElement text;
+		static bool clicked = false;
+		string caption = "Yep, this is a custom gui element written in C#"; 
+		
+		public CustomElement (GUIEnvironment guienv, GUIElement parent, int id,
+		                      Rect rect) : base (guienv, parent, id, rect)
+		{
+			driver = guienv.VideoDriver;
+			
+			// For some reason passing this as a parent parameter doesn't work.
+			// Probably that's because initialization of the managed part 
+			// is not finished yet, so this points to elsewhere but a complete class
+			
+			text = guienv.AddStaticText(caption, rect, false,
+			                            true, null, -1, false);
+			
+			// let's workaround this by calling addchild instantly
+			AddChild(text);
+		}
+		
+		public override void Draw ()
+		{
+			driver.Draw2DRectangle(this.AbsolutePosition, clicked ? Color.Red:Color.Black);
+			base.Draw ();
+		}
+		
+		public override bool OnEvent (Event ev)
+		{
+			if (ev.Type == EventType.MouseInputEvent)
+			{
+				if (ev.MouseInputEvent == MouseInputEvent.LMousePressedDown)
+				{
+						text.Text = caption + "\n\n      I'm clicked!";
+					clicked = true;
+				} else {
+						text.Text = caption;
+					clicked = false;
+				}
+			}
+			return base.OnEvent(ev);
+		}
+
+
+	}
+	
+	
     class Program
     {
     	//Our objects such as video driver or GUI environment
@@ -12,6 +70,7 @@ namespace GUIExample
         static VideoDriver driver;
         static GUIEnvironment guienv;
 		static GUIListBox listbox;		
+		static CustomElement el;
         static void Main(string[] args)
         {
         	//We choosed OpenGL because it is cross-platform and GUI does not need
@@ -68,6 +127,9 @@ namespace GUIExample
 			//And now the scrollbar
             GUIScrollBar scroll = guienv.AddScrollBar(true, new Rect(new Position2D(220, 220), new Dimension2D(240, 20)), null,
                                 (int)GUIItems.ScrollBar);
+			
+			el = new CustomElement(guienv, null, -1, new Rect(new Position2D(220, 120), new Dimension2D(160, 100)));
+			                                     
 
 			//Var for the funny effects
             int toAdd = 1;
@@ -93,7 +155,9 @@ namespace GUIExample
                 driver.EndScene();
             }
             //As in the first example, we need to release main resources
+			device.DumpElements();
             device.Close();
+						
         }
         //Our main vars such as the back color or the one which says if we want the "funny effect"
         static Color BackColor = Color.Blue;

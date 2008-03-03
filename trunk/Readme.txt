@@ -70,4 +70,4 @@ and start with "mono <name of the file>.exe" on other OS).
 If you want to use the wrapper, you need to add a reference to 
 /bin/Release/Irrlicht.NET.dll
 on your project and copy "IrrlichtW.dll", "Irrlicht.dll" (both for Windows)
-and "IrrlichtW.so" (for Linux) on your project's directory.
+and "libIrrlichtW.so" (for Linux) on your project's directory.

@@ -169,6 +169,7 @@ class CustomSceneNode : public ISceneNode
     {
         switch(method)
         {
+        case RENDER: return;
             VOID_S(ADD_ANIMATOR, ISceneNode::addAnimator((ISceneNodeAnimator*)arg1))
             VOID_S(ADD_CHILD, ISceneNode::addChild((ISceneNode*)arg1))
             VOID_S(ON_ANIMATE, ISceneNode::OnAnimate(arg3))
@@ -216,6 +217,7 @@ class CustomSceneNode : public ISceneNode
     {
         switch(method)
         {
+        case GET_BOUNDING_BOX: return;
             FLOAT_S(GET_ABSOLUTE_POSITION, ISceneNode::getAbsolutePosition(), UM_VECT3DF)
             FLOAT_S(GET_ABSOLUTE_TRANSFORMATION, ISceneNode::getAbsoluteTransformation(), UM_MAT4)
             FLOAT_S(GET_POSITION, ISceneNode::getPosition(), UM_VECT3DF)
@@ -223,7 +225,7 @@ class CustomSceneNode : public ISceneNode
             FLOAT_S(GET_ROTATION, ISceneNode::getRotation(), UM_VECT3DF)
             FLOAT_S(GET_SCALE, ISceneNode::getScale(), UM_VECT3DF)
             FLOAT_S(GET_TRANSFORMED_BOUNDING_BOX, ISceneNode::getTransformedBoundingBox(), UM_BOX3D)
-        }
+            }
     }
 };
 
@@ -259,3 +261,9 @@ void CSN_SET_TEMP_FLOATS(IntPtr csn, float* temp)
 {
 	((CustomSceneNode*)csn)->tempFloats = temp;
 }
+
+/* I'm even cleverer :) */
+#undef VOID_S
+#undef RETURN_S
+#undef FLOAT_S
+#undef FLOAT_S2
