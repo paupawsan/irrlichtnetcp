@@ -15,6 +15,9 @@ Legend from 0.9 and after:
 =============================================================================
 Irrlicht .NET CP 0.9 beta
 =============================================================================
+March, 3, Lester
+    + Added GUIEnvironment property to the SceneManager, thanks to hybrid for 
+    advice
 
 March, 2, Lester
     + added some missing functions to GUIElement

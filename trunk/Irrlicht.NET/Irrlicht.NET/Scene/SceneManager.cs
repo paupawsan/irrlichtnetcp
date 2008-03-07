@@ -834,6 +834,13 @@ namespace IrrlichtNETCP
 				                        typeof(MeshCache));}
 		}
 		
+		public GUIEnvironment GUIEnvironment
+		{
+			get { return (GUIEnvironment)
+				NativeElement.GetObject(SceneManager_GetGUIEnv(_raw), 
+				                        typeof(GUIEnvironment)); }
+		}
+		
 		//Please DO NOT change any of these name, they're copy-pasted from the C/C++
 		//source code AND NEEDS TO BE.
 		#region .NET Wrapper Native Code
@@ -1004,6 +1011,9 @@ namespace IrrlichtNETCP
 		
          [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr SceneManager_GetMeshCache (IntPtr scenemanager);
+
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern IntPtr SceneManager_GetGUIEnv (IntPtr scenemanager);
 		#endregion
 	}
 	
