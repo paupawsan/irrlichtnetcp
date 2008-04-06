@@ -117,6 +117,15 @@
             </summary>
             <param name="edges">Aray of 8 edges</param>
         </member>
+        <member name="M:IrrlichtNETCP.Box3D.IntersectsWithLimitedLine(IrrlichtNETCP.Line3D)">
+            <summary>
+            Checks an intersection with some line
+            </summary>
+            <param name="LineToCol">
+            A line to be checked <see cref="T:IrrlichtNETCP.Line3D" /></param>
+            <returns>
+            A result of the collision <see cref="T:System.Boolean" /></returns>
+        </member>
         <member name="P:IrrlichtNETCP.Color.dotNETColor">
             <summary>
             Gets and Sets an standard .NET color from the current Irrlicht color.

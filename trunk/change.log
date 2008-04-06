@@ -15,9 +15,13 @@ Legend from 0.9 and after:
 =============================================================================
 Irrlicht .NET CP 0.9 beta
 =============================================================================
-March, 3, Lester
-    + Added GUIEnvironment property to the SceneManager, thanks to hybrid for 
-    advice
+
+March, 30, Lester
+    * Fixed a bug in Triangle3D.cs named GetIntersectionOfPlaneWithLine
+    + Added missing method IntersectsWithLimitedLine in Box3D.cs
+
+March, 19, Lester
+    * fixed an incorrect skybox image loading by switching the right-left order
 
 March, 2, Lester
     + added some missing functions to GUIElement
@@ -72,7 +76,7 @@ January, 12, Lester
     * Fixed GUIEventType enum
 
 January, 10, Lester
-    i There was hard period for me, I didn't log changes due to 
+    i There was a hard period for me, I didn't log changes due to 
       the fragmentary coding
     + Added functionality to the AnimatedMeshSceneNode
     + Added SkinnedMesh stub

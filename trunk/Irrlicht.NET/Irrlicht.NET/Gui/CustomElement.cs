@@ -146,7 +146,7 @@ namespace IrrlichtNETCP.Inheritable
 		{
 			CGE_PVOID_METHODS(_raw, CGE_VOID_METHOD.DRAW, IntPtr.Zero, 0, 0, null);
 		}
-
+		
 		public override void Move (Position2D absolutemovement)
 		{
 			CGE_PVOID_METHODS(_raw, CGE_VOID_METHOD.MOVE, IntPtr.Zero, 0, 0, absolutemovement.ToUnmanaged());

@@ -158,6 +158,44 @@ namespace IrrlichtNETCP
 			edges[6].Set(middle.X - diag.X, middle.Y + diag.Y, middle.Z - diag.Z);
 			edges[7].Set(middle.X - diag.X, middle.Y - diag.Y, middle.Z - diag.Z);
 		}
+
+		/// <summary>
+		/// Checks an intersection with some line
+		/// </summary>
+		/// <param name="LineToCol">
+		/// A line to be checked <see cref="Line3D"/>
+		/// </param>
+		/// <returns>
+		/// A result of the collision <see cref="System.Boolean"/>
+		/// </returns>
+		public bool IntersectsWithLimitedLine (Line3D lineToCol)
+		{
+			
+			Vector3D lineVector = lineToCol.Vector.Normalize();
+			float halfLength = (float)(lineToCol.Length * 0.5);
+			Vector3D t = Center - lineToCol.Middle;
+			Vector3D e = (MaxEdge - MinEdge); e = e * (float)(0.5);
+
+			if ((Math.Abs(t.X)> e.X+halfLength*Math.Abs(lineVector.X)) ||
+			    (Math.Abs(t.Y)> e.Y+halfLength*Math.Abs(lineVector.Y)) ||
+			    (Math.Abs(t.Z)> e.Z+halfLength*Math.Abs(lineVector.Z)))
+				return false;
+
+			float r = e.Y * (float)Math.Abs(lineVector.Z) + e.Z * Math.Abs(lineVector.Y);
+			if (Math.Abs(t.Y * lineVector.Z - t.Z * lineVector.Y) > r)
+				return false;
+
+			r = e.X * (float)Math.Abs(lineVector.Z) + e.Z * Math.Abs(lineVector.X);
+			if (Math.Abs(t.Z * lineVector.X - t.X * lineVector.Z) > r)
+				return false;
+
+			r = e.X * (float)Math.Abs(lineVector.Y) + e.Y * Math.Abs(lineVector.X);
+			if (Math.Abs(t.X * lineVector.Y - t.Y * lineVector.X) > r)
+				return false;
+
+			return true; 
+			
+		}
 		
 		/// <summary>
 		/// returns center of the bounding box

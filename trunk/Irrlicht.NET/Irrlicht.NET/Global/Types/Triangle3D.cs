@@ -78,13 +78,17 @@ namespace IrrlichtNETCP
         {
             Vector3D normal = Normal.Normalize();
 
-            float t2 = Normal.DotProduct(lineVect);
+            //float t2 = Normal.DotProduct(lineVect);
+	
+            float t2 = normal.DotProduct(lineVect); //corrected line 
 
             intersection = new Vector3D();
             if (NewMath.IsZero(t2))
                 return false;
             float d = PointA.DotProduct(normal);
-            float t = -(Normal.DotProduct(linePoint) - d) / t2;
+            //float t = -(Normal.DotProduct(linePoint) - d) / t2;
+			
+            float t = -(normal.DotProduct(linePoint) - d) / t2; //corrected line 
             intersection = linePoint + (lineVect * t);
             return true;
         }

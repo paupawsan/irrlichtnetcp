@@ -268,8 +268,8 @@ namespace IrrlichtNETCP
 			IntPtr top, bottom, left, right, front, back;
 			top = textureList[0].Raw;
 			bottom = textureList[1].Raw;
-			left = textureList[2].Raw;
-			right = textureList[3].Raw;
+			right = textureList[2].Raw;
+			left = textureList[3].Raw;
 			front = textureList[4].Raw;
 			back = textureList[5].Raw;
 			return (SceneNode)

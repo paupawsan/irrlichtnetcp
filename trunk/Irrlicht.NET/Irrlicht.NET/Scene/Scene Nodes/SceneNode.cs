@@ -61,8 +61,8 @@ namespace IrrlichtNETCP
         {
             get
             {
-                uint size = SceneNode_GetChildrenCount(_raw);
-                IntPtr[] rawlist = new IntPtr[size];
+
+                uint size = SceneNode_GetChildrenCount(_raw);                IntPtr[] rawlist = new IntPtr[size];
                 SceneNode_GetChildren(_raw, rawlist);
                 SceneNode[] tor = new SceneNode[rawlist.Length];
                 for (int i = 0; i < rawlist.Length; i++)

@@ -13,19 +13,10 @@ void Pointer_SafeRelease(IntPtr pointer)
 {
 	irr::IReferenceCounted* tmpPtr = NULL;
 
-	try
-	{
     if(pointer)
 	{
 		 tmpPtr = (irr::IReferenceCounted *)pointer;
 		 tmpPtr->drop();
-	}
-	}
-	catch (std::exception e)
-	{
-#ifdef DEBUG
-		std::cerr << "Shit! Something terrible happened: " << e.what() << std::endl; 
-#endif
 	}
 }
 
