@@ -14,7 +14,7 @@ namespace ShadersAndParticles
         {
             //We choosed OpenGL because it is cross-platform and we only have the openGL shader
             //So please do not change this unless you change the shader !
-            IrrlichtDevice device = new IrrlichtDevice(DriverType.OpenGL,
+            IrrlichtDevice device = new IrrlichtDevice(DriverType.Direct3D9,
                                                     new Dimension2D(640, 480),
                                                     32, false, true, true, false);
             //We set a new working directory

@@ -21,7 +21,7 @@ namespace GUIExample
 		static bool clicked = false;
 		string caption = "Yep, this is a custom gui element written in C#"; 
 		
-		public CustomElement (GUIEnvironment guienv, GUIElement parent, int id,
+		public CustomElement(GUIEnvironment guienv, GUIElement parent, int id,
 		                      Rect rect) : base (guienv, parent, id, rect)
 		{
 			driver = guienv.VideoDriver;
@@ -75,7 +75,7 @@ namespace GUIExample
         {
         	//We choosed OpenGL because it is cross-platform and GUI does not need
         	//Amazing performances...
-            IrrlichtDevice device = new IrrlichtDevice(DriverType.OpenGL,
+            IrrlichtDevice device = new IrrlichtDevice(DriverType.Direct3D9,
                                                     new Dimension2D(640, 480),
                                                     16, false, false, false, false);
             //Delegate that will catch our events

@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\Irrlicht SDK\include&quot;"
+				AdditionalIncludeDirectories="&quot;..\Irrlicht SDK\include&quot;;F:\projects\irrlichtnetcp\vendor"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;COMPILE_WITH_FREETYPE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -221,6 +221,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\customgui.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\customscenenodes.cpp"
 				>
 			</File>
@@ -240,10 +244,6 @@
 				RelativePath=".\guielem.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\customgui.cpp"
-				>
-			</File>			
 			<File
 				RelativePath=".\guielem2.cpp"
 				>
@@ -319,6 +319,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\customgui.h"
+				>
+			</File>
+			<File
 				RelativePath=".\customscenenodes.h"
 				>
 			</File>
@@ -338,10 +342,6 @@
 				RelativePath=".\guielem.h"
 				>
 			</File>
-			<File
-				RelativePath=".\customgui.h"
-				>
-			</File>			
 			<File
 				RelativePath=".\guielem2.h"
 				>

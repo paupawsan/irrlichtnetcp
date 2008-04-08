@@ -44,6 +44,7 @@
     <Compile Include="Device\IrrlichtDevice.cs" />
     <Compile Include="Device\Timer.cs" />
     <Compile Include="Events\Event.cs" />
+    <Compile Include="Global\IrrMarshal.cs" />
     <Compile Include="Global\MainDefinition.cs" />
     <Compile Include="Global\NativeElement.cs" />
     <Compile Include="Global\NewMath.cs" />
@@ -61,12 +62,13 @@
     <Compile Include="Global\Types\Quaternion.cs" />
     <Compile Include="Global\Types\ViewFrustrum.cs" />
     <Compile Include="Gui\CursorControl.cs" />
+    <Compile Include="Gui\CustomElement.cs" />
     <Compile Include="Gui\GUIButton.cs" />
     <Compile Include="Gui\GUICheckBox.cs" />
     <Compile Include="Gui\GUIComboBox.cs" />
     <Compile Include="Gui\GUIContextMenu.cs" />
     <Compile Include="Gui\GUIEditBox.cs" />
-    <Compile Include="Gui\GUIColorSelectDialog.cs" />    
+    <Compile Include="Gui\GUIColorSelectDialog.cs" />
     <Compile Include="Gui\GUIElement.cs" />
     <Compile Include="Gui\GUIEnvironment.cs" />
     <Compile Include="Gui\GUIFileOpenDialog.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Gui\GUIMeshViewer.cs" />
     <Compile Include="Gui\GUIScrollBar.cs" />
     <Compile Include="Gui\GUISkin.cs" />
+    <Compile Include="Gui\GUISpinBox.cs" />
     <Compile Include="Gui\GUIStaticText.cs" />
     <Compile Include="Gui\GUITab.cs" />
     <Compile Include="Gui\GUITabControl.cs" />
@@ -87,7 +90,7 @@
     <Compile Include="Scene\Meshes\AnimatedMeshMD2.cs" />
     <Compile Include="Scene\Meshes\Mesh.cs" />
     <Compile Include="Scene\Meshes\MeshBuffer.cs" />
-    <Compile Include="Scene\Meshes\MeshCache.cs" />    
+    <Compile Include="Scene\Meshes\MeshCache.cs" />
     <Compile Include="Scene\Meshes\MeshManipulator.cs" />
     <Compile Include="Scene\Scene Nodes\CustomSceneNode.cs" />
     <Compile Include="Scene\SceneManager.cs" />
@@ -97,7 +100,7 @@
     <Compile Include="Scene\Scene Nodes\LightSceneNode.cs" />
     <Compile Include="Scene\Scene Nodes\ParticleSystemSceneNode.cs" />
     <Compile Include="Scene\Scene Nodes\SceneNode.cs" />
-    <Compile Include="Scene\Scene Nodes\BoneSceneNode.cs" />    
+    <Compile Include="Scene\Scene Nodes\BoneSceneNode.cs" />
     <Compile Include="Scene\Scene Nodes\ShadowVolumeSceneNode.cs" />
     <Compile Include="Scene\Scene Nodes\TerrainSceneNode.cs" />
     <Compile Include="Scene\Scene Nodes\TextSceneNode.cs" />
@@ -111,7 +114,7 @@
     <Compile Include="Video\GPUProgrammingServices.cs" />
     <Compile Include="Video\Image.cs" />
     <Compile Include="Video\Material.cs" />
-    <Compile Include="Video\MaterialLayer.cs" />    
+    <Compile Include="Video\MaterialLayer.cs" />
     <Compile Include="Video\MaterialRendererServices.cs" />
     <Compile Include="Video\Texture.cs" />
     <Compile Include="Video\Vertices.cs" />
