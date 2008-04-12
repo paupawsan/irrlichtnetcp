@@ -75,7 +75,7 @@ namespace GUIExample
         {
         	//We choosed OpenGL because it is cross-platform and GUI does not need
         	//Amazing performances...
-            IrrlichtDevice device = new IrrlichtDevice(DriverType.Direct3D9,
+            IrrlichtDevice device = new IrrlichtDevice(DriverType.OpenGL,
                                                     new Dimension2D(640, 480),
                                                     16, false, false, false, false);
             //Delegate that will catch our events
@@ -98,7 +98,7 @@ namespace GUIExample
 			TTFont font = new TTFont(device.VideoDriver);
 			font.Antialias = true;
 			TTFace face = new TTFace();
-			face.Load("../../medias/LucidaGrande.ttf");
+			face.Load("../../medias/FreeSans.ttf");
 			font.Attach(face, 14);
 			guienv.Skin.Font = font;
 			

@@ -1,22 +1,24 @@
 ﻿<UserCombinePreferences version="1.0" filename="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET.mds">
   <Files>
-    <File name="Welcome" />
+    <File name="Добро пожаловать" />
     <File name="Irrlicht.Extensions/WaterSceneNode.cs" line="1" column="1" />
     <File name="Irrlicht.NET/Global/Types/Triangle3D.cs" line="96" column="22" />
     <File name="Irrlicht.NET/Global/Types/Box3D.cs" line="126" column="31" />
     <File name="Irrlicht.NET/Global/Types/Line3D.cs" line="45" column="1" />
     <File name="Irrlicht.NET/Scene/Scene Nodes/SceneNode.cs" line="7" column="1" />
     <File name="Irrlicht.NET/Scene/SceneManager.cs" line="649" column="21" />
-    <File name="Irrlicht.NET/Scene/Meshes/AnimatedMesh.cs" line="22" column="4" />
+    <File name="Irrlicht.NET/Scene/Meshes/AnimatedMesh.cs" line="7" column="38" />
+    <File name="Irrlicht.NET/Gui/CustomElement.cs" line="21" column="36" />
   </Files>
   <Views>
     <ViewMemento id="ProjectPad">
       <Node expanded="True">
         <Node name="Irrlicht.NET" expanded="True">
+          <Node name="Gui" expanded="True">
+            <Node name="CustomElement.cs" selected="True" />
+          </Node>
           <Node name="Scene" expanded="True">
-            <Node name="Meshes" expanded="True">
-              <Node name="AnimatedMesh.cs" selected="True" />
-            </Node>
+            <Node name="Meshes" expanded="True" />
           </Node>
         </Node>
       </Node>
@@ -32,7 +34,7 @@
     </ViewMemento>
   </Views>
   <Properties>
-    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET/Scene/Meshes/AnimatedMesh.cs" />
+    <Property key="ActiveWindow" value="/home/lester/workspace/irrlichtnetcp-svn/Irrlicht.NET/Irrlicht.NET/Gui/CustomElement.cs" />
     <Property key="ActiveConfiguration" value="Debug" />
   </Properties>
 </UserCombinePreferences>
