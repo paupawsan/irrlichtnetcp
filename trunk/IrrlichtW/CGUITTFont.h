@@ -3,8 +3,9 @@
 #ifndef __C_GUI_TTFONT_H_INCLUDED__
 #define __C_GUI_TTFONT_H_INCLUDED__
 
-//If on Windows you get an error here, add to your IDE's include path
-//"%Irrlicht .NET CP SDK directory%/Irrlicht SDK/include"
+//If on Windows you have to have vendor directory being checked-out from the 
+//svn repository for compiling with freetype, the include-path is set correctly 
+//by the project settings,
 //Or remove from the preprocessor's configuration COMPILE_WITH_FREETYPE
 #include <ft2build.h>
 #include <freetype/freetype.h>

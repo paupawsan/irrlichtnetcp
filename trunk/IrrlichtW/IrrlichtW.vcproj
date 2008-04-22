@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;..\Irrlicht SDK\include&quot;;F:\projects\irrlichtnetcp\vendor"
+				AdditionalIncludeDirectories="&quot;..\Irrlicht SDK\include&quot;;..\..\vendor"
 				PreprocessorDefinitions="WIN32;_DEBUG;_LIB;COMPILE_WITH_FREETYPE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
