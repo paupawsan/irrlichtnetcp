@@ -107,6 +107,7 @@ namespace CustomSceneNode
 			_scene.AddCameraSceneNode(null);
             _scene.ActiveCamera.Position = new Vector3D(0, -40, 0);
             _scene.ActiveCamera.Target = new Vector3D();
+			
 
             myNode.AddAnimator(new CustomAnimator(new Vector3D(0.8f, 0, 0.8f)));
 			int lastfps = -1, fps = 0;

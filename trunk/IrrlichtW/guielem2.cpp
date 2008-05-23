@@ -342,7 +342,7 @@ void GUIMeshViewer_SetMaterial(IntPtr meshv, IntPtr mat)
 
 void GUIMeshViewer_SetMesh(IntPtr meshv, IntPtr animatedmesh)
 {
-	((IGUIMeshViewer*)meshv)->setMesh((IAnimatedMesh*)meshv);
+	((IGUIMeshViewer*)meshv)->setMesh((IAnimatedMesh*)animatedmesh);
 }
 
 
