@@ -19,6 +19,11 @@ namespace IrrlichtNETCP
 			{
 				return Event_GetType(_raw);
 			}
+			
+			set
+			{
+				Event_SetType(_raw, (int)value);
+			}
 		}
 		
 		public MouseInputEvent MouseInputEvent
@@ -112,12 +117,46 @@ namespace IrrlichtNETCP
 									 typeof(GUIElement));
 			}
 		}
+		
+		public int UserData1
+		{
+			get {
+				return Event_GetUserDataI(_raw, 0);
+			} 
+			set {
+				Event_SetUserDataI (_raw, 0, value);
+			}
+		}
+		
+		public int UserData2
+		{
+			get {
+				return Event_GetUserDataI(_raw, 1);
+			} 
+			set {
+				Event_SetUserDataI (_raw, 1, value);
+			}
+		}
+		
+		public float UserData3
+		{
+			get {
+				return Event_GetUserDataF (_raw);
+			} 
+			set {
+				Event_SetUserDataF (_raw, value);
+			}
+		}		
+		
 		#region Native Invokes		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
         static extern IntPtr Event_Create();
 
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern EventType Event_GetType(IntPtr ev);
+		
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern EventType Event_SetType(IntPtr ev, int evtype);		
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern MouseInputEvent Event_GetMouseInputEvent(IntPtr ev);
@@ -151,6 +190,18 @@ namespace IrrlichtNETCP
 		
 		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 		static extern IntPtr Event_GetCaller(IntPtr ev);
+		
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void Event_SetUserDataI (IntPtr ev, byte num, int data);
+		
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern void Event_SetUserDataF (IntPtr ev, float data);
+		
+		 [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern int Event_GetUserDataI (IntPtr ev, byte num);
+		
+		[DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern float Event_GetUserDataF (IntPtr ev);
 		#endregion
 	}
 	

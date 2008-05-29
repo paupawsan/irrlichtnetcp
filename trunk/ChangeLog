@@ -16,6 +16,13 @@ Legend from 0.9 and after:
 Irrlicht .NET CP 0.9 beta
 =============================================================================
 
+May, 29, Lester
+    i Yeah I know, that was a long time since the last commit, shame to me.
+    * Made Event.Type writable
+    + Added UserData{1,2,3} to the Event class
+    * Fixed a typo in the MeshViewer.SetMesh where animated mesh was incorrectly assigned.
+    + Added GetSceneNodeFromType to the SceneManager.cs
+
 March, 30, Lester
     * Fixed a bug in Triangle3D.cs named GetIntersectionOfPlaneWithLine
     + Added missing method IntersectsWithLimitedLine in Box3D.cs

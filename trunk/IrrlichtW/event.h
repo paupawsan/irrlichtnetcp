@@ -3,6 +3,7 @@ extern "C"
 {
 	EXPORT IntPtr Event_Create() { return new SEvent(); }
     EXPORT EEVENT_TYPE Event_GetType(IntPtr event);
+    EXPORT void Event_SetType (IntPtr event, int evtype);
     EXPORT EMOUSE_INPUT_EVENT Event_GetMouseInputEvent(IntPtr event);
     EXPORT EGUI_EVENT_TYPE Event_GetGUIEventType(IntPtr event);
     EXPORT float Event_GetMouseWheelDelta(IntPtr event);
@@ -14,4 +15,9 @@ extern "C"
     EXPORT char Event_GetKeyChar(IntPtr event);
     EXPORT M_STRING Event_GetLogString(IntPtr event);
     EXPORT IntPtr Event_GetCaller(IntPtr event);
+    
+    EXPORT int Event_GetUserDataI (IntPtr event, unsigned int num);
+    EXPORT float Event_GetUserDataF (IntPtr event);
+    EXPORT void Event_SetUserDataI (IntPtr event, char num, int data);
+    EXPORT void Event_SetUserDataF (IntPtr event, float data);
 }

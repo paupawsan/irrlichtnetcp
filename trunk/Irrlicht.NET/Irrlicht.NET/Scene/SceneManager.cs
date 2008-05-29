@@ -676,6 +676,29 @@ namespace IrrlichtNETCP
 				NativeElement.GetObject(SceneManager_GetSceneNodeFromName(_raw, name),
 										typeof(SceneNode));
 		}
+		
+		/// <summary>
+		/// Returns the first scene node with the specified type. 
+		/// </summary>
+		/// <param name="type">
+		/// A SceneNodeType used for searching <see cref="SceneNodeType"/>
+		/// </param>
+		/// <param name="start">
+		/// A first scene node searching should start from <see cref="SceneNode"/>
+		/// </param>
+		/// <returns>
+		/// A closest scenenode if any <see cref="SceneNode"/>
+		/// </returns>
+		public SceneNode GetSceneNodeFromType (SceneNodeType type, SceneNode start)
+		{
+			return (SceneNode)
+				NativeElement.GetObject(SceneManager_GetSceneNodeFromType(_raw, 
+				                                                          start == null?
+				                                                          IntPtr.Zero:
+				                                                          start.Raw,
+				                                                          (int)type), 
+				                        typeof(SceneNode));
+		}
 
         /// <summary>
         /// Saves the current scene into a file. 
@@ -975,6 +998,9 @@ namespace IrrlichtNETCP
 	    
 	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_GetSceneNodeFromName(IntPtr scenemanager, string name);
+		
+         [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
+		static extern IntPtr SceneManager_GetSceneNodeFromType (IntPtr mgr, IntPtr snode, int type);
 	    
 	     [DllImport(Native.Dll), SuppressUnmanagedCodeSecurity]
 	    static extern IntPtr SceneManager_GetRootSceneNode(IntPtr scenemanager);

@@ -67,3 +67,31 @@ IntPtr Event_GetCaller(IntPtr event)
     return GetEventFromIntPtr(event)->GUIEvent.Caller;
 }
 
+void Event_SetType (IntPtr event, int evtype)
+{
+	GetEventFromIntPtr(event)->EventType = (irr::EEVENT_TYPE)evtype;
+}
+
+int Event_GetUserDataI (IntPtr event, char num)
+{
+	return num? 
+		 (GetEventFromIntPtr(event)->UserEvent.UserData2) :
+		 (GetEventFromIntPtr(event)->UserEvent.UserData1) ;
+}
+
+float Event_GetUserDataF (IntPtr event)
+{
+	return (GetEventFromIntPtr(event)->UserEvent.UserData3);
+}
+
+void Event_SetUserDataI (IntPtr event, char num, int data)
+{
+	num?
+		GetEventFromIntPtr(event)->UserEvent.UserData2 = data:
+		GetEventFromIntPtr(event)->UserEvent.UserData1 = data;
+}
+
+void Event_SetUserDataF (IntPtr event, float data)
+{
+	GetEventFromIntPtr(event)->UserEvent.UserData3 = data;
+}

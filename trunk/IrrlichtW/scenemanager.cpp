@@ -375,3 +375,8 @@ bool SceneManager_PostEventFromUser (IntPtr mgr, IntPtr event)
 {
 	_FIX_BOOL_MARSHAL_BUG(GetSceneFromIntPtr(mgr)->postEventFromUser (*(SEvent*)event));
 }
+
+IntPtr SceneManager_GetSceneNodeFromType (IntPtr mgr, IntPtr snode, int type)
+{
+	return (GetSceneFromIntPtr(mgr)->getSceneNodeFromType((ESCENE_NODE_TYPE)type, (ISceneNode*)snode));
+}
