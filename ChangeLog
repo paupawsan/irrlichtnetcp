@@ -16,6 +16,10 @@ Legend from 0.9 and after:
 =============================================================================
 Irrlicht .NET CP 1.6
 =============================================================================   
+2010/01/25, PauPaw
+   i Push forgoten 1.0 branch
+   + create LibsSolution
+   i Ready to port to irrlicht 1.6.1
 2009/12/06, PauPaw
    i Hi!
       Introducing my self, porting from SVN to git, starting clean branch.
@@ -23,7 +27,6 @@ Irrlicht .NET CP 1.6
      Since Irrlicht .NET CP is intended as an Irrlicht wrapper, the branch name should follow Irrlicht version.
      Like 1.6.x means wrapper for irrlicht 1.6, which x is for extensions or patches against Irrlicht 1.6
    * Moved all 0.9 beta works to 1.0 branch
-   * Adding Irrlicht 1.6 SVN builds (Rev.2968)
    
 =============================================================================
 Irrlicht .NET CP 0.9 beta
